@@ -1,0 +1,117 @@
+<nav class="app-navbar" id="main-navbar">
+    <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 0;">
+        <a id="nav-back-btn" href="home.html" class="navbar-action" style="display: none; margin-left: 0.25rem; font-size: 1.25rem;" title="رجوع">
+            <i class="bi bi-arrow-right"></i>
+        </a>
+        <a href="home.html" class="navbar-brand" style="text-decoration:none;">
+            <img src="../assets/img/logo-favicon.png" alt="لوجو مؤتمر ميلادا عجيبًا" class="navbar-logo">
+            <div style="display: flex; flex-direction: column;">
+                <span class="navbar-title">ميلادا عجيبًا</span>
+                <span class="navbar-subtitle">ميلادا عجيبًا 2026</span>
+            </div>
+        </a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.4rem;">
+        <div class="navbar-actions-container" id="navbar-actions-container" style="display: flex; gap: 0.4rem; align-items: center;">
+            <a href="attendance.html" class="navbar-action" title="حضور والتزام" style="text-decoration:none;color:#4ade80;"><i class="bi bi-shield-check-fill"></i><span style="font-size:.68rem;font-weight:800;">حضور</span></a>
+            <a href="pamphlet.html" class="navbar-action" title="البانفلت" style="text-decoration:none;color:#fbbf24;"><i class="bi bi-journal-richtext"></i><span style="font-size:.68rem;font-weight:800;">البانفلت</span></a>
+            <!-- Page-specific buttons injected here -->
+        </div>
+        <button id="nav-menu-btn" class="navbar-action" aria-label="القائمة" style="font-size: 1.4rem;">
+            <i class="bi bi-grid-fill"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Creative Full-screen Overlay Menu -->
+<div class="nav-menu-overlay" id="nav-menu-overlay">
+    <!-- Header of the overlay -->
+    <div class="overlay-header">
+        <div class="overlay-brand">
+            <img src="../assets/img/logo-favicon.png" alt="لوجو المؤتمر" class="overlay-logo">
+            <div>
+                <div class="overlay-title">اختر القسم للانتقال</div>
+                <div class="overlay-subtitle">ميلادا عجيبًا</div>
+            </div>
+        </div>
+        <button class="overlay-close-btn" id="nav-overlay-close" aria-label="إغلاق">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+
+    <!-- 3x3 Grid of sections with creative hover/animation configs -->
+    <div class="menu-grid">
+        <a href="home.html" class="menu-item-card" style="--idx:0; --card-color:#06b6d4; --card-rgb:6,182,212;">
+            <span class="mic-icon"><i class="bi bi-house-door-fill"></i></span>
+            <span class="mic-text">الرئيسية</span>
+        </a>
+        <a href="lectures.html" class="menu-item-card" style="--idx:1; --card-color:#0284c7; --card-rgb:2,132,199;">
+            <span class="mic-icon"><i class="bi bi-mic-fill"></i></span>
+            <span class="mic-text">المحاضرات</span>
+        </a>
+        <a href="workshops.html" class="menu-item-card" style="--idx:2; --card-color:#0d9488; --card-rgb:13,148,136;">
+            <span class="mic-icon"><i class="bi bi-tools"></i></span>
+            <span class="mic-text">الورش</span>
+        </a>
+        <a href="hymns.html" class="menu-item-card" style="--idx:3; --card-color:#d97706; --card-rgb:217,119,6;">
+            <span class="mic-icon"><i class="bi bi-music-note-beamed"></i></span>
+            <span class="mic-text">الألحان</span>
+        </a>
+        <a href="conference-hymn.html" class="menu-item-card" style="--idx:4; --card-color:#7c1f2b; --card-rgb:124,31,43;">
+            <span class="mic-icon"><i class="bi bi-music-note-list"></i></span>
+            <span class="mic-text">لحن المؤتمر</span>
+        </a>
+        <a href="program.html" class="menu-item-card" style="--idx:5; --card-color:#ea580c; --card-rgb:234,88,12;">
+            <span class="mic-icon"><i class="bi bi-calendar3"></i></span>
+            <span class="mic-text">البرنامج</span>
+        </a>
+        <a href="accommodation.html" class="menu-item-card" style="--idx:6; --card-color:#c026d3; --card-rgb:192,38,211;">
+            <span class="mic-icon"><i class="bi bi-house-fill"></i></span>
+            <span class="mic-text">التسكين</span>
+        </a>
+        <a href="attendance.html" class="menu-item-card" style="--idx:7; --card-color:#16a34a; --card-rgb:22,163,74;">
+            <span class="mic-icon"><i class="bi bi-shield-check-fill"></i></span>
+            <span class="mic-text">حضور والتزام</span>
+        </a>
+        <a href="pamphlet.html" class="menu-item-card" style="--idx:8; --card-color:#d97706; --card-rgb:217,119,6;">
+            <span class="mic-icon"><i class="bi bi-journal-richtext"></i></span>
+            <span class="mic-text">البانفلت</span>
+        </a>
+        <a href="prayer.html" class="menu-item-card" style="--idx:9; --card-color:#db2777; --card-rgb:219,39,119;">
+            <span class="mic-icon"><i class="bi bi-book-fill"></i></span>
+            <span class="mic-text">الصلوات</span>
+        </a>
+        <a href="games.html" class="menu-item-card" style="--idx:10; --card-color:#7c3aed; --card-rgb:124,58,237;">
+            <span class="mic-icon"><i class="bi bi-controller"></i></span>
+            <span class="mic-text">الألعاب</span>
+        </a>
+        <a href="feedback.html" class="menu-item-card" style="--idx:11; --card-color:#10b981; --card-rgb:16,185,129;">
+            <span class="mic-icon"><i class="bi bi-chat-heart-fill"></i></span>
+            <span class="mic-text">شارك رأيك</span>
+        </a>
+        <a href="groups.html" class="menu-item-card" style="--idx:12; --card-color:#4f46e5; --card-rgb:79,70,229;">
+            <span class="mic-icon"><i class="bi bi-people-fill"></i></span>
+            <span class="mic-text">المجموعات</span>
+        </a>
+        <!-- رابط لوحة الإدارة: مخفي افتراضياً — يظهر فقط للمستخدمين الذين سجّلوا دخولاً كأدمن -->
+        <a href="../admin.html" class="menu-item-card admin-only-link" style="--idx:13; --card-color:#06b6d4; --card-rgb:6,182,212; display:none;">
+            <span class="mic-icon"><i class="bi bi-gear-wide-connected"></i></span>
+            <span class="mic-text">لوحة الإدارة</span>
+        </a>
+    </div>
+
+    <!-- Decorative lights inside overlay -->
+    <div class="overlay-glow-1"></div>
+    <div class="overlay-glow-2"></div>
+</div>
+
+<script>
+/* إظهار رابط الإدارة فقط إذا كانت جلسة الأدمن نشطة */
+(function() {
+    if (sessionStorage.getItem('admin_session_token')) {
+        var adminLinks = document.querySelectorAll('.admin-only-link');
+        adminLinks.forEach(function(el) { el.style.display = ''; });
+    }
+})();
+</script>
+

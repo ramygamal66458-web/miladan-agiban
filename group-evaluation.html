@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script>window.location.href = "manage-passengers.html";</script>
+    <title>لوحة تقييم وإدارة درجات المجموعات 🏆</title>
+    <link rel="icon" type="image/png" href="assets/img/logo-favicon.png">
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --bg-deepest: #0e172a;
+            --bg-deep: #141f36;
+            --bg-dark: #1b2842;
+            --bg-light: #2d3e5b;
+            --bg-card: rgba(35, 51, 77, 0.75);
+            --primary: #06b6d4;
+            --primary-light: #38bdf8;
+            --primary-dark: #0891b2;
+            --primary-glow: rgba(56, 189, 248, 0.45);
+            --primary-border: rgba(56, 189, 248, 0.35);
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --gold-glow: rgba(245, 158, 11, 0.45);
+            --success: #10b981;
+            --success-light: #34d399;
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.45);
+            --text-main: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(27, 40, 66, 0.78);
+            --glass-border: rgba(255, 255, 255, 0.16);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-dark) 50%, var(--bg-deepest) 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+                        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 45%);
+            pointer-events: none; z-index: 0;
+        }
+
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Common Styles */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: var(--glass-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Auth Screen */
+        .auth-container {
+            max-width: 420px;
+            margin: 10vh auto;
+            padding: 10px;
+        }
+        .auth-card {
+            padding: 40px 30px;
+            border-color: var(--primary-border);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.15);
+        }
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
+            border: 1.5px solid var(--primary-border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-logo i {
+            font-size: 2.5rem;
+            color: var(--primary-light);
+        }
+
+        /* Navbar */
+        .admin-navbar {
+            background: linear-gradient(135deg, rgba(11, 17, 33, 0.95), rgba(15, 23, 42, 0.95));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--primary-border);
+            padding: 10px 20px;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+        .nav-brand:hover {
+            color: var(--primary-light);
+        }
+        .nav-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Tab Navigation */
+        .tabs-scroller {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-bottom: 20px;
+            padding: 5px 0;
+            scrollbar-width: none;
+        }
+        .tabs-scroller::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-tabs {
+            display: inline-flex;
+            gap: 10px;
+            padding: 5px;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+        .custom-tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .custom-tab-btn:hover {
+            color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #fff;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* Forms Styling */
+        .form-control, .form-select {
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            border-radius: 12px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: rgba(15, 23, 42, 0.8);
+            border-color: var(--primary);
+            color: var(--text-main);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .form-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* Buttons Styling */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border: 1px solid var(--primary-light);
+            color: white;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+            filter: brightness(1.1);
+        }
+        .btn-secondary-custom {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-custom:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: var(--text-secondary);
+            color: white;
+        }
+
+        /* Dashboard Stats */
+        .stat-card {
+            text-align: center;
+            padding: 25px 15px;
+        }
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2px;
+        }
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        /* Group Evaluation Cards */
+        .group-card {
+            border-left: 5px solid var(--group-color, var(--primary));
+            padding: 15px 20px;
+        }
+        .group-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 8px;
+        }
+        .group-name-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--group-color, var(--primary));
+        }
+        .group-percentage-badge {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 3px 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* Leaderboard and Podium */
+        .leaderboard-podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+            margin: 30px 0;
+            padding-top: 20px;
+        }
+        .podium-card {
+            flex: 1;
+            max-width: 140px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px 18px 12px 12px;
+            padding: 15px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: var(--glass-shadow);
+        }
+        .podium-card.first {
+            height: 220px;
+            border-color: var(--gold-light);
+            z-index: 3;
+        }
+        .podium-card.second {
+            height: 180px;
+            z-index: 2;
+        }
+        .podium-card.third {
+            height: 150px;
+            z-index: 1;
+        }
+        .podium-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .first .podium-badge { background: linear-gradient(135deg, #fbbf24, #d97706); color: #000; }
+        .second .podium-badge { background: linear-gradient(135deg, #c084fc, #7e22ce); color: #fff; }
+        .third .podium-badge { background: linear-gradient(135deg, #38bdf8, #0369a1); color: #fff; }
+        
+        .podium-name {
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .podium-score {
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: var(--primary-light);
+        }
+
+        /* تنسيقات تقييم النجوم */
+        .star-rating-row {
+            display: flex;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 10px;
+        }
+        .star-rating-stars {
+            font-size: 1.2rem;
+            display: flex;
+            gap: 3px;
+        }
+        .star-rating-val {
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .judge-star-range {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+            margin-top: 5px;
+        }
+        .judge-star-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-glow);
+            transition: transform 0.1s ease;
+        }
+        .judge-star-range::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+
+        /* Leaderboard table runner up styling */
+        .runner-up-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* Sync status panel */
+        .sync-status-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            border-radius: 14px;
+            background: rgba(6, 182, 212, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            margin-bottom: 20px;
+        }
+        .sync-status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--success);
+            box-shadow: 0 0 10px var(--success-light);
+        }
+        .sync-status-dot.unsaved {
+            background-color: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
+        }
+        
+        /* Auto-complete suggestions list */
+        .autocomplete-suggestions {
+            position: absolute;
+            background: #0f172a;
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            width: calc(100% - 24px);
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .suggestion-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-align: right;
+        }
+        .suggestion-item:hover {
+            background-color: rgba(6, 182, 212, 0.15);
+            color: var(--primary-light);
+        }
+        
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.4);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.5);
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/identity.css">
+</head>
+<body>
+
+    <!-- خلفية تصميم متوهجة -->
+    <div style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; overflow:hidden; pointer-events:none;">
+        <div style="position:absolute; top:-10%; left:-10%; width:50%; height:50%; border-radius:50%; background:radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%); filter:blur(40px);"></div>
+        <div style="position:absolute; bottom:-10%; right:-10%; width:50%; height:50%; border-radius:50%; background:radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%); filter:blur(40px);"></div>
+    </div>
+
+    <!-- 1. شاشة تسجيل الدخول -->
+    <div id="login-screen" class="container auth-container">
+        <div class="glass-card auth-card text-center">
+            <div class="auth-logo">
+                <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <h3 class="fw-bold mb-2">تسجيل الدخول للمشرفين</h3>
+            <p class="text-secondary small mb-4">أدخل بيانات الاعتماد الثابتة لتقييم درجات المجموعات</p>
+            
+            <div id="login-alert" class="alert alert-danger d-none py-2 px-3 small" role="alert"></div>
+
+            <form id="login-form">
+                <div class="mb-3 text-start">
+                    <label class="form-label" for="username">اسم المستخدم</label>
+                    <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required autocomplete="username">
+                </div>
+                <div class="mb-4 text-start">
+                    <label class="form-label" for="password">كلمة المرور</label>
+                    <div class="input-group text-ltr" dir="ltr">
+                        <button class="btn btn-outline-secondary" type="button" id="toggle-pw-btn" style="border-color:var(--glass-border); border-radius:12px 0 0 12px;">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <input type="password" id="password" class="form-control text-end" placeholder="أدخل كلمة المرور" required autocomplete="current-password" style="border-radius: 0 12px 12px 0;">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary-custom w-100 py-2 mb-3">
+                    دخول للوحة التحكم <i class="bi bi-box-arrow-in-left ms-1"></i>
+                </button>
+            </form>
+            
+            <div class="mt-2 text-muted small p-2 rounded" style="background:rgba(255,255,255,0.02); border:1px dashed var(--glass-border);">
+                💡 للولوج السريع:<br>
+                اسم المستخدم: <code style="user-select:all; color:var(--primary-light);">admin</code><br>
+                كلمة المرور: <code style="user-select:all; color:var(--primary-light);">conference-evaluation-2026</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. شاشة لوحة التحكم الأساسية (مخفية بالافتراض) -->
+    <div id="main-dashboard" class="d-none">
+        
+        <!-- Navbar -->
+        <nav class="admin-navbar">
+            <div class="container-fluid max-width-lg nav-inner">
+                <div class="nav-brand">
+                    <div class="nav-brand-logo" style="width: 36px; height: 36px; border: 1.5px solid var(--primary-border); border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(6, 182, 212, 0.1);">
+                        <i class="bi bi-trophy-fill" style="color:var(--primary-light); font-size:1.15rem;"></i>
+                    </div>
+                    <div>
+                        <div class="nav-title">إدارة وتقييم درجات المجموعات</div>
+                        <div class="nav-subtitle">ميلادا عجيبًا 2026</div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="pages/home.html" class="btn btn-sm btn-secondary-custom py-1.5 px-3">
+                        <i class="bi bi-house-door-fill me-1"></i> الموقع العام
+                    </a>
+                    <button id="logout-btn" class="btn btn-sm btn-outline-danger" style="border-radius:10px; padding: 5px 10px;">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container my-4">
+            
+            <!-- مؤشر حفظ البيانات -->
+            <div class="sync-status-box">
+                <div id="sync-dot" class="sync-status-dot"></div>
+                <div class="flex-grow-1 small">
+                    <span id="sync-status-text" class="fw-bold">البيانات محفوظة محلياً.</span>
+                    <span id="last-sync-time" class="text-secondary ms-2 small"></span>
+                </div>
+                <button id="quick-cloud-sync" class="btn btn-sm btn-primary-custom py-1 px-3 fs-7 d-none">
+                    <i class="bi bi-cloud-upload-fill me-1"></i> مزامنة فورية
+                </button>
+            </div>
+
+            <!-- شريط الأقسام (Tabs) -->
+            <div class="tabs-scroller">
+                <div class="custom-tabs">
+                    <button class="custom-tab-btn active" data-tab="dashboard">
+                        <i class="bi bi-speedometer2"></i> الرئيسية
+                    </button>
+                    <button class="custom-tab-btn" data-tab="activities">
+                        <i class="bi bi-vector-pen"></i> تقييم الورش والمحاضرات
+                    </button>
+                    <button class="custom-tab-btn" data-tab="games">
+                        <i class="bi bi-controller"></i> الألعاب الحرة
+                    </button>
+                    <button class="custom-tab-btn" data-tab="reports">
+                        <i class="bi bi-bar-chart-line-fill"></i> لوحة النتائج والتقارير
+                    </button>
+                    <button class="custom-tab-btn" data-tab="settings">
+                        <i class="bi bi-gear-fill"></i> الإعدادات والربط السحابي
+                    </button>
+                </div>
+            </div>
+
+            <!-- محتويات الأقسام (Tab Contents) -->
+            
+            <!-- قسم 1: الرئيسية (Dashboard) -->
+            <div id="tab-dashboard" class="tab-content-panel">
+                <div class="row">
+                    <!-- احصائيات سريعة -->
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="glass-card stat-card">
+                            <span class="stat-icon" style="color:var(--primary-light);">🔥</span>
+                            <div class="stat-num text-cyan" id="dash-top-group">-</div>
+                            <div class="stat-lbl">المجموعة المتصدرة</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="glass-card stat-card">
+                            <span class="stat-icon" style="color:var(--gold-light);">⭐️</span>
+                            <div class="stat-num text-gold" id="dash-top-score">-</div>
+                            <div class="stat-lbl">أعلى مجموع نقاط</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="glass-card stat-card">
+                            <span class="stat-icon" style="color:var(--success-light);">📝</span>
+                            <div class="stat-num text-success" id="dash-activities-count">0/8</div>
+                            <div class="stat-lbl">الأنشطة المقيمة</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="glass-card stat-card">
+                            <span class="stat-icon" style="color:#d97706;">🎮</span>
+                            <div class="stat-num text-warning" id="dash-game-logs-count">0</div>
+                            <div class="stat-lbl">سجلات الألعاب الحرة</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نظرة عامة على تقدم المجموعات -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-grid-fill text-primary-light me-1"></i> ملخص تقدم ونقاط المجموعات</h5>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover align-middle border-0 mb-0">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--glass-border);">
+                                    <th>المجموعة</th>
+                                    <th>نقاط الورش والصلوات</th>
+                                    <th>نقاط الألعاب الحرة</th>
+                                    <th>إجمالي النقاط</th>
+                                    <th>النسبة الإجمالية</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-groups-summary-tbody">
+                                <!-- سيتم تعبئتها ديناميكياً -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- تعليمات تشغيل سريعة -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-info-circle-fill text-primary-light me-1"></i> دليل الاستخدام والتشغيل</h5>
+                    <ul class="text-secondary small ps-3 mb-0" style="line-height:1.7;">
+                        <li><strong>تقييم الورش والمحاضرات:</strong> اختر اليوم والنشاط، ثم سجل تقييم الـ 3 حكام لكل مجموعة. سيتكفل النظام بحساب المتوسطات ونسب التقدم تلقائياً.</li>
+                        <li><strong>إضافة درجات ألعاب حرة:</strong> مخصصة لتسجيل إنجازات المتسابقين الفردية؛ فقط ابدأ بكتابة اسم المشترك، وسيتعرف النظام على مجموعته تلقائياً، قم بإدخال النقاط التي فاز بها واضغط إضافة.</li>
+                        <li><strong>الربط السحابي ومزامنة لوحة صدارة المشتركين:</strong> لكي تظهر التغييرات والنتائج الحية لجميع الحاضرين في صفحة المجموعات، تأكد من وضع رابط Google Apps Script في صفحة الإعدادات ثم انقر على <strong>"مزامنة ورفع إلى السحابة"</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- قسم 2: تقييم الورش والمحاضرات (Structured Activities) -->
+            <div id="tab-activities" class="tab-content-panel d-none">
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-4"><i class="bi bi-vector-pen text-primary-light me-1"></i> إدخال درجات الأنشطة والورش والصلوات</h5>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="select-day">اختر اليوم</label>
+                            <select id="select-day" class="form-select">
+                                <option value="1">اليوم الأول</option>
+                                <option value="2">اليوم الثاني</option>
+                                <option value="3">اليوم الثالث</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="select-activity">اختر النشاط / الفعالية</label>
+                            <select id="select-activity" class="form-select">
+                                <!-- سيتم ملؤه ديناميكياً بناء على اليوم -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info py-2.5 px-3 small border-0 d-flex align-items-center justify-content-between mb-4" style="background:rgba(6,182,212,0.1); color:var(--primary-light);">
+                        <div>
+                            <i class="bi bi-info-circle-fill me-1"></i> 
+                            الحد الأقصى للدرجة في هذا النشاط: <strong id="current-activity-max-weight">50</strong> درجة.
+                        </div>
+                        <span class="badge bg-primary" id="current-activity-type-badge">ورشة عمل</span>
+                    </div>
+
+                    <!-- كروت تقييم المجموعات الأربع -->
+                    <div class="row" id="groups-eval-grid">
+                        <!-- سيتم إنشاؤها ديناميكياً -->
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button id="save-all-activities-btn" class="btn btn-primary-custom px-5 py-2.5">
+                            <i class="bi bi-save2-fill me-1"></i> حفظ درجات هذا النشاط محلياً
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم 3: الألعاب الحرة (Free Games) -->
+            <div id="tab-games" class="tab-content-panel d-none">
+                <div class="row">
+                    <!-- نموذج الإضافة -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="glass-card h-100">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-plus-circle-fill text-primary-light me-1"></i> تسجيل نقاط ألعاب</h5>
+                            
+                            <form id="free-game-form" onsubmit="event.preventDefault();">
+                                <div class="mb-3 position-relative">
+                                    <label class="form-label" for="game-participant-name">اسم المتسابق</label>
+                                    <input type="text" id="game-participant-name" class="form-control" placeholder="اكتب اسم المتسابق للبحث..." required autocomplete="off">
+                                    <div id="autocomplete-list" class="autocomplete-suggestions d-none"></div>
+                                    <div class="form-text text-muted small">ابدأ بكتابة الاسم وسيظهر إكمال تلقائي من المشتركين المسجلين.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="game-group-select">المجموعة</label>
+                                    <select id="game-group-select" class="form-select" required>
+                                        <option value="">اختر المجموعة</option>
+                                        <option value="g1">مارجرجس</option>
+                                        <option value="g2">مريم العذراء</option>
+                                        <option value="g3">الشهيده مارينا</option>
+                                        <option value="g4">البابا كيرلس</option>
+                                    </select>
+                                    <div class="form-text text-muted small">يتم تعيينها تلقائياً بمجرد اختيار المتسابق، ويمكن تغييرها يدوياً.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="game-score-input">النقاط المكتسبة</label>
+                                    <input type="number" id="game-score-input" class="form-control" placeholder="مثال: 10 أو 15 أو 20" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="game-desc-input">اللعبة / التوصيف (اختياري)</label>
+                                    <input type="text" id="game-desc-input" class="form-control" placeholder="مثل: كرة قدم، تنس، تحدي السرعة">
+                                </div>
+
+                                <button type="submit" id="add-game-log-btn" class="btn btn-primary-custom w-100 py-2.5">
+                                    <i class="bi bi-plus-lg me-1"></i> إضافة النقاط للمجموعة
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- سجل النقاط الحالي -->
+                    <div class="col-lg-8 mb-4">
+                        <div class="glass-card h-100 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold mb-0"><i class="bi bi-clock-history text-primary-light me-1"></i> سجل الألعاب والنقاط المضافة</h5>
+                                <span class="badge bg-secondary" id="total-game-logs-badge">0 سجل</span>
+                            </div>
+
+                            <div class="table-responsive flex-grow-1" style="max-height: 400px; overflow-y: auto;">
+                                <table class="table table-dark table-hover align-middle border-0 mb-0">
+                                    <thead>
+                                        <tr style="border-bottom: 2px solid var(--glass-border);">
+                                            <th>الاسم</th>
+                                            <th>المجموعة</th>
+                                            <th>النقاط</th>
+                                            <th>اللعبة</th>
+                                            <th>الوقت</th>
+                                            <th>إجراء</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="game-logs-tbody">
+                                        <!-- سجلات الألعاب -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم 4: لوحة النتائج والتقارير (Reports) -->
+            <div id="tab-reports" class="tab-content-panel d-none">
+                
+                <!-- لوحة صدارة الكأس -->
+                <div class="glass-card text-center">
+                    <h5 class="fw-bold text-start mb-1"><i class="bi bi-trophy-fill text-gold me-1"></i> لوحة الصدارة ومراكز المجموعات</h5>
+                    <p class="text-secondary small text-start mb-4">الترتيب التنافسي المباشر بناءً على إجمالي النقاط (أنشطة + ألعاب)</p>
+                    
+                    <div class="leaderboard-podium" id="podium-container">
+                        <!-- Podium items dynamic content -->
+                    </div>
+
+                    <div class="mx-auto" style="max-width:600px;" id="runners-container">
+                        <!-- Runner up items dynamic content -->
+                    </div>
+                </div>
+
+                <!-- خيارات تصدير التقارير -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="glass-card h-100">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-share-fill text-primary-light me-1"></i> مشاركة النتائج على WhatsApp</h5>
+                            <p class="text-secondary small mb-4">توليد تقرير نصي منسق ومزخرف بالإيموجي يعرض ترتيب المجموعات ونقاطها ومشاركته مباشرة مع الحكام والمنظمين.</p>
+                            
+                            <textarea id="whatsapp-report-preview" class="form-control mb-3 text-start small font-monospace" rows="6" readonly style="background:rgba(0,0,0,0.2); direction:rtl;"></textarea>
+                            
+                            <button id="copy-whatsapp-report" class="btn btn-success w-100 py-2.5 fw-bold" style="border-radius:12px;">
+                                <i class="bi bi-whatsapp me-1"></i> نسخ التقرير وإرساله <i class="bi bi-copy ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="glass-card h-100 d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="fw-bold mb-3"><i class="bi bi-file-earmark-excel-fill text-success me-1"></i> تصدير البيانات إلى Excel</h5>
+                                <p class="text-secondary small mb-3">تصدير ملف جدول بيانات كامل بصيغة Excel (CSV) يحتوي على تفاصيل تقييم كل مجموعة في كل نشاط من الأنشطة الـ 8 بالإضافة لسجلات نقاط الألعاب الحرة بالتفصيل.</p>
+                            </div>
+                            <button id="export-csv-btn" class="btn btn-primary-custom w-100 py-2.5">
+                                <i class="bi bi-download me-1"></i> تحميل ملف Excel (CSV) المطور
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول مصفوفة تفاصيل الدرجات الشاملة -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-grid-3x3-gap-fill text-primary-light me-1"></i> مصفوفة الدرجات التفصيلية</h5>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover align-middle table-bordered border-secondary mb-0 text-center small">
+                            <thead>
+                                <tr style="background:rgba(15,23,42,0.6);">
+                                    <th rowspan="2" class="align-middle text-start">المجموعة</th>
+                                    <th colspan="2">اليوم الأول</th>
+                                    <th colspan="3">اليوم الثاني</th>
+                                    <th colspan="3">اليوم الثالث</th>
+                                    <th rowspan="2" class="align-middle">إجمالي الأنشطة (250)</th>
+                                    <th rowspan="2" class="align-middle">إجمالي الألعاب (90)</th>
+                                    <th rowspan="2" class="align-middle">المجموع النهائي (340)</th>
+                                </tr>
+                                <tr style="background:rgba(15,23,42,0.4);">
+                                    <th>محاضرة 1 (20)</th>
+                                    <th>ورشة 1 (50)</th>
+                                    <th>محاضرة 2 (20)</th>
+                                    <th>صلاة 2 (20)</th>
+                                    <th>ورشة 2 (50)</th>
+                                    <th>قداس 3 (20)</th>
+                                    <th>ورشة 3 (50)</th>
+                                    <th>محاضرة 3 (20)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detailed-matrix-tbody">
+                                <!-- جدول مصفوفة الدرجات -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- section 5: settings & Cloud -->
+            <div id="tab-settings" class="tab-content-panel d-none">
+                
+                <!-- Cloud Sync settings -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-cloud-lightning-fill text-primary-light me-1"></i> ربط مزامنة Google Apps Script</h5>
+                    <p class="text-secondary small mb-4">اربط درجات المجموعات بجدول بيانات جوجل (Google Sheets) لتمكين المزامنة الحية بين أجهزة المشرفين المختلفة وتحديث لوحة الصدارة لجميع المشتركين فوراً.</p>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="google-script-url-input">رابط الويب لتطبيق Google Apps Script Web App</label>
+                        <input type="url" id="google-script-url-input" class="form-control text-start" placeholder="https://script.google.com/macros/s/.../exec" style="direction:ltr;">
+                        <div class="form-text text-muted small text-end">ألصق هنا رابط النشر (Deployment Web App URL) المستخرج من لوحة Apps Script.</div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <button id="cloud-upload-btn" class="btn btn-primary-custom w-100 py-2.5">
+                                <i class="bi bi-cloud-upload-fill me-1"></i> رفع ومزامنة البيانات الحالية للسحاب
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="cloud-download-btn" class="btn btn-secondary-custom w-100 py-2.5">
+                                <i class="bi bi-cloud-download-fill me-1"></i> تحميل وتحديث البيانات من السحاب
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Judges names & activity weights -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-4"><i class="bi bi-sliders text-primary-light me-1"></i> ضبط الحكام وأوزان الأنشطة</h5>
+                    
+                    <!-- Judges -->
+                    <h6 class="fw-bold mb-3 text-cyan">👥 أسماء الحكام الثلاثة في الجولة الحالية</h6>
+                    <div class="row mb-4">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="judge1-name-input">الحكم الأول</label>
+                            <input type="text" id="judge1-name-input" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="judge2-name-input">الحكم الثاني</label>
+                            <input type="text" id="judge2-name-input" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="judge3-name-input">الحكم الثالث</label>
+                            <input type="text" id="judge3-name-input" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Weights -->
+                    <h6 class="fw-bold mb-3 text-cyan">📊 الوزن والدرجة العظمى لكل نشاط مقيّم</h6>
+                    <div class="row">
+                        <!-- Day 1 -->
+                        <div class="col-md-4 mb-3">
+                            <div class="p-3 rounded" style="background:rgba(255,255,255,0.02); border:1px solid var(--glass-border);">
+                                <div class="fw-bold small mb-2 text-gold">اليوم الأول</div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1" for="w-d1-act1">محاضرة 1</label>
+                                    <input type="number" id="w-d1-act1" class="form-control form-control-sm">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1" for="w-d1-act2">محاضرة + ورشة 1</label>
+                                    <input type="number" id="w-d1-act2" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Day 2 -->
+                        <div class="col-md-4 mb-3">
+                            <div class="p-3 rounded" style="background:rgba(255,255,255,0.02); border:1px solid var(--glass-border);">
+                                <div class="fw-bold small mb-2 text-gold">اليوم الثاني</div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1" for="w-d2-act1">محاضرة 2</label>
+                                    <input type="number" id="w-d2-act1" class="form-control form-control-sm">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1" for="w-d2-act2">حلقة صلاة 2</label>
+                                    <input type="number" id="w-d2-act2" class="form-control form-control-sm">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1" for="w-d2-act3">محاضرة + ورشة 2</label>
+                                    <input type="number" id="w-d2-act3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Day 3 -->
+                        <div class="col-md-4 mb-3">
+                            <div class="p-3 rounded" style="background:rgba(255,255,255,0.02); border:1px solid var(--glass-border);">
+                                <div class="fw-bold small mb-2 text-gold">اليوم الثالث</div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1" for="w-d3-act1">القداس الإلهي</label>
+                                    <input type="number" id="w-d3-act1" class="form-control form-control-sm">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small mb-1" for="w-d3-act2">محاضرة + ورشة 3</label>
+                                    <input type="number" id="w-d3-act2" class="form-control form-control-sm">
+                                </div>
+                                <div>
+                                    <label class="form-label small mb-1" for="w-d3-act3">محاضرة 3</label>
+                                    <input type="number" id="w-d3-act3" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Games Weight -->
+                    <div class="row mt-2">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-cyan fw-bold" for="w-games_total">الوزن الأقصى التقريبي للألعاب (إجمالي الـ 3 أيام)</label>
+                            <input type="number" id="w-games_total" class="form-control" placeholder="الافتراضي: 90 درجة">
+                            <div class="form-text text-muted small">يتم احتساب النسبة المئوية النهائية بناءً على مجموع الأنشطة + الألعاب مقسوماً على الإجمالي الكلي (الافتراضي 340).</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button id="save-settings-btn" class="btn btn-primary-custom px-4 py-2.5">
+                            <i class="bi bi-save2-fill me-1"></i> حفظ وتحديث الإعدادات والأوزان
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Google Apps Script guide -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-code-slash text-primary-light me-1"></i> كود Google Apps Script وطريقة الإعداد</h5>
+                    <p class="text-secondary small mb-3">اتبع الخطوات التالية لتشغيل سيرفر المزامنة السحابي مجاناً:</p>
+                    <ol class="text-secondary small ps-3 mb-4" style="line-height:1.7;">
+                        <li>افتح شيت جوجل (Google Sheet) جديد وقم بتسميته "درجات مؤتمر 2026".</li>
+                        <li>من الشريط العلوي، اختر <strong>Extensions</strong> ثم <strong>Apps Script</strong>.</li>
+                        <li>امسح أي كود موجود في الملف الافتراضي، ثم الصق الكود البرمجي الموجود بالأسفل بالكامل.</li>
+                        <li>انقر على زر الحفظ (أيقونة القرص المرن) ثم اضغط على زر <strong>Deploy</strong> (في الأعلى على اليمين) ثم اختر <strong>New deployment</strong>.</li>
+                        <li>من نوع التثبيت (Select type) اختر <strong>Web app</strong>.</li>
+                        <li>قم بتغيير خيار "Execute as" ليكون <strong>Me</strong>، وخيار "Who has access" ليكون <strong>Anyone</strong> (مهم جداً للوصول بدون تسجيل دخول جوجل).</li>
+                        <li>اضغط على <strong>Deploy</strong>، قم بالموافقة على الصلاحيات المطلوبة، ثم انسخ رابط الويب المتولد (Web App URL) والصقه في خانة الرابط بالأعلى.</li>
+                    </ol>
+
+                    <button id="copy-script-code-btn" class="btn btn-sm btn-secondary-custom mb-3">
+                        <i class="bi bi-copy me-1"></i> نسخ كود Google Apps Script للذاكرة
+                    </button>
+                </div>
+
+                <!-- JSON Backup and Restore -->
+                <div class="glass-card">
+                    <h5 class="fw-bold mb-3 text-danger"><i class="bi bi-exclamation-triangle-fill me-1"></i> إدارة قاعدة البيانات الاحتياطية</h5>
+                    <p class="text-secondary small mb-4">في حال الرغبة في عمل نسخة احتياطية محلية للدرجات والتقييمات بالكامل وتنزيلها كملف، أو استعادتها لاحقاً.</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <button id="backup-local-btn" class="btn btn-outline-info w-100 py-2.5">
+                                <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> تنزيل ملف نسخة احتياطية (JSON)
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="file" id="restore-local-file" class="d-none" accept=".json">
+                            <button id="restore-local-btn" class="btn btn-outline-danger w-100 py-2.5" onclick="document.getElementById('restore-local-file').click();">
+                                <i class="bi bi-file-earmark-arrow-up-fill me-1"></i> استعادة البيانات من ملف (JSON)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- config.js: إعدادات GAS (لا يُرفع على GitHub) -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/data-service.js"></script>
+    
+    <!-- منطق تشغيل لوحة التقييم -->
+    <script>
+        (function() {
+            'use strict';
+
+            // 1. البيانات والثوابت المأمنة بصمة SHA-256
+            const AUTH_USER_HASH = "77a3f439969f80c707af7791884a8c135b64f7bf2faf314bb69d6e5e2e5e88c3";
+            const AUTH_PASS_HASH = "f5b9f57cbea8143a47a75f0c45a308b65f7f724ee87dd5bb99727c863744e423";
+
+            async function hashSHA256(str) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(str);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+            
+            const ACTIVITIES_METADATA = {
+                "1": [
+                    { id: "d1_act1", name: "محاضرة 1", type: "محاضرة", defaultWeight: 20 },
+                    { id: "d1_act2", name: "محاضرة + ورشة 1", type: "ورشة عمل", defaultWeight: 50 }
+                ],
+                "2": [
+                    { id: "d2_act1", name: "محاضرة 2", type: "محاضرة", defaultWeight: 20 },
+                    { id: "d2_act2", name: "حلقة صلاة 2", type: "صلاة", defaultWeight: 20 },
+                    { id: "d2_act3", name: "محاضرة + ورشة 2", type: "ورشة عمل", defaultWeight: 50 }
+                ],
+                "3": [
+                    { id: "d3_act1", name: "القداس الإلهي", type: "قداس", defaultWeight: 20 },
+                    { id: "d3_act2", name: "محاضرة + ورشة 3", type: "ورشة عمل", defaultWeight: 50 },
+                    { id: "d3_act3", name: "محاضرة 3", type: "محاضرة", defaultWeight: 20 }
+                ]
+            };
+
+            const GROUPS_META = [
+                { id: "g1", name: "مارجرجس", color: "#ef4444" },
+                { id: "g2", name: "مريم العذراء", color: "#06b6d4" },
+                { id: "g3", name: "الشهيده مارينا", color: "#10b981" },
+                { id: "g4", name: "البابا كيرلس", color: "#fbbf24" }
+            ];
+
+            let evalData = {
+                settings: {
+                    googleScriptUrl: "",
+                    judges: ["حكم 1", "حكم 2", "حكم 3"],
+                    weights: {
+                        "d1_act1": 20, "d1_act2": 50,
+                        "d2_act1": 20, "d2_act2": 20, "d2_act3": 50,
+                        "d3_act1": 20, "d3_act2": 50, "d3_act3": 20,
+                        "games_total": 90
+                    }
+                },
+                activities: {}, // d1_act1: { g1: [j1, j2, j3], g2: [...] }
+                gameLogs: [] // { id, name, groupId, points, desc, time }
+            };
+
+            let localDb = null;
+            let participantsList = [];
+            let hasUnsavedChanges = false;
+
+            // 2. التهيئة الأولى
+            $(document).ready(async function() {
+                checkAuthentication();
+                setupAuthEventListeners();
+                setupTabs();
+                
+                // تحميل بيانات المؤتمر
+                try {
+                    localDb = await DataService.loadConference();
+                    participantsList = localDb.participants || [];
+                } catch(e) {
+                    console.error("تعذر تحميل قائمة المشتركين من DataService:", e);
+                }
+
+                // تحميل البيانات المحفوظة محلياً للتقييم
+                loadEvaluationState();
+                
+                // ربط الأحداث وعناصر الواجهة
+                setupEvaluationPanel();
+                setupGamesPanel();
+                setupSettingsPanel();
+                setupReportsPanel();
+                renderDashboardSummary();
+            });
+
+            // 3. الأمان والدخول
+            function checkAuthentication() {
+                if (sessionStorage.getItem('eval_admin_logged_in') === 'true') {
+                    $('#login-screen').addClass('d-none');
+                    $('#main-dashboard').removeClass('d-none');
+                } else {
+                    $('#login-screen').removeClass('d-none');
+                    $('#main-dashboard').addClass('d-none');
+                }
+            }
+
+            function setupAuthEventListeners() {
+                $('#toggle-pw-btn').click(function() {
+                    const $pw = $('#password');
+                    const $icon = $(this).find('i');
+                    if ($pw.attr('type') === 'password') {
+                        $pw.attr('type', 'text');
+                        $icon.removeClass('bi-eye').addClass('bi-eye-slash');
+                    } else {
+                        $pw.attr('type', 'password');
+                        $icon.removeClass('bi-eye-slash').addClass('bi-eye');
+                    }
+                });
+
+                $('#login-form').submit(async function(e) {
+                    e.preventDefault();
+                    const user = $('#username').val().trim();
+                    const pass = $('#password').val().trim();
+
+                    const uHash = await hashSHA256(user);
+                    const pHash = await hashSHA256(pass);
+
+                    if (uHash === AUTH_USER_HASH && pHash === AUTH_PASS_HASH) {
+                        sessionStorage.setItem('eval_admin_logged_in', 'true');
+                        $('#login-alert').addClass('d-none');
+                        checkAuthentication();
+                    } else {
+                        $('#login-alert').removeClass('d-none').text('❌ خطأ في اسم المستخدم أو كلمة المرور!');
+                    }
+                });
+
+                $('#logout-btn').click(function() {
+                    if (confirm("هل تريد تسجيل الخروج؟")) {
+                        sessionStorage.removeItem('eval_admin_logged_in');
+                        checkAuthentication();
+                    }
+                });
+            }
+
+            // 4. نظام الأقسام (Tabs)
+            function setupTabs() {
+                $('.custom-tab-btn').click(function() {
+                    const tabId = $(this).data('tab');
+                    $('.custom-tab-btn').removeClass('active');
+                    $(this).addClass('active');
+                    $('.tab-content-panel').addClass('d-none');
+                    $(`#tab-${tabId}`).removeClass('d-none');
+                    
+                    // تحديث محتويات التبويب المفتوح
+                    if (tabId === 'dashboard') {
+                        renderDashboardSummary();
+                    } else if (tabId === 'reports') {
+                        renderReportsPanel();
+                    }
+                });
+            }
+
+            // 5. إدارة وحفظ الحالة
+            function loadEvaluationState() {
+                const saved = localStorage.getItem('group_evaluation_data');
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (parsed && parsed.settings && parsed.activities && parsed.gameLogs) {
+                            evalData = parsed;
+                            // تعبئة حقل رابط السكربت إن وجد في الـ settings
+                            if (evalData.settings.googleScriptUrl) {
+                                $('#google-script-url-input').val(evalData.settings.googleScriptUrl);
+                                $('#quick-cloud-sync').removeClass('d-none');
+                            }
+                        }
+                    } catch(e) {
+                        console.error("فشل قراءة بيانات التقييم المخزنة:", e);
+                    }
+                }
+                updateUnsavedStatus(false);
+            }
+
+            function saveEvaluationState(markAsUnsaved = true) {
+                localStorage.setItem('group_evaluation_data', JSON.stringify(evalData));
+                
+                // مزامنة فورية مع مسودة الـ localStorage للموقع الرئيسي
+                syncWithMainWebsiteDraft();
+
+                if (markAsUnsaved) {
+                    updateUnsavedStatus(true);
+                }
+            }
+
+            function updateUnsavedStatus(isUnsaved) {
+                hasUnsavedChanges = isUnsaved;
+                const $dot = $('#sync-dot');
+                const $text = $('#sync-status-text');
+                
+                if (isUnsaved) {
+                    $dot.addClass('unsaved');
+                    $text.text('تنبيه: توجد تعديلات غير مرفوعة للسحاب ⚠️');
+                } else {
+                    $dot.removeClass('unsaved');
+                    $text.text('البيانات متزامنة ومحفوظة بالكامل ✅');
+                }
+            }
+
+            // تحديث درجات المجموعات في مسودة الـ localStorage للموقع الرئيسي
+            function syncWithMainWebsiteDraft() {
+                try {
+                    const totals = calculateGroupTotals();
+                    const mainDraftKey = 'conference_db_draft';
+                    const savedMain = localStorage.getItem(mainDraftKey);
+                    
+                    let mainDb = localDb;
+                    if (savedMain) {
+                        const parsedMain = JSON.parse(savedMain);
+                        if (parsedMain && parsedMain.db) {
+                            mainDb = parsedMain.db;
+                        }
+                    }
+
+                    if (mainDb && mainDb.groups) {
+                        mainDb.groups.forEach(g => {
+                            if (totals[g.id]) {
+                                g.score = totals[g.id].percentage; // حفظ النسبة المئوية
+                            }
+                        });
+
+                        // حفظ المسودة الأحدث للموقع الرئيسي
+                        const draft = {
+                            db: mainDb,
+                            lastSaved: new Date().toISOString(),
+                            version: 'v4'
+                        };
+                        localStorage.setItem(mainDraftKey, JSON.stringify(draft));
+
+                        // تحديث الكاش الجاري
+                        if (window.DataService) {
+                            window.DataService.cachedData = mainDb;
+                        }
+                        window.conferenceData = mainDb;
+                    }
+                } catch(e) {
+                    console.error("تعذر مزامنة درجات المجموعات مع مسودة الموقع الرئيسي:", e);
+                }
+            }
+
+            // 6. لوحة تقييم الأنشطة المنظمة
+            function setupEvaluationPanel() {
+                const $daySelect = $('#select-day');
+                const $actSelect = $('#select-activity');
+
+                function populateActivities() {
+                    const day = $daySelect.val();
+                    const activities = ACTIVITIES_METADATA[day] || [];
+                    
+                    $actSelect.empty();
+                    activities.forEach(act => {
+                        $actSelect.append(`<option value="${act.id}">${act.name}</option>`);
+                    });
+                    
+                    updateCurrentActivityMeta();
+                }
+
+                function updateCurrentActivityMeta() {
+                    const day = $daySelect.val();
+                    const actId = $actSelect.val();
+                    const activities = ACTIVITIES_METADATA[day] || [];
+                    const currentAct = activities.find(a => a.id === actId);
+                    
+                    if (currentAct) {
+                        const maxWeight = evalData.settings.weights[actId] || currentAct.defaultWeight;
+                        $('#current-activity-max-weight').text(maxWeight);
+                        $('#current-activity-type-badge').text(currentAct.type);
+                        
+                        renderGroupCards(actId, maxWeight);
+                    }
+                }
+
+                function getStarsDisplayHtml(rating) {
+                    let starsHtml = '';
+                    for (let i = 1; i <= 5; i++) {
+                        if (rating >= i) {
+                            starsHtml += '<i class="bi bi-star-fill text-warning"></i>';
+                        } else if (rating >= i - 0.5) {
+                            starsHtml += '<i class="bi bi-star-half text-warning"></i>';
+                        } else {
+                            starsHtml += '<i class="bi bi-star text-muted"></i>';
+                        }
+                    }
+                    return starsHtml;
+                }
+
+                function renderJudgeStarRow(judgeName, judgeIdx, starVal, maxWeight, groupId) {
+                    const rating = starVal !== "" && starVal !== null && starVal !== undefined ? Number(starVal) : 0;
+                    const points = rating * (maxWeight / 5);
+                    const starsHtml = getStarsDisplayHtml(rating);
+                    
+                    return `
+                        <div class="star-rating-row mb-2">
+                            <div class="d-flex justify-content-between align-items-center w-100 mb-1">
+                                <span class="form-label small mb-0 fw-bold" style="color:var(--text-secondary);">${judgeName}</span>
+                                <span class="star-rating-val text-cyan fw-bold" id="label-val-${groupId}-${judgeIdx}">${rating.toFixed(1)} ⭐ (${points.toFixed(1)} ن)</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 w-100">
+                                <div class="star-rating-stars" id="stars-display-${groupId}-${judgeIdx}">
+                                    ${starsHtml}
+                                </div>
+                                <input type="range" class="judge-star-range flex-grow-1" data-group="${groupId}" data-judge="${judgeIdx}" min="0" max="5" step="0.5" value="${rating}">
+                            </div>
+                        </div>
+                    `;
+                }
+
+                function renderGroupCards(actId, maxWeight) {
+                    const $grid = $('#groups-eval-grid');
+                    $grid.empty();
+
+                    const judges = evalData.settings.judges;
+                    const activityScores = evalData.activities[actId] || {};
+
+                    GROUPS_META.forEach(g => {
+                        const scores = activityScores[g.id] || [0, 0, 0];
+                        
+                        // حساب المتوسط الحالي بالنقاط
+                        const ratings = scores.map(Number);
+                        const avgStars = ratings.reduce((a,b)=>a+b, 0) / 3;
+                        const avgPoints = avgStars * (maxWeight / 5);
+                        const pct = maxWeight > 0 ? ((avgPoints / maxWeight) * 100).toFixed(0) : "0";
+
+                        const cardHtml = `
+                            <div class="col-md-6 mb-3">
+                                <div class="glass-card group-card" style="--group-color: ${g.color};">
+                                    <div class="group-card-header">
+                                        <span class="group-name-title" style="color: ${g.color};">${g.name}</span>
+                                        <span class="group-percentage-badge text-cyan">المتوسط: <strong class="text-white">${avgPoints.toFixed(1)}</strong> / ${maxWeight} (${pct}%)</span>
+                                    </div>
+                                    <div class="star-rating-container" data-group="${g.id}">
+                                        ${renderJudgeStarRow(judges[0], 0, scores[0], maxWeight, g.id)}
+                                        ${renderJudgeStarRow(judges[1], 1, scores[1], maxWeight, g.id)}
+                                        ${renderJudgeStarRow(judges[2], 2, scores[2], maxWeight, g.id)}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $grid.append(cardHtml);
+                    });
+
+                    // تحديث النجوم والدرجات لحظياً عند سحب الشريط المنزلق
+                    $('.judge-star-range').on('input', function() {
+                        const groupId = $(this).data('group');
+                        const judgeIdx = $(this).data('judge');
+                        const rating = Number($(this).val());
+                        const points = rating * (maxWeight / 5);
+
+                        // 1. تحديث شكل النجوم
+                        $(`#stars-display-${groupId}-${judgeIdx}`).html(getStarsDisplayHtml(rating));
+
+                        // 2. تحديث التسمية
+                        $(`#label-val-${groupId}-${judgeIdx}`).text(`${rating.toFixed(1)} ⭐ (${points.toFixed(1)} ن)`);
+
+                        // 3. إعادة حساب متوسط الكارت بالكامل
+                        recalculateCardAverage($(this).closest('.group-card'), maxWeight);
+                    });
+                }
+
+                function recalculateCardAverage($card, maxWeight) {
+                    const ratings = [];
+                    $card.find('.judge-star-range').each(function() {
+                        ratings.push(Number($(this).val()));
+                    });
+
+                    const avgStars = ratings.length > 0 ? (ratings.reduce((a,b)=>a+b,0) / ratings.length) : 0;
+                    const avgPoints = avgStars * (maxWeight / 5);
+                    const pct = maxWeight > 0 ? ((avgPoints / maxWeight) * 100).toFixed(0) : "0";
+
+                    $card.find('.group-percentage-badge').html(`المتوسط: <strong class="text-white">${avgPoints.toFixed(1)}</strong> / ${maxWeight} (${pct}%)`);
+                }
+
+                $daySelect.change(populateActivities);
+                $actSelect.change(updateCurrentActivityMeta);
+                
+                populateActivities();
+
+                // حفظ درجات هذا النشاط
+                $('#save-all-activities-btn').click(function() {
+                    const actId = $actSelect.val();
+                    const activityScores = {};
+
+                    GROUPS_META.forEach(g => {
+                        activityScores[g.id] = [0, 0, 0];
+                    });
+
+                    $('.judge-star-range').each(function() {
+                        const groupId = $(this).data('group');
+                        const judgeIdx = $(this).data('judge');
+                        const rating = Number($(this).val());
+                        
+                        if (activityScores[groupId]) {
+                            activityScores[groupId][judgeIdx] = rating;
+                        }
+                    });
+
+                    evalData.activities[actId] = activityScores;
+                    saveEvaluationState(true);
+                    alert("✅ تم حفظ تقييم النشاط بالنجوم محلياً بنجاح!");
+                });
+            }
+
+            // 7. لوحة الألعاب الحرة
+            function setupGamesPanel() {
+                const $nameInput = $('#game-participant-name');
+                const $groupSelect = $('#game-group-select');
+                const $autocomplete = $('#autocomplete-list');
+
+                // Autocomplete
+                $nameInput.on('input', function() {
+                    const query = $(this).val().trim().toLowerCase();
+                    $autocomplete.empty().addClass('d-none');
+                    
+                    if (query.length < 2) return;
+
+                    const matches = participantsList.filter(p => p.name && p.name.toLowerCase().includes(query));
+                    
+                    if (matches.length > 0) {
+                        $autocomplete.removeClass('d-none');
+                        matches.slice(0, 5).forEach(m => {
+                            const firstMatchText = m.name;
+                            const groupObj = GROUPS_META.find(g => g.id === m.groupId);
+                            const groupText = groupObj ? groupObj.name : "بدون مجموعة";
+                            
+                            $autocomplete.append(`
+                                <div class="suggestion-item" data-id="${m.id}" data-name="${m.name}" data-group="${m.groupId || ''}">
+                                    <strong>${firstMatchText}</strong> <span class="text-secondary ms-2 small">(${groupText})</span>
+                                </div>
+                            `);
+                        });
+                    }
+                });
+
+                $(document).on('click', '.suggestion-item', function() {
+                    const name = $(this).data('name');
+                    const groupId = $(this).data('group');
+
+                    $nameInput.val(name);
+                    if (groupId) {
+                        $groupSelect.val(groupId);
+                    }
+                    $autocomplete.addClass('d-none');
+                });
+
+                // إغلاق الاقتراحات عند النقر بالخارج
+                $(document).click(function(e) {
+                    if (!$(e.target).closest('.position-relative').length) {
+                        $autocomplete.addClass('d-none');
+                    }
+                });
+
+                // إضافة سجل لعبة
+                $('#free-game-form').submit(function(e) {
+                    e.preventDefault();
+                    
+                    const name = $nameInput.val().trim();
+                    const groupId = $groupSelect.val();
+                    const points = Number($('#game-score-input').val());
+                    const desc = $('#game-desc-input').val().trim() || "نقاط ألعاب حرة";
+
+                    if (!name || !groupId) {
+                        alert("⚠️ يرجى تعبئة اسم المتسابق وتحديد مجموعته!");
+                        return;
+                    }
+
+                    const newLog = {
+                        id: 'game_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                        name: name,
+                        groupId: groupId,
+                        points: points,
+                        desc: desc,
+                        time: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+                    };
+
+                    evalData.gameLogs.unshift(newLog);
+                    saveEvaluationState(true);
+                    
+                    // مسح الحقول
+                    $nameInput.val('');
+                    $groupSelect.val('');
+                    $('#game-score-input').val('');
+                    $('#game-desc-input').val('');
+                    
+                    renderGameLogsTable();
+                });
+
+                renderGameLogsTable();
+            }
+
+            function renderGameLogsTable() {
+                const $tbody = $('#game-logs-tbody');
+                $tbody.empty();
+
+                const logs = evalData.gameLogs || [];
+                $('#total-game-logs-badge').text(`${logs.length} سجل`);
+
+                if (logs.length === 0) {
+                    $tbody.append(`<tr><td colspan="6" class="text-center text-secondary small py-4">لم يتم تسجيل أي نقاط ألعاب حرة بعد.</td></tr>`);
+                    return;
+                }
+
+                logs.forEach(log => {
+                    const groupObj = GROUPS_META.find(g => g.id === log.groupId);
+                    const groupName = groupObj ? groupObj.name : "مجهول";
+                    const groupColor = groupObj ? groupObj.color : "#fff";
+
+                    $tbody.append(`
+                        <tr id="row_${log.id}">
+                            <td class="fw-bold text-start">${escapeHtml(log.name)}</td>
+                            <td><span class="badge" style="background:${groupColor}22; border:1px solid ${groupColor}; color:${groupColor};">${groupName}</span></td>
+                            <td class="fw-bold text-success">${log.points >= 0 ? '+' : ''}${log.points}</td>
+                            <td class="text-secondary small">${escapeHtml(log.desc)}</td>
+                            <td class="text-muted small">${log.time}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-danger btn-delete-game-log py-0.5 px-2" data-id="${log.id}">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
+
+                $('.btn-delete-game-log').click(function() {
+                    const id = $(this).data('id');
+                    if (confirm("هل أنت متأكد من حذف هذا السجل؟ سيتم خصم النقاط من المجموعة فوراً.")) {
+                        evalData.gameLogs = evalData.gameLogs.filter(l => l.id !== id);
+                        saveEvaluationState(true);
+                        renderGameLogsTable();
+                    }
+                });
+            }
+
+            // 8. حساب إجماليات المجموعات
+            function calculateGroupTotals() {
+                const totals = {};
+                
+                GROUPS_META.forEach(g => {
+                    totals[g.id] = {
+                        id: g.id,
+                        name: g.name,
+                        activityPoints: 0,
+                        gamePoints: 0,
+                        totalPoints: 0,
+                        percentage: 0
+                    };
+                });
+
+                // 1. حساب درجات الأنشطة المقيّمة بالحكام
+                let totalMaxWeights = 0;
+                
+                Object.keys(ACTIVITIES_METADATA).forEach(day => {
+                    ACTIVITIES_METADATA[day].forEach(act => {
+                        const actId = act.id;
+                        const maxWeight = evalData.settings.weights[actId] || act.defaultWeight;
+                        totalMaxWeights += maxWeight;
+
+                        const activityScores = evalData.activities[actId] || {};
+                        
+                        GROUPS_META.forEach(g => {
+                            const scores = activityScores[g.id] || [0, 0, 0];
+                            const numScores = scores.filter(s => s !== "" && !isNaN(s)).map(Number);
+                            const avgStars = numScores.length > 0 ? (numScores.reduce((a,b)=>a+b, 0) / numScores.length) : 0;
+                            const avgPoints = avgStars * (maxWeight / 5);
+                            
+                            totals[g.id].activityPoints += avgPoints;
+                        });
+                    });
+                });
+
+                // 2. حساب درجات الألعاب الحرة
+                const logs = evalData.gameLogs || [];
+                logs.forEach(log => {
+                    if (totals[log.groupId]) {
+                        totals[log.groupId].gamePoints += log.points;
+                    }
+                });
+
+                // 3. حساب المجموع النهائي والنسبة المئوية
+                const gamesMaxWeight = Number(evalData.settings.weights.games_total) || 90;
+                const grandTotalMax = totalMaxWeights + gamesMaxWeight;
+
+                GROUPS_META.forEach(g => {
+                    const t = totals[g.id];
+                    t.totalPoints = t.activityPoints + t.gamePoints;
+                    
+                    t.percentage = grandTotalMax > 0 ? Math.round((t.totalPoints / grandTotalMax) * 100) : 0;
+                    if (t.percentage < 0) t.percentage = 0;
+                });
+
+                return totals;
+            }
+
+            // 9. تعبئة شاشة الرئيسية ولوحة القيادة
+            function renderDashboardSummary() {
+                const totals = calculateGroupTotals();
+                const $tbody = $('#dash-groups-summary-tbody');
+                $tbody.empty();
+
+                const sortedGroups = Object.values(totals).sort((a,b) => b.totalPoints - a.totalPoints);
+                
+                if (sortedGroups.length > 0) {
+                    $('#dash-top-group').text(sortedGroups[0].name);
+                    $('#dash-top-score').text(Math.round(sortedGroups[0].totalPoints));
+                }
+
+                let activeEvalCount = 0;
+                Object.keys(ACTIVITIES_METADATA).forEach(day => {
+                    ACTIVITIES_METADATA[day].forEach(act => {
+                        if (evalData.activities[act.id]) {
+                            const scores = Object.values(evalData.activities[act.id]);
+                            const hasAnyScore = scores.some(sArr => sArr.some(scoreVal => scoreVal !== ""));
+                            if (hasAnyScore) activeEvalCount++;
+                        }
+                    });
+                });
+                $('#dash-activities-count').text(`${activeEvalCount}/8`);
+                $('#dash-game-logs-count').text(evalData.gameLogs.length);
+
+                Object.values(totals).forEach(t => {
+                    const groupObj = GROUPS_META.find(g => g.id === t.id);
+                    const groupColor = groupObj ? groupObj.color : "#fff";
+                    
+                    const progressHtml = `
+                        <div class="progress" style="height:8px; background:rgba(255,255,255,0.05); border-radius:4px;">
+                            <div class="progress-bar" role="progressbar" style="width: ${Math.min(100, t.percentage)}%; background-color:${groupColor};" aria-valuenow="${t.percentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    `;
+
+                    $tbody.append(`
+                        <tr>
+                            <td class="fw-bold text-start" style="color:${groupColor};">${t.name}</td>
+                            <td>${t.activityPoints.toFixed(1)} / 250</td>
+                            <td class="fw-bold text-success">${t.gamePoints >= 0 ? '+' : ''}${t.gamePoints}</td>
+                            <td class="fw-bold text-gold">${t.totalPoints.toFixed(1)}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="fw-bold text-cyan" style="min-width:40px;">${t.percentage}%</span>
+                                    <div class="flex-grow-1">${progressHtml}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge" style="background:${groupColor}22; color:${groupColor}; border:1px solid ${groupColor}44;">نشط</span>
+                            </td>
+                        </tr>
+                    `);
+                });
+            }
+
+            // 10. إعداد شاشة لوحة النتائج والتقارير
+            function renderReportsPanel() {
+                const totals = calculateGroupTotals();
+                const sorted = Object.values(totals).sort((a,b) => b.totalPoints - a.totalPoints);
+                
+                const $podium = $('#podium-container');
+                $podium.empty();
+                
+                // Podium cards order: Second, First, Third
+                const podiumCards = [];
+                
+                // Second Place
+                if (sorted[1]) {
+                    const groupObj = GROUPS_META.find(g => g.id === sorted[1].id);
+                    podiumCards.push(`
+                        <div class="podium-card second" style="--group-color: ${groupObj.color}">
+                            <div class="podium-badge">🥈</div>
+                            <div class="podium-name">${sorted[1].name}</div>
+                            <div class="podium-score">${sorted[1].percentage}%</div>
+                            <div class="text-muted small">${sorted[1].totalPoints.toFixed(0)} ن</div>
+                        </div>
+                    `);
+                }
+                
+                // First Place
+                if (sorted[0]) {
+                    const groupObj = GROUPS_META.find(g => g.id === sorted[0].id);
+                    // Add first place to index 0 or correct place
+                    podiumCards.unshift(`
+                        <div class="podium-card first" style="--group-color: ${groupObj.color}">
+                            <div class="podium-badge">👑</div>
+                            <div class="podium-name">${sorted[0].name}</div>
+                            <div class="podium-score">${sorted[0].percentage}%</div>
+                            <div class="text-muted small">${sorted[0].totalPoints.toFixed(0)} ن</div>
+                        </div>
+                    `);
+                }
+
+                // Third Place
+                if (sorted[2]) {
+                    const groupObj = GROUPS_META.find(g => g.id === sorted[2].id);
+                    podiumCards.push(`
+                        <div class="podium-card third" style="--group-color: ${groupObj.color}">
+                            <div class="podium-badge">🥉</div>
+                            <div class="podium-name">${sorted[2].name}</div>
+                            <div class="podium-score">${sorted[2].percentage}%</div>
+                            <div class="text-muted small">${sorted[2].totalPoints.toFixed(0)} ن</div>
+                        </div>
+                    `);
+                }
+
+                // Render in order Second, First, Third
+                if (sorted[1] && sorted[0]) {
+                    // We need Second on the right (Arabic direction: right-to-left)
+                    // In RTL, items go: Second (right), First (middle), Third (left)
+                    $podium.append(podiumCards.join(''));
+                } else {
+                    $podium.append(podiumCards.join(''));
+                }
+
+                // Runner up 4th place
+                const $runners = $('#runners-container');
+                $runners.empty();
+                
+                if (sorted[3]) {
+                    const groupObj = GROUPS_META.find(g => g.id === sorted[3].id);
+                    $runners.append(`
+                        <div class="runner-up-row">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fw-bold" style="color:var(--text-secondary);">المركز الرابع</span>
+                                <span class="fw-bold" style="color:${groupObj.color}">${sorted[3].name}</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fw-bold text-cyan">${sorted[3].percentage}%</span>
+                                <span class="text-muted small">${sorted[3].totalPoints.toFixed(0)} نقطة</span>
+                            </div>
+                        </div>
+                    `);
+                }
+
+                // Detailed Matrix table
+                const $matrix = $('#detailed-matrix-tbody');
+                $matrix.empty();
+
+                GROUPS_META.forEach(g => {
+                    const t = totals[g.id];
+                    const rowScores = [];
+                    Object.keys(ACTIVITIES_METADATA).forEach(day => {
+                        ACTIVITIES_METADATA[day].forEach(act => {
+                            const actScores = evalData.activities[act.id] || {};
+                            const scores = actScores[g.id] || ["", "", ""];
+                            const numScores = scores.filter(s => s !== "" && !isNaN(s)).map(Number);
+                            const avg = numScores.length > 0 ? (numScores.reduce((a,b)=>a+b, 0) / numScores.length) : 0;
+                            rowScores.push(avg.toFixed(1));
+                        });
+                    });
+
+                    $matrix.append(`
+                        <tr>
+                            <td class="fw-bold text-start" style="color:${g.color};">${g.name}</td>
+                            <td>${rowScores[0]}</td>
+                            <td>${rowScores[1]}</td>
+                            <td>${rowScores[2]}</td>
+                            <td>${rowScores[3]}</td>
+                            <td>${rowScores[4]}</td>
+                            <td>${rowScores[5]}</td>
+                            <td>${rowScores[6]}</td>
+                            <td>${rowScores[7]}</td>
+                            <td class="fw-bold">${t.activityPoints.toFixed(1)}</td>
+                            <td class="fw-bold text-success">${t.gamePoints >= 0 ? '+' : ''}${t.gamePoints}</td>
+                            <td class="fw-bold text-gold">${t.totalPoints.toFixed(1)} (${t.percentage}%)</td>
+                        </tr>
+                    `);
+                });
+
+                // Generate whatsapp report preview text
+                generateWhatsAppReportPreview(sorted);
+            }
+
+            function setupReportsPanel() {
+                // copy WhatsApp report text
+                $('#copy-whatsapp-report').click(function() {
+                    const text = $('#whatsapp-report-preview').val();
+                    navigator.clipboard.writeText(text).then(function() {
+                        alert("📋 تم نسخ التقرير المنسق لـ WhatsApp بنجاح! افتح محادثة واتساب والصقه.");
+                    }).catch(function() {
+                        alert("⚠️ فشل النسخ التلقائي، قم بنسخ النص يدوياً من المربع.");
+                    });
+                });
+
+                // download csv
+                $('#export-csv-btn').click(function() {
+                    exportEvaluationToCSV();
+                });
+            }
+
+            function exportEvaluationToCSV() {
+                const totals = calculateGroupTotals();
+                let csvContent = "\ufeff"; // BOM لضمان عمل الترميز العربي في Excel
+                
+                csvContent += "تقرير درجات ميلادا عجيبًا 2026\n";
+                csvContent += "المجموعات ولوحة الصدارة\n\n";
+                csvContent += "المجموعة,محاضرة 1 (20),ورشة 1 (50),محاضرة 2 (20),صلاة 2 (20),ورشة 2 (50),قداس 3 (20),ورشة 3 (50),محاضرة 3 (20),إجمالي الأنشطة,إجمالي الألعاب,المجموع الكلي,النسبة المئوية\n";
+
+                GROUPS_META.forEach(g => {
+                    const t = totals[g.id];
+                    const rowScores = [];
+                    Object.keys(ACTIVITIES_METADATA).forEach(day => {
+                        ACTIVITIES_METADATA[day].forEach(act => {
+                            const actId = act.id;
+                            const maxWeight = evalData.settings.weights[actId] || act.defaultWeight;
+                            const actScores = evalData.activities[actId] || {};
+                            const scores = actScores[g.id] || [0, 0, 0];
+                            const numScores = scores.filter(s => s !== "" && !isNaN(s)).map(Number);
+                            const avgStars = numScores.length > 0 ? (numScores.reduce((a,b)=>a+b, 0) / numScores.length) : 0;
+                            const avgPoints = avgStars * (maxWeight / 5);
+                            rowScores.push(avgPoints.toFixed(1));
+                        });
+                    });
+
+                    csvContent += `"${g.name}",${rowScores.join(',')},${t.activityPoints.toFixed(1)},${t.gamePoints},${t.totalPoints.toFixed(1)},"${t.percentage}%"\n`;
+                });
+
+                csvContent += "\n\nسجل الألعاب الحرة بالتفصيل\n";
+                csvContent += "الاسم,المجموعة,النقاط المكتسبة,اللعبة / التوصيف,الوقت\n";
+                
+                const logs = evalData.gameLogs || [];
+                logs.forEach(log => {
+                    const groupObj = GROUPS_META.find(g => g.id === log.groupId);
+                    const groupName = groupObj ? groupObj.name : "مجهول";
+                    csvContent += `"${log.name}","${groupName}",${log.points},"${log.desc || 'نقاط حرة'}","${log.time}"\n`;
+                });
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", `درجات_مجموعات_المؤتمر_${Date.now()}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // 11. Settings & cloud sync functions
+            function setupSettingsPanel() {
+                $('#judge1-name-input').val(evalData.settings.judges[0]);
+                $('#judge2-name-input').val(evalData.settings.judges[1]);
+                $('#judge3-name-input').val(evalData.settings.judges[2]);
+
+                Object.keys(evalData.settings.weights).forEach(key => {
+                    $(`#w-${key}`).val(evalData.settings.weights[key]);
+                });
+
+                // save weights and judges settings
+                $('#save-settings-btn').click(function() {
+                    const j1 = $('#judge1-name-input').val().trim() || "حكم 1";
+                    const j2 = $('#judge2-name-input').val().trim() || "حكم 2";
+                    const j3 = $('#judge3-name-input').val().trim() || "حكم 3";
+                    
+                    evalData.settings.judges = [j1, j2, j3];
+
+                    Object.keys(evalData.settings.weights).forEach(key => {
+                        const val = $(`#w-${key}`).val();
+                        if (val !== undefined && val !== "") {
+                            evalData.settings.weights[key] = Number(val);
+                        }
+                    });
+
+                    saveEvaluationState(true);
+                    alert("✅ تم حفظ الإعدادات وتحديث الأوزان محلياً!");
+                    setupEvaluationPanel();
+                });
+
+                // copy google script code to clipboard
+                $('#copy-script-code-btn').click(function() {
+                    const scriptCode = `function doGet(e) {
+  var action = e.parameter.action;
+  var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  if (action === 'getScores') {
+    var scoreSheet = sheet.getSheetByName("النقاط_الحالية") || initSheets(sheet);
+    var data = scoreSheet.getDataRange().getValues();
+    var scores = [];
+    for (var i = 1; i < data.length; i++) {
+      scores.push({
+        id: data[i][0],
+        name: data[i][1],
+        score: Number(data[i][2])
+      });
+    }
+    return ContentService.createTextOutput(JSON.stringify(scores))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  if (action === 'getFullData') {
+    var dataSheet = sheet.getSheetByName("البيانات_الكاملة") || initSheets(sheet);
+    var cellValue = dataSheet.getRange(1, 1).getValue();
+    return ContentService.createTextOutput(cellValue || "{}")
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({error: "Invalid action"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  try {
+    var postData = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp.getActiveSpreadsheet();
+    
+    var dataSheet = sheet.getSheetByName("البيانات_الكاملة") || initSheets(sheet);
+    dataSheet.getRange(1, 1).setValue(JSON.stringify(postData));
+    
+    var scoreSheet = sheet.getSheetByName("النقاط_الحالية") || initSheets(sheet);
+    scoreSheet.clearContents();
+    scoreSheet.appendRow(["معرف المجموعة", "اسم المجموعة", "النقاط الإجمالية"]);
+    
+    if (postData.groupTotals) {
+      for (var groupId in postData.groupTotals) {
+        scoreSheet.appendRow([
+          groupId,
+          postData.groupTotals[groupId].name,
+          Math.round(postData.groupTotals[groupId].score)
+        ]);
+      }
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({success: true}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({success: false, error: error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function initSheets(sheet) {
+  var scoreSheet = sheet.getSheetByName("النقاط_الحالية");
+  if (!scoreSheet) {
+    scoreSheet = sheet.insertSheet("النقاط_الحالية");
+    scoreSheet.appendRow(["معرف المجموعة", "اسم المجموعة", "النقاط الإجمالية"]);
+  }
+  var dataSheet = sheet.getSheetByName("البيانات_الكاملة");
+  if (!dataSheet) {
+    dataSheet = sheet.insertSheet("البيانات_الكاملة");
+  }
+  return scoreSheet;
+}`;
+                    navigator.clipboard.writeText(scriptCode).then(function() {
+                        alert("📋 تم نسخ كود Google Apps Script بنجاح! افتح لوحة سكريبت جوجل والصقه.");
+                    });
+                });
+
+                // backup JSON downoad
+                $('#backup-local-btn').click(function() {
+                    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(evalData));
+                    const link = document.createElement("a");
+                    link.setAttribute("href", dataStr);
+                    link.setAttribute("download", `نسخة_احتياطية_درجات_${Date.now()}.json`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+
+                // restore JSON file upload
+                $('#restore-local-file').change(function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        try {
+                            const parsed = JSON.parse(evt.target.result);
+                            if (parsed && parsed.settings && parsed.activities && parsed.gameLogs) {
+                                if (confirm("⚠️ هل أنت متأكد من استعادة هذه البيانات؟ سيتم استبدال جميع الدرجات الحالية بالبيانات الموجودة في الملف.")) {
+                                    evalData = parsed;
+                                    saveEvaluationState(false);
+                                    alert("✅ تم استيراد واستعادة البيانات بنجاح!");
+                                    location.reload();
+                                }
+                            } else {
+                                alert("❌ الملف المستورد ليس بصيغة نسخة احتياطية صالحة!");
+                            }
+                        } catch(err) {
+                            alert("❌ فشل قراءة الملف الاحتياطي، يرجى التأكد من اختيار ملف JSON صحيح.");
+                        }
+                    };
+                    reader.readAsText(file);
+                });
+
+                // script url text input save
+                $('#google-script-url-input').on('change', function() {
+                    const url = $(this).val().trim();
+                    evalData.settings.googleScriptUrl = url;
+                    localStorage.setItem('group_eval_google_script_url', url);
+                    saveEvaluationState(true);
+
+                    if (url) {
+                        $('#quick-cloud-sync').removeClass('d-none');
+                    } else {
+                        $('#quick-cloud-sync').addClass('d-none');
+                    }
+                });
+
+                // upload and sync cloud POST
+                $('#cloud-upload-btn, #quick-cloud-sync').click(async function() {
+                    const scriptUrl = evalData.settings.googleScriptUrl;
+                    if (!scriptUrl) {
+                        alert("⚠️ يرجى إدخال رابط Google Apps Script أولاً في شاشة الإعدادات!");
+                        return;
+                    }
+
+                    const totals = calculateGroupTotals();
+                    const payload = {
+                        settings: evalData.settings,
+                        activities: evalData.activities,
+                        gameLogs: evalData.gameLogs,
+                        groupTotals: {}
+                    };
+
+                    GROUPS_META.forEach(g => {
+                        payload.groupTotals[g.id] = {
+                            name: g.name,
+                            score: totals[g.id].percentage
+                        };
+                    });
+
+                    const $btn = $(this);
+                    const originalHtml = $btn.html();
+                    $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2" role="status"></span> جاري الرفع والمزامنة...');
+
+                    try {
+                        const response = await fetch(scriptUrl, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        });
+
+                        updateUnsavedStatus(false);
+                        $('#last-sync-time').text(`آخر مزامنة: ${new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'})}`);
+                        alert("☁️ تم رفع وتصدير درجات المجموعات بنجاح إلى جدول بيانات جوجل! سيتمكن الحاضرون الآن من رؤية النتائج الحية.");
+                    } catch(err) {
+                        console.error("فشل الرفع السحابي:", err);
+                        alert("❌ فشل الاتصال بخادم جوجل. تأكد من إعداد Apps Script بالنشر بصلاحية Anyone وإدخال الرابط الصحيح.");
+                    } finally {
+                        $btn.prop('disabled', false).html(originalHtml);
+                    }
+                });
+
+                // download and sync cloud GET
+                $('#cloud-download-btn').click(async function() {
+                    const scriptUrl = evalData.settings.googleScriptUrl;
+                    if (!scriptUrl) {
+                        alert("⚠️ يرجى إدخال رابط Google Apps Script أولاً!");
+                        return;
+                    }
+
+                    const $btn = $(this);
+                    const originalHtml = $btn.html();
+                    $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2" role="status"></span> جاري جلب البيانات...');
+
+                    try {
+                        const fetchUrl = `${scriptUrl}?action=getFullData&t=${Date.now()}`;
+                        const res = await fetch(fetchUrl);
+                        
+                        if (!res.ok) throw new Error('فشل جلب البيانات: ' + res.status);
+                        
+                        const data = await res.json();
+                        
+                        if (data && data.settings && data.activities && data.gameLogs) {
+                            if (confirm("☁️ تم العثور على نسخة درجات محفوظة سحابياً. هل تريد تنزيلها وتحديث البيانات المحلية الخاصة بك؟")) {
+                                evalData = data;
+                                saveEvaluationState(false);
+                                alert("✅ تم جلب وتحديث لوحة الدرجات بنجاح!");
+                                location.reload();
+                            }
+                        } else {
+                            alert("ℹ️ لم يتم العثور على درجات مخزنة سلفاً في ملف السحاب. قد يكون الملف فارغاً.");
+                        }
+                    } catch(err) {
+                        console.error("تعذر تحميل البيانات من السحاب:", err);
+                        alert("❌ فشل جلب البيانات من السحاب. تأكد من نشر السكربت كـ Web App بصلاحيات Anyone وإعادة المحاولة.");
+                    } finally {
+                        $btn.prop('disabled', false).html(originalHtml);
+                    }
+                });
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return str.replace(/&/g, "&amp;")
+                          .replace(/</g, "&lt;")
+                          .replace(/>/g, "&gt;")
+                          .replace(/"/g, "&quot;")
+                          .replace(/'/g, "&#039;");
+            }
+
+        })();
+    </script>
+<script src="assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

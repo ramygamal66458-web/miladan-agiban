@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/_api/gas"
+  to = "/.netlify/functions/gas-proxy"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/_api/gas/*"
+  to = "/.netlify/functions/gas-proxy"
+  status = 200
+  force = true
