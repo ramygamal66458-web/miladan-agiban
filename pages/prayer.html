@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="صلوات الأجبية — صلاة باكر وصلاة النوم لمؤتمر الشباب">
+    <title>الصلوات — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <style>
+        .prayer-portal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1rem 3rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        .prayer-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            width: 100%;
+            max-width: 480px;
+            margin-top: 1.5rem;
+        }
+
+        .prayer-portal-card {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.25s, border-color 0.25s;
+        }
+
+        .prayer-portal-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .prayer-portal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .prayer-portal-card:active {
+            transform: scale(0.97);
+        }
+
+        /* Card-specific glows */
+        .card-bakkar {
+            border-color: rgba(245, 158, 11, 0.25);
+        }
+        .card-bakkar .card-portal-icon {
+            background: rgba(245, 158, 11, 0.12);
+            color: #f59e0b;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+        }
+        .card-bakkar .card-portal-title {
+            color: #f59e0b;
+        }
+        .card-bakkar:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2), 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .card-noom {
+            border-color: rgba(99, 102, 241, 0.25);
+        }
+        .card-noom .card-portal-icon {
+            background: rgba(99, 102, 241, 0.12);
+            color: #818cf8;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        }
+        .card-noom .card-portal-title {
+            color: #818cf8;
+        }
+        .card-noom:hover {
+            border-color: #818cf8;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2), 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .card-portal-icon {
+            width: 68px;
+            height: 68px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.1rem;
+            flex-shrink: 0;
+            transition: transform 0.25s;
+        }
+
+        .prayer-portal-card:hover .card-portal-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-portal-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-portal-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .prayer-portal-info {
+            max-width: 480px;
+            margin: 1.5rem auto 0;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-light);
+            border-radius: 18px;
+            padding: 1.1rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .prayer-portal-info i {
+            font-size: 1.25rem;
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-layer bg-layer-ambient"></div>
+    <div id="app-navbar-slot"></div>
+
+    <header style="padding: 1.25rem 1rem .5rem">
+        <div class="page-header-title">📖 الصلوات الأرثوذكسية</div>
+        <div class="page-header-sub">صلوات الأجبية اليومية للمشتركين في المؤتمر</div>
+    </header>
+
+    <main class="prayer-portal-container">
+        <!-- بطاقات اختيار الصلوات -->
+        <div class="prayer-cards-grid">
+            
+            <!-- صلاة باكر -->
+            <a href="prayer-morning.html" class="prayer-portal-card card-bakkar animate__animated animate__fadeInUp">
+                <div class="card-portal-icon">
+                    <i class="bi bi-sun-fill"></i>
+                </div>
+                <div>
+                    <div class="card-portal-title">صلاة باكر</div>
+                    <div class="card-portal-desc">صلاة الصباح الباكر، نبدأ بها يومنا بطلب حماية الرب ورعايته ونور نعمته.</div>
+                </div>
+            </a>
+
+            <!-- صلاة النوم -->
+            <a href="prayer-night.html" class="prayer-portal-card card-noom animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <div class="card-portal-icon">
+                    <i class="bi bi-moon-stars-fill"></i>
+                </div>
+                <div>
+                    <div class="card-portal-title">صلاة النوم</div>
+                    <div class="card-portal-desc">صلاة المساء قبل النوم، نطلب فيها الصفح، سلامة الجسد، وحماية ملائكة السلام.</div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- نص إضافي معلوماتي -->
+        <div class="prayer-portal-info animate__animated animate__fadeIn" style="animation-delay: 0.25s;">
+            <i class="bi bi-info-circle-fill"></i>
+            <div>
+                <strong>تنبيه روحي:</strong> الصلوات مرتبة بالنصوص الكنسية الكاملة للأجبية. يمكنك تكبير وتصغير حجم الخط أثناء القراءة أو التمرير التلقائي السلس لقراءة مريحة بدون تشتت.
+            </div>
+        </div>
+    </main>
+
+    <div id="app-bottomnav-slot"></div>
+
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/identity.js"></script>
+    <script>
+        YC.loadPartials();
+    </script>
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+</body>
+</html>

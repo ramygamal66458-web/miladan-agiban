@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>إكس أو - مؤتمر الشباب</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+        :root {
+            --bg-deepest: #070d19;
+            --bg-deep: #0b1121;
+            --bg-dark: #0f172a;
+            --bg-light: #1e293b;
+            --bg-card: #1e293b;
+            --primary: #06b6d4;
+            --primary-light: #22d3ee;
+            --primary-glow: rgba(6, 182, 212, 0.5);
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            --purple-glow: rgba(139, 92, 246, 0.5);
+            --magenta: #d946ef;
+            --magenta-light: #e879f9;
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --text-main: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ================= Navbar ================= */
+        nav {
+            background: linear-gradient(135deg, rgba(11, 17, 33, 0.95) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(7, 13, 25, 0.95) 100%);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border-bottom: 1px solid rgba(6, 182, 212, 0.25);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            -webkit-tap-highlight-color: transparent;
+        }
+        nav .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 700px; margin: 0 auto; }
+        nav .nav-back-link {
+            display: flex; align-items: center; gap: 6px;
+            color: var(--primary-light); text-decoration: none;
+            font-size: 0.9rem; font-weight: 700;
+            padding: 7px 14px; border-radius: 50px;
+            background: rgba(6, 182, 212, 0.1); border: 1px solid var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        nav .nav-back-link:hover { background: rgba(6, 182, 212, 0.2); border-color: rgba(6, 182, 212, 0.5); color: var(--text-main); transform: translateY(-1px); }
+        nav .nav-back-link:active { transform: scale(0.95); }
+        nav .nav-title { font-weight: 900; font-size: 1.1rem; background: linear-gradient(135deg, var(--primary-light), var(--gold-light), var(--purple), var(--primary)); background-size: 250% 250%; animation: navGradientShift 6s ease infinite; -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
+        nav .nav-subtitle { font-size: 0.65rem; color: var(--text-muted); text-align: center; letter-spacing: 1px; margin-top: 2px; }
+        nav .spacer { width: 70px; }
+        nav .nav-brand {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; justify-content: center;
+            transition: opacity 0.25s ease, transform 0.2s ease;
+        }
+        nav .nav-brand:hover { opacity: 0.85; }
+        nav .nav-brand:active { transform: scale(0.96); }
+        nav .nav-brand-logo {
+            width: 32px; height: 32px; flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.15);
+        }
+        nav .nav-brand-logo i { font-size: 1rem; color: var(--primary); }
+        @keyframes navGradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: var(--bg-deepest);
+            color: var(--text-main);
+            min-height: 100vh; min-height: 100dvh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== شاشة إدخال الأسماء ========== */
+        .name-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; min-height: 100dvh;
+            padding: 20px;
+            background: linear-gradient(135deg, #0a0118 0%, #0d0b2e 20%, #0b1121 40%, #0a1628 60%, #062a2e 80%, #071a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .name-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(217, 70, 239, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: nameBgShift 8s ease-in-out infinite alternate;
+        }
+        @keyframes nameBgShift {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .name-screen::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 30% 65%, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1.5px 1.5px at 55% 15%, rgba(139,92,246,0.5), transparent),
+                radial-gradient(1px 1px at 70% 45%, rgba(255,255,255,0.25), transparent),
+                radial-gradient(1.5px 1.5px at 85% 75%, rgba(6,182,212,0.5), transparent),
+                radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 45% 50%, rgba(217,70,239,0.4), transparent),
+                radial-gradient(1.5px 1.5px at 60% 90%, rgba(139,92,246,0.3), transparent);
+            pointer-events: none;
+            animation: sparkleDrift 6s ease-in-out infinite alternate;
+        }
+        @keyframes sparkleDrift {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-8px) scale(1.05); opacity: 1; }
+        }
+        .name-screen.hidden { display: none; }
+
+        .name-logo {
+            font-size: 4.5rem;
+            margin-bottom: 12px;
+            animation: bounceLogo 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3)) drop-shadow(0 0 40px rgba(6, 182, 212, 0.2));
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes bounceLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .name-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--primary-light), var(--purple-light), var(--magenta-light), var(--primary-light));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGradient 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .name-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .player-inputs {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .player-input-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 18px;
+            padding: 18px 16px;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .player-input-card.x-card {
+            border-color: rgba(6, 182, 212, 0.25);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(15, 23, 42, 0.5));
+        }
+        .player-input-card.o-card {
+            border-color: rgba(139, 92, 246, 0.25);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(15, 23, 42, 0.5));
+        }
+        .player-input-card:focus-within {
+            transform: scale(1.02) translateY(-2px);
+        }
+        .player-input-card.x-card:focus-within {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.3), 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .player-input-card.o-card:focus-within {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .player-input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .player-symbol {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+        .player-symbol.x-sym {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+        }
+        .player-symbol.o-sym {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple-light);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+        }
+        .player-input-card input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .player-input-card input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .player-input-card.x-card input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 16px var(--primary-glow);
+        }
+        .player-input-card.o-card input:focus {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 16px var(--purple-glow);
+        }
+
+        .start-btn {
+            margin-top: 25px;
+            width: 100%;
+            max-width: 380px;
+            padding: 16px;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(135deg, #0f766e, var(--primary), var(--purple));
+            background-size: 200% 200%;
+            color: white;
+            box-shadow: 0 6px 30px rgba(6, 182, 212, 0.3), 0 2px 8px rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(6, 182, 212, 0.4), 0 4px 16px rgba(139, 92, 246, 0.3);
+            background-position: 100% 50%;
+        }
+        .start-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        .back-link {
+            position: relative;
+            z-index: 1;
+            margin-top: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .back-link:hover { color: var(--primary-light); }
+
+        /* ========== شاشة اللعبة ========== */
+        .game-screen {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh; min-height: 100dvh;
+        }
+        .game-screen.active { display: flex; }
+
+        /* Top Bar */
+        .game-topbar {
+            background: rgba(10, 14, 28, 0.85);
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            z-index: 10;
+        }
+
+        .player-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 14px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            border: 2px solid transparent;
+        }
+        .player-indicator.active-x {
+            background: rgba(6, 182, 212, 0.12);
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 0 20px var(--primary-glow);
+            animation: indicatorPulseX 2s ease-in-out infinite;
+        }
+        .player-indicator.active-o {
+            background: rgba(139, 92, 246, 0.12);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 20px var(--purple-glow);
+            animation: indicatorPulseO 2s ease-in-out infinite;
+        }
+        @keyframes indicatorPulseX {
+            0%, 100% { box-shadow: 0 0 15px rgba(6,182,212,0.3); }
+            50% { box-shadow: 0 0 25px rgba(6,182,212,0.5); }
+        }
+        @keyframes indicatorPulseO {
+            0%, 100% { box-shadow: 0 0 15px rgba(139,92,246,0.3); }
+            50% { box-shadow: 0 0 25px rgba(139,92,246,0.5); }
+        }
+
+        .indicator-symbol {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+        .indicator-symbol.x-ind {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--primary-light);
+            box-shadow: 0 0 8px rgba(6,182,212,0.2);
+        }
+        .indicator-symbol.o-ind {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--purple-light);
+            box-shadow: 0 0 8px rgba(139,92,246,0.2);
+        }
+        .indicator-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .indicator-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .indicator-score {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+        .indicator-score.x-score { color: var(--primary-light); text-shadow: 0 0 10px rgba(6,182,212,0.4); }
+        .indicator-score.o-score { color: var(--purple-light); text-shadow: 0 0 10px rgba(139,92,246,0.4); }
+
+        .turn-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        .turn-badge.x-turn {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(6, 182, 212, 0.35);
+            box-shadow: 0 0 12px rgba(6,182,212,0.2);
+        }
+        .turn-badge.o-turn {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple-light);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            box-shadow: 0 0 12px rgba(139,92,246,0.2);
+        }
+        .turn-badge.draw-turn {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            box-shadow: 0 0 12px rgba(245,158,11,0.2);
+        }
+        .turn-badge.win-turn {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--gold-light);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            box-shadow: 0 0 16px rgba(245,158,11,0.3);
+        }
+
+        /* منطقة اللعبة */
+        .game-area {
+            flex: 1;
+            background: linear-gradient(160deg, #071520 0%, #0a1628 20%, #0d1f35 40%, #0b2530 60%, #0a2a2e 80%, #081e22 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-area::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 40%, rgba(6, 182, 212, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(217, 70, 239, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+            animation: gameBgPulse 10s ease-in-out infinite alternate;
+        }
+        @keyframes gameBgPulse {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .game-status {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            min-height: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* لوحة اللعب - RTL آمن */
+        .board-wrapper {
+            position: relative;
+            z-index: 1;
+            width: min(85vw, 320px);
+            height: min(85vw, 320px);
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            direction: ltr;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(139,92,246,0.1));
+            padding: 6px;
+            border-radius: 20px;
+            box-shadow:
+                0 12px 48px rgba(0,0,0,0.4),
+                0 2px 8px rgba(6,182,212,0.1),
+                0 2px 8px rgba(139,92,246,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
+            width: 100%;
+            height: 100%;
+        }
+
+        .cell {
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 3.2rem;
+            font-weight: 900;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1.5px solid rgba(255,255,255,0.06);
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            position: relative;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 0 20px rgba(0,0,0,0.1);
+        }
+        .cell:hover:not(.taken):not(.game-over) {
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(255,255,255,0.12);
+            transform: scale(1.05);
+        }
+        .cell:active:not(.taken):not(.game-over) {
+            transform: scale(0.95);
+        }
+        .cell.taken { cursor: default; }
+        .cell.game-over { cursor: default; }
+
+        .cell .x-mark {
+            color: #22d3ee;
+            text-shadow:
+                0 0 12px rgba(34, 211, 238, 0.8),
+                0 0 28px rgba(34, 211, 238, 0.5),
+                0 0 50px rgba(34, 211, 238, 0.25),
+                0 2px 4px rgba(0,0,0,0.3);
+            animation: placeMark 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .cell .o-mark {
+            color: #a78bfa;
+            text-shadow:
+                0 0 12px rgba(167, 139, 250, 0.8),
+                0 0 28px rgba(167, 139, 250, 0.5),
+                0 0 50px rgba(167, 139, 250, 0.25),
+                0 2px 4px rgba(0,0,0,0.3);
+            animation: placeMark 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes placeMark {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            60% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .cell.winner-cell {
+            background: rgba(245, 158, 11, 0.2) !important;
+            border-color: rgba(245, 158, 11, 0.6) !important;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(245, 158, 11, 0.1) !important;
+            animation: winPulse 1s ease-in-out infinite;
+        }
+        @keyframes winPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), inset 0 0 15px rgba(245, 158, 11, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.6), inset 0 0 20px rgba(245, 158, 11, 0.15); }
+        }
+
+        /* خط الفوز */
+        .win-line {
+            position: absolute;
+            background: linear-gradient(90deg, var(--gold-light), #f97316, var(--gold-light));
+            border-radius: 4px;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5), 0 0 30px rgba(245, 158, 11, 0.3);
+            animation: lineAppear 0.5s ease-out forwards;
+        }
+        @keyframes lineAppear {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Bottom Bar */
+        .game-bottombar {
+            background: rgba(10, 14, 28, 0.85);
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .bar-btn {
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .bar-btn-primary {
+            background: linear-gradient(135deg, #0f766e, var(--primary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
+        }
+        .bar-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(6, 182, 212, 0.5);
+        }
+        .bar-btn-secondary {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .bar-btn-secondary:hover {
+            background: rgba(51, 65, 85, 0.6);
+            color: var(--text-main);
+        }
+        .bar-btn-share {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        .bar-btn-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(14, 165, 233, 0.5);
+        }
+        .share-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            box-shadow: 0 6px 25px rgba(14, 165, 233, 0.4);
+            z-index: 500;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .share-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ========== نافذة النتيجة ========== */
+        .result-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 18, 0.92);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .result-overlay.show { display: flex; }
+        .result-box {
+            text-align: center;
+            padding: 38px 28px;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 2px solid transparent;
+            max-width: 360px;
+            width: 90%;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            box-shadow:
+                0 0 0 1px rgba(245, 158, 11, 0.3),
+                0 0 30px rgba(245, 158, 11, 0.15),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+        .result-box::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(6,182,212,0.5), rgba(245,158,11,0.5), rgba(139,92,246,0.5), rgba(217,70,239,0.5));
+            background-size: 300% 300%;
+            animation: borderGradient 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes borderGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .result-emoji {
+            font-size: 4rem;
+            margin-bottom: 8px;
+            animation: resultEmojiBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+        }
+        @keyframes resultEmojiBounce {
+            0% { transform: scale(0) rotate(-30deg); }
+            60% { transform: scale(1.3) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .result-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+        .result-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .result-scores {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        .result-score-item { text-align: center; }
+        .result-score-name {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        .result-score-num {
+            font-size: 2.2rem;
+            font-weight: 900;
+        }
+        .result-score-num.x-color { color: var(--primary-light); text-shadow: 0 0 15px rgba(6,182,212,0.5); }
+        .result-score-num.o-color { color: var(--purple-light); text-shadow: 0 0 15px rgba(139,92,246,0.5); }
+        .result-score-vs {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            align-self: center;
+            font-weight: 700;
+        }
+        .result-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .result-btns .bar-btn { flex: 1; justify-content: center; }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 300;
+            overflow: hidden;
+        }
+        @keyframes confettiFall {
+            0% { top: -10%; opacity: 1; transform: rotate(0deg) scale(1); }
+            100% { top: 110%; opacity: 0; transform: rotate(720deg) scale(0.5); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: floatParticle 10s infinite ease-in-out;
+        }
+        .particle:nth-child(odd) { background: rgba(6, 182, 212, 0.4); }
+        .particle:nth-child(even) { background: rgba(139, 92, 246, 0.4); }
+        .particle:nth-child(3n) { background: rgba(217, 70, 239, 0.35); }
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            50% { transform: translateY(-60px) translateX(30px); opacity: 0.4; }
+            90% { opacity: 0.1; }
+        }
+
+        /* ========== Share Card Overlay ========== */
+        .share-card-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 18, 0.95);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 20px;
+            animation: fadeInOverlay 0.3s ease-out;
+        }
+        .share-card-overlay.show { display: flex; }
+        @keyframes fadeInOverlay {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .share-card-preview {
+            width: min(85vw, 400px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 2px rgba(6, 182, 212, 0.3),
+                0 0 40px rgba(6, 182, 212, 0.15),
+                0 0 40px rgba(139, 92, 246, 0.15),
+                0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: scaleInCard 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-bottom: 20px;
+        }
+        .share-card-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        @keyframes scaleInCard {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .share-card-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .share-card-actions .bar-btn {
+            flex: 1;
+            min-width: 110px;
+            justify-content: center;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+        }
+        .share-card-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .share-card-close:hover {
+            background: rgba(51, 65, 85, 0.9);
+            color: var(--text-main);
+            transform: scale(1.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/identity.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-inner">
+            <a href="games.html" class="nav-back-link"><i class="bi bi-arrow-right"></i> رجوع</a>
+            <a href="home.html" class="nav-brand">
+                <div class="nav-brand-logo"><i class="bi bi-bus-front-fill"></i></div>
+                <div class="nav-brand-text">
+                    <div class="nav-title">إكس أو</div>
+                    <div class="nav-subtitle">مؤتمر الشباب</div>
+                </div>
+            </a>
+            <div class="spacer"></div>
+        </div>
+    </nav>
+
+
+    <!-- ========== شاشة إدخال الأسماء ========== -->
+    <div class="name-screen" id="nameScreen">
+        <div class="name-logo">❌⭕</div>
+        <div class="name-title">إكس أو</div>
+        <div class="name-subtitle">العب مع صاحبك! 👀</div>
+
+        <div class="player-inputs">
+            <div class="player-input-card x-card">
+                <div class="player-input-label">
+                    <div class="player-symbol x-sym">X</div>
+                    <span style="color: var(--primary-light);">اللاعب الأول</span>
+                </div>
+                <input type="text" id="player1Name" placeholder="اكتب اسمك يا صاحب X" maxlength="15" autocomplete="off">
+            </div>
+            <div class="player-input-card o-card">
+                <div class="player-input-label">
+                    <div class="player-symbol o-sym">O</div>
+                    <span style="color: var(--purple-light);">اللاعب التاني</span>
+                </div>
+                <input type="text" id="player2Name" placeholder="اكتب اسمك يا صاحب O" maxlength="15" autocomplete="off">
+            </div>
+        </div>
+
+        <button class="start-btn" id="startBtn">يلا نلعب! 🎮</button>
+        <a href="games.html" class="back-link">
+            <i class="bi bi-arrow-right"></i> رجوع للألعاب
+        </a>
+    </div>
+
+    <!-- ========== شاشة اللعبة ========== -->
+    <div class="game-screen" id="gameScreen">
+
+        <!-- Top Bar -->
+        <div class="game-topbar">
+            <div class="player-indicator" id="xIndicator">
+                <div class="indicator-symbol x-ind">X</div>
+                <div class="indicator-info">
+                    <div class="indicator-name" id="xNameTop">اللاعب 1</div>
+                    <div class="indicator-score x-score" id="xScoreTop">0</div>
+                </div>
+            </div>
+
+            <div class="turn-badge x-turn" id="turnBadge">دور X</div>
+
+            <div class="player-indicator" id="oIndicator">
+                <div class="indicator-info" style="text-align: left;">
+                    <div class="indicator-name" id="oNameTop">اللاعب 2</div>
+                    <div class="indicator-score o-score" id="oScoreTop">0</div>
+                </div>
+                <div class="indicator-symbol o-ind">O</div>
+            </div>
+        </div>
+
+        <!-- منطقة اللعبة -->
+        <div class="game-area">
+            <div class="game-status" id="gameStatus">دور اللاعب الأول</div>
+
+            <div class="board-wrapper" id="boardWrapper">
+                <div class="game-board" id="gameBoard">
+                    <!-- الخلايا بتتبنى ديناميكياً من الجافاسكريبت -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="game-bottombar">
+            <button class="bar-btn bar-btn-primary" id="btnNewRound">
+                <i class="bi bi-arrow-repeat"></i> جولة جديدة
+            </button>
+            <button class="bar-btn bar-btn-secondary" id="btnResetScores">
+                <i class="bi bi-trash3"></i> امسح النتائج
+            </button>
+            <button class="bar-btn bar-btn-secondary" id="btnBackToNames">
+                <i class="bi bi-people"></i> لاعبين جداد
+            </button>
+            <a href="games.html" class="bar-btn bar-btn-secondary" style="text-decoration:none;">
+                <i class="bi bi-house"></i> الألعاب
+            </a>
+        </div>
+    </div>
+
+    <!-- نافذة النتيجة -->
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-box" id="resultBox">
+            <div class="result-emoji" id="resultEmoji">🏆</div>
+            <div class="result-title" id="resultTitle">مبروك!</div>
+            <div class="result-subtitle" id="resultSubtitle"></div>
+            <div class="result-scores">
+                <div class="result-score-item">
+                    <div class="result-score-name" id="resultXName">اللاعب 1</div>
+                    <div class="result-score-num x-color" id="resultXScore">0</div>
+                </div>
+                <div class="result-score-vs">VS</div>
+                <div class="result-score-item">
+                    <div class="result-score-name" id="resultOName">اللاعب 2</div>
+                    <div class="result-score-num o-color" id="resultOScore">0</div>
+                </div>
+            </div>
+            <div class="result-btns">
+                <button class="bar-btn bar-btn-primary" id="btnResultNewRound">
+                    <i class="bi bi-arrow-repeat"></i> جولة جديدة
+                </button>
+                <button class="bar-btn bar-btn-share" id="btnShareResult" onclick="shareResult()">
+                    <i class="bi bi-share-fill"></i> شارك
+                </button>
+                <button class="bar-btn bar-btn-secondary" id="btnResultBackToNames">
+                    <i class="bi bi-people"></i> لاعبين جداد
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- Background Particles -->
+    <div id="particles"></div>
+
+    <!-- ========== Share Card Overlay ========== -->
+    <div class="share-card-overlay" id="shareCardOverlay">
+        <button class="share-card-close" onclick="closeShareCard()">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="share-card-preview">
+            <img id="shareCardImage" src="" alt="بطاقة المشاركة">
+        </div>
+        <div class="share-card-actions">
+            <button class="bar-btn bar-btn-share" onclick="shareImageCard()">
+                <i class="bi bi-share-fill"></i> شارك الصورة
+            </button>
+            <button class="bar-btn bar-btn-primary" onclick="downloadShareCard()">
+                <i class="bi bi-download"></i> حمّل الصورة
+            </button>
+            <button class="bar-btn bar-btn-secondary" onclick="copyShareText()">
+                <i class="bi bi-clipboard"></i> نسخ النص
+            </button>
+        </div>
+    </div>
+
+    <script>
+    /* ==========================================================
+     *  لعبة إكس أو - إعادة بناء كاملة بمنطق صحيح
+     *  المشاكل اللي اتحلت:
+     *  1. RTL - الشبكة بقت LTR بشكل صحيح عشان الخلايا تتطابق مع الداتا
+     *  2. خط الفوز - بيتحسب ديناميكياً من مواقع الخلايا الفعلية
+     *  3. منطق الفوز - إعادة كتابة نظيفة بدون jQuery
+     *  4. بناء الخلايا ديناميكياً عشان نضمن تطابق الداتا مع الشاشة
+     * ========================================================== */
+
+    (function() {
+        'use strict';
+
+        // ===== ثوابت اللعبة =====
+        // ترقيم الخلايا:
+        // 0 | 1 | 2
+        // ---------
+        // 3 | 4 | 5
+        // ---------
+        // 6 | 7 | 8
+        const WIN_COMBOS = [
+            [0, 1, 2], // صف أول
+            [3, 4, 5], // صف تاني
+            [6, 7, 8], // صف تالت
+            [0, 3, 6], // عمود أول
+            [1, 4, 7], // عمود تاني
+            [2, 5, 8], // عمود تالت
+            [0, 4, 8], // قطر من شمال ليمين
+            [2, 4, 6]  // قطر من يمين لشمال
+        ];
+
+        // ===== حالة اللعبة =====
+        let board = Array(9).fill(null);  // null يعني فاضي
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let scores = { X: 0, O: 0, draw: 0 };
+        let playerNames = { X: 'اللاعب 1', O: 'اللاعب 2' };
+        let roundCount = 0;
+
+        // ===== عناصر DOM =====
+        const $ = id => document.getElementById(id);
+
+        const nameScreen     = $('nameScreen');
+        const gameScreen     = $('gameScreen');
+        const gameBoard      = $('gameBoard');
+        const boardWrapper   = $('boardWrapper');
+        const gameStatus     = $('gameStatus');
+        const turnBadge      = $('turnBadge');
+        const xIndicator     = $('xIndicator');
+        const oIndicator     = $('oIndicator');
+        const resultOverlay  = $('resultOverlay');
+        const confettiContainer = $('confettiContainer');
+
+        // ===== بناء الخلايا ديناميكياً =====
+        // بنبني الخلايا من الجافاسكريبت عشان نضمن إن data-index
+        // مطابق للترتيب الفعلي في الشبكة LTR
+        function buildBoard() {
+            gameBoard.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.dataset.index = i;
+                cell.addEventListener('click', () => onCellClick(i));
+                gameBoard.appendChild(cell);
+            }
+        }
+
+        // ===== منطق اللعبة الأساسي =====
+
+        function onCellClick(index) {
+            // متلعبش لو اللعبة واقفة أو الخلية مليانة
+            if (!gameActive || board[index] !== null) return;
+
+            // سجل الحركة
+            board[index] = currentPlayer;
+            renderCell(index);
+
+            // اشوف حد كسب
+            const winResult = checkWin();
+            if (winResult) {
+                handleWin(winResult);
+                return;
+            }
+
+            // اشوف التعادل
+            if (isBoardFull()) {
+                handleDraw();
+                return;
+            }
+
+            // غيّر الدور
+            switchTurn();
+        }
+
+        function renderCell(index) {
+            const cell = gameBoard.children[index];
+            if (!cell) return;
+            cell.classList.add('taken');
+            const mark = document.createElement('span');
+            mark.className = currentPlayer === 'X' ? 'x-mark' : 'o-mark';
+            mark.textContent = currentPlayer;
+            cell.appendChild(mark);
+        }
+
+        function checkWin() {
+            for (const combo of WIN_COMBOS) {
+                const [a, b, c] = combo;
+                if (board[a] !== null &&
+                    board[a] === board[b] &&
+                    board[a] === board[c]) {
+                    return { winner: board[a], combo: combo };
+                }
+            }
+            return null;
+        }
+
+        function isBoardFull() {
+            return board.every(cell => cell !== null);
+        }
+
+        function switchTurn() {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            updateUI();
+        }
+
+        // ===== معالجة النتائج =====
+
+        function handleWin(result) {
+            gameActive = false;
+
+            // ظلّل الخلايا الفايزة
+            result.combo.forEach(index => {
+                gameBoard.children[index].classList.add('winner-cell');
+            });
+
+            // ضيف game-over لكل الخلايا
+            Array.from(gameBoard.children).forEach(cell => {
+                cell.classList.add('game-over');
+            });
+
+            // ارسم خط الفوز
+            drawWinLine(result.combo);
+
+            // حدّث النتيجة
+            scores[result.winner]++;
+            updateScoreDisplay();
+
+            // غيّر الحالة
+            const name = playerNames[result.winner];
+            const symbol = result.winner;
+            gameStatus.innerHTML = `${name} (${symbol}) كسب! 🎉`;
+
+            turnBadge.textContent = `${name} كسب!`;
+            turnBadge.className = 'turn-badge win-turn';
+
+            // اعرض نتيجة بعد ثانية
+            setTimeout(() => {
+                showResultOverlay(result.winner);
+                launchConfetti();
+            }, 1000);
+        }
+
+        function handleDraw() {
+            gameActive = false;
+
+            Array.from(gameBoard.children).forEach(cell => {
+                cell.classList.add('game-over');
+            });
+
+            scores.draw++;
+            updateScoreDisplay();
+
+            gameStatus.innerHTML = 'تعادل! ⚖️';
+            turnBadge.textContent = 'تعادل!';
+            turnBadge.className = 'turn-badge draw-turn';
+
+            setTimeout(() => {
+                showResultOverlay(null);
+            }, 800);
+        }
+
+        // ===== خط الفوز ديناميكي =====
+        function drawWinLine(combo) {
+            removeWinLine();
+
+            // احسب مراكز الخلايا الفايزة
+            const wrapperRect = boardWrapper.getBoundingClientRect();
+            const centers = combo.map(index => {
+                const cell = gameBoard.children[index];
+                const cellRect = cell.getBoundingClientRect();
+                return {
+                    x: cellRect.left - wrapperRect.left + cellRect.width / 2,
+                    y: cellRect.top - wrapperRect.top + cellRect.height / 2
+                };
+            });
+
+            // خط من أول خلية لآخر خلية
+            const startX = centers[0].x;
+            const startY = centers[0].y;
+            const endX = centers[2].x;
+            const endY = centers[2].y;
+
+            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+
+            const line = document.createElement('div');
+            line.className = 'win-line';
+            line.style.width = length + 'px';
+            line.style.height = '6px';
+            line.style.left = startX + 'px';
+            line.style.top = (startY - 3) + 'px';
+            line.style.transformOrigin = '0 50%';
+            line.style.transform = `rotate(${angle}deg)`;
+
+            boardWrapper.appendChild(line);
+        }
+
+        function removeWinLine() {
+            const existing = boardWrapper.querySelectorAll('.win-line');
+            existing.forEach(el => el.remove());
+        }
+
+        // ===== تحديث الواجهة =====
+
+        function updateUI() {
+            // شارة الدور
+            const name = playerNames[currentPlayer];
+            turnBadge.textContent = `دور ${name}`;
+            turnBadge.className = 'turn-badge ' + (currentPlayer === 'X' ? 'x-turn' : 'o-turn');
+
+            // حالة اللعبة
+            gameStatus.innerHTML = `دور <strong>${name}</strong> (${currentPlayer})`;
+
+            // مؤشرات اللاعبين
+            xIndicator.className = 'player-indicator' + (currentPlayer === 'X' ? ' active-x' : '');
+            oIndicator.className = 'player-indicator' + (currentPlayer === 'O' ? ' active-o' : '');
+
+            updateScoreDisplay();
+        }
+
+        function updateScoreDisplay() {
+            $('xScoreTop').textContent = scores.X;
+            $('oScoreTop').textContent = scores.O;
+            $('resultXScore').textContent = scores.X;
+            $('resultOScore').textContent = scores.O;
+        }
+
+        function showResultOverlay(winner) {
+            if (winner) {
+                const name = playerNames[winner];
+                $('resultEmoji').textContent = '🏆';
+                $('resultTitle').textContent = `${name} كسب!`;
+                $('resultTitle').style.color = winner === 'X' ? 'var(--primary-light)' : 'var(--purple-light)';
+            } else {
+                $('resultEmoji').textContent = '⚖️';
+                $('resultTitle').textContent = 'تعادل!';
+                $('resultTitle').style.color = 'var(--gold-light)';
+            }
+            $('resultSubtitle').textContent = `الجولة رقم ${roundCount}`;
+            $('resultXName').textContent = playerNames.X;
+            $('resultOName').textContent = playerNames.O;
+            resultOverlay.classList.add('show');
+        }
+
+        function closeResultOverlay() {
+            resultOverlay.classList.remove('show');
+        }
+
+        // ===== إجراءات اللعبة =====
+
+        function startGame() {
+            const name1 = $('player1Name').value.trim() || 'اللاعب 1';
+            const name2 = $('player2Name').value.trim() || 'اللاعب 2';
+
+            playerNames.X = name1;
+            playerNames.O = name2;
+
+            $('xNameTop').textContent = name1;
+            $('oNameTop').textContent = name2;
+
+            nameScreen.classList.add('hidden');
+            gameScreen.classList.add('active');
+
+            scores = { X: 0, O: 0, draw: 0 };
+            roundCount = 0;
+            newRound();
+        }
+
+        function newRound() {
+            board = Array(9).fill(null);
+            currentPlayer = 'X';
+            gameActive = true;
+            roundCount++;
+
+            closeResultOverlay();
+            removeWinLine();
+            buildBoard();
+            updateUI();
+        }
+
+        function resetScores() {
+            scores = { X: 0, O: 0, draw: 0 };
+            roundCount = 0;
+            updateScoreDisplay();
+            newRound();
+        }
+
+        function backToNames() {
+            gameScreen.classList.remove('active');
+            nameScreen.classList.remove('hidden');
+            closeResultOverlay();
+            confettiContainer.innerHTML = '';
+            scores = { X: 0, O: 0, draw: 0 };
+            roundCount = 0;
+        }
+
+        // ===== Confetti =====
+        function launchConfetti() {
+            confettiContainer.innerHTML = '';
+            const colors = ['#06b6d4', '#22d3ee', '#14b8a6', '#10b981', '#f59e0b', '#fbbf24', '#8b5cf6', '#a78bfa', '#ef4444', '#ec4899', '#ffffff'];
+
+            for (let i = 0; i < 70; i++) {
+                const piece = document.createElement('div');
+                const size = 6 + Math.random() * 10;
+                const shape = Math.random() > 0.5 ? '50%' : '2px';
+                const duration = 2 + Math.random() * 3;
+                const delay = Math.random() * 2;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                piece.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    border-radius: ${shape};
+                    left: ${Math.random() * 100}%;
+                    top: -20px;
+                    opacity: 0;
+                    animation: confettiFall ${duration}s ${delay}s ease-out forwards;
+                `;
+                confettiContainer.appendChild(piece);
+            }
+            setTimeout(() => { confettiContainer.innerHTML = ''; }, 6000);
+        }
+
+        // ===== Particles =====
+        function createParticles() {
+            const container = $('particles');
+            for (let i = 0; i < 12; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 8 + 's';
+                p.style.animationDuration = (5 + Math.random() * 6) + 's';
+                container.appendChild(p);
+            }
+        }
+
+        // ===== ربط الأحداث =====
+        function bindEvents() {
+            // شاشة الأسماء
+            $('startBtn').addEventListener('click', startGame);
+
+            $('player1Name').addEventListener('keypress', e => {
+                if (e.key === 'Enter') $('player2Name').focus();
+            });
+            $('player2Name').addEventListener('keypress', e => {
+                if (e.key === 'Enter') startGame();
+            });
+
+            // أزرار اللعبة
+            $('btnNewRound').addEventListener('click', newRound);
+            $('btnResetScores').addEventListener('click', resetScores);
+            $('btnBackToNames').addEventListener('click', backToNames);
+
+            // أزرار نافذة النتيجة
+            $('btnResultNewRound').addEventListener('click', () => {
+                closeResultOverlay();
+                newRound();
+            });
+            $('btnResultBackToNames').addEventListener('click', () => {
+                closeResultOverlay();
+                backToNames();
+            });
+
+            // إغلاق نافذة النتيجة بالضغط خارجها
+            resultOverlay.addEventListener('click', e => {
+                if (e.target === resultOverlay) closeResultOverlay();
+            });
+        }
+
+        // ===== تشغيل =====
+        function init() {
+            createParticles();
+            buildBoard();
+            bindEvents();
+
+            // ركّز على أول خانة اسم
+            setTimeout(() => { $('player1Name').focus(); }, 500);
+        }
+
+        // استنى DOM يتحمل
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // ===== مشاركة النتيجة =====
+        var shareCardBlob = null;
+
+        window.shareResult = function() {
+            var resultBox = document.getElementById('resultBox');
+            if (!resultBox) {
+                // Fallback to text share
+                var text = getXOShareText();
+                if (navigator.share) {
+                    navigator.share({ title: 'إكس أو', text: text }).catch(function(){});
+                }
+                return;
+            }
+            html2canvas(resultBox, {
+                backgroundColor: '#070d19',
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                allowTaint: true,
+                onclone: function(clonedDoc) {
+                    var clonedBox = clonedDoc.getElementById('resultBox');
+                    if (clonedBox) {
+                        clonedBox.style.background = 'linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98))';
+                        clonedBox.style.backdropFilter = 'none';
+                        clonedBox.style.webkitBackdropFilter = 'none';
+                    }
+                }
+            }).then(function(canvas) {
+                var dataUrl = canvas.toDataURL('image/png');
+                document.getElementById('shareCardImage').src = dataUrl;
+                
+                canvas.toBlob(function(blob) {
+                    shareCardBlob = blob;
+                    document.getElementById('shareCardOverlay').classList.add('show');
+                }, 'image/png');
+            }).catch(function(err) {
+                // Fallback to text share
+                var text = getXOShareText();
+                if (navigator.share) {
+                    navigator.share({ title: 'إكس أو', text: text }).catch(function(){});
+                }
+            });
+        };
+
+        function getXOShareText() {
+            var xName = playerNames.X || 'اللاعب 1';
+            var oName = playerNames.O || 'اللاعب 2';
+            var text = '❌⭕ إكس أو - مؤتمر الشباب\n';
+            text += xName + ' (X): ' + scores.X + ' نقطة\n';
+            text += oName + ' (O): ' + scores.O + ' نقطة\n';
+            text += 'تعادل: ' + scores.draw + '\n';
+            text += '✝️';
+            return text;
+        }
+
+        window.closeShareCard = function() {
+            var overlay = document.getElementById('shareCardOverlay');
+            overlay.classList.remove('show');
+            var img = document.getElementById('shareCardImage');
+            if (img.src) {
+                URL.revokeObjectURL(img.src);
+                img.src = '';
+            }
+            shareCardBlob = null;
+        };
+
+        window.shareImageCard = function() {
+            if (!shareCardBlob) return;
+            var file = new File([shareCardBlob], 'xo-result.png', { type: 'image/png' });
+            var shareData = { files: [file], title: 'إكس أو', text: getXOShareText() };
+            if (navigator.canShare && navigator.canShare(shareData)) {
+                navigator.share(shareData).catch(function() {});
+            } else if (navigator.share) {
+                navigator.share({ title: 'إكس أو', text: getXOShareText() }).catch(function() {});
+            }
+        };
+
+        window.downloadShareCard = function() {
+            if (!shareCardBlob) return;
+            var url = URL.createObjectURL(shareCardBlob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'xo-result.png';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('تم تحميل الصورة!');
+        };
+
+        window.copyShareText = function() {
+            var text = getXOShareText();
+            navigator.clipboard.writeText(text).then(function() {
+                showToast('تم نسخ النص!');
+            }).catch(function() {
+                showToast('مش قادرين ننسخ النص');
+            });
+        };
+
+        function showToast(msg) {
+            var existing = document.querySelector('.share-toast');
+            if (existing) existing.remove();
+            var toast = document.createElement('div');
+            toast.className = 'share-toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(function() { toast.classList.add('show'); }, 10);
+            setTimeout(function() { toast.classList.remove('show'); setTimeout(function(){ toast.remove(); }, 400); }, 2500);
+        }
+
+    })();
+    </script>
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

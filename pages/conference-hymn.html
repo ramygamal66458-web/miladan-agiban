@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لحن مؤتمر ميلادا عجيبًا — الصورة والصوت والنص">
+    <title>لحن المؤتمر — ميلادا عجيبًا</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      .hymn-page{max-width:1000px;margin:0 auto;padding:1.2rem 1rem 2rem}
+      .hymn-hero{background:linear-gradient(145deg,rgba(44,33,21,.96),rgba(13,11,8,.96));border:1px solid rgba(229,200,120,.28);border-radius:28px;padding:1.5rem;box-shadow:0 18px 55px rgba(0,0,0,.35);text-align:center}
+      .hymn-hero img{width:96px;height:96px;object-fit:contain;border-radius:50%;margin:0 auto 1rem;border:2px solid #b78b32;background:#fff;padding:4px}
+      .hymn-title{color:#e5c878;font-weight:900;font-size:clamp(1.35rem,5vw,2.2rem);margin:0}
+      .hymn-sub{color:#d8ccb9;margin:.45rem 0 0}
+      .hymn-section{margin-top:1rem;background:rgba(35,27,18,.88);border:1px solid rgba(229,200,120,.18);border-radius:22px;padding:1rem}
+      .section-title{font-weight:900;color:#f1e6d2;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+      .audio-shell{background:rgba(10,9,7,.8);border:1px solid rgba(229,200,120,.22);border-radius:18px;padding:1rem}
+      audio{width:100%}
+      .notation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+      .notation-card{background:#0d0b09;border:1px solid rgba(229,200,120,.16);border-radius:18px;padding:.6rem;overflow:hidden}
+      .notation-card img{width:100%;height:auto;border-radius:12px;cursor:zoom-in}
+      .lyrics-box{line-height:2;color:#eadfcd;background:#120f0c;border:1px solid rgba(229,200,120,.22);border-radius:16px;padding:1.1rem;text-align:right}.reflection-card{margin-top:1rem;padding:1rem;border-radius:16px;background:linear-gradient(145deg,rgba(183,139,50,.13),rgba(18,15,12,.95));border-right:4px solid #b78b32}.reflection-card strong{display:block;color:#e5c878;margin-bottom:.5rem}
+      .source-note{color:#a99c89;font-size:.78rem;margin-top:.7rem}
+      @media(max-width:700px){.notation-grid{grid-template-columns:1fr}.hymn-page{padding-inline:.75rem}.hymn-hero{padding:1.1rem}}
+    </style>
+</head>
+<body>
+<div class="bg-layer bg-layer-ambient"></div>
+<div id="app-navbar-slot"></div>
+<main class="hymn-page">
+  <section class="hymn-hero">
+    <img src="../assets/img/logo-hero.webp" alt="لوجو مؤتمر ميلادا عجيبًا">
+    <h1 class="hymn-title">لحن المؤتمر</h1>
+    <p class="hymn-sub">المزمور السنجاري لعيد الميلاد</p>
+  </section>
+
+  <section class="hymn-section">
+    <div class="section-title"><i class="bi bi-volume-up-fill"></i> اسمع اللحن</div>
+    <div class="audio-shell">
+      <audio controls preload="metadata" id="conference-hymn-audio"></audio><div class="source-note" id="audio-note">لم يتم رفع ملف الصوت بعد — أضف تسجيلك في مجلد assets/audio ليظهر هنا تلقائيًا.</div>
+    </div>
+  </section>
+
+  <section class="hymn-section">
+    <div class="section-title"><i class="bi bi-image-fill"></i> صورة اللحن / المصدر</div>
+    <div class="notation-grid">
+      <div class="notation-card"><img src="../assets/img/conference-hymn-notation-1.png" alt="المزمور السنجاري لعيد الميلاد — المصدر الأول" loading="lazy"></div>
+      <div class="notation-card"><img src="../assets/img/conference-hymn-notation-2.png" alt="المزمور السنجاري لعيد الميلاد — المصدر الثاني" loading="lazy"></div>
+    </div>
+    <div class="source-note">اضغط على الصورة لفتحها بالحجم الكامل.</div>
+  </section>
+
+  <section class="hymn-section">
+    <div class="section-title"><i class="bi bi-stars"></i> شعار المؤتمر — الكلمات</div>
+    <div class="lyrics-box" style="font-size:1.05rem;line-height:2.35;text-align:center;white-space:pre-line;">
+      بصوتي ونغماتي أهتف بالسلام
+      لسر التجسد عظيم المقـام
+      إلهنا المخلص جه شال الظلام
+      فدانا بجسده ودمه الكريم
+      نسبح نمجد الهنا العظيم
+
+      في بطن العذراء حصل اتحاد
+      لاهوت مع ناسوت يشيلوا السواد
+      وصلح صورتنا رجعنا جداد
+      أخذ اللى لينا بفضله الكبير
+      وهو ادانا مجده الهنا القدير
+    </div>
+    <div class="source-note">صوت الشعار سيُضاف هنا بمجرد إضافة ملف التسجيل الخاص بالمؤتمر.</div>
+  </section>
+</main>
+<div id="app-bottomnav-slot"></div>
+<script src="../assets/js/core.js?v=2026_v10" defer></script>
+<script src="../assets/js/identity.js?v=2026_v1"></script>
+<script>
+  document.addEventListener('click', function(e){
+    const img=e.target.closest('.notation-card img');
+    if(!img) return;
+    const w=window.open('','_blank');
+    if(w){
+      w.document.write(`<!doctype html><html lang="ar" dir="rtl"><head><title>شعار المؤتمر</title></head><body style="margin:0;background:#0b0a08;display:grid;place-items:center;min-height:100vh"><img src="${img.src}" style="max-width:100%;max-height:100vh;object-fit:contain"></body></html>`);
+      w.document.close();
+    }
+  });
+</script>
+</body>');w.document.close();}
+  });
+</script>
+</body>
+</html>

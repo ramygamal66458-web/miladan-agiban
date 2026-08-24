@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="ورش عمل مؤتمر الشباب 2026">
+    <title>ورش العمل — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <!-- preconnect في أول الصفحة لتسريع DNS+TLS قبل Bootstrap CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css?v=2.6">
+    <link rel="stylesheet" href="../assets/css/content-cards.css?v=2.6">
+    <style>
+        .day-tabs { display:flex; gap:.5rem; padding:.75rem 1rem; overflow-x:auto; scrollbar-width:none; position:sticky; top:56px; z-index:100; background:rgba(7,13,25,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border-subtle); }
+        .day-tabs::-webkit-scrollbar { display:none; }
+        .day-tab { flex-shrink:0; padding:.5rem 1.2rem; border-radius:20px; border:1px solid var(--border-light); background:transparent; color:var(--text-muted); font-family:inherit; font-size:.85rem; font-weight:600; cursor:pointer; transition:all .2s; white-space:nowrap; }
+        .day-tab:hover { border-color:rgba(244,63,94,.4); color:#fb7185; }
+        .day-tab.active { background:rgba(244,63,94,.1); border-color:rgba(244,63,94,.35); color:#fb7185; }
+        .day-panel { display:none; padding:1.25rem 1rem; }
+        .workshop-card { 
+            background: radial-gradient(circle at top right, rgba(244, 63, 94, 0.12) 0%, rgba(15, 23, 42, 0.85) 55%, rgba(7, 11, 22, 0.98) 100%); 
+            border: 1.5px solid rgba(251, 113, 133, 0.25); 
+            border-radius: 26px; 
+            padding: 1.4rem 1.5rem; 
+            margin-bottom: 1.25rem; 
+            cursor: pointer; 
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        box-shadow 0.35s ease,
+                        border-color 0.25s ease; 
+            box-shadow: 0 14px 35px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+            /* backdrop-filter على :hover فقط لتجنب GPU layer دائم */
+        }
+        .workshop-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, #fb7185, #fbbf24, #22d3ee);
+            opacity: 0.85;
+        }
+        .workshop-card:hover { 
+            will-change: transform;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateY(-6px) scale(1.008); 
+            box-shadow: 0 20px 45px rgba(244, 63, 94, 0.22), 0 0 25px rgba(244, 63, 94, 0.15); 
+            border-color: rgba(251, 113, 133, 0.6); 
+        }
+        .ws-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .ws-badge-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .ws-badge-pill {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .ws-badge-pill.day {
+            background: rgba(244, 63, 94, 0.18);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fda4af;
+        }
+        .ws-badge-pill.type {
+            background: rgba(250, 204, 21, 0.12);
+            border: 1px solid rgba(250, 204, 21, 0.35);
+            color: #fde68a;
+        }
+        .ws-icon { 
+            width: 56px; 
+            height: 56px; 
+            border-radius: 18px; 
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.28) 0%, rgba(225, 29, 72, 0.08) 100%); 
+            color: #fb7185; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.65rem; 
+            flex-shrink: 0; 
+            border: 1.5px solid rgba(251, 113, 133, 0.4);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.25);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .workshop-card:hover .ws-icon {
+            transform: scale(1.08) rotate(-4deg);
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.4) 0%, rgba(225, 29, 72, 0.2) 100%);
+        }
+        .ws-title {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.4;
+            letter-spacing: -0.2px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .ws-meta-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .ws-chip {
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 4px 11px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+        }
+        .ws-chip.time { color: #f87171; border-color: rgba(248, 113, 113, 0.25); background: rgba(248, 113, 113, 0.08); }
+        .ws-chip.place { color: #38bdf8; border-color: rgba(56, 189, 248, 0.25); background: rgba(56, 189, 248, 0.08); }
+        .ws-chip.speaker { color: #fbbf24; border-color: rgba(251, 191, 36, 0.25); background: rgba(251, 191, 36, 0.08); }
+        
+        .ws-summary-box {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px 14px;
+            background: rgba(15, 23, 42, 0.5);
+            border-right: 3px solid rgba(251, 113, 133, 0.5);
+            border-radius: 0 14px 14px 0;
+        }
+        .ws-cta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .ws-cta-btn {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffe4e6;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.25) 0%, rgba(225, 29, 72, 0.35) 100%);
+            border: 1.2px solid rgba(251, 113, 133, 0.45);
+            border-radius: 14px;
+            padding: 8px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(244, 63, 94, 0.15);
+        }
+        .workshop-card:hover .ws-cta-btn {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.4) 0%, rgba(225, 29, 72, 0.5) 100%);
+            border-color: rgba(251, 113, 133, 0.7);
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgba(244, 63, 94, 0.35);
+        }
+        .ws-cta-btn i {
+            transition: transform 0.3s ease;
+        }
+        .workshop-card:hover .ws-cta-btn i {
+            transform: translateX(-5px);
+        }
+        .lecture-modal .modal-content { background: radial-gradient(circle at top right, #111827 0%, #070d19 100%); border: 1.5px solid rgba(251, 113, 133, 0.25); border-radius: 28px; color: var(--text-main); box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(251, 113, 133, 0.15); }
+        .lecture-modal .modal-header { border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding: 1.5rem 1.5rem 1rem; }
+        .lecture-modal .modal-header .btn-close { filter: invert(1); opacity: 0.7; }
+        .lecture-modal .modal-body { padding: 1.5rem; }
+        .objective-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 0.9rem 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.25s ease;
+        }
+        .objective-item:hover {
+            background: rgba(251, 113, 133, 0.04);
+            border-color: rgba(251, 113, 133, 0.2);
+            transform: translateX(-3px);
+        }
+        .objective-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(251, 113, 133, 0.2);
+            color: #fb7185;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 900;
+            border: 1px solid rgba(251, 113, 133, 0.35);
+            flex-shrink: 0;
+        }
+        .objective-text {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        .practical-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(6, 182, 212, 0.01) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            border-radius: 18px;
+            padding: 1.1rem;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        .practical-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; width: 4px;
+            background: #06b6d4;
+        }
+        
+        /* تنسيقات العداد التنازلي والمهام التفاعلية للورش */
+        .ws-countdown-wrap {
+            background: rgba(251, 191, 36, 0.04);
+            border: 1px dashed rgba(251, 191, 36, 0.25);
+            border-radius: 18px;
+            padding: 1.25rem;
+            text-align: center;
+            margin-top: 1rem;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.05);
+            /* animation borderPulse removed for performance */
+        }
+        .ws-countdown-timer {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fbbf24;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+            margin: 0.5rem 0;
+            font-family: monospace;
+            /* animation textPulse removed for performance */
+        }
+        .ws-tasks-wrap {
+            background: rgba(16, 185, 129, 0.03);
+            border: 1.5px solid rgba(16, 185, 129, 0.2);
+            border-radius: 20px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.06);
+            animation: fadeInUp 0.4s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ws-task-item {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .ws-task-item:hover {
+            background: rgba(16, 185, 129, 0.04);
+            border-color: rgba(16, 185, 129, 0.15);
+            transform: translateX(-3px);
+        }
+        .ws-task-item.completed {
+            border-color: rgba(16, 185, 129, 0.35);
+            background: rgba(16, 185, 129, 0.06);
+        }
+        .ws-task-checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        .ws-task-item.completed .ws-task-checkbox {
+            border-color: #10b981;
+            background: #10b981;
+            color: #fff;
+        }
+        .ws-task-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.85);
+            transition: all 0.2s ease;
+        }
+        .ws-task-item.completed .ws-task-text {
+            color: rgba(255,255,255,0.45);
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-layer bg-layer-ambient"></div>
+    <div id="app-navbar-slot"></div>
+
+    <header style="padding:1.25rem 1rem .5rem">
+        <div class="page-header-title">🛠️ ورش العمل</div>
+        <div class="page-header-sub">تطبيقات عملية ومهارات لكل يوم</div>
+    </header>
+
+    <div class="day-tabs" role="tablist">
+        <button class="day-tab active" data-day="1">اليوم الأول</button>
+        <button class="day-tab" data-day="2">اليوم الثاني</button>
+        <button class="day-tab" data-day="3">اليوم الثالث</button>
+    </div>
+
+    <main id="workshops-main">
+        <!-- اليوم الأول -->
+        <div class="day-panel active" id="ws-panel-day-1">
+            <div class="workshop-card" onclick="openWorkshopModal(1)">
+                <div class="ws-card-header">
+                    <div class="ws-badge-group">
+                        <span class="ws-badge-pill day"><i class="bi bi-calendar3"></i> اليوم الأول</span>
+                        <span class="ws-badge-pill type"><i class="bi bi-stars"></i> تفاعلية</span>
+                    </div>
+                    <div class="ws-icon"><i class="bi bi-brain-fill"></i></div>
+                </div>
+                <div class="ws-title">فك الشفرة: من يقود فكرك؟ 🧠</div>
+                <div class="ws-meta-chips">
+                    <span class="ws-chip time"><i class="bi bi-clock-fill"></i> 6:30 pm - 8:30 pm</span>
+                    <span class="ws-chip place"><i class="bi bi-geo-alt-fill"></i> قاعة ورش العمل</span>
+                    <span class="ws-chip speaker"><i class="bi bi-person-badge-fill"></i> فريق الورش والتدريب</span>
+                </div>
+                <p class="ws-summary-box">اكتشف المؤثرات الخفية التي تشكل أفكارك اليومية وقراراتك الشخصية في جلسة تفاعلية شيقة.</p>
+                <div class="ws-cta-row">
+                    <span style="font-size: 0.75rem; color: #64748b; font-weight: 700;">اضغط لعرض الأهداف بالتفصيل</span>
+                    <div class="ws-cta-btn">
+                        <span>عرض تفاصيل الورشة</span>
+                        <i class="bi bi-arrow-left"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اليوم الثاني -->
+        <div class="day-panel" id="ws-panel-day-2">
+            <div class="workshop-card" onclick="openWorkshopModal(2)">
+                <div class="ws-card-header">
+                    <div class="ws-badge-group">
+                        <span class="ws-badge-pill day"><i class="bi bi-calendar3"></i> اليوم الثاني</span>
+                        <span class="ws-badge-pill type"><i class="bi bi-stars"></i> تفاعلية</span>
+                    </div>
+                    <div class="ws-icon"><i class="bi bi-compass-fill"></i></div>
+                </div>
+                <div class="ws-title">البوصلة والذكاء الاصطناعي: من القائد؟ 🧭🤖</div>
+                <div class="ws-meta-chips">
+                    <span class="ws-chip time"><i class="bi bi-clock-fill"></i> 7:30 pm - 9:30 pm</span>
+                    <span class="ws-chip place"><i class="bi bi-geo-alt-fill"></i> قاعة ورش العمل</span>
+                    <span class="ws-chip speaker"><i class="bi bi-person-badge-fill"></i> فريق الورش والتدريب</span>
+                </div>
+                <p class="ws-summary-box">رحلة ممتعة لمعرفة ما يقود حياتك، وكيف تكون قائداً متميزاً في عصر التكنولوجيا والذكاء الاصطناعي.</p>
+                <div class="ws-cta-row">
+                    <span style="font-size: 0.75rem; color: #64748b; font-weight: 700;">اضغط لعرض الأهداف بالتفصيل</span>
+                    <div class="ws-cta-btn">
+                        <span>عرض تفاصيل الورشة</span>
+                        <i class="bi bi-arrow-left"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اليوم الثالث -->
+        <div class="day-panel" id="ws-panel-day-3">
+            <div class="workshop-card" onclick="openWorkshopModal(3)">
+                <div class="ws-card-header">
+                    <div class="ws-badge-group">
+                        <span class="ws-badge-pill day"><i class="bi bi-calendar3"></i> اليوم الثالث</span>
+                        <span class="ws-badge-pill type"><i class="bi bi-stars"></i> تفاعلية</span>
+                    </div>
+                    <div class="ws-icon"><i class="bi bi-map-fill"></i></div>
+                </div>
+                <div class="ws-title">خريطة الطريق والشخصيات السبعة 🗺️👤</div>
+                <div class="ws-meta-chips">
+                    <span class="ws-chip time"><i class="bi bi-clock-fill"></i> 2:00 pm - 4:00 pm</span>
+                    <span class="ws-chip place"><i class="bi bi-geo-alt-fill"></i> قاعة ورش العمل</span>
+                    <span class="ws-chip speaker"><i class="bi bi-person-badge-fill"></i> فريق الورش والتدريب</span>
+                </div>
+                <p class="ws-summary-box">تعلم المعايير الذهبية لتقييم مسارك الشخصي والروحي، واكتشف أسرار الشخصيات السبعة.</p>
+                <div class="ws-cta-row">
+                    <span style="font-size: 0.75rem; color: #64748b; font-weight: 700;">اضغط لعرض الأهداف بالتفصيل</span>
+                    <div class="ws-cta-btn">
+                        <span>عرض تفاصيل الورشة</span>
+                        <i class="bi bi-arrow-left"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade lecture-modal" id="workshopModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="ws-modal-title">عنوان الورشة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="ws-modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-bottomnav-slot"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/core.js?v=2026_v9" defer></script>
+    <script src="../assets/js/workshops.js?v=2026_v9" defer></script>
+    <!-- YC.loadPartials() called by core.js -->
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="الداشبورد الرئيسي لمؤتمر ميلادا عجيبًا — كل أقسام المؤتمر في مكان واحد">
+    <title>ميلادا عجيبًا — الرئيسية</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- خلفية محيطية -->
+    <div class="bg-layer bg-layer-ambient"></div>
+
+    <!-- Navbar slot -->
+    <div id="app-navbar-slot"></div>
+
+    <!-- ════ الحاوية الرئيسية (flex column) ════ -->
+    <div class="home-main">
+
+        <!-- Hero Strip (مضغوط) -->
+        <section class="home-hero-strip" aria-label="رأس الصفحة">
+            <img src="../assets/img/logo-hero.webp" alt="لوجو مؤتمر ميلادا عجيبًا" class="hero-logo-sm">
+            <div class="hero-text-wrap">
+                <h1 class="home-greeting" id="main-greeting">أهلاً بك في ميلادا عجيبًا ❤️</h1>
+                <p class="home-greeting-sub">ميلادا عجيبًا 2026 — بيت الماء الحي بنها</p>
+            </div>
+        </section>
+
+        <!-- Live Activity Compact (الآن / بعد) -->
+        <div class="live-compact" id="live-compact" style="display:none" role="status" aria-live="polite">
+            <div class="lc-section">
+                <span class="lc-badge now">الآن</span>
+                <span class="lc-title" id="lp-now-title">—</span>
+                <span class="lc-time"  id="lp-now-remaining"></span>
+            </div>
+            <div class="lc-section" id="lp-next-wrap">
+                <span class="lc-badge next">بعد</span>
+                <span class="lc-title" id="lp-next-title">—</span>
+                <span class="lc-time"  id="lp-next-in"></span>
+            </div>
+        </div>
+
+        <!-- ════ Dashboard Dial (يملأ ما تبقى) ════ -->
+        <div class="dial-wrapper" id="dash-wheel-container" aria-label="قائمة الأقسام الدائرية" style="touch-action: pan-y;">
+
+            <!-- الدائرة الضخمة من الجانب الأيمن -->
+            <div class="dial-outer-ring" id="dial-outer-ring">
+                <svg viewBox="0 0 300 300" width="100%" height="100%" class="dial-svg">
+                    <defs>
+                        <!-- Gradients to make segments look premium -->
+                        <radialGradient id="grad-lectures" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#b78b32" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#b78b32" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#b78b32" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-workshops" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#8f6a22" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#8f6a22" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#8f6a22" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-hymns" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#c6a653" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#c6a653" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#c6a653" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-program" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#b78b32" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#b78b32" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#b78b32" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-accomm" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#8f6a22" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#8f6a22" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#8f6a22" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-slogan" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#c6a653" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#c6a653" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#c6a653" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-prayer" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#7c1f2b" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#7c1f2b" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#7c1f2b" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-games" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#b78b32" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#b78b32" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#b78b32" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-feedback" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#8f6a22" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#8f6a22" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#8f6a22" stop-opacity="0.45" />
+                        </radialGradient>
+                        <radialGradient id="grad-groups" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#c6a653" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#c6a653" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#c6a653" stop-opacity="0.45" />
+                        </radialGradient>
+
+                        <radialGradient id="grad-conference-hymn" cx="150" cy="150" r="140" gradientUnits="userSpaceOnUse">
+                            <stop offset="58%" stop-color="#7c1f2b" stop-opacity="0.05" />
+                            <stop offset="85%" stop-color="#7c1f2b" stop-opacity="0.28" />
+                            <stop offset="100%" stop-color="#7c1f2b" stop-opacity="0.5" />
+                        </radialGradient>
+
+                        <!-- Glow Filter for active segment -->
+                        <filter id="svg-glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+
+                        <!-- Hub Logo Circular ClipPath -->
+                        <clipPath id="hub-clip">
+                            <circle cx="150" cy="150" r="68" />
+                        </clipPath>
+                    </defs>
+
+                    <!-- Rotating Wheel Group (11 Sections) -->
+                    <g id="dial-wheel" class="dial-wheel">
+                        <g class="dial-node" data-index="0" data-href="lectures.html" transform="rotate(0.000000, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-lectures)" stroke="#b78b32" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🎤</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">المحاضرات</text>
+                        </g>
+                        <g class="dial-node" data-index="1" data-href="workshops.html" transform="rotate(32.727273, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-workshops)" stroke="#8f6a22" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🛠</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">ورش العمل</text>
+                        </g>
+                        <g class="dial-node" data-index="2" data-href="hymns.html" transform="rotate(65.454545, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-hymns)" stroke="#c6a653" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🎵</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">الألحان</text>
+                        </g>
+                        <g class="dial-node" data-index="3" data-href="conference-hymn.html" transform="rotate(98.181818, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-conference-hymn)" stroke="#7c1f2b" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🎼</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">لحن المؤتمر</text>
+                        </g>
+                        <g class="dial-node" data-index="4" data-href="program.html" transform="rotate(130.909091, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-program)" stroke="#b78b32" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🗓</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">البرنامج</text>
+                        </g>
+                        <g class="dial-node" data-index="5" data-href="accommodation.html" transform="rotate(163.636364, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-accomm)" stroke="#8f6a22" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🛏</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">التسكين</text>
+                        </g>
+                        <g class="dial-node" data-index="6" data-href="conference-hymn.html" transform="rotate(196.363636, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-slogan)" stroke="#c6a653" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">✨</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">شعار المؤتمر</text>
+                        </g>
+                        <g class="dial-node" data-index="7" data-href="prayer.html" transform="rotate(229.090909, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-prayer)" stroke="#7c1f2b" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🙏</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">الصلوات</text>
+                        </g>
+                        <g class="dial-node" data-index="8" data-href="games.html" transform="rotate(261.818182, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-games)" stroke="#b78b32" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">🎮</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">الألعاب</text>
+                        </g>
+                        <g class="dial-node" data-index="9" data-href="feedback.html" transform="rotate(294.545455, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-feedback)" stroke="#8f6a22" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">💬</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">رأيك</text>
+                        </g>
+                        <g class="dial-node" data-index="10" data-href="groups.html" transform="rotate(327.272727, 150, 150)">
+                            <path class="svg-sector" d="M 284.33 110.56 A 140 140 0 0 1 284.33 189.44 L 231.56 173.95 A 85 85 0 0 0 231.56 126.05 Z" fill="url(#grad-groups)" stroke="#c6a653" stroke-width="1.3" stroke-opacity="0.85" />
+                            <text x="270" y="150" transform="rotate(90, 270, 150)" class="svg-icon">👥</text>
+                            <text x="238" y="150" transform="rotate(90, 238, 150)" class="svg-label">المجموعات</text>
+                        </g>
+                    </g>
+
+                    <!-- Static Hub and Gear Overlay (Does not rotate) -->
+                    <!-- Gear teeth (dashed thick stroke) -->
+                    <circle cx="150" cy="150" r="77" fill="none" stroke="#101827" stroke-width="10" stroke-dasharray="6 6" />
+                    <!-- Inner gear neon line -->
+                    <circle cx="150" cy="150" r="72" fill="none" stroke="#22d3ee" stroke-width="1.5" filter="drop-shadow(0 0 3px #22d3ee)" stroke-opacity="0.85" />
+                    <!-- Hub Center Background -->
+                    <circle cx="150" cy="150" r="71" fill="#081020" stroke="#f59e0b" stroke-width="2" filter="drop-shadow(0 0 8px rgba(245, 158, 11, 0.4))" />
+
+                    <!-- Logo Centered inside Hub SVG (100% SVG Vector Aligned) -->
+                    <image href="../assets/img/logo-hero.webp" xlink:href="../assets/img/logo-hero.webp" x="90" y="90" width="120" height="120" preserveAspectRatio="xMidYMid meet" clip-path="url(#hub-clip)" onerror="this.setAttribute('href', 'assets/img/logo-hero.webp'); this.setAttribute('xlink:href', 'assets/img/logo-hero.webp');" />
+
+                    <!-- Statically positioned pointer at 180 degrees (left side, pointing right) -->
+                    <path d="M 4 143 L 13 150 L 4 157 Z" fill="#22d3ee" stroke="#22d3ee" stroke-width="1.5" filter="drop-shadow(0 0 4px #22d3ee)" />
+                </svg>
+            </div>
+
+            <!-- ════ بادج القسم النشط (بجانب السهم) ════ -->
+            <div class="dial-active-badge" id="dial-active-badge" role="link" tabindex="0" aria-label="اضغط لفتح القسم">
+
+                <!-- مؤشر الذروة -->
+                <div class="dab-indicator">
+                    <div class="dab-dot"></div>
+                    <div class="dab-vline"></div>
+                </div>
+
+                <!-- أيقونة القسم -->
+                <span class="dab-icon" id="dab-icon">🎤</span>
+
+                <!-- اسم القسم -->
+                <div class="dab-name" id="dab-name">المحاضرات الروحية</div>
+
+                <!-- وصف مختصر -->
+                <div class="dab-desc" id="dab-desc">محاضرات الأيام الثلاثة</div>
+
+                <!-- تلميح الدخول -->
+                <div class="dab-enter">
+                    <i class="bi bi-arrow-left-circle-fill"></i> اضغط للدخول
+                </div>
+
+                <!-- سهم واصل للدائرة -->
+                <div class="dab-connector">
+                    <div class="dab-h-line"></div>
+                    <span class="dab-h-arrow">›</span>
+                </div>
+            </div>
+
+            <!-- أزرار التنقل (أعلى / أسفل) -->
+            <button class="dial-nav-btn dial-nav-up"   id="dial-btn-up"   aria-label="القسم السابق">
+                <i class="bi bi-chevron-up"></i>
+            </button>
+            <button class="dial-nav-btn dial-nav-down" id="dial-btn-down" aria-label="القسم التالي">
+                <i class="bi bi-chevron-down"></i>
+            </button>
+
+        </div>
+        <!-- /dial-wrapper -->
+
+        <!-- Dots -->
+        <div class="dial-footer">
+            <div class="dial-dots" role="tablist">
+                <span class="dial-dot active" data-index="0" role="tab"></span>
+                <span class="dial-dot" data-index="1" role="tab"></span>
+                <span class="dial-dot" data-index="2" role="tab"></span>
+                <span class="dial-dot" data-index="3" role="tab"></span>
+                <span class="dial-dot" data-index="4" role="tab"></span>
+                <span class="dial-dot" data-index="5" role="tab"></span>
+                <span class="dial-dot" data-index="6" role="tab"></span>
+                <span class="dial-dot" data-index="7" role="tab"></span>
+                <span class="dial-dot" data-index="8" role="tab"></span>
+                <span class="dial-dot" data-index="9" role="tab"></span>
+                <span class="dial-dot" data-index="10" role="tab"></span>
+                </div>
+            <div class="dial-swipe-hint" aria-hidden="true">
+                <i class="bi bi-hand-index-thumb"></i> اسحب للتنقل
+            </div>
+        </div>
+
+    </div>
+    <!-- /home-main -->
+
+    <!-- Bottom Nav slot -->
+    <div id="app-bottomnav-slot"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="../assets/js/config.js?v=2026_v7"></script>
+    <script src="../assets/js/data-service.js?v=2026_v7"></script>
+    <script src="../assets/js/core.js?v=2026_v7"></script>
+    <script src="../assets/js/identity.js"></script>
+    <script src="../assets/js/home.js?v=2026_v7"></script>
+
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+</body>
+</html>

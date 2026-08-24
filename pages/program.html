@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="برنامج مؤتمر ميلادا عجيبًا 2026 — جدول الأيام الثلاثة">
+    <title>البرنامج — ميلادا عجيبًا</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <!-- preconnect في أول الصفحة لتسريع DNS+TLS قبل أي CSS خارجي -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-layer bg-layer-ambient"></div>
+    <div id="app-navbar-slot"></div>
+
+    <header style="padding:1.25rem 1rem .5rem; display:flex; align-items:flex-start; justify-content:space-between;">
+        <div>
+            <div class="page-header-title">📅 البرنامج</div>
+            <div class="page-header-sub">جدول مؤتمر ميلادا عجيبًا لكل يوم</div>
+        </div>
+        <a id="jump-now-btn" href="live-board.html" class="btn-primary-app" style="padding:.5rem 1rem;font-size:.8rem;margin-top:.5rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;" title="افتح لوحة الطيران الحية (الآن)">
+            <i class="bi bi-broadcast"></i> الآن ✈️
+        </a>
+    </header>
+
+    <!-- Live Status Widget -->
+    <div class="live-status-card" id="live-status-widget" style="display: none;">
+        <div class="live-badge-now">
+            <span class="blink-dot"></span>
+            الآن
+        </div>
+        <div class="live-title" id="live-activity-title">تحميل الفعالية الجارية...</div>
+        <div class="live-progress-container">
+            <div class="live-progress-text">
+                <span id="live-time-left">متبقي --:--</span>
+                <span id="live-progress-percent">0%</span>
+            </div>
+            <div class="live-progress-bar-track">
+                <div class="live-progress-bar-fill" id="live-progress-bar-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+        <div class="live-next-teaser" id="live-next-teaser">
+            <i class="bi bi-chevron-double-left"></i>
+            <span id="live-next-activity-text">النشاط التالي: جارِ الحساب...</span>
+        </div>
+    </div>
+
+    <!-- Day Tabs -->
+    <div class="day-tabs" role="tablist">
+        <!-- يتم توليد التابات ديناميكياً من الجافاسكريبت -->
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="filter-pills-bar" role="toolbar" aria-label="فلاتر الأنشطة">
+        <button class="filter-pill active" data-filter="all"><i class="bi bi-grid-fill"></i>الكل</button>
+        <button class="filter-pill" data-filter="starred" style="border-color:#fbbf24;color:#fbbf24;"><i class="bi bi-star-fill"></i>جدولي</button>
+        <button class="filter-pill" data-filter="prayer"><i class="bi bi-book-fill"></i>صلوات</button>
+        <button class="filter-pill" data-filter="lecture"><i class="bi bi-mic-fill"></i>محاضرات</button>
+        <button class="filter-pill" data-filter="workshop"><i class="bi bi-tools"></i>ورش</button>
+        <button class="filter-pill" data-filter="free"><i class="bi bi-emoji-smile-fill"></i>ترفيه</button>
+        <button class="filter-pill" data-filter="meal"><i class="bi bi-cup-hot-fill"></i>وجبات</button>
+    </div>
+
+    <!-- Day Panels -->
+    <main id="program-main">
+        <div class="day-panel active" id="prog-panel-day-1">
+            <div class="timeline" id="timeline-day-1"></div>
+        </div>
+        <div class="day-panel" id="prog-panel-day-2">
+            <div class="timeline" id="timeline-day-2"></div>
+        </div>
+        <div class="day-panel" id="prog-panel-day-3">
+            <div class="timeline" id="timeline-day-3"></div>
+        </div>
+        <div class="day-panel" id="prog-panel-day-4">
+            <div class="timeline" id="timeline-day-4"></div>
+        </div>
+    </main>
+
+    <!-- 🍽️ نافذة منيو الوجبة المخصصة (Meal Card Popup Modal) -->
+    <div class="modal fade" id="mealCardModal" tabindex="-1" aria-labelledby="mealModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="background:#0f172a; border:2px solid #fbbf24; border-radius:20px; overflow:hidden;">
+                <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.1); padding:1rem 1.25rem;">
+                    <h5 class="modal-title fw-bold" id="mealModalTitle" style="color:#fbbf24;">🍽️ قائمة الوجبة المخصصة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter:invert(1);"></button>
+                </div>
+                <div class="modal-body text-center p-3">
+                    <img id="mealModalImg" src="" alt="منيو الوجبة" style="max-width:100%; max-height:80vh; border-radius:14px; box-shadow:0 0 30px rgba(0,0,0,0.8); object-fit:contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-bottomnav-slot"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/core.js?v=2026_v9" defer></script>
+    <script src="../assets/js/program-data.js?v=2026_v44" defer></script>
+    <script src="../assets/js/program.js?v=2026_v44" defer></script>
+    <!-- YC.loadPartials() called automatically by core.js -->
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

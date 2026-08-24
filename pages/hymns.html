@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="ألحان مؤتمر الشباب 2026">
+    <title>الألحان — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <!-- preconnect في أول الصفحة لتسريع DNS+TLS لـ CDN والخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <style>
+/* ══════════════════════════ نظام الألوان ══════════════════════════ */
+:root {
+
+    --conf-primary:   #f59e0b;
+    --conf-light:     #fbbf24;
+    --conf-glow:      rgba(245,158,11,0.28);
+    --conf-border:    rgba(251,191,36,0.25);
+    --conf-bg:        rgba(245,158,11,0.08);
+
+    --fav-primary:    #f43f5e;
+    --fav-light:      #fb7185;
+    --fav-glow:       rgba(244,63,94,0.28);
+    --fav-border:     rgba(251,113,133,0.25);
+    --fav-bg:         rgba(244,63,94,0.08);
+
+    --modal-bg: #070d1c;
+    --card-radius: 20px;
+}
+body.reading-mode { background: #04080f; }
+
+/* ══════════════════════════ Page Header ══════════════════════════ */
+.hymns-page-header { padding: 1rem 1rem .3rem; }
+.hymns-page-title {
+    font-size: 1.45rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--prayer-light), var(--prayer-accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: .1rem;
+}
+.hymns-page-sub { font-size: .75rem; color: rgba(255,255,255,0.35); }
+
+/* ══════════════════════════ شريط القراءة ══════════════════════════ */
+.reading-controls {
+    display: flex; align-items: center; gap: .4rem;
+    padding: .4rem .9rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.ctrl-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 9px; color: rgba(255,255,255,0.45); font-size: .78rem;
+    padding: .3rem .7rem; cursor: pointer;
+    transition: border-color .2s, color .2s; display: inline-flex; align-items: center; gap: .3rem;
+    font-family: inherit;
+}
+.ctrl-btn:hover { border-color: var(--prayer-border); color: var(--prayer-light); }
+.ctrl-btn.active { background: var(--prayer-bg); border-color: var(--prayer-border); color: var(--prayer-light); }
+
+/* ══════════════════════════ HYMNS HOME — صفحة الوصول ══════════════════════════ */
+#hymns-home {
+    padding: .9rem 1rem 5rem;
+    display: block;
+}
+#hymns-home.hidden { display: none; }
+
+/* كرت القسم الكبير */
+.section-card {
+    position: relative; border-radius: var(--card-radius);
+    overflow: hidden; cursor: pointer; margin-bottom: 1rem;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transition: transform .28s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow .28s ease,
+                border-color .22s ease;
+    -webkit-tap-highlight-color: transparent;
+    will-change: transform;
+}
+.section-card:active { transform: scale(0.97); }
+
+/* صورة الخلفية */
+.section-card-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 20%;
+    pointer-events: none; display: block;
+}
+.section-card-overlay {
+    position: absolute; inset: 0;
+    pointer-events: none;
+}
+
+/* محتوى الكرت */
+.section-card-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.1rem 1.2rem 1.2rem;
+}
+.section-card-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    display: inline-flex; align-items: center; gap: .35rem;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px; padding: .28rem .7rem;
+    font-size: .72rem; font-weight: 700; color: #fff;
+}
+.section-card-tag {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px; padding: .3rem .55rem;
+    font-size: .85rem;
+}
+.section-card-title {
+    font-size: 1.4rem; font-weight: 900; line-height: 1.2;
+    margin-bottom: .3rem; color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+.section-card-sub {
+    font-size: .8rem; color: rgba(255,255,255,0.65);
+    display: flex; align-items: center; gap: .5rem;
+}
+.section-card-arrow {
+    position: absolute; bottom: 1.2rem; left: 1.1rem;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1rem;
+    transition: background .2s, transform .2s;
+}
+.section-card:hover .section-card-arrow {
+    background: rgba(255,255,255,0.2);
+    transform: translateX(-3px);
+}
+
+/* كرت ترانيم المؤتمر */
+.section-card.conference-card {
+    height: 190px;
+    background: linear-gradient(135deg, #1a0e04 0%, #241505 40%, #2d1a06 100%);
+    border-color: var(--conf-border);
+}
+.section-card.conference-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(245,158,11,0.3), 0 0 0 1px var(--conf-border);
+    border-color: var(--conf-primary);
+}
+/* تأثير دائري ذهبي في الخلفية */
+.conference-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 70% 50%,
+        rgba(245,158,11,0.18) 0%,
+        rgba(251,191,36,0.06) 60%,
+        transparent 100%);
+    pointer-events: none;
+}
+.conference-card .section-card-overlay {
+    background: linear-gradient(
+        to right,
+        rgba(10,6,2,0.85) 0%,
+        rgba(10,6,2,0.5) 45%,
+        rgba(10,6,2,0.15) 100%
+    );
+}
+.conference-card .section-card-title {
+    background: linear-gradient(to left, var(--conf-primary), var(--conf-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.conference-card .section-card-arrow {
+    background: rgba(245,158,11,0.15);
+    border-color: rgba(245,158,11,0.3);
+    color: var(--conf-light);
+}
+.conference-card:hover .section-card-arrow { background: rgba(245,158,11,0.28); }
+
+/* صورة خلفية كرت المؤتمر — portrait فيجب object-position لليمين حيث الوجه */
+.conf-bg-img {
+    object-position: right center !important;
+    filter: brightness(0.82) saturate(1.1);
+}
+
+/* صورة م. أدروسيس في Hero قائمة ترانيم المؤتمر */
+.conf-hero-img {
+    width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+    object-fit: cover; object-position: right top;
+    border: 2px solid var(--conf-border);
+    box-shadow: 0 4px 16px rgba(245,158,11,0.2);
+}
+
+/* صورة عائمة في كرت المؤتمر */
+.conf-floating-notes {
+    position: absolute; inset: 0;
+    pointer-events: none; overflow: hidden;
+}
+.conf-note {
+    position: absolute;
+    font-size: 1.6rem; opacity: 0.07;
+    animation: floatNote 6s ease-in-out infinite;
+}
+.conf-note:nth-child(1) { top: 20%; right: 15%; animation-delay: 0s; }
+.conf-note:nth-child(2) { top: 55%; right: 40%; animation-delay: 2s; font-size: 1.1rem; }
+.conf-note:nth-child(3) { top: 30%; right: 65%; animation-delay: 4s; font-size: 2rem; }
+@keyframes floatNote {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50%       { transform: translateY(-8px) rotate(5deg); }
+}
+
+/* ══════════════════════════ شريط البحث العالمي ══════════════════════════ */
+.global-search-wrap {
+    position: relative; margin-bottom: 1rem;
+}
+.global-search-bar {
+    display: flex; align-items: center; gap: .6rem;
+    background: rgba(15,24,50,0.75);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: .7rem 1rem;
+    transition: border-color .25s, box-shadow .25s;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.global-search-bar:focus-within {
+    border-color: var(--prayer-border);
+    box-shadow: 0 0 0 3px var(--prayer-glow);
+}
+.global-search-icon { color: rgba(255,255,255,0.35); font-size: 1rem; flex-shrink: 0; }
+.global-search-input {
+    flex: 1; background: none; border: none; outline: none;
+    color: rgba(255,255,255,0.9); font-family: inherit;
+    font-size: .95rem; direction: rtl;
+}
+.global-search-input::placeholder { color: rgba(255,255,255,0.28); }
+.global-search-clear {
+    background: none; border: none; padding: .15rem;
+    color: rgba(255,255,255,0.3); cursor: pointer; font-size: .9rem;
+    display: none; transition: color .2s; flex-shrink: 0;
+}
+.global-search-clear.visible { display: flex; align-items: center; }
+.global-search-clear:hover { color: rgba(255,255,255,0.7); }
+
+/* نتائج البحث — dropdown */
+.global-search-results {
+    position: absolute; top: calc(100% + .4rem); left: 0; right: 0;
+    background: #0d1628;
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    z-index: 200;
+    max-height: 340px; overflow-y: auto;
+    display: none;
+    -webkit-overflow-scrolling: touch;
+}
+.global-search-results.open { display: block; }
+.search-result-item {
+    display: flex; align-items: center; gap: .75rem;
+    padding: .78rem 1rem; cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background .15s;
+}
+.search-result-item:last-child { border-bottom: none; }
+.search-result-item:hover, .search-result-item.focused {
+    background: rgba(99,102,241,0.12);
+}
+.search-result-item.conf-result:hover, .search-result-item.conf-result.focused {
+    background: rgba(245,158,11,0.1);
+}
+.search-result-icon {
+    width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; font-weight: 800;
+}
+.search-result-icon.conf-icon {
+    background: var(--conf-bg); color: var(--conf-light);
+    border: 1px solid var(--conf-border);
+}
+.search-result-info { flex: 1; min-width: 0; }
+.search-result-title {
+    font-size: .9rem; font-weight: 700; color: rgba(255,255,255,0.9);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.search-result-title mark {
+    background: none;
+    color: var(--prayer-light); font-weight: 900;
+}
+.search-result-item.conf-result .search-result-title mark {
+    color: var(--conf-light);
+}
+.search-result-section {
+    font-size: .68rem; color: rgba(255,255,255,0.35); margin-top: .06rem;
+}
+.search-result-audio {
+    font-size: .68rem; color: var(--conf-light);
+    display: inline-flex; align-items: center; gap: .2rem;
+}
+.search-result-arrow { color: rgba(255,255,255,0.18); font-size: .82rem; flex-shrink: 0; }
+.search-no-results {
+    padding: 1.5rem; text-align: center;
+    color: rgba(255,255,255,0.3); font-size: .85rem;
+}
+.search-no-results i { display: block; font-size: 1.6rem; margin-bottom: .4rem; opacity: .4; }
+
+/* كرت المفضلة — صغير */
+.fav-mini-card {
+    display: flex; align-items: center; gap: .85rem;
+    padding: .85rem 1.1rem; border-radius: 16px;
+    background: rgba(244,63,94,0.05);
+    border: 1.5px solid var(--fav-border);
+    cursor: pointer; margin-bottom: .5rem;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .2s;
+    -webkit-tap-highlight-color: transparent;
+}
+.fav-mini-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px var(--fav-glow);
+    border-color: var(--fav-primary);
+}
+.fav-mini-card:active { transform: scale(0.97); }
+.fav-mini-icon {
+    width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+    background: var(--fav-bg); border: 1px solid var(--fav-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: var(--fav-light);
+}
+.fav-mini-text { flex: 1; }
+.fav-mini-title { font-size: .95rem; font-weight: 800; color: rgba(255,255,255,0.88); }
+.fav-mini-sub { font-size: .75rem; color: rgba(255,255,255,0.38); margin-top: .08rem; }
+.fav-mini-arrow { color: rgba(255,255,255,0.2); font-size: .9rem; }
+
+/* ══════════════════════════ HYMNS LIST VIEW ══════════════════════════ */
+#hymns-list-view {
+    display: none;
+    flex-direction: column;
+}
+#hymns-list-view.active { display: flex; }
+
+/* شريط الرجوع */
+.list-topbar {
+    display: flex; align-items: center; gap: .75rem;
+    padding: .65rem 1rem;
+    background: rgba(6,11,24,0.97);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: sticky; top: 56px; z-index: 100; flex-shrink: 0;
+}
+.list-back-btn {
+    width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center;
+    font-size: .95rem; cursor: pointer;
+    transition: background .2s, color .2s;
+}
+.list-back-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+.list-topbar-title {
+    font-size: .95rem; font-weight: 800; flex: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.list-topbar-badge {
+    display: inline-flex; align-items: center; gap: .3rem;
+    border-radius: 14px; padding: .22rem .65rem;
+    font-size: .7rem; font-weight: 700; flex-shrink: 0;
+}
+.conf-hero-icon {
+    width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(251,191,36,0.1));
+    border: 1px solid var(--conf-border);
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.conf-hero-text { flex: 1; }
+.conf-hero-title {
+    font-size: .95rem; font-weight: 900; margin-bottom: .12rem;
+    background: linear-gradient(to left, var(--conf-primary), var(--conf-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.conf-hero-sub { font-size: .7rem; color: rgba(255,255,255,0.38); }
+.conf-hero-badge {
+    display: inline-flex; align-items: center; gap: .28rem;
+    background: var(--conf-bg); border: 1px solid var(--conf-border);
+    border-radius: 12px; padding: .22rem .65rem;
+    font-size: .7rem; color: var(--conf-light); font-weight: 700; flex-shrink: 0;
+}
+
+/* شريط البحث */
+.search-bar-wrap { padding: .7rem 1rem .35rem; }
+.search-bar {
+    display: flex; align-items: center; gap: .55rem;
+    background: rgba(15,27,55,0.65); border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 13px; padding: .58rem .9rem;
+    transition: border-color .2s, box-shadow .2s;
+}
+.search-bar:focus-within {
+    border-color: var(--prayer-border);
+    box-shadow: 0 0 0 3px var(--prayer-glow);
+}
+.search-bar i { color: rgba(255,255,255,0.28); font-size: .9rem; flex-shrink: 0; }
+.search-bar input {
+    flex: 1; background: none; border: none; outline: none;
+    color: var(--text-main); font-family: inherit;
+    font-size: .88rem; direction: rtl;
+}
+.search-bar input::placeholder { color: rgba(255,255,255,0.22); }
+.search-clear-btn {
+    background: none; border: none; padding: .1rem .28rem;
+    color: rgba(255,255,255,0.28); cursor: pointer; font-size: .82rem;
+    display: none; transition: color .2s;
+}
+.search-clear-btn.visible { display: block; }
+.search-clear-btn:hover { color: rgba(255,255,255,0.65); }
+.search-count { font-size: .7rem; color: var(--prayer-light); white-space: nowrap; font-weight: 700; }
+
+/* قائمة الترانيم */
+.hymns-list { padding: .5rem 1rem 6rem; }
+
+/* بطاقة ترنيمة */
+.hymn-card {
+    display: flex; align-items: center; gap: .7rem;
+    border-radius: 14px; padding: .8rem .95rem;
+    margin-bottom: .55rem; cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
+    position: relative; overflow: hidden;
+    animation: cardFadeIn .3s ease both;
+}
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.hymn-card:active { transform: scale(0.98); }
+.hymn-card.hidden { display: none; }
+
+/* بطاقة الصلاة */
+.hymn-card.type-conference {
+    background: rgba(20,16,10,0.7);
+    border: 1.5px solid var(--conf-border);
+}
+.hymn-card.type-conference:hover {
+    border-color: rgba(245,158,11,0.6);
+    box-shadow: 0 4px 20px var(--conf-glow), inset 4px 0 0 var(--conf-primary);
+    transform: translateY(-2px);
+}
+
+.hymn-num {
+    width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 800;
+}
+.type-conference .hymn-num { background: var(--conf-bg); color: var(--conf-light); border: 1px solid var(--conf-border); }
+
+.hymn-icon {
+    width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: .95rem;
+}
+.type-conference .hymn-icon { background: var(--conf-bg); color: var(--conf-light); border: 1px solid var(--conf-border); }
+
+.hymn-card-info { flex: 1; min-width: 0; }
+.hymn-title {
+    font-weight: 700; font-size: .9rem; color: rgba(255,255,255,0.9);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin-bottom: .1rem;
+}
+.hymn-preview {
+    font-size: .72rem; color: rgba(255,255,255,0.32);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.4;
+}
+.hymn-has-audio {
+    font-size: .66rem; color: var(--conf-light); font-weight: 600;
+    display: inline-flex; align-items: center; gap: .22rem;
+}
+
+.hymn-card-actions { display: flex; align-items: center; gap: .28rem; flex-shrink: 0; }
+.hymn-fav-btn {
+    background: none; border: none; padding: .28rem;
+    color: rgba(255,255,255,0.22); font-size: .95rem; cursor: pointer;
+    transition: color .2s, transform .2s;
+}
+.hymn-fav-btn.active { color: var(--fav-primary); }
+.hymn-fav-btn:hover { color: var(--fav-light); }
+.hymn-arrow { color: rgba(255,255,255,0.18); font-size: .85rem; }
+
+/* ══════════════════════════ MODAL ══════════════════════════ */
+.hymn-modal {
+    position: fixed; inset: 0; z-index: 2000;
+    background: var(--modal-bg);
+    display: flex; flex-direction: column;
+    transform: translateY(100%);
+    transition: transform .4s cubic-bezier(0.2,0.85,0.2,1);
+}
+.hymn-modal.open { transform: translateY(0); }
+
+.modal-header {
+    display: flex; align-items: center; gap: .45rem;
+    padding: .8rem 1rem; flex-shrink: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    background: rgba(7,13,28,0.97);
+}
+.modal-close {
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.65); font-size: .88rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, color .2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.16); color: #fff; }
+.modal-center { flex: 1; min-width: 0; text-align: center; }
+.modal-title {
+    font-size: .98rem; font-weight: 800;
+    color: rgba(255,255,255,0.92);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.modal-progress-dots { display: flex; justify-content: center; gap: 4px; margin-top: .22rem; }
+.modal-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255,255,255,0.18); transition: all .22s;
+}
+.modal-dot.active { width: 14px; border-radius: 3px; background: var(--prayer-light); }
+.modal-dot.active.conf { background: var(--conf-light); }
+.modal-nav-btn {
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    color: rgba(255,255,255,0.45); font-size: .88rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, color .2s;
+}
+.modal-nav-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+.modal-nav-btn:disabled { opacity: .22; cursor: not-allowed; }
+
+/* صورة الترنيمة */
+.modal-hymn-img-wrap { flex-shrink: 0; display: none; }
+.modal-hymn-img-wrap.has-img { display: block; }
+.modal-hymn-img {
+    width: 100%; max-height: min(50vw, 240px);
+    object-fit: contain; display: block; background: var(--modal-bg);
+}
+.modal-hymn-img-overlay {
+    position: relative; margin-top: -50px; height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--modal-bg));
+}
+
+/* ضوابط حجم الخط */
+.modal-font-controls {
+    display: flex; justify-content: center; align-items: center; gap: .5rem;
+    padding: .42rem 1rem; flex-shrink: 0;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.modal-ctrl-btn {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09);
+    color: rgba(255,255,255,0.55); font-size: .88rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s; font-family: inherit;
+}
+.modal-ctrl-btn:hover { background: rgba(255,255,255,0.14); }
+.modal-font-label { font-size: .68rem; color: rgba(255,255,255,0.28); min-width: 46px; text-align: center; }
+
+/* مشغّل الصوت */
+.modal-audio-player {
+    flex-shrink: 0; display: none;
+    background: rgba(255,255,255,0.025);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: .65rem 1rem;
+}
+.modal-audio-player.has-audio { display: block; }
+.audio-progress-wrap { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+.audio-time { font-size: .66rem; color: rgba(255,255,255,0.32); min-width: 32px; font-variant-numeric: tabular-nums; }
+.audio-progress {
+    flex: 1; height: 4px; border-radius: 2px;
+    background: rgba(255,255,255,0.1); cursor: pointer;
+    -webkit-appearance: none; appearance: none; outline: none; border: none;
+}
+.audio-progress::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 13px; height: 13px;
+    border-radius: 50%; background: var(--conf-light); cursor: pointer;
+    box-shadow: 0 0 8px var(--conf-glow);
+}
+.audio-btns { display: flex; justify-content: center; align-items: center; gap: .85rem; }
+.audio-btn {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.5); font-size: 1.2rem; padding: .32rem;
+    transition: color .2s, transform .15s;
+    display: flex; align-items: center; justify-content: center;
+}
+.audio-btn:hover { color: #fff; }
+.audio-btn:active { transform: scale(0.9); }
+.audio-btn-play {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--conf-primary), #d97706);
+    color: #0d1527; font-size: 1.35rem;
+    box-shadow: 0 4px 16px var(--conf-glow);
+}
+.audio-btn-play:hover { transform: scale(1.07); color: #0d1527; }
+.audio-btn-loop.looping { color: var(--conf-light) !important; }
+
+/* محتوى الترنيمة */
+.modal-body {
+    flex: 1; overflow-y: auto; padding: 1.2rem 1.1rem 1rem;
+    display: flex; flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+}
+.modal-lyrics {
+    font-size: 1rem; line-height: 2.5; white-space: pre-wrap;
+    direction: rtl; text-align: center;
+    color: rgba(255,255,255,0.82); letter-spacing: .3px;
+    margin-bottom: 1.2rem; flex: 1;
+}
+
+/* بطاقة م. أدروسيس */
+.modal-conference-card {
+    display: none; background: var(--conf-bg); border: 1px solid var(--conf-border);
+    border-radius: 14px; padding: .85rem 1rem; text-align: center;
+    margin-bottom: .5rem; flex-shrink: 0;
+}
+.modal-conference-card.visible { display: block; }
+.conf-card-icon { font-size: 1.5rem; margin-bottom: .3rem; }
+.conf-card-quote { font-size: .82rem; color: rgba(255,255,255,0.68); font-style: italic; line-height: 1.6; margin: 0 0 .35rem; }
+.conf-card-name { font-size: .72rem; color: var(--conf-light); font-weight: 700; letter-spacing: .5px; margin: 0 0 .65rem; }
+.modal-conf-btn {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: linear-gradient(135deg, var(--conf-primary), #d97706);
+    color: #0d1527 !important; text-decoration: none;
+    border-radius: 11px; padding: .48rem 1rem;
+    font-weight: 700; font-size: .82rem;
+    box-shadow: 0 3px 10px var(--conf-glow);
+}
+
+/* حالات فارغة */
+.empty-state { text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.3); }
+.empty-state i { font-size: 2rem; margin-bottom: .65rem; display: block; opacity: .3; }
+.empty-state p { font-size: .84rem; }
+.no-results { text-align: center; padding: 2rem 1rem; color: rgba(255,255,255,0.3); display: none; }
+.no-results i { font-size: 1.8rem; display: block; margin-bottom: .45rem; opacity: .38; }
+
+/* التابات القديمة — مخفية، الكود يعمل من الداخل */
+.hymns-tabs { display: none; }
+.hymn-panel { display: none; }
+.hymn-panel.active { display: block; }
+
+/* Responsive */
+@media (min-width: 640px) {
+    #hymns-home { max-width: 580px; margin: 0 auto; }
+    #hymns-list-view { max-width: 640px; margin: 0 auto; }
+    .hymns-list { max-width: 640px; margin: 0 auto; }
+    .conference-hero { max-width: 640px; margin: .8rem auto .5rem; }
+    .search-bar-wrap { max-width: 640px; margin: 0 auto; }
+}
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-layer bg-layer-ambient"></div>
+<div id="app-navbar-slot"></div>
+
+<!-- Header الصفحة -->
+<header class="hymns-page-header">
+    <div class="hymns-page-title">🎵 الألحان</div>
+    <div class="hymns-page-sub">اختر القسم للبدء</div>
+</header>
+
+<!-- ضوابط القراءة -->
+<div class="reading-controls">
+    <button class="ctrl-btn" id="font-dec"><i class="bi bi-dash"></i>خط</button>
+    <button class="ctrl-btn" id="font-inc"><i class="bi bi-plus"></i>خط</button>
+    <button class="ctrl-btn" id="reading-toggle" data-reading-toggle aria-pressed="false">
+        <i class="bi bi-moon-stars"></i>القراءة
+    </button>
+</div>
+
+<!-- ══════ صفحة الوصول — Hymns Home ══════ -->
+<div id="hymns-home">
+
+    <!-- شريط البحث العالمي -->
+    <div class="global-search-wrap" id="global-search-wrap">
+        <div class="global-search-bar">
+            <i class="bi bi-search global-search-icon"></i>
+            <input type="text" class="global-search-input" id="global-search-input"
+                   placeholder="ابحث في كل الألحان..."
+                   autocomplete="off" spellcheck="false" autocorrect="off">
+            <button class="global-search-clear" id="global-search-clear" title="مسح">
+                <i class="bi bi-x-circle-fill"></i>
+            </button>
+        </div>
+        <div class="global-search-results" id="global-search-results" role="listbox"></div>
+    </div>
+
+    <!-- كرت الألحان -->
+    <div class="section-card conference-card" id="home-conference-card" role="button" tabindex="0">
+        <!-- صورة م. أدروسيس كخلفية -->
+        <picture>
+            <source srcset="../assets/img/conference_hymns_cover.webp" type="image/webp">
+            <img class="section-card-bg conf-bg-img"
+                 src="../assets/img/conference_hymns_cover.png"
+                 alt="الألحان" loading="lazy">
+        </picture>
+        <div class="conf-floating-notes" aria-hidden="true">
+            <div class="conf-note">♪</div>
+            <div class="conf-note">♫</div>
+            <div class="conf-note">🎵</div>
+        </div>
+        <div class="section-card-overlay"></div>
+        <div class="section-card-tag">🎤</div>
+        <div class="section-card-badge" style="border-color:rgba(245,158,11,0.3); color:#fbbf24">
+            <i class="bi bi-soundwave"></i>
+            <span id="home-conf-count">٥</span> ألحان
+        </div>
+        <div class="section-card-content">
+            <div class="section-card-title">الألحان</div>
+            <div class="section-card-sub">
+                <span>ألحان واستماع</span>
+                <span style="opacity:.4">•</span>
+                <span style="color:#fbbf24"><i class="bi bi-soundwave"></i> مع استماع</span>
+            </div>
+        </div>
+        <div class="section-card-arrow" style="background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.28); color:#fbbf24">
+            <i class="bi bi-chevron-left"></i>
+        </div>
+    </div>
+
+    <!-- كرت المفضلة -->
+    <div class="fav-mini-card" id="home-fav-card" role="button" tabindex="0">
+        <div class="fav-mini-icon"><i class="bi bi-heart-fill"></i></div>
+        <div class="fav-mini-text">
+            <div class="fav-mini-title">مفضلتي</div>
+            <div class="fav-mini-sub" id="home-fav-sub">لا توجد ألحان مفضلة بعد</div>
+        </div>
+        <div class="fav-mini-arrow"><i class="bi bi-chevron-left"></i></div>
+    </div>
+
+</div>
+
+<!-- ══════ قائمة الألحان — List View ══════ -->
+<div id="hymns-list-view">
+
+    <!-- شريط الرجوع + العنوان -->
+    <div class="list-topbar" id="list-topbar">
+        <button class="list-back-btn" id="list-back-btn" title="رجوع">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+        <div class="list-topbar-title" id="list-topbar-title">الألحان</div>
+        <div class="list-topbar-badge" id="list-topbar-badge">
+            <i class="bi bi-music-note-beamed"></i>
+            <span id="list-topbar-count">٥</span>
+        </div>
+    </div>
+
+    <!-- ══ تاب الألحان ══ -->
+    <div id="list-conference" class="list-section" style="display:none">
+        <div class="conference-hero">
+            <div class="conf-hero-icon">🎤</div>
+            <div class="conf-hero-text">
+                <div class="conf-hero-title">الألحان</div>
+                <div class="conf-hero-sub">ألحان جديدة — مؤتمر الشباب 2026</div>
+            </div>
+            <div class="conf-hero-badge">
+                <i class="bi bi-music-note-beamed"></i>
+                <span id="conference-hymns-count">٥</span>
+            </div>
+        </div>
+        <div class="hymns-list" id="panel-conference-list"></div>
+    </div>
+
+    <!-- ══ تاب المفضلة ══ -->
+    <div id="list-favorites" class="list-section" style="display:none">
+        <div class="hymns-list" id="panel-favorites-list"></div>
+    </div>
+
+</div>
+
+<div id="app-bottomnav-slot"></div>
+
+    <!-- ══════════════════════════════════════
+         المودال — صفحة القراءة
+         ══════════════════════════════════════ -->
+    <div class="hymn-modal" id="hymn-modal" role="dialog" aria-modal="true">
+
+        <!-- رأس المودال -->
+        <div class="modal-header">
+            <button class="modal-close" id="modal-close" title="إغلاق">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <div class="modal-center">
+                <div class="modal-title" id="modal-hymn-title">عنوان الترنيمة</div>
+                <div class="modal-progress-dots" id="modal-dots"></div>
+            </div>
+
+            <button class="modal-nav-btn" id="modal-prev" title="السابقة">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+            <button class="modal-nav-btn" id="modal-next" title="التالية">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+        </div>
+
+        <!-- صورة الترنيمة -->
+        <div class="modal-hymn-img-wrap" id="modal-img-wrap">
+            <img class="modal-hymn-img" id="modal-hymn-img" src="" alt="صورة الترنيمة">
+            <div class="modal-hymn-img-overlay"></div>
+        </div>
+
+        <!-- مشغّل الصوت -->
+        <div class="modal-audio-player" id="modal-audio-player">
+            <div class="audio-progress-wrap">
+                <span class="audio-time" id="audio-current">0:00</span>
+                <input type="range" class="audio-progress" id="audio-progress"
+                       min="0" max="100" value="0" step="0.1">
+                <span class="audio-time" id="audio-duration">0:00</span>
+            </div>
+            <div class="audio-btns">
+                <button class="audio-btn" id="audio-replay" title="إعادة من البداية">
+                    <i class="bi bi-skip-start-fill"></i>
+                </button>
+                <button class="audio-btn" id="audio-back15" title="15 ثانية للخلف">
+                    <i class="bi bi-skip-backward-fill"></i>
+                </button>
+                <button class="audio-btn audio-btn-play" id="audio-play" title="تشغيل / إيقاف">
+                    <i class="bi bi-play-fill" id="audio-play-icon"></i>
+                </button>
+                <button class="audio-btn" id="audio-fwd15" title="15 ثانية للأمام">
+                    <i class="bi bi-skip-forward-fill"></i>
+                </button>
+                <button class="audio-btn audio-btn-loop" id="audio-loop" title="تكرار" style="font-size:1rem">
+                    <i class="bi bi-arrow-repeat"></i>
+                </button>
+            </div>
+            <audio id="modal-audio" preload="none"></audio>
+        </div>
+
+        <!-- ضوابط حجم الخط -->
+        <div class="modal-font-controls">
+            <button class="modal-ctrl-btn" id="modal-font-dec" title="تصغير الخط">أ−</button>
+            <span class="modal-font-label" id="modal-font-label">حجم الخط</span>
+            <button class="modal-ctrl-btn" id="modal-font-inc" title="تكبير الخط">أ+</button>
+        </div>
+
+        <!-- محتوى الترنيمة -->
+        <div class="modal-body" id="modal-body">
+            <div class="modal-lyrics" id="modal-hymn-lyrics"></div>
+
+            <!-- بطاقة م. أدروسيس -->
+            <div class="modal-conference-card" id="modal-conference-card">
+                <div class="conf-card-icon">🎵</div>
+                <p class="conf-card-quote">
+                    "كلمات تلمس القلب قبل الأذن...<br>
+                    شارك رأيك وأخبرنا بالترنيمة اللي وصلتلك!"
+                </p>
+                <p class="conf-card-name">م. أدروسيس</p>
+                <a href="../pages/feedback.html" class="modal-conf-btn">
+                    <i class="bi bi-chat-heart-fill"></i> شارك رأيك
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/core.js?v=2026_v9" defer></script>
+    <script src="../assets/js/hymns-data.js?v=2026_melodies" defer></script>
+    <script src="../assets/js/hymns.js?v=2026_melodies_v2" defer></script>
+    <!-- كود التهيئة نُقل إلى hymns.js للتوافق مع defer -->
+    <script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مسابقة دينية أرثوذكسية - مؤتمر الشباب</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+
+        :root {
+            --bg-deepest: #070d19;
+            --bg-deep: #0b1121;
+            --bg-dark: #0f172a;
+            --bg-light: #1e293b;
+            --bg-card: rgba(15, 23, 42, 0.7);
+            --primary: #06b6d4;
+            --primary-light: #22d3ee;
+            --primary-dark: #0891b2;
+            --primary-glow: rgba(6, 182, 212, 0.5);
+            --primary-border: rgba(6, 182, 212, 0.3);
+            --emerald: #10b981;
+            --emerald-light: #34d399;
+            --emerald-glow: rgba(16, 185, 129, 0.5);
+            --violet: #8b5cf6;
+            --violet-light: #a78bfa;
+            --violet-glow: rgba(139, 92, 246, 0.5);
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --gold-glow: rgba(245, 158, 11, 0.5);
+            --rose: #f43f5e;
+            --rose-light: #fb7185;
+            --rose-glow: rgba(244, 63, 94, 0.4);
+            --sky: #0ea5e9;
+            --text-main: #f1f5f9;
+            --text-sec: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        /* ================= Navbar ================= */
+        nav {
+            background: linear-gradient(135deg, rgba(11, 17, 33, 0.95) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(7, 13, 25, 0.95) 100%);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border-bottom: 1px solid var(--primary-border);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 700px; margin: 0 auto; }
+        nav .nav-back-link {
+            display: flex; align-items: center; gap: 6px;
+            color: var(--primary-light); text-decoration: none;
+            font-size: 0.9rem; font-weight: 700;
+            padding: 7px 14px; border-radius: 50px;
+            background: rgba(6, 182, 212, 0.1); border: 1px solid var(--primary-border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        nav .nav-back-link:hover { background: rgba(6, 182, 212, 0.2); border-color: rgba(6, 182, 212, 0.5); color: var(--text-main); transform: translateY(-1px); }
+        nav .nav-back-link:active { transform: scale(0.95); }
+        nav .nav-title { font-weight: 900; font-size: 1.1rem; background: linear-gradient(135deg, var(--primary-light), var(--gold-light), var(--emerald), var(--primary)); background-size: 250% 250%; animation: navGradientShift 6s ease infinite; -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
+        nav .nav-subtitle { font-size: 0.65rem; color: var(--text-muted); text-align: center; letter-spacing: 1px; margin-top: 2px; }
+        nav .spacer { width: 70px; }
+        nav .nav-brand {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; justify-content: center;
+            transition: opacity 0.25s ease, transform 0.2s ease;
+        }
+        nav .nav-brand:hover { opacity: 0.85; }
+        nav .nav-brand:active { transform: scale(0.96); }
+        nav .nav-brand-logo {
+            width: 32px; height: 32px; flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 1px solid var(--primary-border);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.15);
+        }
+        nav .nav-brand-logo i { font-size: 1rem; color: var(--primary); }
+        @keyframes navGradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: var(--bg-deepest);
+            color: var(--text-main);
+            min-height: 100vh; min-height: 100dvh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 70% 50% at 50% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                linear-gradient(180deg, #070d19 0%, #0b1121 30%, #0f172a 60%, #0b1121 100%);
+            z-index: 0;
+            animation: bgShift 12s ease-in-out infinite alternate;
+        }
+        @keyframes bgShift {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(8deg) brightness(1.05); }
+            100% { filter: hue-rotate(-5deg) brightness(1); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body > * { position: relative; z-index: 1; }
+
+        /* =============================== */
+        /*        شاشة الإعدادات          */
+        /* =============================== */
+        .setup-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; min-height: 100dvh;
+            padding: 20px 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .setup-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .setup-screen.hidden { display: none; }
+
+        .setup-logo {
+            font-size: 4rem;
+            margin-bottom: 8px;
+            animation: bounceLogo 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
+        }
+        @keyframes bounceLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .setup-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--primary-light), var(--emerald-light), var(--violet-light), var(--gold-light));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGrad 4s ease-in-out infinite;
+        }
+        @keyframes titleGrad {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .setup-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+            margin-bottom: 25px;
+        }
+
+        .setup-form {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .setting-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 18px;
+            padding: 18px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        .setting-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--primary-light);
+        }
+        .setting-label i {
+            font-size: 1.1rem;
+        }
+
+        /* Number selector buttons */
+        .num-selector {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .num-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(30, 41, 59, 0.5);
+            color: var(--text-sec);
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Cairo', sans-serif;
+        }
+        .num-btn:hover {
+            border-color: var(--primary-border);
+            background: rgba(6, 182, 212, 0.08);
+        }
+        .num-btn.selected {
+            border-color: var(--primary-light);
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--primary-light);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+            transform: scale(1.08);
+        }
+
+        /* Timer options */
+        .timer-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .timer-btn {
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            background: rgba(30, 41, 59, 0.5);
+            color: var(--text-sec);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Cairo', sans-serif;
+        }
+        .timer-btn:hover {
+            border-color: var(--gold-glow);
+            background: rgba(245, 158, 11, 0.08);
+        }
+        .timer-btn.selected {
+            border-color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold-light);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Player names container */
+        .players-container {
+            max-height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 2px;
+        }
+        .players-container::-webkit-scrollbar { width: 4px; }
+        .players-container::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 4px; }
+
+        .player-name-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .player-color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px currentColor;
+        }
+        .player-name-input {
+            flex: 1;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px 14px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+        }
+        .player-name-input::placeholder { color: var(--text-muted); font-weight: 400; }
+        .player-name-input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .start-game-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(135deg, #0f766e, var(--primary), var(--violet));
+            background-size: 200% 200%;
+            color: white;
+            box-shadow: 0 6px 30px rgba(6, 182, 212, 0.3), 0 2px 8px rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Cairo', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .start-game-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(6, 182, 212, 0.4), 0 4px 16px rgba(139, 92, 246, 0.3);
+        }
+        .start-game-btn:active { transform: translateY(-1px) scale(0.98); }
+
+        .setup-back-link {
+            margin-top: 15px;
+            color: var(--text-sec);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .setup-back-link:hover { color: var(--primary-light); }
+
+        /* =============================== */
+        /*      شاشة انتقال اللاعب        */
+        /* =============================== */
+        .transition-screen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.95);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .transition-screen.show { display: flex; }
+        .transition-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: transBounce 1s ease-in-out infinite;
+        }
+        @keyframes transBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.1); }
+        }
+        .transition-player-name {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px currentColor;
+        }
+        .transition-round-info {
+            font-size: 1rem;
+            color: var(--text-sec);
+            margin-bottom: 25px;
+        }
+        .transition-ready-btn {
+            padding: 14px 50px;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            box-shadow: 0 6px 25px var(--primary-glow);
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .transition-ready-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 35px var(--primary-glow);
+        }
+
+        /* =============================== */
+        /*         شاشة اللعبة            */
+        /* =============================== */
+        .game-screen {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh; min-height: 100dvh;
+        }
+        .game-screen.active { display: flex; }
+
+        /* Top Bar */
+        .game-topbar {
+            background: rgba(10, 14, 28, 0.85);
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .topbar-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .topbar-player-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 0 8px currentColor;
+        }
+        .topbar-player-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-sec);
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .topbar-score {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--gold-light);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+        .topbar-center {
+            text-align: center;
+        }
+        .topbar-round {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            letter-spacing: 0.5px;
+        }
+        .topbar-question-count {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+        .topbar-back {
+            color: var(--text-sec);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            padding: 4px;
+        }
+        .topbar-back:hover { color: var(--primary-light); }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 12px 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .progress-label {
+            font-size: 0.75rem;
+            color: var(--primary-light);
+            white-space: nowrap;
+            font-weight: 700;
+        }
+        .progress-bar-outer {
+            flex: 1;
+            height: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(6, 182, 212, 0.15);
+        }
+        .progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--emerald), var(--violet-light));
+            background-size: 200% 100%;
+            border-radius: 12px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+            box-shadow: 0 0 10px var(--primary-glow);
+            animation: progressShimmer 2s linear infinite;
+        }
+        @keyframes progressShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Timer */
+        .timer-bar {
+            margin: 10px 15px;
+            text-align: center;
+        }
+        .timer-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(6, 182, 212, 0.05);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+        }
+        .timer-circle::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary), transparent 60%);
+            opacity: 0.15;
+            z-index: -1;
+            animation: timerSpin 4s linear infinite;
+        }
+        @keyframes timerSpin { to { transform: rotate(360deg); } }
+        .timer-circle.warning {
+            border-color: var(--gold);
+            color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.08);
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+        .timer-circle.danger {
+            border-color: var(--rose);
+            color: var(--rose-light);
+            background: rgba(244, 63, 94, 0.08);
+            box-shadow: 0 0 30px var(--rose-glow);
+            animation: pulseDanger 0.5s ease-in-out infinite;
+        }
+        @keyframes pulseDanger {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px var(--rose-glow); }
+            50% { transform: scale(1.06); box-shadow: 0 0 40px var(--rose-glow); }
+        }
+        .timer-no-timer {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 12px;
+        }
+
+        /* Question Area */
+        .question-area {
+            max-width: 550px;
+            margin: 12px auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+        .question-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.5));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 24px 20px;
+            margin-bottom: 14px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: cardEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--emerald), var(--violet-light), var(--primary));
+            background-size: 300% 100%;
+            animation: topBorderFlow 3s linear infinite;
+        }
+        @keyframes topBorderFlow {
+            0% { background-position: 0% 0; }
+            100% { background-position: 300% 0; }
+        }
+        @keyframes cardEnter {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .question-number {
+            font-size: 0.8rem;
+            color: var(--primary-light);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 800;
+            line-height: 1.9;
+            color: var(--text-main);
+        }
+
+        /* Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .option-btn {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid var(--primary-border);
+            border-radius: 16px;
+            padding: 14px 12px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+            animation: optionEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+        }
+        .option-btn:nth-child(1) { animation-delay: 0.05s; border-color: rgba(6, 182, 212, 0.3); }
+        .option-btn:nth-child(2) { animation-delay: 0.1s; border-color: rgba(139, 92, 246, 0.3); }
+        .option-btn:nth-child(3) { animation-delay: 0.15s; border-color: rgba(245, 158, 11, 0.3); }
+        .option-btn:nth-child(4) { animation-delay: 0.2s; border-color: rgba(244, 63, 94, 0.3); }
+        @keyframes optionEnter {
+            0% { opacity: 0; transform: translateY(12px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .option-btn:hover:not(.disabled) {
+            transform: translateY(-3px) scale(1.02);
+        }
+        .option-btn:nth-child(1):hover:not(.disabled) {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        .option-btn:nth-child(2):hover:not(.disabled) {
+            border-color: var(--violet-light);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .option-btn:nth-child(3):hover:not(.disabled) {
+            border-color: var(--gold-light);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+        .option-btn:nth-child(4):hover:not(.disabled) {
+            border-color: var(--rose-light);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+        }
+        .option-btn.correct {
+            border-color: var(--emerald) !important;
+            background: rgba(16, 185, 129, 0.15) !important;
+            box-shadow: 0 0 25px var(--emerald-glow) !important;
+            color: var(--emerald-light) !important;
+            transform: scale(1.03);
+        }
+        .option-btn.wrong {
+            border-color: var(--rose) !important;
+            background: rgba(244, 63, 94, 0.15) !important;
+            box-shadow: 0 0 25px var(--rose-glow) !important;
+            color: var(--rose-light) !important;
+            animation: shakeBtn 0.5s ease-in-out;
+        }
+        @keyframes shakeBtn {
+            0%, 100% { transform: translateX(0); }
+            15% { transform: translateX(-8px) rotate(-1deg); }
+            30% { transform: translateX(7px) rotate(1deg); }
+            45% { transform: translateX(-5px); }
+            60% { transform: translateX(4px); }
+            75% { transform: translateX(-2px); }
+        }
+        .option-btn.disabled {
+            cursor: default;
+            opacity: 0.5;
+            transform: scale(0.98);
+        }
+
+        /* Points popup */
+        .points-popup {
+            position: fixed;
+            font-size: 2rem;
+            font-weight: 900;
+            pointer-events: none;
+            z-index: 150;
+            animation: pointsFloat 1.4s ease-out forwards;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+            filter: drop-shadow(0 2px 8px rgba(16, 185, 129, 0.4));
+        }
+        @keyframes pointsFloat {
+            0% { opacity: 1; transform: translateY(0) scale(0.8); }
+            30% { transform: translateY(-20px) scale(1.3); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1); }
+        }
+
+        /* =============================== */
+        /*      شاشة نتائج الجولة         */
+        /* =============================== */
+        .round-results-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.92);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .round-results-overlay.show { display: flex; }
+        .round-results-box {
+            text-align: center;
+            padding: 35px 25px;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 2px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.2), 0 24px 48px rgba(0, 0, 0, 0.4);
+            max-width: 450px;
+            width: 100%;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .round-results-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--violet-light), var(--primary), var(--emerald), var(--gold));
+            background-size: 300% 100%;
+            animation: topBorderFlow 3s linear infinite;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.4) translateY(30px); opacity: 0; }
+            60% { transform: scale(1.05) translateY(-5px); opacity: 1; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .round-results-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--gold-light), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .round-results-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            margin-bottom: 18px;
+        }
+
+        /* Scoreboard */
+        .scoreboard {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .scoreboard-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s;
+        }
+        .scoreboard-row.winner-row {
+            background: rgba(245, 158, 11, 0.12);
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+        }
+        .scoreboard-rank {
+            font-size: 1.2rem;
+            font-weight: 900;
+            width: 30px;
+            text-align: center;
+        }
+        .scoreboard-rank.rank-1 { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .scoreboard-rank.rank-2 { color: #c0c0c0; }
+        .scoreboard-rank.rank-3 { color: #cd7f32; }
+        .scoreboard-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 6px currentColor;
+        }
+        .scoreboard-name {
+            flex: 1;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .scoreboard-correct {
+            font-size: 0.75rem;
+            color: var(--emerald-light);
+            font-weight: 600;
+        }
+        .scoreboard-pts {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--gold-light);
+            text-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .round-results-btn {
+            padding: 14px 40px;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--violet));
+            background-size: 200% 100%;
+            color: white;
+            box-shadow: 0 6px 20px var(--primary-glow);
+            transition: all 0.35s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .round-results-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        /* =============================== */
+        /*     شاشة النتيجة النهائية       */
+        /* =============================== */
+        .final-results-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.94);
+            z-index: 250;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .final-results-overlay.show { display: flex; }
+        .final-results-box {
+            text-align: center;
+            padding: 35px 25px;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 2px solid rgba(245, 158, 11, 0.5);
+            box-shadow: 0 0 60px rgba(245, 158, 11, 0.25), 0 24px 48px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 100%;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .final-results-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--violet-light), var(--primary), var(--emerald), var(--gold));
+            background-size: 300% 100%;
+            animation: topBorderFlow 3s linear infinite;
+        }
+        .final-crown { font-size: 4rem; margin-bottom: 8px; animation: transBounce 1s ease-in-out infinite; }
+        .final-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--gold-light), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .final-winner-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        .final-winner-score {
+            font-size: 1rem;
+            color: var(--gold-light);
+            margin-bottom: 18px;
+        }
+        .final-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .final-btn {
+            padding: 12px 24px;
+            border-radius: 14px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s;
+        }
+        .final-btn-primary {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        .final-btn-primary:hover { transform: translateY(-2px); }
+        .final-btn-secondary {
+            background: rgba(30, 41, 59, 0.6);
+            color: var(--text-sec);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .final-btn-secondary:hover { background: rgba(51, 65, 85, 0.6); color: var(--text-main); }
+        .final-btn-share {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        .final-btn-share:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(14, 165, 233, 0.5); }
+        .share-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 6px 25px rgba(14, 165, 233, 0.4);
+            z-index: 500;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .share-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 300;
+            overflow: hidden;
+        }
+        @keyframes confettiFall {
+            0% { top: -10%; opacity: 1; transform: rotate(0deg) scale(1); }
+            100% { top: 110%; opacity: 0; transform: rotate(720deg) scale(0.5); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 0;
+            animation: floatParticle 10s infinite ease-in-out;
+        }
+        .particle:nth-child(odd) { background: rgba(6, 182, 212, 0.4); }
+        .particle:nth-child(even) { background: rgba(139, 92, 246, 0.4); }
+        .particle:nth-child(3n) { background: rgba(245, 158, 11, 0.3); }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.5; }
+            50% { transform: translateY(-60px) translateX(30px); opacity: 0.4; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(0) translateX(0); opacity: 0; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deepest); }
+        ::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 4px; }
+
+        /* =============================== */
+        /*       شاشة مشاركة البطاقة       */
+        /* =============================== */
+        .share-card-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.95);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .share-card-overlay.show { display: flex; }
+        .share-card-preview {
+            max-width: 420px;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(6, 182, 212, 0.2), 0 24px 48px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            margin-bottom: 20px;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .share-card-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .share-card-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 420px;
+            width: 100%;
+        }
+        .share-card-btn {
+            padding: 12px 22px;
+            border-radius: 14px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .share-card-btn i { font-size: 1.1rem; }
+        .share-card-btn-share {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        .share-card-btn-share:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(14, 165, 233, 0.5); }
+        .share-card-btn-download {
+            background: linear-gradient(135deg, var(--emerald), #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        .share-card-btn-download:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5); }
+        .share-card-btn-copy {
+            background: rgba(30, 41, 59, 0.6);
+            color: var(--text-sec);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .share-card-btn-copy:hover { background: rgba(51, 65, 85, 0.6); color: var(--text-main); }
+        .share-card-btn-close {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--rose-light);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+        .share-card-btn-close:hover { background: rgba(244, 63, 94, 0.25); }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/identity.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-inner">
+            <a href="games.html" class="nav-back-link"><i class="bi bi-arrow-right"></i> رجوع</a>
+            <a href="home.html" class="nav-brand">
+                <div class="nav-brand-logo"><i class="bi bi-bus-front-fill"></i></div>
+                <div class="nav-brand-text">
+                    <div class="nav-title">مسابقة أرثوذكسية</div>
+                    <div class="nav-subtitle">مؤتمر الشباب</div>
+                </div>
+            </a>
+            <div class="spacer"></div>
+        </div>
+    </nav>
+
+
+    <!-- =============================== -->
+    <!--        شاشة الإعدادات          -->
+    <!-- =============================== -->
+    <div class="setup-screen" id="setupScreen">
+        <div class="setup-logo">☦️</div>
+        <div class="setup-title">مسابقة أرثوذكسية</div>
+        <div class="setup-subtitle">اختبر معلوماتك الدينية! 📖</div>
+
+        <div class="setup-form">
+            <!-- عدد اللاعبين -->
+            <div class="setting-card">
+                <div class="setting-label"><i class="bi bi-people-fill"></i> عدد اللاعبين</div>
+                <div class="num-selector" id="playerCountSelector"></div>
+            </div>
+
+            <!-- أسماء اللاعبين -->
+            <div class="setting-card">
+                <div class="setting-label"><i class="bi bi-person-badge"></i> أسماء اللاعبين</div>
+                <div class="players-container" id="playersContainer"></div>
+            </div>
+
+            <!-- عدد الجولات -->
+            <div class="setting-card">
+                <div class="setting-label"><i class="bi bi-arrow-repeat"></i> عدد الجولات</div>
+                <div class="num-selector" id="roundCountSelector"></div>
+            </div>
+
+            <!-- التايمر -->
+            <div class="setting-card">
+                <div class="setting-label"><i class="bi bi-clock"></i> وقت الإجابة</div>
+                <div class="timer-options" id="timerSelector"></div>
+            </div>
+
+            <button class="start-game-btn" id="startGameBtn">يلا نلعب! 🎮</button>
+            <a href="games.html" class="setup-back-link"><i class="bi bi-arrow-right"></i> رجوع للألعاب</a>
+        </div>
+    </div>
+
+    <!-- =============================== -->
+    <!--      شاشة انتقال اللاعب        -->
+    <!-- =============================== -->
+    <div class="transition-screen" id="transitionScreen">
+        <div class="transition-icon" id="transitionIcon">🙋</div>
+        <div class="transition-player-name" id="transitionPlayerName">اللاعب</div>
+        <div class="transition-round-info" id="transitionRoundInfo">الجولة 1</div>
+        <button class="transition-ready-btn" id="transitionReadyBtn">جاهز! 👊</button>
+    </div>
+
+    <!-- =============================== -->
+    <!--         شاشة اللعبة            -->
+    <!-- =============================== -->
+    <div class="game-screen" id="gameScreen">
+        <!-- Top Bar -->
+        <div class="game-topbar">
+            <div class="topbar-section">
+                <a href="games.html" class="topbar-back"><i class="bi bi-arrow-right"></i></a>
+                <div class="topbar-player-dot" id="topbarDot"></div>
+                <div>
+                    <div class="topbar-player-name" id="topbarPlayerName">اللاعب</div>
+                    <div class="topbar-score" id="topbarScore">0</div>
+                </div>
+            </div>
+            <div class="topbar-center">
+                <div class="topbar-round" id="topbarRound">الجولة 1 / 3</div>
+                <div class="topbar-question-count" id="topbarQCount">السؤال 1 / 10</div>
+            </div>
+            <div class="topbar-section" style="visibility:hidden;">
+                <div style="width:12px;height:12px;border-radius:50%;"></div>
+                <div><div style="height:12px;"></div><div style="height:16px;"></div></div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <span class="progress-label" id="progressLabel">1 / 10</span>
+            <div class="progress-bar-outer">
+                <div class="progress-bar-inner" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="timer-bar" id="timerBar"></div>
+
+        <!-- Question Area -->
+        <div class="question-area">
+            <div class="question-card" id="questionCard">
+                <div class="question-number" id="questionNumber">السؤال 1 من 10</div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+            <div class="options-grid" id="optionsGrid"></div>
+        </div>
+    </div>
+
+    <!-- =============================== -->
+    <!--      شاشة نتائج الجولة         -->
+    <!-- =============================== -->
+    <div class="round-results-overlay" id="roundResultsOverlay">
+        <div class="round-results-box">
+            <div class="round-results-title" id="roundResultsTitle">نتيجة الجولة</div>
+            <div class="round-results-subtitle" id="roundResultsSubtitle"></div>
+            <div class="scoreboard" id="scoreboard"></div>
+            <button class="round-results-btn" id="roundResultsBtn">الجولة الجاية →</button>
+        </div>
+    </div>
+
+    <!-- =============================== -->
+    <!--     شاشة النتيجة النهائية       -->
+    <!-- =============================== -->
+    <div class="final-results-overlay" id="finalResultsOverlay">
+        <div class="final-results-box" id="finalResultsBox">
+            <div class="final-crown" id="finalCrown">👑</div>
+            <div class="final-title" id="finalTitle">الفائز!</div>
+            <div class="final-winner-name" id="finalWinnerName"></div>
+            <div class="final-winner-score" id="finalWinnerScore"></div>
+            <div class="scoreboard" id="finalScoreboard"></div>
+            <div class="final-btns">
+                <button class="final-btn final-btn-primary" id="btnPlayAgain">العب تاني 🔄</button>
+                <button class="final-btn final-btn-share" id="btnShareResult" onclick="shareResult()"><i class="bi bi-share-fill"></i> شارك النتيجة</button>
+                <a href="games.html" class="final-btn final-btn-secondary" style="text-decoration:none;">
+                    <i class="bi bi-house"></i> الألعاب
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- Background Particles -->
+    <div id="particles"></div>
+
+    <script>
+    /* ==========================================================
+     *  مسابقة دينية أرثوذكسية - إعادة بناء كاملة
+     *  المميزات:
+     *  - 2 إلى 10 لاعبين
+     *  - أسئلة دينية مسيحية متوسطة الصعوبة
+     *  - اختيار عدد الجولات (1-10)
+     *  - اختيار وقت الإجابة (تايمر)
+     *  - كل جولة = سؤال واحد لكل لاعب
+     *  - الأسئلة بتتغير في كل مرة ومفيش تكرار أثناء اللعب
+     * ========================================================== */
+
+    (function() {
+        'use strict';
+
+        // ===== ألوان اللاعبين =====
+        const PLAYER_COLORS = [
+            '#22d3ee', // سماوي
+            '#a78bfa', // بنفسجي
+            '#fbbf24', // ذهبي
+            '#fb7185', // وردي
+            '#34d399', // أخضر
+            '#f97316', // برتقالي
+            '#38bdf8', // أزرق
+            '#e879f9', // فوشيا
+            '#4ade80', // ليموني
+            '#f43f5e'  // أحمر
+        ];
+
+        // ===== بنك أسئلة مؤتمر الشباب 2026 =====
+        // أسئلة أسفار + أسئلة عامة + إيموجي + أمثال شعبية + من أنا
+const ALL_QUESTIONS = [
+            { q: "سفر من أسفار موسى الخمسة يتكون من خمس حروف بها آخر حرف (ن)؟", options: ["عدد", "لاويين", "تكوين", "خروج"], answer: 2 },
+            { q: "سفر من أسفار البشائر يوجد بها حرف (و)؟", options: ["لوقا", "يوحنا", "متى", "مرقس"], answer: 0 },
+            { q: "سفر من أسفار التعليمية تتكون من أربع حروف تبدأ حرف (ب) وآخرها حرف (س)؟", options: ["يهوذا", "بطرس", "فيلبس", "يعقوب"], answer: 1 },
+            { q: "سفر من أسفار الشعرية يتكون من ستة حروف يوجد بها حرف (ز)؟", options: ["الجامعة", "نشيد", "أيوب", "مزامير"], answer: 3 },
+            { q: "سفر من أسفار التاريخية تاني حرف بها (ل)؟", options: ["قضاة", "صموئيل", "ملوك", "يشوع"], answer: 2 },
+            { q: "رسالة من رسائل بولس تبدأ حرف (غ)؟", options: ["فيلبي", "غلاطية", "كولوسي", "أفسس"], answer: 1 },
+            { q: "سفر من أسفار القانونية الثانية بها حرف (ر)؟", options: ["يوديت", "سيراخ", "طوبيا", "باروك"], answer: 3 },
+            { q: "سفر من أسفار الأنبياء الصغار يوجد في نص حرف (ن)؟", options: ["عاموس", "يونان", "هوشع", "ميخا"], answer: 1 },
+            { q: "سفر من أسفار الأنبياء الكبار يوجد بها حرف (ق)؟", options: ["إشعياء", "دانيال", "إرميا", "حزقيال"], answer: 3 },
+            { q: "البلد التي ولد فيها السيد المسيح؟", options: ["مصر", "الناصرة", "بيت لحم", "أورشليم"], answer: 1 },
+            { q: "\"قال الله نعمل الإنسان علي صورتنا .......\" (تك 1:26)؟", options: ["لمجدنا", "لطاعتنا", "كشبهنا", "في أرضنا"], answer: 2 },
+            { q: "من أي سبط جاي المسيح؟", options: ["يهوذا", "يوسف", "بنيامين", "لاوي"], answer: 0 },
+            { q: "من الذي أعطاه فرعون لقب صفنات فعنيح؟", options: ["يوسف", "داود", "موسى", "سليمان"], answer: 0 },
+            { q: "ما هو الاسم الأول للرسول بولس؟", options: ["استفانوس", "شاول", "برنابا", "سيلا"], answer: 1 },
+            { q: "ما معنى اسم إسحق؟", options: ["يبكي", "يفرح", "يضحك", "يصلي"], answer: 2 },
+            { q: "من كان أصغر إخوته ومسحه صموئيل الملك على كل إسرائيل؟", options: ["داود", "سليمان", "يشوع", "شاول"], answer: 0 },
+            { q: "كم سنة كانت كل أيام نوح؟", options: ["850 سنة", "950 سنة", "1000 سنة", "900 سنة"], answer: 1 },
+            { q: "إلى أين صعد يسوع ليجري من إبليس؟", options: ["البحر", "البرية", "الجبل", "المدينة"], answer: 1 },
+            { q: "من هو الذي سمي ابنه نحس؟", options: ["رعوئيل", "بلدد", "صوفار", "إيليفاز"], answer: 0 },
+            { q: "ما هو القربان الذي قدم قايين؟", options: ["أبكار غنمه", "ذبيحة حمام", "عجل سمين", "أثمار الأرض"], answer: 3 },
+            { q: "أين كان جالساً لوط عندما جاء إليه الملاكان؟", options: ["داخل البيت", "في الساحة", "باب سدوم", "على الجبل"], answer: 2 },
+            { q: "إلى أي إنجيل يرمز الثور؟", options: ["إنجيل متى", "إنجيل لوقا", "إنجيل يوحنا", "إنجيل مرقس"], answer: 1 },
+            { q: "من أي سبط كان موسى؟", options: ["سبط يوسف", "سبط لاوي", "سبط بنيامين", "سبط يهوذا"], answer: 1 },
+            { q: "ما معنى اسم مرقس؟", options: ["ملاك", "مطرقة", "أسد", "بشير"], answer: 1 },
+            { q: "أي من تلاميذ المسيح كان الصندوق عنده؟", options: ["متّى", "بطرس", "يوحنا", "يهوذا الإسخريوطي"], answer: 3 },
+            { q: "من أول رجل تزوج امرأتين؟", options: ["نوح", "لامك", "قايين", "إبراهيم"], answer: 1 },
+            { q: "ما اسم ابن حنة؟", options: ["كالب", "يشوع", "صموئيل", "عالي"], answer: 0 },
+            { q: "إلى أي مدينة تنسب السيدة العذراء؟", options: ["أورشليم", "الناصرة", "بيت لحم", "مصر"], answer: 1 },
+            { q: "اسم ابن قال الملاك لوالديه قبل أن يولد أنه نذير الرب؟", options: ["شمشون", "يوحنا المعمدان", "صموئيل", "إسحق"], answer: 0 },
+            { q: "أمشي بلا أقدام وأطير بلا جناحات وأبكي بلا عيون! من أنا؟", options: ["الريح", "الضوء", "الظل", "السحابة"], answer: 3 },
+            { q: "من هو أول عازف موسيقار في الكتاب المقدس؟", options: ["لامك", "داود", "يوبال", "يوب"], answer: 2 },
+            { q: "أميرة عاقر أضافت نبياً فوعد أن يكون لها ابن؟", options: ["رفقة", "سارة بنت هاران", "حنة", "راحيل"], answer: 1 },
+            { q: "قيل عنه أنه أعظم من نبي؟", options: ["موسى", "إيليا", "إشعياء", "يوحنا المعمدان"], answer: 3 },
+            { q: "شئ في جسم الإنسان من ثلاثة أحرف: الأول والثاني طائر والأول والثالث مشروب مشهور والثاني والثالث وحدة موازين فما هو؟", options: ["رأس", "بطن", "يدن", "قدم"], answer: 1 },
+            { q: "كنت من الشجعان أمير في جيش الرومان قلبي بحب يسوع مليان اتعذبت علشان سبع سنين زمان. من أنا؟", options: ["مارانطونيوس", "ماربطرس", "مارمينا", "مارجرجس الروماني"], answer: 3 },
+            { q: "أحبته حب العبادة ورمته في الزنزانة. من هي؟", options: ["حاتاك", "استير", "امرأة فوطيفار", "دليلة"], answer: 2 },
+            { q: "بصت بصة وبسببها طلعت برة. من هي؟", options: ["مريم", "سارة", "رفقة", "حواء"], answer: 3 },
+            { q: "ساب قميصه وجري بعيد وعاش فترة خلف قبضان الحديد. من هو؟", options: ["داود", "إيليا", "موسى", "يوسف"], answer: 3 },
+            { q: "شئ ينفخك وحاجة تبنيك؟", options: ["القوة تنفخك والصلاة تبنيك", "المال ينفخك والعمل يبنيك", "العلم ينفخك والمحبة تبنيك", "الكبرياء ينفخك والتواضع يبنيك"], answer: 2 },
+            { q: "ما معنى اسم إسرائيل؟", options: ["يجاهد مع الله", "مختار الله", "ابن الله", "شعب الله"], answer: 0 },
+            { q: "من هو النبي الذي كان جميلاً وأخفته أمه بعد ولادة ثلاثة أشهر؟", options: ["موسى", "صموئيل", "إشعياء", "داود"], answer: 0 },
+            { q: "ماذا حدث في مصر عند دخول العائلة المقدسة إليها؟", options: ["سقط المعبد", "جف النيل", "أنار النور", "تزلزلت الأوثان"], answer: 3 },
+            { q: "\"تسربلوا ..... لأن الله يقاوم المستكبرين وأما المتواضعون فيعطيهم نعمة\" (١بط ٥:٥)؟", options: ["بالتواضع", "بالإيمان", "بالمحبة", "بالصبر"], answer: 0 },
+            { q: "من هو القديس الذي ترتبط أيقونته بأسد واحد؟", options: ["مارمرقس الرسول", "مارجرجس", "مارانطونيوس", "مارمينا"], answer: 0 },
+            { q: "من هو الشهيد الملقب بالمقطع؟", options: ["مارمينا", "مارجرجس", "يعقوب الفارس", "أبانوب"], answer: 2 },
+            { q: "كم مرة دار يشوع مع شعب إسرائيل حول سور أريحا حتى سقط السور؟", options: ["12 مرة", "7 مرات", "13 مرة", "10 مرات"], answer: 2 },
+            { q: "ما هو نوع الثمر الذي خرج من عصا هارون حين أفرخت في خيمة الشهادة؟", options: ["ثمر الوز", "ثمر الزيتون", "ثمر العنب", "ثمر التين"], answer: 0 },
+            { q: "ما هي المدة التي وقفت فيها الشمس عن الغروب بعد ما أمرها يشوع؟", options: ["يومان", "ثلاثة أيام", "نصف يوم", "يوم واحد"], answer: 3 },
+            { q: "كم كان عمر يوسف حين أصبح وزير علي كل أرض مصر؟", options: ["30 سنة", "25 سنة", "35 سنة", "40 سنة"], answer: 0 },
+            { q: "\"من لا يأخذ ....... ويتبعني فلا يستحقني\" (متي ١٠: ٣٨)؟", options: ["ماله", "عائلته", "صليبه", "حياته"], answer: 2 },
+            { q: "ما معنى اسم حنة؟", options: ["حنان", "نعمة", "فرح", "صلاة"], answer: 0 },
+            { q: "من الذي مد أيامه خمسة عشر عاماً؟", options: ["دانيال", "حزقيا الملك", "أخزيا", "يوشيا الملك"], answer: 1 },
+            { q: "ماهي الفترة التي ظل فيها شاول (بولس) لا يبصر؟ (أع ٩)", options: ["يوم واحد", "ثلاثة أيام", "سبعة أيام", "يومان"], answer: 1 },
+            { q: "من هو الطفل الذي خدم الهيكل منذ طفولته؟", options: ["داود", "يشوع", "صموئيل", "سليمان"], answer: 2 },
+            { q: "من هو ولد نوح؟", options: ["لامك", "سام", "يافث", "حام"], answer: 0 },
+            { q: "من هم أولاد نوح؟", options: ["سام، لامك، يافث", "سام، حام، يافث", "إبراهيم، إسحق، يعقوب", "قايين، هابيل، شيث"], answer: 1 },
+            { q: "كم يوم غطت المياه قمم الجبال وكل الأرض أثناء الطوفان؟", options: ["100 يوم", "120 يوماً", "200 يوم", "150 يوماً"], answer: 3 },
+            { q: "ماهو أول إنجيل في العهد الجديد؟", options: ["لوقا", "يوحنا", "متى", "مرقس"], answer: 2 },
+            { q: "من كان أول شهيد من الرسل؟", options: ["بولس", "يعقوب الرسول", "استفانوس", "بطرس"], answer: 1 },
+            { q: "كم عدد رسائل بولس الرسول في العهد الجديد؟", options: ["14 رسالة", "12 رسالة", "15 رسالة", "13 رسالة"], answer: 0 },
+            { q: "\"مقدمين بعضكم بعضاً في ........\" (رو 10:12)؟", options: ["المحبة", "الصبر", "الكرامة", "الإيمان"], answer: 2 },
+            { q: "في أي مزمور الرب راعي فلا يعوزني شئ؟", options: ["مزمور 23", "مزمور 121", "مزمور 1", "مزمور 91"], answer: 0 },
+            { q: "أين ولد الملك داود؟ (١صم ١٧)", options: ["الناصرة", "بيت لحم", "أورشليم", "حبرون"], answer: 1 },
+            { q: "أي من التلاميذ قال ليسوع لن تغسل رجلي أبداً؟ (يو ٨:١٣)", options: ["يوحنا", "يعقوب", "بطرس", "متّى"], answer: 2 },
+            { q: "من هي جاءت من رجل بدون امرأة؟", options: ["حواء", "سارة", "رفقة", "مريم العذراء"], answer: 0 },
+            { q: "ما معنى اسم دليلة؟", options: ["الغنية", "الجميلة", "القوية", "الرقيقة أو الأنيقة"], answer: 3 },
+            { q: "من كانت سبباً في قلع أعين زوجها؟", options: ["سارة", "استير", "حواء", "دليلة"], answer: 3 },
+            { q: "ما هو الشيء الذي أصله كان نبات ثم تحول إلي جماد ثم أصبح حيوان؟", options: ["عصا موسى النبي", "قسط المن", "عصا يشوع", "عصا هارون"], answer: 0 },
+            { q: "خلق الله في اليوم الرابع .......", options: ["الشمس", "القمر", "النور", "البحار"], answer: 1 },
+            { q: "خلق الله في اليوم الأول .....", options: ["الأرض", "السماء", "الماء", "النور"], answer: 3 },
+            { q: "الاسم الأول لإبراهيم .......", options: ["آرام", "أفرايم", "إبرام", "إسحق"], answer: 2 },
+            { q: "من هو أبو إبراهيم؟", options: ["هاران", "تارح", "ناحور", "ساروج"], answer: 1 },
+            { q: "نام يعقوب في بيت ...... عند عروبة من عيسو", options: ["حبرون", "بيت ايل", "إيل", "شكيم"], answer: 1 },
+            { q: "أقام بنو إسرائيل في مصر مدة .......", options: ["350 سنة", "400 سنة", "430 سنة", "450 سنة"], answer: 2 },
+            { q: "ما هو سفر الشريعة؟", options: ["سفر اللاويين", "سفر التكوين", "سفر الخروج", "سفر العدد"], answer: 0 },
+            { q: "مات موسى في جبل .....", options: ["تبور", "نبو", "حوريب", "سينا"], answer: 1 },
+            { q: "كان يشوع من سبط .....", options: ["لاوي", "أفرايم", "بنيامين", "يهوذا"], answer: 1 },
+            { q: "سفر يشوع كام أصحاح؟", options: ["22", "26", "24", "20"], answer: 2 },
+            { q: "من هو القاضي من سبط منسي؟", options: ["شمشون", "شمعون", "يفتاح", "جدعون"], answer: 3 },
+            { q: "من هو القاضي الذي قدم بنته ذبيحة؟", options: ["أبيمالك", "جدعون", "يفتاح الجلعادي", "شمشون"], answer: 2 },
+            { q: "من هو القاضي الذي اسم أمه حنة؟", options: ["يفتاح", "شمشون", "صموئيل النبي", "جدعون"], answer: 2 },
+            { q: "جاء المجوس من أرض المشرق التي هي .....", options: ["العراق", "الهند", "السعودية", "إيران"], answer: 3 },
+            { q: "قضت العائلة المقدسة في مصر كام عام؟", options: ["سنة واحدة", "3 أعوام", "سنتين", "5 أعوام"], answer: 1 },
+            { q: "في أي يوم من أسبوع الآلام تنبأ الرب يسوع عن خراب أورشليم؟", options: ["الخميس", "الثلاثاء", "الاثنين", "الأربعاء"], answer: 1 },
+            { q: "كم عدد أصحاحات سفر أعمال الرسل؟", options: ["28 أصحاح", "30 أصحاح", "24 أصحاح", "26 أصحاح"], answer: 0 },
+            { q: "ما هي مهنة بولس الرسول؟", options: ["نجار", "صانع خيام", "صياد", "كاتب"], answer: 1 },
+            { q: "ما معنى اسم شاول؟", options: ["قوي", "عظيم", "مختار", "مطلوب"], answer: 3 },
+            { q: "ماذا يرمز رقم 10 في الكتاب المقدس؟", options: ["التسبحات العشر", "الوصايا العشر", "القرون العشرة", "الأسباط العشرة"], answer: 1 },
+            { q: "أدخل كلمة العشاء في ترنيمة؟", options: ["ليلة العشاء السري", "ليلة القيامة", "عشية العيد", "أمسية المجد"], answer: 0 },
+            { q: "أدخل كلمة حبيبي في ترنيمة؟", options: ["حبيبي يسوع", "يا حبيبي", "وحبيبي", "حبيبي القديم"], answer: 2 },
+            { q: "ماذا يشير البخور في الكنيسة؟", options: ["طلبات والصلوات", "الفرح والبهجة", "الشكر والحمد", "التوبة والرجوع"], answer: 0 },
+            { q: "في العهد الجديد من هم أول ناس قدموا البخور؟", options: ["المجوس", "الكهنة", "التلاميذ", "الرعاة"], answer: 0 },
+            { q: "اذكر آيتين من الكلمات الآتية: (شئ - للمؤمن - مستطاع - عند - كل - الله)؟", options: ["كل شئ مستطاع عند الله / كل شئ مستطاع للمؤمن", "كل شئ مستطاع / عند الله كل شئ", "كل شئ عند الله / كل شئ للمؤمن", "للمؤمن كل شئ / عند الله مستطاع"], answer: 0 },
+            { q: "من هو القديس الذي تم بشارته من قبل ملاك ببشارة عظيمة؟", options: ["مريم العذراء", "الرعاة", "يوسف النجار", "زكريا الكاهن"], answer: 2 },
+            { q: "أدخل كلمة سيدي في ترنيمة؟", options: ["سيدي وإلهي", "يا سيدي كام كان", "يا سيدي الحنون", "سيدي المسيح"], answer: 1 },
+            { q: "ماهي رموز الأناجيل الأربعة؟", options: ["متى (الثور) - مرقس (النسر) - يوحنا (الإنسان) - لوقا (الأسد)", "متى (الأسد) - مرقس (الثور) - يوحنا (الإنسان) - لوقا (النسر)", "متى (النسر) - مرقس (الإنسان) - يوحنا (الأسد) - لوقا (الثور)", "متى (وجه الإنسان) - مرقس (الأسد) - يوحنا (النسر) - لوقا (الثور)"], answer: 3 },
+            { q: "من هو أول واحد ألف فزورة في الكتاب المقدس؟", options: ["أيوب", "شمشون", "سليمان", "داود"], answer: 1 },
+            { q: "من هو أشهر غني في الكتاب المقدس؟", options: ["إبراهيم", "سليمان الحكيم", "يوسف", "أيوب"], answer: 1 },
+            { q: "أكمل الآية: \"فكل من يعترف بي .........\" (مت 32:10)", options: ["أعترف أنا أيضاً به قدام أبي الذي في السموات", "أعطيه حياة أبدية", "سأجعله ابناً لي", "أرسل له روح القدوس"], answer: 0 },
+            { q: "😗🤝💰🙍🏽 من أنا؟", options: ["يوسف", "متّى", "يهوذا", "بطرس"], answer: 2 },
+            { q: "💇💃✂️🏛️🦁💪 من أنا؟", options: ["شمشون", "جلعاد", "داود", "يهوذا"], answer: 0 },
+            { q: "🌳🌊🐳🙍🏻 من أنا؟", options: ["إيليا", "موسى", "يونان", "بطرس"], answer: 2 },
+            { q: "👑🪨🎶🐑🙍🏻 من أنا؟", options: ["موسى", "سليمان", "داود", "يشوع"], answer: 2 },
+            { q: "🔥👑🙍 من أنا؟", options: ["إشعياء", "موسى", "إيليا النبي", "إرميا"], answer: 2 },
+            { q: "🧺🍼👩 من أنا؟", options: ["داود", "موسى النبي", "يشوع", "صموئيل"], answer: 1 },
+            { q: "🐔😢🙍🪨 من أنا؟", options: ["بطرس الرسول", "يوحنا", "يعقوب", "بولس"], answer: 0 },
+            { q: "🦁✝️🙍 من أنا؟", options: ["دانيال النبي", "موسى", "مارجرجس", "داود"], answer: 0 },
+            { q: "🧑‍🦳⛴️🌈🕊️ من أنا؟", options: ["إيليا", "موسى", "إبراهيم", "نوح"], answer: 3 },
+            { q: "👑👴🔨🛕📜 من أنا؟", options: ["سليمان النبي", "حزقيا", "يوشيا", "داود"], answer: 0 },
+            { q: "👦📖🕯️⚖️ من أنا؟", options: ["موسى", "صموئيل النبي", "دانيال", "إيليا"], answer: 1 },
+            { q: "🙍🐂🔔👂📣✝️ من أنا؟", options: ["بولس الرسول", "يوحنا", "بطرس", "مرقس"], answer: 0 },
+            { q: "\"من حفر حفرة لأخيه وقع فيها\" - من قصة الكتاب المقدس؟", options: ["قايين وهابيل", "هامان ومردخاي واللذين دبروا مؤامرة لدانيال النبي", "شاول وداود", "فرعون وموسى"], answer: 1 },
+            { q: "\"من طلع من داره إتقل مقداره\" - من قصة الكتاب المقدس؟", options: ["يعقوب حين هرب من عيسو", "موسى حين خرج من مصر", "إبراهيم حين غار أرض كنعان", "الابن الضال عندما أخذ ميراثه وترك بيت أبيه"], answer: 3 },
+            { q: "\"تكون في إيدك وتقسم لغيرك\" - من قصة الكتاب المقدس؟", options: ["أرض كنعان والأنبياء", "تاج داود وأخذه شاول", "البكورية التي كانت من نصيب عيسو وأخذها يعقوب", "ميراث يعقوب وأخذه عيسو"], answer: 2 },
+            { q: "\"الضفر ميطلعش من اللحم\" - من قصة الكتاب المقدس؟", options: ["موسى وهارون", "يوسف الصديق عندما سامح إخوته", "يعقوب وبنيه", "إسحق وإسماعيل"], answer: 1 },
+            { q: "\"خيراً تعمل شراً تلقى\" - من قصة الكتاب المقدس؟", options: ["موسى وفرعون", "إيليا وأخاب", "يوسف وإخوته", "داود الذي قتل جليات فزوجه شاول ابنته ولكنه حسده وأراد قتله"], answer: 3 },
+            { q: "\"ضربني وبكي سبقني واشتكي\" - من قصة الكتاب المقدس؟", options: ["امرأة فوطيفار التي اتهمته زوراً", "دليلة مع شمشون", "حواء مع آدم", "إيزابل مع إيليا"], answer: 0 },
+            { q: "\"ابن الوز عوام\" - من قصة الكتاب المقدس؟", options: ["يعقوب وداود", "سليمان الذي كتب الأمثال مثل داود أبيه كاتب المزامير", "إسحق وإبراهيم", "يوشيا وداود"], answer: 1 },
+            { q: "\"ماتجيش المصايب إلاّ من الحبايب\" - من قصة الكتاب المقدس؟", options: ["يوسف إخوته ألقوه في البئر ثم باعوه", "يهوذا والمسيح", "قايين وهابيل", "شاول وداود"], answer: 0 },
+            { q: "\"ما جمع إلا ما وفق\" - من قصة الكتاب المقدس؟", options: ["حنانيا وسفيرة اللذان كذبا على التلاميذ فماتا", "قايين", "يهوذا الإسخريوطي", "الشاب الغني"], answer: 0 },
+            { q: "\"يا مربي غير ولدك يا باني في غير ملكك\" - من قصة الكتاب المقدس؟", options: ["إبراهيم وإسماعيل", "عالي الكاهن وأبناؤه", "فرعون ربى موسى في قصره وموسى عمل في غير ملكه", "داود وسليمان"], answer: 2 },
+            { q: "\"باب النجار مخلع\" - من قصة الكتاب المقدس؟", options: ["فرعون وموسى", "عالي الكاهن فشل في تربية أولاده فعاقبهم الله", "نوح وأبناؤه", "دانيال في جوش الأسود"], answer: 1 },
+            { q: "\"يافرعون مين فرعنك قال ملقتش حد يردني\" - من قصة الكتاب المقدس؟", options: ["هيرودس مع المجوس", "فرعون مع موسى", "نيبخد نصر مع دانيال", "جليات الجبار الذي ظل 40 يوماً يعيير بني إسرائيل"], answer: 3 },
+            { q: "\"عين في الجنة وعين في النار\" - من قصة الكتاب المقدس؟", options: ["لوط وامرأته", "الشاب الغني الذي نصحه المسيح بأن يتخلى عن أمواله فحزن", "إيليا على جبل الكرمل", "يوشيا الملك"], answer: 1 },
+            { q: "\"أسمع كلامك يعجبني أشوف أمورك أستعجب\" - من قصة الكتاب المقدس؟", options: ["بطرس الرسول", "يهوذا الإسخريوطي", "الشاب الغني", "الكتبة والفريسيون الذين كانوا يقولون ولا يعملون"], answer: 3 },
+            { q: "\"إللى يسأل ماتتوهش\" - من قصة الكتاب المقدس؟", options: ["حنة حين صلت في الهيكل", "أليعازر الدمشقي الذي ذهب وسأل ليأخذ رفقة زوجة لإسحق", "موسى حين سأل الله", "سليمان حين طلب الحكمة"], answer: 1 },
+            { q: "\"إللى تعمله النملة فى سنة ياخده الجمل فى خف\" - من قصة الكتاب المقدس؟", options: ["أيوب الصديق الذي كان غنياً وحسده الشيطان وبدد أمواله", "الشاب الغني", "الابن الضال", "سليمان الحكيم"], answer: 0 },
+            { q: "\"المال إللى ماتتعبش فيه اليد لا يحزن عليه القلب\" - من قصة الكتاب المقدس؟", options: ["الابن الضال الذي أخذ نصيبه من مال أبيه وبدده", "الشاب الغني", "يهوذا الإسخريوطي", "زكا العشار"], answer: 0 },
+            { q: "\"من رضى بقليله عاش\" - من قصة الكتاب المقدس؟", options: ["الشاب الغني", "إبراهيم", "أيوب الصديق", "إيليا النبي وأرملة صرفة صيدا"], answer: 3 },
+            { q: "\"جت الحزينة تفرح مالقتلهاش مطرح\" - من قصة الكتاب المقدس؟", options: ["العذارى الجاهلات فعندما جاء العريس لم يكن معهن زيتاً", "مريم المجدلية", "حنة وصموئيل", "الأرملة وإيليا"], answer: 0 },
+            { q: "\"إن غاب القط العب يا فار\" - من قصة الكتاب المقدس؟", options: ["شاول وداود", "فرعون وموسى", "هيرودس ويوحنا", "يعقوب مع عيسو"], answer: 3 },
+            { q: "من أنا؟ أنا أول من سجدت لملك الملوك", options: ["المجوس", "الرعاة", "يوحنا المعمدان", "مريم العذراء"], answer: 2 },
+            { q: "من أنا؟ إنتهزت آخر فرصة فدخلت الفردوس", options: ["اللص الشمال", "اللص اليمين", "بيلاطس", "يهوذا"], answer: 1 },
+            { q: "من أنا؟ يعقوب وعيسو ولداي وإبراهيم أبي", options: ["آدم", "إبراهيم", "إسحق البار", "يعقوب"], answer: 2 },
+            { q: "من أنا؟ قضيت أربعة أيام من عمري مربوطاً داخل مكان مظلم", options: ["يونان", "أيوب", "لعازر", "يوسف"], answer: 2 },
+            { q: "من أنا؟ قام السيد المسيح بشفائي مع أنني لم أقابله أو أكلمه", options: ["الأبرص", "المولود أعمى", "المفلوج", "ابن خادم الملك"], answer: 3 },
+            { q: "من أنا؟ اسمي معروف ولقبي مشهور لذلك بالطبع لم أكن أبيضًا", options: ["مار يوحنا", "مارجرجس", "مارمينا", "أنبا موسى الأسود"], answer: 3 },
+            { q: "من أنا؟ أخذتها وطفلها إلى الأرض المبارك شعبها حيث الأمان", options: ["يوسف النجار", "مريم المجدلية", "يوحنا الرسول", "بطرس"], answer: 0 },
+            { q: "من أنا؟ حاجة عجيبة حاجة مريبة، في الصبح وجدت زوجتي", options: ["إبراهيم", "يعقوب البار", "إسحق", "آدم"], answer: 1 },
+            { q: "من أنا؟ لي أخ اسمه جرجس وكانت وظيفتي رئيس كتاب مصر", options: ["إبراهيم الجوهرى", "مارمينا", "أنبا أنطونيوس", "ماربقطر"], answer: 0 },
+            { q: "من أنا؟ معروف للجميع كنت عشاراً وصرت من الـ (12) تلميذاً", options: ["بطرس", "يوحنا", "متى الرسول", "يعقوب"], answer: 2 },
+            { q: "من أنا؟ لي 3 أبناء: نبي مشهور والثاني كاهن والثالث نبية", options: ["يوكابد أم موسى", "سارة", "راحيل", "حنة أم صموئيل"], answer: 0 },
+            { q: "من أنا؟ ضمنت لأولادي الخمسة تيجان ونات التاج السادس", options: ["الشهيدة بربارة", "الشهيدة دميانة", "الشهيدة رفقة", "الشهيدة كاترين"], answer: 2 },
+            { q: "من أنا؟ أحسست بالجوع القاسي مما أدى إلى إصلاح مسار حياتي", options: ["الشاب الغني", "الابن الضال", "زكا العشار", "يوحنا المعمدان"], answer: 1 },
+            { q: "من أنا؟ خدعت والدي أخي وأنا صغير فخدعني أولادي وأنا كبير", options: ["آدم", "يعقوب البار", "إسحق", "إبراهيم"], answer: 1 },
+            { q: "من أنا؟ على الرغم من أن عيني كانتا مفتوحتين إلا أنني لم أكن أرى بهما", options: ["المولود أعمى", "الشاول", "توما", "بولس الرسول"], answer: 3 },
+            { q: "من أنا؟ لم أنسى منظر الأسود الجائعة الملتفة حولي وهي وديعة", options: ["دانيال النبي", "مارجرجس", "موسى", "بطرس"], answer: 0 },
+            { q: "من أنا؟ اثنان من البطاركة السابقين لي اسمهم كذلك كاسم رئيس المتوحدين", options: ["البابا شنودة الثالث", "البابا كيرلس", "البابا تواضروس", "البابا يوساب"], answer: 0 },
+            { q: "من أنا؟ أقمت ابن الأرملة من الموت وقابلت الذي أقام ابن أرملة نايين", options: ["أليشع", "موسى", "إشعياء", "إيليا النبي"], answer: 3 },
+            { q: "من أنا؟ لو فكرت أن هذه الثمرة تعمل هكذا لكنت امتنعت عن لمسها وقطفها", options: ["سارة", "رفقة", "مريم", "حواء"], answer: 3 },
+            { q: "من أنا؟ أنا صوت صارخ في البرية أعدوا طريق الرب كما قال إشعياء النبي", options: ["موسى", "يوحنا المعمدان", "إرميا", "إيليا"], answer: 1 }
+        ];
+
+        // ===== ثوابت اللعبة =====
+        // كل جولة = سؤال واحد لكل لاعب
+        const QUESTIONS_PER_ROUND_PER_PLAYER = 1;
+
+        // ===== حالة اللعبة =====
+        let settings = {
+            playerCount: 2,
+            rounds: 3,
+            timerSeconds: 15, // 0 يعني بدون تايمر
+            playerNames: []
+        };
+
+        let gameState = {
+            currentRound: 1,
+            currentPlayerIndex: 0,
+            players: [],         // [{name, color, totalScore, roundScore, roundCorrect}]
+            roundQuestions: [],  // الأسئلة المختارة للجولة الحالية (لكل اللاعبين)
+            usedQuestionIndices: new Set(), // الأسئلة اللي اتعبت في كل الجوالات
+            timerInterval: null,
+            timeLeft: 0,
+            answered: false,
+            questionStartTime: 0
+        };
+
+        // ===== DOM Elements =====
+        const $ = id => document.getElementById(id);
+
+        // ===== خلط عشوائي (Fisher-Yates) =====
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // ===== بناء شاشة الإعدادات =====
+        function buildSetupScreen() {
+            // عدد اللاعبين
+            const pcSel = $('playerCountSelector');
+            pcSel.innerHTML = '';
+            for (let i = 2; i <= 10; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'num-btn' + (i === settings.playerCount ? ' selected' : '');
+                btn.textContent = i;
+                btn.addEventListener('click', () => {
+                    settings.playerCount = i;
+                    pcSel.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    buildPlayerInputs();
+                });
+                pcSel.appendChild(btn);
+            }
+
+            // عدد الجولات
+            const rcSel = $('roundCountSelector');
+            rcSel.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'num-btn' + (i === settings.rounds ? ' selected' : '');
+                btn.textContent = i;
+                btn.addEventListener('click', () => {
+                    settings.rounds = i;
+                    rcSel.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                });
+                rcSel.appendChild(btn);
+            }
+
+            // خيارات التايمر
+            const tSel = $('timerSelector');
+            tSel.innerHTML = '';
+            const timerOptions = [
+                { label: 'بدون تايمر', value: 0 },
+                { label: '10 ثواني', value: 10 },
+                { label: '15 ثانية', value: 15 },
+                { label: '20 ثانية', value: 20 },
+                { label: '25 ثانية', value: 25 },
+                { label: '30 ثانية', value: 30 }
+            ];
+            timerOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'timer-btn' + (opt.value === settings.timerSeconds ? ' selected' : '');
+                btn.textContent = opt.label;
+                btn.addEventListener('click', () => {
+                    settings.timerSeconds = opt.value;
+                    tSel.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                });
+                tSel.appendChild(btn);
+            });
+
+            // أسماء اللاعبين
+            buildPlayerInputs();
+
+            // زر البدء
+            $('startGameBtn').addEventListener('click', startGame);
+        }
+
+        function buildPlayerInputs() {
+            const container = $('playersContainer');
+            container.innerHTML = '';
+            for (let i = 0; i < settings.playerCount; i++) {
+                const row = document.createElement('div');
+                row.className = 'player-name-row';
+                const dot = document.createElement('div');
+                dot.className = 'player-color-dot';
+                dot.style.color = PLAYER_COLORS[i];
+                dot.style.background = PLAYER_COLORS[i];
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'player-name-input';
+                input.placeholder = 'اسم اللاعب ' + (i + 1);
+                input.maxLength = 15;
+                input.autocomplete = 'off';
+                input.dataset.index = i;
+                // حفظ الاسم القديم لو موجود
+                if (settings.playerNames[i]) {
+                    input.value = settings.playerNames[i];
+                }
+                input.addEventListener('input', () => {
+                    settings.playerNames[i] = input.value.trim();
+                });
+                row.appendChild(dot);
+                row.appendChild(input);
+                container.appendChild(row);
+            }
+        }
+
+        // ===== بدء اللعبة =====
+        function startGame() {
+            // تحقق من الأسماء
+            settings.playerNames = [];
+            const inputs = $('playersContainer').querySelectorAll('.player-name-input');
+            inputs.forEach((inp, i) => {
+                settings.playerNames[i] = inp.value.trim() || ('اللاعب ' + (i + 1));
+            });
+
+            // تحقق إن كل الأسماء مختلفة
+            const nameSet = new Set(settings.playerNames);
+            if (nameSet.size < settings.playerCount) {
+                // أضف أرقام للأسماء المكررة
+                for (let i = 0; i < settings.playerCount; i++) {
+                    if (!settings.playerNames[i]) {
+                        settings.playerNames[i] = 'اللاعب ' + (i + 1);
+                    }
+                }
+            }
+
+            // بناء حالة اللاعبين
+            gameState.players = settings.playerNames.map((name, i) => ({
+                name: name,
+                color: PLAYER_COLORS[i],
+                totalScore: 0,
+                roundScore: 0,
+                roundCorrect: 0
+            }));
+
+            gameState.currentRound = 1;
+            gameState.currentPlayerIndex = 0;
+            gameState.usedQuestionIndices = new Set();
+
+            // إخفاء شاشة الإعدادات
+            $('setupScreen').classList.add('hidden');
+
+            // عرض شاشة انتقال اللاعب الأول
+            showPlayerTransition();
+        }
+
+        // ===== تحضير أسئلة الجولة =====
+        function prepareRoundQuestions() {
+            // عدد الأسئلة المطلوب = عدد اللاعبين × 1 سؤال
+            const needed = settings.playerCount * QUESTIONS_PER_ROUND_PER_PLAYER;
+
+            // الأسئلة المتاحة (اللي مستخدمتش قبل كده)
+            let availableIndices = [];
+            for (let i = 0; i < ALL_QUESTIONS.length; i++) {
+                if (!gameState.usedQuestionIndices.has(i)) {
+                    availableIndices.push(i);
+                }
+            }
+
+            // لو الأسئلة المتاحة أقل من المطلوب، نعيد تعبئة من الأول
+            if (availableIndices.length < needed) {
+                gameState.usedQuestionIndices.clear();
+                availableIndices = [];
+                for (let i = 0; i < ALL_QUESTIONS.length; i++) {
+                    availableIndices.push(i);
+                }
+            }
+
+            // خلط عشوائي واختيار
+            const shuffled = shuffle(availableIndices);
+            const selectedIndices = shuffled.slice(0, needed);
+
+            // تسجيل الأسئلة المستخدمة
+            selectedIndices.forEach(idx => gameState.usedQuestionIndices.add(idx));
+
+            // بناء الأسئلة مع تخليط الإجابات
+            gameState.roundQuestions = selectedIndices.map(idx => {
+                const q = ALL_QUESTIONS[idx];
+                const correctAnswer = q.options[q.answer];
+                const shuffledOptions = shuffle(q.options);
+                const newAnswerIndex = shuffledOptions.indexOf(correctAnswer);
+                return {
+                    q: q.q,
+                    options: shuffledOptions,
+                    answer: newAnswerIndex
+                };
+            });
+        }
+
+        // ===== شاشة انتقال اللاعب =====
+        function showPlayerTransition() {
+            const player = gameState.players[gameState.currentPlayerIndex];
+            $('transitionIcon').textContent = '🙋';
+            $('transitionPlayerName').textContent = player.name;
+            $('transitionPlayerName').style.color = player.color;
+            $('transitionRoundInfo').textContent = 'الجولة ' + gameState.currentRound + ' من ' + settings.rounds;
+            $('transitionScreen').classList.add('show');
+        }
+
+        $('transitionReadyBtn').addEventListener('click', () => {
+            $('transitionScreen').classList.remove('show');
+
+            // لو أول لاعب في الجولة، حضّر الأسئلة
+            if (gameState.currentPlayerIndex === 0) {
+                prepareRoundQuestions();
+            }
+
+            // تصفير نقاط الجولة للاعب الحالي (سؤال واحد)
+            gameState.players[gameState.currentPlayerIndex].roundScore = 0;
+            gameState.players[gameState.currentPlayerIndex].roundCorrect = 0;
+
+            // عرض شاشة اللعبة
+            $('gameScreen').classList.add('active');
+            loadQuestion();
+        });
+
+        // ===== تحميل السؤال =====
+        function loadQuestion() {
+            const player = gameState.players[gameState.currentPlayerIndex];
+            const qIndex = gameState.currentPlayerIndex; // سؤال واحد لكل لاعب
+
+            if (qIndex >= gameState.roundQuestions.length) {
+                finishPlayerRound();
+                return;
+            }
+
+            gameState.answered = false;
+            gameState.questionStartTime = Date.now();
+
+            const q = gameState.roundQuestions[qIndex];
+
+            // تحديث الـ Top Bar
+            $('topbarDot').style.color = player.color;
+            $('topbarDot').style.background = player.color;
+            $('topbarPlayerName').textContent = player.name;
+            $('topbarPlayerName').style.color = player.color;
+            $('topbarScore').textContent = player.totalScore;
+            $('topbarRound').textContent = 'الجولة ' + gameState.currentRound + ' / ' + settings.rounds;
+            $('topbarQCount').textContent = 'سؤال الجولة';
+
+            // Progress - بناءً على الجوالات
+            $('progressLabel').textContent = 'الجولة ' + gameState.currentRound + ' / ' + settings.rounds;
+            $('progressBar').style.width = (gameState.currentRound / settings.rounds * 100) + '%';
+
+            // Timer
+            buildTimer();
+
+            // السؤال
+            $('questionNumber').textContent = 'الجولة ' + gameState.currentRound + ' - سؤال ' + player.name;
+            $('questionText').textContent = q.q;
+
+            // إعادة تحريك الكارت
+            const card = $('questionCard');
+            card.style.animation = 'none';
+            card.offsetHeight; // trigger reflow
+            card.style.animation = '';
+
+            // الخيارات
+            const grid = $('optionsGrid');
+            grid.innerHTML = '';
+            const labels = ['أ', 'ب', 'ج', 'د'];
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = labels[i] + ') ' + opt;
+                btn.addEventListener('click', () => handleAnswer(i));
+                grid.appendChild(btn);
+            });
+
+            // تشغيل التايمر
+            startTimer();
+        }
+
+        // ===== التايمر =====
+        function buildTimer() {
+            const bar = $('timerBar');
+            if (settings.timerSeconds === 0) {
+                bar.innerHTML = '<div class="timer-no-timer"><i class="bi bi-infinity"></i> بدون تايمر</div>';
+            } else {
+                gameState.timeLeft = settings.timerSeconds;
+                bar.innerHTML = '<div class="timer-circle" id="timerCircle"><span id="timerText">' + settings.timerSeconds + '</span></div>';
+            }
+        }
+
+        function startTimer() {
+            stopTimer();
+            if (settings.timerSeconds === 0) return;
+
+            gameState.timeLeft = settings.timerSeconds;
+            const circle = $('timerCircle');
+            const text = $('timerText');
+            if (!circle || !text) return;
+
+            circle.classList.remove('warning', 'danger');
+            text.textContent = gameState.timeLeft;
+
+            gameState.timerInterval = setInterval(() => {
+                gameState.timeLeft--;
+                if (text) text.textContent = gameState.timeLeft;
+
+                if (circle) {
+                    if (gameState.timeLeft <= 5) {
+                        circle.classList.remove('warning');
+                        circle.classList.add('danger');
+                    } else if (gameState.timeLeft <= Math.floor(settings.timerSeconds * 0.55)) {
+                        circle.classList.add('warning');
+                    }
+                }
+
+                if (gameState.timeLeft <= 0) {
+                    stopTimer();
+                    timeUp();
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+                gameState.timerInterval = null;
+            }
+        }
+
+        function timeUp() {
+            if (gameState.answered) return;
+            gameState.answered = true;
+
+            const qIndex = gameState.currentPlayerIndex;
+            const q = gameState.roundQuestions[qIndex];
+
+            // عرض الإجابة الصحيحة
+            const btns = $('optionsGrid').querySelectorAll('.option-btn');
+            btns.forEach((btn, i) => {
+                btn.classList.add('disabled');
+                if (i === q.answer) btn.classList.add('correct');
+            });
+
+            // بعد الإجابة/الوقت، خلص دور اللاعب ده
+            setTimeout(() => {
+                finishPlayerRound();
+            }, 1500);
+        }
+
+        // ===== معالجة الإجابة =====
+        function handleAnswer(index) {
+            if (gameState.answered) return;
+            gameState.answered = true;
+            stopTimer();
+
+            const player = gameState.players[gameState.currentPlayerIndex];
+            const qIndex = gameState.currentPlayerIndex;
+            const q = gameState.roundQuestions[qIndex];
+            const isCorrect = index === q.answer;
+
+            // تعطيل كل الأزرار
+            const btns = $('optionsGrid').querySelectorAll('.option-btn');
+            btns.forEach(btn => btn.classList.add('disabled'));
+
+            if (isCorrect) {
+                btns[index].classList.add('correct');
+                // حساب النقاط: نقطة أساسية + بونص السرعة
+                const timeTaken = settings.timerSeconds > 0
+                    ? (Date.now() - gameState.questionStartTime) / 1000
+                    : 0;
+                const timeBonus = settings.timerSeconds > 0
+                    ? Math.max(0, Math.round(100 - (timeTaken / settings.timerSeconds) * 60))
+                    : 50;
+                const points = 100 + timeBonus;
+                player.roundScore += points;
+                player.roundCorrect++;
+                $('topbarScore').textContent = player.totalScore + player.roundScore;
+                showPointsPopup(points);
+            } else {
+                btns[index].classList.add('wrong');
+                setTimeout(() => {
+                    btns[q.answer].classList.add('correct');
+                }, 400);
+            }
+
+            // بعد الإجابة، خلص دور اللاعب ده
+            setTimeout(() => {
+                finishPlayerRound();
+            }, 1800);
+        }
+
+        // ===== نقاط منبثقة =====
+        function showPointsPopup(points) {
+            const popup = document.createElement('div');
+            popup.className = 'points-popup';
+            popup.style.color = 'var(--emerald-light)';
+            popup.textContent = '+' + points;
+            popup.style.left = (window.innerWidth / 2 - 30) + 'px';
+            popup.style.top = (window.innerHeight / 2) + 'px';
+            document.body.appendChild(popup);
+            setTimeout(() => popup.remove(), 1400);
+        }
+
+        // ===== انتهاء جولة اللاعب =====
+        function finishPlayerRound() {
+            stopTimer();
+            $('gameScreen').classList.remove('active');
+
+            const player = gameState.players[gameState.currentPlayerIndex];
+            // إضافة نقاط السؤال للإجمالي
+            player.totalScore += player.roundScore;
+
+            // الانتقال للاعب التالي أو نهاية الجولة
+            gameState.currentPlayerIndex++;
+
+            if (gameState.currentPlayerIndex < settings.playerCount) {
+                // في لاعب تاني في الجولة دي
+                showPlayerTransition();
+            } else {
+                // خلصت الجولة
+                showRoundResults();
+            }
+        }
+
+        // ===== نتائج الجولة =====
+        function showRoundResults() {
+            const isLastRound = gameState.currentRound >= settings.rounds;
+
+            $('roundResultsTitle').textContent = isLastRound ? 'نتيجة الجولة الأخيرة' : 'نتيجة الجولة ' + gameState.currentRound;
+            $('roundResultsSubtitle').textContent = 'الترتيب الحالي بعد الجولة ' + gameState.currentRound;
+
+            // ترتيب اللاعبين حسب النقاط الإجمالية
+            const sorted = [...gameState.players].sort((a, b) => b.totalScore - a.totalScore);
+
+            const sb = $('scoreboard');
+            sb.innerHTML = '';
+            sorted.forEach((p, i) => {
+                const row = document.createElement('div');
+                row.className = 'scoreboard-row' + (i === 0 ? ' winner-row' : '');
+                const rankClass = i < 3 ? ' rank-' + (i + 1) : '';
+                row.innerHTML = `
+                    <div class="scoreboard-rank ${rankClass}">${i + 1}</div>
+                    <div class="scoreboard-dot" style="color:${p.color};background:${p.color};"></div>
+                    <div class="scoreboard-name">${p.name}</div>
+                    <div class="scoreboard-correct">${p.roundCorrect > 0 ? '✅' : '❌'}</div>
+                    <div class="scoreboard-pts">${p.totalScore}</div>
+                `;
+                sb.appendChild(row);
+            });
+
+            if (isLastRound) {
+                $('roundResultsBtn').textContent = 'النتيجة النهائية 🏆';
+                $('roundResultsBtn').onclick = () => {
+                    $('roundResultsOverlay').classList.remove('show');
+                    showFinalResults();
+                };
+            } else {
+                $('roundResultsBtn').textContent = 'الجولة الجاية →';
+                $('roundResultsBtn').onclick = () => {
+                    $('roundResultsOverlay').classList.remove('show');
+                    gameState.currentRound++;
+                    gameState.currentPlayerIndex = 0;
+                    showPlayerTransition();
+                };
+            }
+
+            $('roundResultsOverlay').classList.add('show');
+
+            // كونفيتي لو في أول جولة
+            if (sorted[0].totalScore > 0) {
+                launchConfetti();
+            }
+        }
+
+        // ===== النتيجة النهائية =====
+        function showFinalResults() {
+            const sorted = [...gameState.players].sort((a, b) => b.totalScore - a.totalScore);
+            const winner = sorted[0];
+
+            $('finalCrown').textContent = '👑';
+            $('finalTitle').textContent = 'الفائز!';
+            $('finalWinnerName').textContent = winner.name;
+            $('finalWinnerName').style.color = winner.color;
+            $('finalWinnerScore').textContent = winner.totalScore + ' نقطة';
+
+            const sb = $('finalScoreboard');
+            sb.innerHTML = '';
+            sorted.forEach((p, i) => {
+                const row = document.createElement('div');
+                row.className = 'scoreboard-row' + (i === 0 ? ' winner-row' : '');
+                const rankClass = i < 3 ? ' rank-' + (i + 1) : '';
+                row.innerHTML = `
+                    <div class="scoreboard-rank ${rankClass}">${i + 1}</div>
+                    <div class="scoreboard-dot" style="color:${p.color};background:${p.color};"></div>
+                    <div class="scoreboard-name">${p.name}</div>
+                    <div class="scoreboard-pts">${p.totalScore}</div>
+                `;
+                sb.appendChild(row);
+            });
+
+            $('finalResultsOverlay').classList.add('show');
+            launchConfetti();
+        }
+
+        // ===== زر العب تاني =====
+        $('btnPlayAgain').addEventListener('click', () => {
+            $('finalResultsOverlay').classList.remove('show');
+            $('gameScreen').classList.remove('active');
+            $('setupScreen').classList.remove('hidden');
+
+            // إعادة تعيين
+            gameState.players.forEach(p => {
+                p.totalScore = 0;
+                p.roundScore = 0;
+                p.roundCorrect = 0;
+            });
+            gameState.usedQuestionIndices.clear();
+        });
+
+        // ===== كونفيتي =====
+        function launchConfetti() {
+            const container = $('confettiContainer');
+            container.innerHTML = '';
+            const colors = ['#06b6d4', '#22d3ee', '#10b981', '#34d399', '#f59e0b', '#fbbf24', '#8b5cf6', '#a78bfa', '#ef4444', '#ec4899'];
+            for (let i = 0; i < 50; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const piece = document.createElement('div');
+                piece.style.position = 'absolute';
+                piece.style.width = (6 + Math.random() * 10) + 'px';
+                piece.style.height = (6 + Math.random() * 10) + 'px';
+                piece.style.background = color;
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.left = (Math.random() * 100) + '%';
+                piece.style.top = '-20px';
+                piece.style.opacity = '0';
+                piece.style.animation = `confettiFall ${2 + Math.random() * 3}s ${Math.random() * 2}s ease-out forwards`;
+                container.appendChild(piece);
+            }
+            setTimeout(() => container.innerHTML = '', 6000);
+        }
+
+        // ===== جسيمات الخلفية =====
+        function createParticles() {
+            const container = $('particles');
+            container.innerHTML = '';
+            for (let i = 0; i < 15; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = (Math.random() * 100) + '%';
+                p.style.top = (Math.random() * 100) + '%';
+                p.style.animationDelay = (Math.random() * 10) + 's';
+                p.style.animationDuration = (6 + Math.random() * 8) + 's';
+                container.appendChild(p);
+            }
+        }
+
+        // ===== تشغيل =====
+        createParticles();
+        buildSetupScreen();
+    })();
+    function getShareText() {
+        var sorted = players.slice().sort(function(a, b) { return b.score - a.score; });
+        var text = '☦️ مسابقة أرثوذكسية - مؤتمر الشباب\n';
+        text += '🏆 الفائز: ' + sorted[0].name + ' بـ ' + sorted[0].score + ' نقطة!\n\n';
+        sorted.forEach(function(p, i) {
+            var medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '  ';
+            text += medal + ' ' + p.name + ': ' + p.score + ' نقطة (' + p.correct + ' صح)\n';
+        });
+        text += '\n✝️';
+        return text;
+    }
+
+    var _shareCardBlob = null;
+
+    function shareResult() {
+        var resultBox = document.getElementById('finalResultsBox');
+        if (!resultBox) {
+            shareTextFallback();
+            return;
+        }
+        html2canvas(resultBox, {
+            backgroundColor: '#070d19',
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            allowTaint: true,
+            onclone: function(clonedDoc) {
+                var clonedBox = clonedDoc.getElementById('finalResultsBox');
+                if (clonedBox) {
+                    clonedBox.style.background = 'linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98))';
+                    clonedBox.style.backdropFilter = 'none';
+                    clonedBox.style.webkitBackdropFilter = 'none';
+                    clonedBox.style.borderRadius = '28px';
+                    clonedBox.style.padding = '35px 25px';
+                }
+            }
+        }).then(function(canvas) {
+            var dataUrl = canvas.toDataURL('image/png');
+            var previewImg = document.getElementById('shareCardPreviewImg');
+            previewImg.src = dataUrl;
+            
+            canvas.toBlob(function(blob) {
+                _shareCardBlob = blob;
+                var shareBtn = document.getElementById('shareCardShareBtn');
+                if (navigator.share && navigator.canShare && blob) {
+                    var file = new File([blob], 'orthodox-quiz-result.png', { type: 'image/png' });
+                    var shareData = { files: [file], title: 'مسابقة أرثوذكسية', text: getShareText() };
+                    if (navigator.canShare(shareData)) {
+                        shareBtn.style.display = 'flex';
+                        shareBtn.onclick = function() {
+                            navigator.share(shareData).catch(function(){});
+                        };
+                    } else {
+                        shareBtn.style.display = 'none';
+                    }
+                } else {
+                    shareBtn.style.display = 'none';
+                }
+                document.getElementById('shareCardOverlay').classList.add('show');
+            }, 'image/png');
+        }).catch(function(err) {
+            shareTextFallback();
+        });
+    }
+
+    function shareTextFallback() {
+        var text = getShareText();
+        if (navigator.share) {
+            navigator.share({ title: 'مسابقة أرثوذكسية', text: text }).catch(function(){});
+        } else {
+            navigator.clipboard.writeText(text).then(function() {
+                showToast('تم نسخ النتيجة!');
+            }).catch(function() {
+                showToast('مش قادرين ننسخ النتيجة');
+            });
+        }
+    }
+
+    function closeShareCard() {
+        var overlay = document.getElementById('shareCardOverlay');
+        overlay.classList.remove('show');
+        var shareBtn = document.getElementById('shareCardShareBtn');
+        shareBtn.style.display = 'none';
+    }
+
+    function downloadShareCard() {
+        var resultBox = document.getElementById('finalResultsBox');
+        if (!resultBox) return;
+        html2canvas(resultBox, {
+            backgroundColor: '#070d19',
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            allowTaint: true,
+            onclone: function(clonedDoc) {
+                var clonedBox = clonedDoc.getElementById('finalResultsBox');
+                if (clonedBox) {
+                    clonedBox.style.background = 'linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98))';
+                    clonedBox.style.backdropFilter = 'none';
+                    clonedBox.style.webkitBackdropFilter = 'none';
+                    clonedBox.style.borderRadius = '28px';
+                    clonedBox.style.padding = '35px 25px';
+                }
+            }
+        }).then(function(canvas) {
+            var link = document.createElement('a');
+            link.download = 'orthodox-quiz-result.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showToast('تم تحميل الصورة!');
+        });
+    }
+
+    function copyShareText() {
+        var text = getShareText();
+        navigator.clipboard.writeText(text).then(function() {
+            showToast('تم نسخ النص!');
+        }).catch(function() {
+            showToast('مش قادرين ننسخ النص');
+        });
+    }
+
+    function showToast(msg) {
+        var existing = document.querySelector('.share-toast');
+        if (existing) existing.remove();
+        var toast = document.createElement('div');
+        toast.className = 'share-toast';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(function() { toast.classList.add('show'); }, 10);
+        setTimeout(function() { toast.classList.remove('show'); setTimeout(function(){ toast.remove(); }, 400); }, 2500);
+    }
+
+    </script>
+    <!-- =============================== -->
+    <!--       شاشة مشاركة البطاقة       -->
+    <!-- =============================== -->
+    <div class="share-card-overlay" id="shareCardOverlay">
+        <div class="share-card-preview">
+            <img id="shareCardPreviewImg" alt="بطاقة النتيجة" />
+        </div>
+        <div class="share-card-btns">
+            <button class="share-card-btn share-card-btn-share" id="shareCardShareBtn" style="display:none;">
+                <i class="bi bi-share-fill"></i> مشاركة
+            </button>
+            <button class="share-card-btn share-card-btn-download" onclick="downloadShareCard()">
+                <i class="bi bi-download"></i> تحميل
+            </button>
+            <button class="share-card-btn share-card-btn-copy" onclick="copyShareText()">
+                <i class="bi bi-clipboard"></i> نسخ النص
+            </button>
+            <button class="share-card-btn share-card-btn-close" onclick="closeShareCard()">
+                <i class="bi bi-x-lg"></i> إغلاق
+            </button>
+        </div>
+    </div>
+
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

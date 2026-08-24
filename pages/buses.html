@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>الأتوبيسات والمقاعد — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <!-- Bootstrap 5 RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <link rel="stylesheet" href="../assets/css/buses.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="seats-body">
+
+    <!-- فيديو النهاية - يظهر بعد يوم الاحد الساعة 6 -->
+    <div id="video-overlay">
+        <div class="video-container">
+            <!-- src يُعيّن بـ JavaScript عند ظهور overlay لضمان تشغيل الفيديو -->
+            <iframe id="end-video-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <p class="video-message">🎉 خلاص المؤتمر خلص 😂! أشوفك المرة الجاية ❤️</p>
+    </div>
+
+
+
+    <!-- طبقات الخلفية المتحركة -->
+    <div class="bg-layer bg-layer-1"></div>
+    <div class="bg-layer bg-layer-2">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+        <div class="floating-circle circle-4"></div>
+    </div>
+    <div class="bg-layer bg-layer-3"></div>
+
+    <!-- نافذة البحث المنبثقة (Popup) -->
+    <div id="search-popup" class="modal fade" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="searchPopupLabel">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content popup-content">
+                <button type="button" class="btn-close btn-close-white popup-close-btn" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                <div class="modal-body">
+                    <div class="popup-icon-badge"><i class="bi bi-person-check-fill"></i></div>
+                    <h5 class="popup-title" id="searchPopupLabel">دور على مكانك</h5>
+                    <p class="popup-subtitle">اكتب اسمك وهنقولك مكانك في الأتوبيس 😉</p>
+                    <div class="search-input-wrapper">
+                        <i class="bi bi-search search-input-icon"></i>
+                        <input type="text" id="search-input" class="form-control form-control-lg text-center mb-3" placeholder="اكتب اسمك هنا...">
+                        <div id="search-options"></div>
+                    </div>
+                    <button id="search-btn" class="btn btn-primary btn-lg w-100 rounded-3 fw-bold">
+                        <i class="bi bi-search me-2"></i>ورّيني مكاني
+                    </button>
+                    <div id="search-result" class="result-msg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة خطأ تحميل البيانات -->
+    <div id="error-overlay" class="error-overlay">
+        <div class="error-overlay-content">
+            <div class="error-overlay-icon"><i class="bi bi-wifi-off"></i></div>
+            <h2>آسف، حصلت مشكلة!</h2>
+            <p>مقدرش أحمل بيانات المؤتمر دلوقتي<br>اتأكد من النت وحاول تاني</p>
+            <button id="retry-btn" class="retry-btn" onclick="location.reload()">
+                <i class="bi bi-arrow-clockwise me-2"></i>حاول تاني
+            </button>
+        </div>
+    </div>
+
+    <!-- نافذة المشاركة المنبثقة -->
+    <div id="share-modal" class="share-modal">
+        <div class="share-modal-content">
+            <button class="share-close-btn" onclick="closeShareModal()"><i class="bi bi-x-lg"></i></button>
+            <h2><i class="bi bi-share-fill me-2"></i>شارك مكانك</h2>
+            <div class="share-preview" id="share-preview">
+                <span class="share-preview-icon">🚍</span>
+                <div class="share-preview-name" id="share-name">ابحث عن اسمك الأول!</div>
+                <div class="share-preview-info" id="share-info">دور على مكانك وشاركه مع صحابك</div>
+            </div>
+            <div class="share-buttons" id="share-buttons">
+                <a class="share-btn-item share-whatsapp" id="share-whatsapp" href="#" target="_blank">
+                    <i class="bi bi-whatsapp"></i>واتساب
+                </a>
+                <a class="share-btn-item share-telegram" id="share-telegram" href="#" target="_blank">
+                    <i class="bi bi-telegram"></i>تليجرام
+                </a>
+                <button class="share-btn-item share-copy" id="share-copy-btn" onclick="copyShareLink()">
+                    <i class="bi bi-link-45deg"></i>نسخ الرابط
+                </button>
+                <button class="share-btn-item share-screenshot" onclick="takeScreenshot()">
+                    <i class="bi bi-camera"></i>سكرين شوت
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- محتوى الصفحة الرئيسي -->
+    <div id="main-content">
+        <!-- Navbar slot (يُحقن من partials/navbar.html) -->
+        <div id="app-navbar-slot"></div>
+
+        <!-- بطاقة مسار الرحلة والخريطة التفاعلية المدمجة المحدثة -->
+        <div class="container mt-3 px-3">
+            <div class="map-card-unified">
+                <div class="map-card-header d-flex justify-content-between align-items-center" id="map-card-toggle" style="cursor: pointer;">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-4">🗺️</span>
+                        <div>
+                            <span class="fw-bold text-white d-block" style="font-size:1rem;">مسار التحرك وخريطة الرحلة</span>
+                            <span class="text-secondary d-block" style="font-size:0.75rem;">اضغط هنا لعرض خريطة المسار ونقطة الانطلاق والوصول</span>
+                        </div>
+                    </div>
+                    <i class="bi bi-chevron-down text-secondary fs-5" id="map-toggle-arrow"></i>
+                </div>
+                
+                <div class="map-card-body" id="map-card-content" style="display: none;">
+                    <div class="map-route">
+                        <div class="route-point route-start">
+                            <div class="route-dot route-dot-start"><i class="bi bi-building"></i></div>
+                            <div class="route-info">
+                                <span class="route-label">مكان الانطلاق</span>
+                                <span class="route-name">بيت الماء الحي بنها</span>
+                            </div>
+                        </div>
+                        <div class="route-line">
+                            <div class="route-line-inner"></div>
+                            <div class="route-bus-icon"><i class="bi bi-bus-front-fill"></i></div>
+                        </div>
+                        <div class="route-point route-end">
+                            <div class="route-dot route-dot-end"><i class="bi bi-flag-fill"></i></div>
+                            <div class="route-info">
+                                <span class="route-label">الوجهة</span>
+                                <span class="route-name">بيت الماء الحي Villa</span>
+                                <span class="route-address">جمعية أحمد عرابى، بنها، القاهرة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="route-distance-info"></div>
+                    <div class="map-actions">
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=%D9%83%D9%86%D9%8A%D8%B3%D8%A9+%D9%85%D8%A7%D8%B1%D9%85%D8%B1%D9%82%D8%B3+%D8%A7%D9%84%D8%B1%D8%B3%D9%88%D9%84+%D8%A8%D8%A7%D9%84%D9%85%D9%86%D8%B4%D9%8A%D8%A9&destination=King+land+villa%2C+6GMP%2BW46%2C+%D8%AC%D9%85%D8%B9%D9%8A%D8%A9+%D8%A7%D8%AD%D9%85%D8%AF+%D8%B9%D8%B1%D8%A7%D8%A8%D9%89%2C+%D8%A7%D9%84%D8%B9%D8%A8%D9%88%D8%B1%2C+%D9%85%D8%AD%D8%A7%D9%81%D8%B8%D8%A9+%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%2C+6363213&travelmode=driving" target="_blank" rel="noopener" class="map-btn map-btn-nav">
+                            <i class="bi bi-map me-2"></i>افتح الخريطة
+                        </a>
+                        <a href="https://www.google.com/maps/place/6GMP%2BW46+%D8%AC%D9%85%D8%B9%D9%8A%D8%A9+%D8%A7%D8%AD%D9%85%D8%AF+%D8%B9%D8%B1%D8%A7%D8%A8%D9%89+%D8%A7%D9%84%D8%B9%D8%A8%D9%88%D8%B1" target="_blank" rel="noopener" class="map-btn map-btn-loc">
+                            <i class="bi bi-geo me-2"></i>مكان الوجهة
+                        </a>
+                    </div>
+                    <div class="map-embed mt-3">
+                        <iframe 
+                            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3451.5!2d31.44!3d30.22!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDEzJzEyLjAiTiAzMcKwMjYnMjQuMCJF!5e0!3m2!1sar!2seg!4v1" 
+                            width="100%" height="200" style="border:0; border-radius:16px;" allowfullscreen="" loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الحاوية التي سيتم رسم الأوتوبيسات بداخلها عبر الجافاسكريبت -->
+        <div class="buses-wrapper container d-flex flex-column align-items-center gap-4 py-4" id="buses-wrapper"></div>
+
+        <!-- إحصائيات المؤتمر بالكامل -->
+        <div id="overall-stats" class="container text-center p-4 mx-auto mb-5 overall-stats-card">
+            <h2 class="mb-3 text-white fs-4">إحصائيات المؤتمر كله 📊</h2>
+            <div class="row g-3 mb-3">
+                <div class="col-6">
+                    <div class="p-3 rounded-4 text-center stat-card stat-card-available">
+                        فاضي <br><span id="global-avail" class="fs-2 fw-bold">0</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded-4 text-center stat-card stat-card-booked">
+                        محجوز <br><span id="global-booked" class="fs-2 fw-bold">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-secondary">
+                عدد مقاعد المؤتمر كلها (الأتوبيسات مع بعض): <span id="global-total" class="fw-bold text-white">0</span> مقعد
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-3 text-secondary small">
+            <div class="container">
+                مؤتمر الشباب ❤️
+            </div>
+        </footer>
+
+        <!-- زر البحث العائم -->
+        <button id="open-search-btn" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-lg">
+            <i class="bi bi-search me-2"></i>دور على مكانك
+        </button>
+
+        <!-- زر المشاركة العائم -->
+        <button id="share-btn" class="btn share-float-btn rounded-pill fw-bold shadow-lg">
+            <i class="bi bi-share-fill me-2"></i>شارك مكانك
+        </button>
+    </div>
+
+    <!-- Bottom Nav slot -->
+    <div id="app-bottomnav-slot"></div>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- html2canvas for seat sharing screenshots -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/identity.js"></script>
+    <script src="../assets/js/buses.js"></script>
+    <script>
+        YC.loadPartials().then(() => {
+            const container = document.getElementById('navbar-actions-container');
+            if (container) {
+                container.innerHTML = `
+                    <a href="prayer.html" id="nav-prayer-btn" class="btn nav-action-btn" title="الصلوات الأجيبية">
+                        <i class="bi bi-book-half"></i>
+                    </a>
+                    <button id="nav-search-btn" class="btn nav-action-btn" title="بحث">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <button id="nav-top-btn" class="btn nav-action-btn" title="فوق" style="display:none;">
+                        <i class="bi bi-arrow-up"></i>
+                    </button>
+                `;
+            }
+        });
+    </script>
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+</body>
+</html>

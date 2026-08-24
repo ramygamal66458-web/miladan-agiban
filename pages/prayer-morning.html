@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صلاة باكر - القداس القبطي الأرثوذكسي</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Google Fonts for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Base App Styles -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    
+    <style>
+        :root {
+            --church-gold: #d4a843;
+            --church-gold-light: #e6d5a8;
+            --church-gold-glow: #f0c75e;
+            --church-blue: #1a3461;
+            --church-blue-deep: #0f1f3e;
+            --church-blue-light: #3d5a8a;
+            --church-burgundy: #8b1a3a;
+            --church-burgundy-deep: #5c1230;
+            --church-cream: #fffef9;
+            --church-bg: #0e1a30;
+            --church-bg-light: #162244;
+            --text-primary: #ffffff;
+            --text-secondary: #f3f4f6;
+            --text-muted: #9ca3af;
+            --shadow-soft: 0 4px 16px rgba(0,0,0,0.25);
+            --shadow-medium: 0 8px 32px rgba(0,0,0,0.35);
+            --shadow-gold: 0 4px 20px rgba(212, 168, 67, 0.2);
+            --glass-bg: rgba(15, 23, 42, 0.85);
+            --glass-border: rgba(212, 168, 67, 0.22);
+            --glass-blur: 20px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* ================= Navbar ================= */
+        .app-nav {
+            background: linear-gradient(135deg, rgba(11, 17, 33, 0.95) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(7, 13, 25, 0.95) 100%);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.25);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .app-nav .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 700px; margin: 0 auto; }
+        .app-nav .nav-back-link {
+            display: flex; align-items: center; gap: 6px;
+            color: var(--church-gold-light); text-decoration: none;
+            font-size: 0.9rem; font-weight: 700;
+            padding: 7px 14px; border-radius: 50px;
+            background: rgba(212, 168, 67, 0.1); border: 1px solid rgba(212, 168, 67, 0.3);
+            transition: all 0.3s ease;
+        }
+        .app-nav .nav-back-link:hover { background: rgba(212, 168, 67, 0.2); border-color: var(--church-gold-glow); }
+        .app-nav .nav-back-link:active { transform: scale(0.95); }
+        .app-nav .nav-brand {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; justify-content: center;
+            transition: opacity 0.25s ease, transform 0.2s ease;
+        }
+        .app-nav .nav-brand:hover { opacity: 0.85; }
+        .app-nav .nav-brand:active { transform: scale(0.96); }
+        .app-nav .nav-brand-logo {
+            width: 32px; height: 32px; flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.2) 0%, rgba(212, 168, 67, 0.08) 100%);
+            border: 1px solid rgba(212, 168, 67, 0.35);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 8px rgba(212, 168, 67, 0.15);
+        }
+        .app-nav .nav-brand-logo i { font-size: 1rem; color: var(--church-gold-light); }
+        .app-nav .nav-title { font-weight: 900; font-size: 1rem; color: var(--church-gold-light); letter-spacing: 0.5px; }
+        .app-nav .nav-subtitle { font-size: 0.62rem; color: var(--text-muted); letter-spacing: 1px; margin-top: 1px; }
+        .app-nav .spacer { width: 70px; }
+        body {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            background: linear-gradient(160deg, #0a1225 0%, #0e1a30 20%, #142040 40%, #0e1a30 70%, #0a1225 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 2;
+            font-size: 1.15rem;
+            padding-bottom: 100px;
+            position: relative;
+            min-height: 100vh; min-height: 100dvh;
+        }
+        
+        /* Animated background glow orbs */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 168, 67, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb1 20s ease-in-out infinite;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -15%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(26, 52, 97, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb2 25s ease-in-out infinite;
+        }
+        
+        @keyframes floatOrb1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-40px, 30px) scale(1.05); }
+            66% { transform: translate(20px, -20px) scale(0.95); }
+        }
+        
+        @keyframes floatOrb2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.08); }
+            66% { transform: translate(-25px, 15px) scale(0.92); }
+        }
+        
+        /* Floating particles container */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--church-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat linear infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header Styles */
+        .prayer-header {
+            background: linear-gradient(135deg, var(--church-blue-deep) 0%, var(--church-blue) 35%, var(--church-burgundy-deep) 75%, var(--church-burgundy) 100%);
+            color: white;
+            text-align: center;
+            padding: 3.5rem 1.5rem 2.5rem;
+            border-bottom: 3px solid var(--church-gold);
+            box-shadow: 0 8px 40px rgba(212, 168, 67, 0.15), 0 4px 20px rgba(0,0,0,0.4);
+            position: relative;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        /* Shimmer effect on header */
+        .prayer-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.08), transparent);
+            animation: headerShimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        .prayer-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--church-gold-glow), var(--church-gold), var(--church-gold-glow), transparent);
+            animation: goldPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes headerShimmer {
+            0%, 100% { left: -100%; }
+            50% { left: 150%; }
+        }
+        
+        @keyframes goldPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .prayer-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 12px rgba(212, 168, 67, 0.3), 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(180deg, #ffffff 0%, #f0dca0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .prayer-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.92;
+            max-width: 750px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.9;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+        }
+        
+        /* Navigation Button */
+        #navToggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--church-blue), var(--church-burgundy));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            border: 2px solid var(--church-gold);
+            box-shadow: 0 4px 20px rgba(212, 168, 67, 0.25), var(--shadow-medium);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #navToggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(212, 168, 67, 0.4), 0 8px 25px rgba(0,0,0,0.3);
+            border-color: var(--church-gold-glow);
+        }
+        
+        #navToggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        #navToggle.active i {
+            transform: rotate(90deg);
+        }
+        
+        #navMenu {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 340px;
+            height: 70vh;
+            max-height: 75vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--glass-border);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            
+            /* transitions */
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        #navMenu.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        
+        .nav-header {
+            background: linear-gradient(135deg, var(--church-blue), var(--church-burgundy-deep));
+            color: white;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            flex-shrink: 0;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        
+        .nav-close {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+        
+        .nav-close:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: var(--church-gold-light);
+        }
+        
+        .nav-items {
+            padding: 8px 0;
+            overflow-y: auto;
+            flex: 1;
+            scrollbar-width: thin;
+            scrollbar-color: var(--church-gold) rgba(255,255,255,0.05);
+        }
+        
+        .nav-items::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .nav-items::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.03);
+            border-radius: 3px;
+        }
+        
+        .nav-items::-webkit-scrollbar-thumb {
+            background: var(--church-gold);
+            border-radius: 3px;
+        }
+        
+        .nav-item {
+            padding: 11px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+        
+        .nav-item:hover {
+            background: rgba(212, 168, 67, 0.1);
+            color: var(--church-gold-light);
+            padding-right: 15px;
+            border-right: 3px solid var(--church-gold);
+        }
+        
+        .nav-item.active {
+            background: rgba(212, 168, 67, 0.15);
+            color: var(--church-gold-glow);
+            font-weight: 600;
+            border-right: 3px solid var(--church-gold-glow);
+            padding-right: 16px;
+        }
+        
+        .nav-item i {
+            margin-left: 12px;
+            color: var(--church-gold);
+            width: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            transition: color 0.25s ease;
+        }
+        
+        .nav-item:hover i,
+        .nav-item.active i {
+            color: var(--church-gold-glow);
+        }
+        
+        /* Prayer Content Sections */
+        .prayer-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-radius: 16px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 1.8rem;
+            box-shadow: var(--shadow-soft), 0 0 0 1px var(--glass-border);
+            border-top: 3px solid var(--church-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Subtle inner glow on cards */
+        .prayer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(180deg, rgba(212, 168, 67, 0.04) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .prayer-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 168, 67, 0.15), 0 4px 20px rgba(0,0,0,0.3), 0 0 0 1px rgba(212, 168, 67, 0.25);
+            border-top-color: var(--church-gold-glow);
+        }
+        
+        .section-title {
+            color: var(--church-gold-light);
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 1.3rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid rgba(212, 168, 67, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--church-gold), transparent);
+        }
+        
+        .section-title i {
+            color: var(--church-gold-glow);
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 4px rgba(212, 168, 67, 0.3));
+        }
+        
+        .prayer-text {
+            font-size: calc(1.25rem * var(--reading-scale, 1));
+            text-align: justify;
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 2.2;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .psalm-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--church-gold), var(--church-burgundy-deep));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(212, 168, 67, 0.3);
+        }
+        
+        .gospel-text {
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.08), rgba(212, 168, 67, 0.02));
+            border-right: 4px solid var(--church-gold);
+            padding: 1.4rem 1.6rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.3rem 0;
+            font-style: normal;
+            position: relative;
+            z-index: 1;
+            box-shadow: inset 2px 0 8px rgba(212, 168, 67, 0.05);
+        }
+        
+        .gospel-text p {
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .gospel-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .coptic-text {
+            background: rgba(212, 168, 67, 0.06);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            color: var(--church-gold-light);
+            border: 1px dashed rgba(212, 168, 67, 0.3);
+            direction: ltr;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .amen {
+            text-align: left;
+            font-weight: 700;
+            color: var(--church-gold-glow);
+            margin-top: 1.2rem;
+            font-size: 1.35rem;
+            text-shadow: 0 0 10px rgba(212, 168, 67, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Decorative divider */
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            color: var(--church-gold);
+            font-weight: 500;
+            font-size: 1rem;
+            opacity: 0;
+            height: 0;
+        }
+        
+        /* Section decorative divider between prayer sections */
+        .prayer-section + .prayer-section {
+            position: relative;
+        }
+        
+        .psalms-container .prayer-section {
+            border-top-color: var(--church-gold);
+        }
+        
+        /* Footer */
+        .prayer-footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding: 2.5rem 2rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            border-top: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-cross {
+            font-size: 2.5rem;
+            color: var(--church-gold);
+            margin-bottom: 10px;
+            display: block;
+            text-shadow: 0 0 15px rgba(212, 168, 67, 0.4);
+            animation: crossGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes crossGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(212, 168, 67, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(212, 168, 67, 0.6), 0 0 40px rgba(212, 168, 67, 0.2); }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+        
+        /* Highlight animation */
+        .section-highlight {
+            animation: highlight 1.8s ease;
+        }
+        
+        @keyframes highlight {
+            0% { background-color: rgba(212, 168, 67, 0.25); border-top-color: var(--church-gold-glow); }
+            50% { background-color: rgba(212, 168, 67, 0.1); }
+            100% { background-color: var(--glass-bg); }
+        }
+        
+        /* Fade-in animation for sections on scroll */
+        .prayer-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Staggered delay for sections */
+        .prayer-section:nth-child(1) { animation-delay: 0.05s; }
+        .prayer-section:nth-child(2) { animation-delay: 0.1s; }
+        .prayer-section:nth-child(3) { animation-delay: 0.15s; }
+        .prayer-section:nth-child(4) { animation-delay: 0.2s; }
+        .prayer-section:nth-child(5) { animation-delay: 0.25s; }
+        .prayer-section:nth-child(6) { animation-delay: 0.3s; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body { font-size: 1.1rem; }
+            .prayer-title { font-size: 2.2rem; }
+            .prayer-subtitle { font-size: 1.15rem; padding: 0 10px; }
+            .prayer-section { padding: 1.6rem 1.4rem; }
+            .section-title { font-size: 1.5rem; }
+            .prayer-text { font-size: calc(1.15rem * var(--reading-scale, 1)); }
+            #navMenu { width: 92%; left: 4%; bottom: 95px; max-height: 70vh; }
+            #navToggle { width: 55px; height: 55px; bottom: 20px; left: 20px; }
+            .prayer-header { padding: 2.5rem 1rem 2rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .prayer-header { padding: 2rem 0.8rem; }
+            .prayer-title { font-size: 1.9rem; }
+            .prayer-subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 1.4rem; gap: 8px; }
+            .prayer-text { font-size: 1.1rem; line-height: 2; }
+            #navMenu { width: 95%; left: 2.5%; }
+            .nav-item { font-size: 1rem; padding: 10px 16px; }
+            .prayer-section { padding: 1.3rem 1.1rem; }
+        }
+        
+        /* Back to top button */
+        #backToTop {
+            position: fixed;
+            bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--church-blue), var(--church-blue-deep));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            border: 2px solid var(--church-gold);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 998;
+            box-shadow: 0 4px 15px rgba(212, 168, 67, 0.2), var(--shadow-medium);
+            transition: all 0.3s ease;
+        }
+        
+        #backToTop:hover {
+            background: linear-gradient(135deg, var(--church-burgundy), var(--church-burgundy-deep));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(212, 168, 67, 0.3), var(--shadow-medium);
+            border-color: var(--church-gold-glow);
+        }
+
+        #backToTop:active {
+            transform: scale(0.92);
+        }
+        
+        #backToTop.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar slot -->
+    <div id="app-navbar-slot"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="prayer-header" style="position: relative;">
+        <h1 class="prayer-title">صلاة باكر</h1>
+        <p class="prayer-subtitle">في هذه الصلاة نشكر الله على انقضاء الليل بسلام، ونطلب من أجل نهار مضيء بالأعمال الصالحة، وفيها نذكر قيامة السيد المسيح في باكر النهار فنمجده على قيامته.</p>
+    </header>
+    
+    <div class="container">
+        <!-- مقدمة كل ساعة -->
+        <section id="intro" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-cross"></i> مقدمة كل ساعة</h2>
+            <p class="prayer-text">باسم الآب والابن والروح القدس</p>
+            <p class="prayer-text">الإله الواحد آمين.</p>
+            <p class="prayer-text">يا رب ارحم. يا رب ارحم. يا رب بارك. آمين.</p>
+            <p class="prayer-text">المجد للآب والابن والروح القدس الآن وكل أوان وإلى دهر الدهور آمين.</p>
+        </section>
+        
+        <!-- الصلاة الربانية -->
+        <section id="lords-prayer" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-pray"></i> الصلاة الربانية</h2>
+            <p class="prayer-text">اللهم اجعلنا مستحقين أن نقول بشكر:</p>
+            <p class="prayer-text">أبانا الذي في السموات. ليتقدس اسمك. ليأت ملكوتك. لتكن مشيئتك. كما في السماء كذلك على الأرض. خبزنا الذي للغد أعطنا اليوم. وأغفر لنا ذنوبنا كما نغفر نحن أيضا للمذنبين إلينا. ولا تدخلنا في تجربة. لكن نجنا من الشرير. بالمسيح يسوع ربنا لأن لك الملك والقوة والمجد إلى الأبد. آمين.</p>
+        </section>
+        
+        <!-- صلاة الشكر -->
+        <section id="thanksgiving" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-heart"></i> صلاة الشكر</h2>
+            <p class="prayer-text">فلنشكر صانع الخيرات الرحوم الله، أبا ربنا وإلهنا ومخلصنا يسوع المسيح، لأنه سترنا وأعاننا، وحفظنا، وقبلنا إليه وأشفق علينا وعضدنا، وأتى بنا إلى هذه الساعة. هو أيضا فلنسأله أن يحفظنا في هذا اليوم المقدس وكل أيام حياتنا بكل سلام. الضابط الكل الرب إلهنا.</p>
+            <p class="prayer-text">أيها السيد الإله ضابط الكل أبو ربنا وإلهنا ومخلصنا يسوع المسيح، نشكرك على كل حال ومن أجل كل حال، وفى كل حال، لأنك سترتنا، وأعنتنا، وحفظتنا، وقبلتنا إليك، وأشفقت علينا، وعضدتنا، وأتيت بنا إلى هذه الساعة.</p>
+            <p class="prayer-text">من أجل هذا نسأل ونطلب من صلاحك يا محب البشر، امنحنا أن نكمل هذا اليوم المقدس وكل أيام حياتنا بكل سلام مع خوفك. كل حسد، وكل تجربة وكل فعل الشيطان ومؤامرة الناس الأشرار، وقيام الأعداء الخفيين والظاهريين، انزعها عنا وعن سائر شعبك، وعن موضعك المقدس هذا. أما الصالحات والنافعات فارزقنا إياها. لأنك أنت الذي أعطيتنا السلطان أن ندوس الحيات والعقارب وكل قوة العدو. ولا تدخلنا في تجربة، لكن نجنا من الشرير.</p>
+            <p class="prayer-text">بالنعمة والرأفات ومحبة البشر اللواتي لابنك الوحيد ربنا وإلهنا ومخلصنا يسوع المسيح. هذا الذي من قبله المجد والإكرام والعزة والسجود تليق بك معه مع الروح القدس المحيي المساوي لك الآن وكل أوان وإلى دهر الدهور آمين.</p>
+        </section>
+        
+        <!-- المزمور الخمسون -->
+        <section id="psalm50" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-music"></i> المزمور الخمسون</h2>
+            <p class="prayer-text">ارحمني يا الله كعظيم رحمتك، ومثل كثرة رأفتك تمحو إثمي. اغسلني كثيرا من إثمي ومن خطيتي طهرني، لأني أنا عارف بإثمي وخطيتي أمامي في كل حين. لك وحدك أخطأت، والشر قدامك صنعت. لكي تتبرر في أقوالك. وتغلب إذا حوكمتُ. لأني هاأنذا بالإثم حبل بي، وبالخطايا ولدتني أمي. لأنك هكذا قد أحببت الحق، إذ أوضحت لي غوامض حكمتك ومستوراتها. تنضح على بزوفاك فأطهر، تغسلني فأبيض أكثر من الثلج. تسمعني سرورا وفرحا، فتبتهج عظامي المنسحقة. اصرف وجهك عن خطاياي، وامح كل آثامي. قلبا نقيا اخلق في يا الله، وروحا مستقيما جدده في أحشائي. لا تطرحني من قدام وجهك وروحك القدوس لا تنزعه منى. امنحني بهجة خلاصك، وبروح رئاسي عضدني فأعلم الأثمة طرقك والمنافقون إليك يرجعون، نجني من الدماء يا الله إله خلاصي، فيبتهج لساني بعدلك. يا رب افتح شفتي، فيخبر فمي بتسبيحك. لأنك لو آثرت الذبيحة لكنت الآن أعطي، ولكنك لا تسر بالمحرقات، فالذبيحة لله روح منسحق. القلب المنكسر والمتواضع لا يرذله الله، أنعم يا رب بمسرتك على صهيون، ولتبن أسوار أورشليم. حينئذ تسر بذبائح البر قربانا ومحرقات ويقربون على مذابحك العجول. هلليلويا.</p>
+        </section>
+        
+        <!-- بدء الصلاة -->
+        <section id="prayer-start" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-church"></i> بدء الصلاة</h2>
+            
+            <h3 class="mb-3 mt-4" style="color: var(--church-gold-light); font-size: 1.3rem; border-right: 3px solid var(--church-gold); padding-right: 12px;">هلم نسجد:</h3>
+            <p class="prayer-text">هلم نسجد هلم نسأل المسيح إلهنا. هلم نسجد، هلم نطلب من المسيح ملكنا. هلم نسجد، هلم نتضرع إلى المسيح مخلصنا. يا ربنا يسوع المسيح كلمة الله إلهنا، بشفاعة القديسة مريم وجميع قديسيك، احفظنا ولنبدأ بدءا حسنا. ارحمنا كإرادتك إلى الأبد. الليل عبر، نشكرك يا رب ونسأل أن تحفظنا في هذا اليوم بغير خطية وأنقذنا.</p>
+            
+            <h3 class="mb-3 mt-4" style="color: var(--church-gold-light); font-size: 1.3rem; border-right: 3px solid var(--church-gold); padding-right: 12px;">البولس من رسالة أفسس (4: 1-5)</h3>
+            <p class="prayer-text">أسألكم أنا الأسير في الرب أن تسلكوا كما يحق للدعوة التي دعيتم إليها، بكل تواضع القلب والوداعة وطول الأناة، محتملين بعضكم بعضا بالمحبة، مسرعين إلى حفظ وحدانية الروح برباط الصلح الكامل لكي تكونوا جسدًا واحدًا وروحًا واحدا، كما دعيتم في رجاء دعوتكم الواحد. ربٍّ واحد. وإيمان واحد. ومعمودية واحدة.</p>
+            
+            <h3 class="mb-3 mt-4" style="color: var(--church-gold-light); font-size: 1.3rem; border-right: 3px solid var(--church-gold); padding-right: 12px;">من إيمان الكنيسة</h3>
+            <p class="prayer-text">واحد هو الله أبو كل أحد. واحد هو أيضا ابنه يسوع المسيح الكلمة، الذي تجسد ومات وقام من الأموات في اليوم الثالث وأقامنا معه، واحد هو الروح القدس المعزى الواحد بأقنومه، منبثق من الآب، يطهر كل البرية. يعلمنا أن نسجد للثالوث القدوس بلاهوت واحد وطبيعة واحدة، نسبحه ونباركه إلى الأبد. آمين.</p>
+        </section>
+        
+        <!-- بدء صلاة باكر -->
+        <section id="bakkar-start" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-sun"></i> بدء صلاة باكر</h2>
+            <p class="prayer-text">صلاة باكر من النهار المبارك، أقدمها للمسيح ملكي وإلهي، وأرجوه أن يغفر لي خطاياي.</p>
+            <p class="prayer-text">من مزامير معلمنا داود النبي بركاته علينا أمين.</p>
+        </section>
+        
+        <!-- المزامير -->
+        <div class="psalms-container">
+            <!-- المزمور 1 -->
+            <section id="psalm1" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">1</span> المزمور الأول</h2>
+                <p class="prayer-text">طوبى للرجل الذي لم يسلك في مشورة المنافقين. وفى طريق الخطاة لم يقف، وفى مجلس المستهزئين لم يجلس. لكن في ناموس الرب إرادته، وفى ناموسه يلهج نهارا وليلا. فيكون كالشجرة المغروسة على مجارى المياه التي تعطى ثمرها في حينه. وورقها لا ينتثر، وكل ما يصنع ينجح فيه. ليس كذلك المنافقون، ليس كذلك. لكنهم كالهباء الذي تذريه الريح عن وجه الأرض. فلهذا لا يقوم المنافقون في الدينونة، ولا الخطاة في مجمع الصديقين. لأن الرب يعرف طريق الأبرار، وأما طريق المنافقين فتباد. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 2 -->
+            <section id="psalm2" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">2</span> المزمور الثاني</h2>
+                <p class="prayer-text">لماذا ارتجت الأمم، وتفكرت الشعوب في الباطل. قام ملوك الأرض وتآمر الرؤساء معا على الرب وعلى مسيحه قائلين: لنقطع أغلالهما، ولنطرح عنا نيرهما. الساكن في السموات يضحك بهم، والرب يستهزئ بهم. حينئذ يكلمهم بغضبه، وبرجزه يرجفهم. أنا أقمته ملكا على صهيون جبل قدسه، لأكرز بأمر الرب. الرب قال لي: أنت ابني، وأنا اليوم ولدتك. اسألني فأعطيك الأمم ميراثك، وسلطانك إلى أقطار الأرض. لترعاهم بقضيب من حديد. ومثل آنية الفخار تسحقهم. فالآن أيها الملوك افهموا، وتأدبوا يا جميع قضاة الأرض اعبدوا الرب بخشية. وهللوا له برعدة. الزموا الأدب لئلا يغضب الرب فتضلوا عن طريق الحق. عندما يتقد غضبه بسرعة، طوبى لجميع المتكلين عليه هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 3 -->
+            <section id="psalm3" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">3</span> المزمور الثالث</h2>
+                <p class="prayer-text">يا رب لماذا كثر الذين يحزنونني، كثيرون قاموا علي. كثيرون يقولون لنفسي، ليس له خلاص بإلهه. أنت يا رب أنت هو ناصري، مجدي ورافع رأسي. بصوتي إلى الرب صرخت. فاستجاب لي من جبل قدسه. أنا اضطجعت ونمت، ثم استيقظت لأن الرب ناصري. فلا أخاف من ربوات الجموع المحيطين بي القائمين على. قم يا رب خلصني يا إلهي، لأنك ضربت كل من يعاديني باطلا. أسنان الخطاة سحقتها. للرب الخلاص وعلى شعبه بركته. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 4 -->
+            <section id="psalm4" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">4</span> المزمور الرابع</h2>
+                <p class="prayer-text">إذ دعوتُ استجبتَ لي يا إله بري. في الشدة فرجت عنى. تراءف على يا رب واسمع صلاتي. يا بني البشر، حتى متى تثقل قلوبكم؟ لماذا تحبون الباطل وتبتغون الكذب؟ اعلموا أن الرب قد جعل صفيه عجبا. الرب يستجيب لي إذا ما صرخت إليه. اغضبوا ولا تخطئوا، الذي تقولونه في قلوبكم اندموا عليه في مضاجعكم. اذبحوا ذبيحة البر، وتوكلوا على الرب. كثيرون يقولون: من يرينا الخيرات؟ قد أضاء علينا نور وجهك يا رب. أعطيت سرورا لقلبي أوفر من الذين كثرت حنطتهم وخمرهم وزيتهم. فبالسلامة أضطجع أيضا وأنام، لأنك أنت وحدك يا رب أسكنتني على الرجاء هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 5 -->
+            <section id="psalm5" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">5</span> المزمور الخامس</h2>
+                <p class="prayer-text">أنصت يا رب لكلماتي، واسمع صراخي. أصغ إلى صوت طلبتي يا ملكي وإلهي، لأني إليك أصلى. يا رب بالغداة تسمع صوتي، بالغداة أقف أمامك وتراني. لأنك إله لا تشاء الإثم، ولا يساكنك من يصنع الشر. ولا يثبت مخالفو الناموس أمام عينيك. يا رب أبغضت جميع فاعلي الإثم، وتهلك كل الناطقين بالكذب. رجل الدماء والغاش يرذله الرب. أما أنا فبكثرة رحمتك أدخل بيتك، وأسجد قدام هيكل قدسك بمخافتك. اهدني يا رب ببرك. من أجل أعدائي سهل أمامي طريقك. لأن ليس في أفواههم صدق. باطل هو قلبهم. حنجرتهم قبر مفتوح. وبألسنتهم قد غشوا. فدنهم يا لله. وليسقطوا من جميع مؤامراتهم وككثرة نفاقهم استأصلهم، لأنهم قد أغضبوك يا رب. وليفرح جميع المتكلين عليك، إلى الأبد يسرون وتحل فيهم. ويفتخر بك كل الذين يحبون اسمك. لأنك أنت باركت الصديق يا رب. كما بترس المسرة كللتنا. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 6 -->
+            <section id="psalm6" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">6</span> المزمور السادس</h2>
+                <p class="prayer-text">يا رب لا تبكتني بغضبك، ولا تؤدبني بسخطك. ارحمني يا رب فإني ضعيف، اشفني يا رب فإن عظامي قد اضطربت ونفسي قد انزعجت جدا. وأنت يا رب فإلي متى؟ عد ونج نفسي، وأحيني من أجل رحمتك. لأنه ليس في الموت من يذكرك ولا في الجحيم من يعترف لك. تعبت في تنهدي. أعوم كل ليلة سريري، وبدموعي أبل فراشي. تعكرت من الغضب عيناي. شاخت من سائر أعدائي . ابعدوا عنى يا جميع فاعلي الإثم. لأن الرب قد سمع صوت بكائي. الرب سمع تضرعي، الرب لصلاتي قبل، فليَخزَ وليضطرب جدا جميع أعدائي، وليرتدوا إلى ورائهم بالخزي سريعا جدا. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 8 -->
+            <section id="psalm8" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">8</span> المزمور الثامن</h2>
+                <p class="prayer-text">أيها الرب ربنا، ما أعجب اسمك في الأرض كلها! لأنه قد ارتفع عظم جلالك فوق السموات. من أفواه الأطفال والرضعان هيأت سبحا، من أجل أعدائك، لتسكت عدوا ومنتقما. لأني أرى السموات أعمال أصابعك. القمر والنجوم أنت أسستها. من هو الإنسان حتى تذكره، أو ابن الإنسان حتى تفتقده؟! أنقصته قليلا عن الملائكة. بالمجد والكرامة توجته، وعلى أعمال يديك أقمته. كل شيء أخضعت تحت قدميه، الغنم والبقر جميعا وأيضا بهائم الحقل، وطيور السماء وأسماك البحر السالكة في البحار. أيها الرب ربنا. ما أعجب اسمك في الأرض كلها. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 11 -->
+            <section id="psalm11" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">11</span> المزمور الحادي عشر</h2>
+                <p class="prayer-text">خلصني يا رب فإن البار قد فني، وقد قلت الأمانة من بنى البشر. تكلم كل واحد مع قريبه بالأباطيل. شفاه غاشة في قلوبهم وبقلوبهم تخاطبوا. يستأصل الرب جميع الشفاه الغاشة، واللسانَ الناطق بالعظائم. الذين قالوا: نعظم ألسنتنا شفاهنا معنا، فمن هو رب علينا؟! من أجل شقاء المساكين وتنهد البائسين الآن أقوم، يقول الرب، أصنع الخلاص علانية. كلام الرب كلام نقي، فضة محماة مجربة في الأرض، قد صفيت سبعة أضعاف. وأنت يا رب تنجينا وتحفظنا من هذا الجيل وإلى الدهر. المنافقون حولنا يمشون. مثل ارتفاعك أكثرت أعمار بنى البشر. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 12 -->
+            <section id="psalm12" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">12</span> المزمور الثاني عشر</h2>
+                <p class="prayer-text">إلى متى يا رب تنساني؟ إلى الانقضاء؟ حتى متى تصرف وجهك عني؟ إلى متى أردد هذه المشورات في نفسي، وهذه الأوجاع في قلبي النهار كله؟ إلى متى يرتفع عدوى علي؟ انظر واستجب لي يا ربي وإلهي. أنر عيني لئلا أنام نوم الموت، لئلا يقول عدوي: إني قد قويت عليه. الذين يحزنونني يتهللون إن أنا زللت. أما أنا فعلى رحمتك توكلت. يبتهج قلبي بخلاصك. أسبح الرب المحسنَ إلي، وأرتل لاسم الرب العلي. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 14 -->
+            <section id="psalm14" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">14</span> المزمور الرابع عشر</h2>
+                <p class="prayer-text">يا رب من يسكن في مسكنك، ومن يحل في جبل قدسك؟ السالك بلا عيب والفاعل البر، والمتكلم بالحق في قلبه، الذي لا يغش بلسانه، ولا يصنع بقريبه سوءا، ولا يقبل عارا على جيرانه. فاعل الشر مرذول أمامه، ويمجد الذين يتقون الرب. الذي يحلف لقريبه ولا يغدر به. ولا يعطى فضته بالربا، ولا يقبل الرشوة على الأبرياء. الذي يصنع هذا لا يتزعزع إلى الأبد. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 15 -->
+            <section id="psalm15" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">15</span> المزمور الخامس عشر</h2>
+                <p class="prayer-text">احفظني يا رب فإني عليك توكلت. قلت للرب: أنت ربي، ولا تحتاج إلى صلاحي. أظهر عجائبه لقديسيه الذين في أرضه، وصنع فيهم كل مشيئاته. كثرت أمراضهم الذين أسرعوا وراء آخر. لا أجمع مجامعهم من الدماء، ولا أذكر أسماءهم بشفتي. الرب هو نصيب ميراثي وكأسي. أنت الذي ترد إلى ميراثي. حبال المساحة وقعت لي في أرض خصبة، وإن ميراثي لثابت لي. أبارك الرب الذي أفهمني. وأيضا إلى الليل تنذرني كليتاي. تقدمت فرأيت الرب أمامي في كل حين، لأنه عن يميني لكي لا أتزعزع. من أجل هذا فرح قلبي وتهلل لساني. وأيضا جسدي يسكن على الرجاء. لأنك لا تترك نفسي في الجحيم. ولا تدع قدوسك يرى فسادا. قد عرفتني سبل الحياة. تملأني فرحا مع وجهك. البهجة في يمينك إلى الانقضاء. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 18 -->
+            <section id="psalm18" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">18</span> المزمور الثامن عشر</h2>
+                <p class="prayer-text">السموات تحدث بمجد الله، والفلك يخبر بعمل يديه. يوم إلى يوم يبدي قولا. وليل إلى ليل يظهر علما. لا قول ولا كلام. لا تسمع أصواتهم، في كل الأرض خرج منطقهم. وإلى أقصى المسكونة بلغت أقوالهم. جعل في الشمس مظلته. وهى مثل العريس الخارج من خدره. تتهلل مثل الجبار الذي يسرع في طريقه. من أقصى السماء خروجها، ومنتهاها إلى أقصى السماء ولا شيء يختفي من حرارتها. ناموس الرب بلا عيب، يرد النفوس. شهادة الرب صادقة، تعلم الأطفال. فرائض الرب مستقيمة، تفرح القلب. وصية الرب مضيئة، تنير العينين عن بعد. خشية الرب زكية، دائمة إلى أبد الأبد. أحكام الرب أحكام حق وعادلة معا. شهوة قلبه مختارة. أفضل من الذهب والحجر الكثير الثمن، وأحلى من العسل والشهد. عبدك يحفظها، وفى حفظها ثواب عظيم. الهفوات من يشعر بها؟ من الخطايا المستترة يا رب طهرني، ومن الغرباء احفظ عبدك حتى لا يتسلطوا على، فحينئذ أكون بلا عيب، وأتنقى من خطية عظيمة. وتكون جميع أقوال فمي وفكر قلبي مرضية أمامك في كل حين. يا رب أنت معيني ومخلصي. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 24 -->
+            <section id="psalm24" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">24</span> المزمور الرابع والعشرون</h2>
+                <p class="prayer-text">إليك يا رب رفعت نفسي، يا إلهي عليك توكلت. فلا تخزني إلى الأبد، ولا تشْمت بي أعدائي. لأن جميع الذين ينتظرونك لا يخزون. ليخز الذين يصنعون الإثم باطلا. أظهر لي يا رب طرقك، وعلمني سبلك. اهدني إلى عدلك وعلمني. لأنك أنت هو الله مخلصي، وإياك انتظرت النهار كله. اذكر يا رب رأفاتك ومراحمك، لأنها ثابتة منذ الأزل. خطايا شبابي وجهالاتي لا تذكر. كرحمتك اذكرني أنت من أجل صلاحك يا رب. الرب صالح ومستقيم، لذلك يرشد الذين يخطئون في الطريق. يهدى الودعاء في الحكم، يعلم الودعاء طرقه. جميع طرق الرب رحمة وحق لحافظي عهده وشهاداته. من أجل اسمك يا رب اغفر لي خطيتي لأنها كثيرة. من هو الإنسان الخائف الرب، يرشده في الطريق التي ارتضاها. نفسه في الخيرات تثبت، ونسله يرث الأرض. الرب عز لخائفيه، واسم الرب لأتقيائه. ولهم يعلن عهده. عيناي تنظران إلى الرب في كل حين، لأنه يجتذب من الفخ رجلي. انظر إلى وارحمني، لأني ابن وحيد وفقير أنا. أحزان قلبي قد كثرت، أخرجني من شدائدي. انظر إلى ذلي وتعبي. واغفر لي جميع خطاياي. انظر إلى أعدائي فإنهم قد كثروا وأبغضوني ظلما. احفظ نفسي ونجني، لا أخزى لأني عليك توكلت. الذين لا شر فيهم والمستقيمون لصقوا بي، لأني انتظرتك يا رب. يا الله أنقذ إسرائيل من جميع شدائده. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 26 -->
+            <section id="psalm26" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">26</span> المزمور السادس والعشرون</h2>
+                <p class="prayer-text">الرب نوري وخلاصي ممن أخاف؟! الرب حصن حياتي ممن أجزع؟! عندما يقترب الأشرار منى ليأكلوا لحمي، مضايقي وأعدائي عثروا وسقطوا. إن يحاربني جيش فلن يخاف قلبي. وإن قام على قتال ففي هذا أنا أطمئن. واحدة سألت من الرب وإياها ألتمس. أن أسكن في بيت الرب كلَّ أيام حياتي. لكي أنظر نعيم الرب، وأتفرس في هيكله المقدس. لأنه أخفاني في خيمته. في يوم شدتي، سترني بستر مظلته. وعلى صخرة رفعني. والآن هوذا قد رفع رأسي على أعدائي. طفت وذبحت في مظلته ذبيحة التهليل، أسبح وأرتل للرب. استمع يا رب صوتي الذي به دعوتك. ارحمني واستجب لي فإنه لك قال قلبي: طلبت وجهك، ووجهك يا رب ألتمس. لا تحجب وجهك عنى، ولا تنبذ بغضبك عبدك. كن لي معينا، لا تخذلني ولا ترفضني يا الله مخلصي. فإن أبى وأمي قد تركاني، وأما الرب فقبلني. علمني يا رب طريقك، واهدني في سبيل مستقيم من أجل أعدائي. لا تسلمني إلى أيدي مضايقي، لأنه قد قام على شهود زور، وكذبوا علي ظلما. وأنا أؤمن أنى أعاين خيرات الرب في أرض الأحياء. انتظر الربّ، تقوَّ وليتشدد قلبك وانتظر الرب. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 62 -->
+            <section id="psalm62" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">62</span> المزمور الثاني والستون</h2>
+                <p class="prayer-text">يا الله إلهي إليك أبكر، عطشت إليك نفسي. يشتاق إليك جسدي، في أرض مقفرة وموضع غير مسلوك ومكان بلا ماء. هكذا ظهرت لك في القدس، لأرى قوّتك ومجدك. لان رحمتك أفضل من الحياة. شفتاي تسبحانِك. لذلك أباركك في حياتي، وباسمك أرفع يدي. فتشبع نفسي كما من شحم ودسم. بشفاه الابتهاج نبارك اسمك. كنت أذكرك على فراشي، وفى أوقات الأسحار كنت أرتل لك. لأنك صرت لي عونا، وبظل جناحيك أبتهج. التحقت نفسي وراءك، ويمينك عضدتني. أما الذين طلبوا نفسي للهلاك، فيدخلون في أسافل الأرض. ويُدفعون إلى يد السيف، ويكونون أنصبة للثعالب. أما الملك فيفرح بالله، ويفتخر كل من يحلف به. لأن أفواه المتكلمين بالظلم تُسَدُّ. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 66 -->
+            <section id="psalm66" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">66</span> المزمور السادس والستون</h2>
+                <p class="prayer-text">ليتراءف الله علينا ويباركنا، وليظهر وجهه علينا ويرحمنا. لتعرَف في الأرض طريقك، وفى جميع الأمم خلاصك. فلتعترف لك الشعوب يا الله، فلتعترف لك الشعوب كلها. لتفرح الأمم وتبتهج، لأنك تحكم في الشعوب بالاستقامة، وتهدى الأمم في الأرض. فلتعترف لك الشعوب يا الله، فلتعترف لك الشعوب جميعا. الأرض أعطت ثمرتها، فليباركنا الله إلهنا. ليباركنا الله، فلتخشه جميع أقطار الأرض. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 69 -->
+            <section id="psalm69" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">69</span> المزمور التاسع والستون</h2>
+                <p class="prayer-text">اللهم التفت إلى معونتي، يا رب أسرع وأعنى. ليَخزَ ويخجل طالبو نفسي، وليرتد إلى خلف ويخجل الذين يبتغون لي الشر. وليرجع بالخزي سريعا القائلون لي: نِعِمَّا نِعِمَّا. وليبتهج ويفرح بك جميع الذين يلتمسونك، وليقل في كل حين محبو خلاصك: فليتعظم الرب. وأما أنا فمسكين وفقير، اللهم أعنى. أنت معيني ومخلصي يا رب فلا تبطئ.هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 112 -->
+            <section id="psalm112" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">112</span> المزمور المائة والثاني عشر</h2>
+                <p class="prayer-text">سبحوا الرب أيها الفتيان، سبحوا اسم الرب. ليكن اسم الرب مباركا من الآن وإلى الأبد. من مشارق الشمس إلى مغاربها باركوا اسم الرب. الرب عالٍ على كل الأمم، فوق السموات مجده. من مثل الرب إلهنا؟!‍ الساكن في الأعالي، الناظِر إلى المتواضعين في السماء وعلى الأرض. المقيم المسكين من التراب، الرافع البائس من المِزْبَلة لكي يُجلسه مع رؤساء شعبه. الذي يجعل العاقرَ ساكنة في بيت، أم أولادٍ فرحة. هلليلويا.</p>
+            </section>
+            
+            <!-- المزمور 142 -->
+            <section id="psalm142" class="prayer-section">
+                <h2 class="section-title"><span class="psalm-number">142</span> المزمور المائة والثاني والأربعون</h2>
+                <p class="prayer-text">يا رب اسمع صلاتي. أنصت إلى طلبتي بحقك. استجب لي بعدلك. ولا تدخل في المحاكمة مع عبدك، فإنه لن يتزكى قدامك كل حي. لأن العدو قد اضطهد نفسي، وأذل في الأرض حياتي. أجلسَني في الظلمات مثل الموتى منذ الدهر، أضجر في روحي، اضطرب في قلبي. تذكرت الأيام الأولى ولهجت في كل أعمالك، وفى صنائع يديك كنت أتأمل. بسطت إليك يدي، صارت نفسي لك مثل أرض بلا ماء. استجب لي يا رب عاجلا، فقد فنيت روحي. لا تحجب وجهك عني، فأشابه الهابطين في الجب. فلأسمع في الغدوات رحمتك، فإني عليك توكلت. عرفني يا رب الطريق التي أسلك فيها، لأني إليك رفعت نفسي. أنقذني من أعدائي يا رب، فإني لجأت إليك. علمني أن أصنع مشيئتك، لأنك أنت هو إلهي. روحك القدوس فليهدني إلى الاستقامة، من أجل اسمك يا رب تحييني. بحقك تخرج من الشدة نفسي، وبرحمتك تستأصل أعدائي. وتهلك جميع مضايقي نفسي، لأني أنا هو عبدك أنا. هلليلويا.</p>
+            </section>
+        </div>
+        
+        <!-- إنجيل يوحنا -->
+        <section id="gospel" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> إنجيل يوحنا 1: 1ـ17</h2>
+            <p class="prayer-text">من إنجيل معلمنا يوحنا البشير بركاته علينا أمين.</p>
+            <div class="gospel-text">
+                <p>في البدء كان الكلمة، والكلمة كان عندَ الله. وكان الكلمة الله، هذا كان في البدء عند الله. كل شيء به كان، وبغيره لم يكن شيء مما كان. فيه كانت الحياة، والحياة كانت نورَ الناس، والنور أضاء في الظلمة، والظلمة لم تدركه.</p>
+                <p>كان إنسان مرسل من الله اسمه يوحنا، هذا جاء للشهادة ليشهد للنور ليؤمن الكل بواسطته. لم يكن هو النور بل ليشهد للنور، كان النورُ الحقيقي الذي ينير كل إنسان آتيا إلى العالم. كان في العالم، وكُوِّنَ العالم به، ولم يعرفه العالم. إلى خاصته جاء، وخاصته لم تقبله. وأما الذين قبلوه فأعطاهم سلطانًا أن يصيروا أبناء الله، الذين يؤمنون باسمه، الذين ولدوا ليس من دم، ولا من مشيئة جسد، ولا من مشيئة رجل، لكن من الله ولدوا.</p>
+                <p>والكلمة صار جسدًا وحل بيننا ورأينا مجده مثل مجد ابن وحيد لأبيه مملوءًا نعمة وحقًا. يوحنا شهد له وصرخ قائلًا: هذا هو الذي قلت عنه إن الذي يأتي بعدى كان قبلي، لأنه كان أقدم منى. ونحن جميعا أخذنا من ملئه، ونعمة عوضًا عن نعمة. لأن الناموس بموسى أعطى. أما النعمة والحق فبيسوع المسيح صارا. والمجد لله دائمًا أبديًا أمين.</p>
+            </div>
+        </section>
+        
+        <!-- القطع -->
+        <section id="cut" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-cross"></i> القطع</h2>
+            <p class="prayer-text">أيها النور الحقيقي الذي يضئ لكل إنسان آت إلى العالم، أتيت إلى العالم بمحبتك للبشر، وكل الخليقة تهللت بمجيئك. خلصت أبانا آدم من الغواية، وعتقت أمنا حواء من طلقات الموت، وأعطيتنا روح البنوة، نسبحك ونباركك قائلين: (ذوكصابتري كيه إيو كي آجيو ابنيفماتي Doxa Patri ke Uiw ke `agiw `Pneumati - المجد للآب والابن والروح القدس).</p>
+            <p class="prayer-text">إذا ما دخل إلينا وقت الصباح أيها المسيح إلهنا النور الحقيقي، فلتشرق فينا الحواس المضيئة والأفكار النورانية. ولا تغطينا ظلمة الآلام، لكي نسبحك عقليا مع داود قائلين: "سبقت عيناي وقت السحر لأتلو في جميع أقوالك". اسمع أصواتنا كعظيم رحمتك، ونجنا أيها الرب إلهنا بتحننك. (كي نين، كي آ إي، كي ايستوس إي أوناس تون إي أونون آمين Ke nun ke `a`i ke ic touc `e`wnac twn `e`wnwn `amyn - الآن وكل أوان وإلى دهر الداهرين آمين)</p>
+            <p class="prayer-text">أنت هي أم النور المكرمة، من مشارق الشمس إلى مغاربها يقدمون لك تمجيدات يا والدة الإله السماء الثانية، لأنك أنت هي الزهرة النيرة غير المتغيرة والأم الباقية عذراء، لأن الآب اختارك، والروح القدس ظللك، والابن تنازل وتجسد منك. فاسأليه أن يعطى الخلاص للعالم الذي خلقه، وأن ينجيَّه من التجارب. نسبحه تسبيحا جديدا ونباركه الآن وكل أوان وإلى الأبد. أمين.</p>
+        </section>
+        
+        <!-- تسبحة الملائكة -->
+        <section id="angels-hymn" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-angel"></i> تسبحة الملائكة</h2>
+            <p class="prayer-text">فلنسبح مع الملائكة قائلين: المجد لله في الأعالي وعلى الأرض السلام وفى الناس المسرة. نسبحك. نباركك. نخدمك. نسجد لك. نعترف لك. ننطق بمجدك. نشكرك من أجل عظم مجدك، أيها الرب المالك على السموات، الله الآب ضابط الكل، والرب الابن الواحد الوحيد يسوع المسيح، والروح القدس.</p>
+            <p class="prayer-text">أيها الرب الإله، حمل الله، ابن الآب، رافع خطية العالم، ارحمنا. يا حامل خطية العالم، اقبل طلباتنا إليك. أيها الجالس عن يمين أبيه، ارحمنا. أنت وحدك القدوس. أنت وحدك العالي يا ربى يسوع المسيح والروح القدس. مجدا لله الآب أمين.</p>
+            <p class="prayer-text">أباركك كل يوم، وأسبح اسمك القدوس إلى الأبد. وإلى أبد الأبد. أمين. منذ الليل روحي تبكر إليك يا إلهي، لأن أوامرك هي نور على الأرض. كنت أتلو في طرقك، لأنك صرت لي معينا. باكرا يا رب تسمع صوتي، بالغداة أقف أمامك وتراني.</p>
+        </section>
+        
+        <!-- الثلاث تقديسات -->
+        <section id="trisagion" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-dove"></i> الثلاث تقديسات</h2>
+            <p class="prayer-text">قدوس الله، قدوس القوى، قدوس الحي الذي لا يموت، الذي ولد من العذراء، ارحمنا. قدوس الله، قدوس القوى، قدوس الحي الذي لا يموت، الذي صلب عنا، ارحمنا. قدوس الله، قدوس القوى، قدوس الحي الذي لا يموت، الذي قام من الأموات وصعد إلى السموات، ارحمنا. المجد للآب والابن والروح القدس، الآن وكل أوان وإلى دهر الدهور. أمين. أيها الثالوث القدوس ارحمنا. أيها الثالوث القدوس ارحمنا. أيها الثالوث القدوس ارحمنا.</p>
+            <p class="prayer-text">يا رب اغفر لنا خطايانا. يا رب اغفر لنا آثامنا. يا رب اغفر لنا زلاتنا. يا رب افتقد مرضى شعبك، اشفهم من أجل اسمك القدوس. آباؤنا وإخوتنا الذين رقدوا، يا رب نيح نفوسهم. يا من هو بلا خطية، يا رب ارحمنا. يا من بلا خطية، يا رب أعنا، واقبل طلباتنا إليك. لأن لك المجد والعزة والتقديس المثلث. يا رب ارحم. يا رب ارحم يا رب بارك. أمين.</p>
+            <p class="prayer-text">واجعلنا مستحقين أن نقول بشكر: أبانا الذي في السموات....</p>
+        </section>
+        
+        <!-- السلام لك -->
+        <section id="peace-to-you" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-praying-hands"></i> السلام لك</h2>
+            <p class="prayer-text">السلام لك. نسألك أيتها القديسة الممتلئة مجدا العذراء كل حين، والدة الإله أم المسيح، أصعدي صلواتنا إلى ابنك الحبيب ليغفر لنا خطايانا.</p>
+            <p class="prayer-text">السلام للتي ولدت لنا النور الحقيقي المسيح إلهنا، العذراء القديسة، اسألي الرب عنا، ليصنع رحمة مع نفوسنا، ويغفر لنا خطايانا.</p>
+            <p class="prayer-text">أيتها العذراء مريم والدة الإله، القديسة الشفيعة الأمينة لجنس البشرية، اشفعي فينا أمام المسيح الذي ولدته لكي ينعم علينا بغفران خطايانا.</p>
+            <p class="prayer-text">السلام لك أيتها العذراء الملكة الحقيقية، السلام لفخر جنسنا، ولدت لنا عمانوئيل. نسألك: اذكرينا، أيتها الشفيعة المؤتمنة، أمام ربنا يسوع المسيح، ليغفر لنا خطايانا.</p>
+        </section>
+        
+        <!-- بدء قانون الإيمان -->
+        <section id="creed-start" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-church"></i> بدء قانون الإيمان</h2>
+            <p class="prayer-text">نعظمك يا أم النور الحقيقي، ونمجدك أيتها العذراء القديسة، والدة الإله، لأنك ولدت لنا مخلص العالم، أتى وخلص نفوسنا.</p>
+            <p class="prayer-text">المجد لكَ يا سيدنا وملكنا المسيح، فخر الرسل، إكليل الشهداء تهليل الصديقين، ثبات الكنائس، غفران الخطايا.</p>
+            <p class="prayer-text">نبشر بالثالوث القدوس، لاهوت واحد، نسجد له ونمجده. يا رب ارحم. يا رب ارحم. يا رب بارك. أمين.</p>
+        </section>
+        
+        <!-- قانون الإيمان -->
+        <section id="creed" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-scroll"></i> قانون الإيمان المقدس الأرثوذكسي</h2>
+            <p class="prayer-text">بالحقيقة نؤمن بإله واحد، الله الآب، ضابط الكل، خالق السماء والأرض، ما يُرَى وما لا يرى.</p>
+            <p class="prayer-text">نؤمن برب واحد يسوع المسيح، ابن الله الوحيد، المولود من الآب قبل كل الدهور، نور من نور، إله حق من إله حق، مولود غير مخلوق، مساو للآب في الجوهر، الذي به كان كل شيء. هذا الذي من أجلنا نحن البشر، ومن أجل خلاصنا، نزل من السماء، وتجسد من الروح القدس ومن مريم العذراء، وتأنس. وصلب عنا على عهد بيلاطس البنطي. وتألم وقبر وقام من بين الأموات في اليوم الثالث كما في الكتب، وصعد إلى السموات، وجلس عن يمين  أبيه، وأيضا يأتي في مجده ليدين الأحياء والأموات، الذي ليس لملكه انقضاء.</p>
+            <p class="prayer-text">نعم نؤمن بالروح القدس، الرب المحيى المنبثق من الآب. نسجد له ونمجده مع الآب والابن، الناطق في الأنبياء.</p>
+            <p class="prayer-text">وبكنيسة واحدة مقدسة جامعة رسولية.</p>
+            <p class="prayer-text">ونعترف بمعمودية واحدة لمغفرة الخطايا.</p>
+            <p class="prayer-text">وننتظر قيامة الأموات وحياة الدهر الآتي. أمين.</p>
+            <p class="coptic-text">Kuri`e `ele`hcon (يا رب ارحم) 41 مرة</p>
+        </section>
+        
+        <!-- قدوس قدوس قدوس -->
+        <section id="holy-holy" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-fire"></i> قدوس قدوس قدوس</h2>
+            <p class="prayer-text">قدوس، قدوس، قدوس، رب الصباؤوت. السماء والأرض مملوءتان من مجدك وكرامتك. ارحمنا يا الله الآب ضابط الكل. أيها الثالوث القدوس ارحمنا. أيها الرب إله القوات كن معنا، لأنه ليس لنا معين في شدائدنا وضيقاتنا سواك.</p>
+            <p class="prayer-text">حل واغفر واصفح لنا يا الله عن سيئاتنا، التي صنعناها بإرادتنا والتي صنعناها بغير إرادتنا، التي فعلناها بمعرفة والتي فعلناها بغير معرفة، الخفية والظاهرة. يا رب اغفرها لنا، من أجل اسمك القدوس الذي دعي علينا. كرحمتك يا رب وليس كخطايانا.</p>
+            <p class="prayer-text">واجعلنا مستحقين أن نقول بشكر: أبانا الذي في السموات..</p>
+        </section>
+        
+        <!-- التحليل -->
+        <section id="absolution" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-hands-praying"></i> التحليل</h2>
+            <p class="prayer-text">أيها الرب إله القوات، الكائن قبل الدهور والدائم إلى الأبد، الذي خلق الشمس لضياء النهار، والليل راحة لكل البشر، نشكرك يا ملك الدهور لأنك أجزتنا هذا الليل بسلام وأتيت بنا إلى مبدأ النهار.</p>
+            <p class="prayer-text">من أجل هذا نسأل يا ملكنا ملك الدهور، ليشرق لنا نور وجهك، وليضيء علينا نور علمك الإلهي. واجعلنا يا سيدنا أن نكون بنى النور وبني  النهار، لكي نجوز هذا اليوم ببر وطهارة وتدبير حسن، لنكمل بقية أيام حياتنا بلا عثرة. بالنعمة والرأفة ومحبة البشر اللواتي لابنك الوحيد يسوع المسيح، وموهبة روحك القدوس. الآن وكل أوان وإلى الأبد. أمين.</p>
+        </section>
+        
+        <!-- تحليل آخر -->
+        <section id="absolution2" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-lightbulb"></i> تحليل آخر</h2>
+            <p class="prayer-text">أيها الباعث النور فينطلق، المشرق شمسه على الأبرار والأشرار، الذي صنع النور الذي يضئ على المسكونة، أنر عقولنا وقلوبنا وأفهامنا يا سيد الكل. هب لنا في هذا اليوم الحاضر أن نرضيك فيه. واحرسنا من كل شيء رديء ومن كل خطيئة، ومن كل قوة مضادة بالمسيح يسوع ربنا. هذا الذي أنت مبارك معه مع الروح القدس المحيى المساوي لك، الآن وكل أوان وإلى دهر الدهور. أمين.</p>
+        </section>
+        
+        <!-- الطلبة الأخيرة -->
+        <section id="final-petition" class="prayer-section">
+            <h2 class="section-title"><i class="fas fa-heart"></i> طلبة تصلى آخر كل ساعة</h2>
+            <p class="prayer-text">ارحمنا يا الله ثم ارحمنا. يا من في كل وقت وكل ساعة، في السماء وعلى الأرض، مسجود له وممجد. المسيح إلهنا الصالح، الطويل الروح، الكثير الرحمة، الجزيل التحنن، الذي يحب الصديقين ويرحم الخطأت الذين أولهم أنا. الذي لا يشاء موت الخاطئ مثل ما يرجع ويحيا. الداعي الكل إلى الخلاص لأجل الموعد بالخيرات المنتظرة.</p>
+            <p class="prayer-text">يا رب اقبل منا في هذه الساعة وكل ساعة طلباتنا. سهل حياتنا، وأرشدنا إلى العمل بوصاياك. قدس أرواحنا. طهر أجسامنا. قوم أفكارنا. نق نياتنا. اشف أمراضنا واغفر خطايانا. ونجنا من كل حزن رديء ووجع قلب. أحطنا بملائكتك القديسين، لكي نكون بمعسكرهم محفوظين ومرشدين، لنصل إلى اتحاد الإيمان وإلى معرفة مجدك غير المحسوس وغير المحدود، فإنك مبارك إلى الأبد. أمين.</p>
+            <p class="prayer-text">اللهم اجعلنا مستحقين أن نقول بشكر: أبانا الذي في السموات...</p>
+            <p class="amen">آمين</p>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="prayer-footer">
+        <span class="footer-cross">✠</span>
+        <p>صلاة باكر - القداس القبطي الأرثوذكسي</p>
+        <p class="mt-2 small" style="opacity: 0.8;"> نورت مؤتمر الشباب 2026 </p>
+    </footer>
+
+    <!-- Navigation Button -->
+    <button id="navToggle" title="قائمة الأقسام">
+        <i class="fas fa-list"></i>
+    </button>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTop" title="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Navigation Menu - Scrollable -->
+    <div id="navMenu">
+        <div class="nav-header">
+            <span><i class="fas fa-book me-2"></i>أقسام الصلاة</span>
+            <button class="nav-close" id="navClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="nav-items">
+            <div class="nav-item" data-target="intro"><i class="fas fa-cross"></i> مقدمة كل ساعة</div>
+            <div class="nav-item" data-target="lords-prayer"><i class="fas fa-pray"></i> الصلاة الربانية</div>
+            <div class="nav-item" data-target="thanksgiving"><i class="fas fa-heart"></i> صلاة الشكر</div>
+            <div class="nav-item" data-target="psalm50"><i class="fas fa-music"></i> المزمور الخمسون</div>
+            <div class="nav-item" data-target="prayer-start"><i class="fas fa-church"></i> بدء الصلاة</div>
+            <div class="nav-item" data-target="bakkar-start"><i class="fas fa-sun"></i> بدء صلاة باكر</div>
+            <div class="nav-item" data-target="psalm1"><i class="fas fa-music"></i> المزمور الأول</div>
+            <div class="nav-item" data-target="psalm2"><i class="fas fa-music"></i> المزمور الثاني</div>
+            <div class="nav-item" data-target="psalm3"><i class="fas fa-music"></i> المزمور الثالث</div>
+            <div class="nav-item" data-target="psalm4"><i class="fas fa-music"></i> المزمور الرابع</div>
+            <div class="nav-item" data-target="psalm5"><i class="fas fa-music"></i> المزمور الخامس</div>
+            <div class="nav-item" data-target="psalm6"><i class="fas fa-music"></i> المزمور السادس</div>
+            <div class="nav-item" data-target="psalm8"><i class="fas fa-music"></i> المزمور الثامن</div>
+            <div class="nav-item" data-target="psalm11"><i class="fas fa-music"></i> المزمور الحادي عشر</div>
+            <div class="nav-item" data-target="psalm12"><i class="fas fa-music"></i> المزمور الثاني عشر</div>
+            <div class="nav-item" data-target="psalm14"><i class="fas fa-music"></i> المزمور الرابع عشر</div>
+            <div class="nav-item" data-target="psalm15"><i class="fas fa-music"></i> المزمور الخامس عشر</div>
+            <div class="nav-item" data-target="psalm18"><i class="fas fa-music"></i> المزمور الثامن عشر</div>
+            <div class="nav-item" data-target="psalm24"><i class="fas fa-music"></i> المزمور الرابع والعشرون</div>
+            <div class="nav-item" data-target="psalm26"><i class="fas fa-music"></i> المزمور السادس والعشرون</div>
+            <div class="nav-item" data-target="psalm62"><i class="fas fa-music"></i> المزمور الثاني والستون</div>
+            <div class="nav-item" data-target="psalm66"><i class="fas fa-music"></i> المزمور السادس والستون</div>
+            <div class="nav-item" data-target="psalm69"><i class="fas fa-music"></i> المزمور التاسع والستون</div>
+            <div class="nav-item" data-target="psalm112"><i class="fas fa-music"></i> المزمور 112</div>
+            <div class="nav-item" data-target="psalm142"><i class="fas fa-music"></i> المزمور 142</div>
+            <div class="nav-item" data-target="gospel"><i class="fas fa-book-open"></i> إنجيل يوحنا</div>
+            <div class="nav-item" data-target="cut"><i class="fas fa-cross"></i> القطع</div>
+            <div class="nav-item" data-target="angels-hymn"><i class="fas fa-angel"></i> تسبحة الملائكة</div>
+            <div class="nav-item" data-target="trisagion"><i class="fas fa-dove"></i> الثلاث تقديسات</div>
+            <div class="nav-item" data-target="peace-to-you"><i class="fas fa-praying-hands"></i> السلام لك</div>
+            <div class="nav-item" data-target="creed-start"><i class="fas fa-church"></i> بدء قانون الإيمان</div>
+            <div class="nav-item" data-target="creed"><i class="fas fa-scroll"></i> قانون الإيمان</div>
+            <div class="nav-item" data-target="holy-holy"><i class="fas fa-fire"></i> قدوس قدوس قدوس</div>
+            <div class="nav-item" data-target="absolution"><i class="fas fa-hands-praying"></i> التحليل</div>
+            <div class="nav-item" data-target="absolution2"><i class="fas fa-lightbulb"></i> تحليل آخر</div>
+            <div class="nav-item" data-target="final-petition"><i class="fas fa-heart"></i> الطلبة الأخيرة</div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Toggle navigation menu
+            $('#navToggle').click(function(e) {
+                e.stopPropagation();
+                $(this).toggleClass('active');
+                $('#navMenu').toggleClass('show');
+            });
+            
+            // Close navigation menu
+            $('#navClose').click(function(e) {
+                e.stopPropagation();
+                $('#navMenu').removeClass('show');
+                $('#navToggle').removeClass('active');
+            });
+            
+            // Close menu when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('#navMenu, #navToggle').length) {
+                    $('#navMenu').removeClass('show');
+                    $('#navToggle').removeClass('active');
+                }
+            });
+            
+            // Smooth scroll to section
+            $('.nav-item').click(function(e) {
+                e.preventDefault();
+                const targetId = $(this).data('target');
+                const targetSection = $('#' + targetId);
+                
+                if (targetSection.length) {
+                    // Close menu first
+                    $('#navMenu').removeClass('show');
+                    $('#navToggle').removeClass('active');
+                    
+                    // Smooth scroll with dynamic offset (nav bar height + 15px spacing)
+                    const headerHeight = $('.app-navbar').outerHeight() || 56;
+                    const offsetPosition = targetSection.offset().top - headerHeight - 15;
+                    
+                    $('html, body').animate({
+                        scrollTop: offsetPosition
+                    }, 500);
+                    
+                    // Highlight section temporarily
+                    targetSection.addClass('section-highlight');
+                    setTimeout(function() {
+                        targetSection.removeClass('section-highlight');
+                    }, 2000);
+                    
+                    // Update active state
+                    $('.nav-item').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+            
+            // Handle scroll to update active nav item
+            let scrollTimeout;
+            $(window).scroll(function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(function() {
+                    const scrollPosition = $(window).scrollTop() + 150;
+                    
+                    $('.prayer-section').each(function() {
+                        const sectionTop = $(this).offset().top;
+                        const sectionBottom = sectionTop + $(this).outerHeight();
+                        const sectionId = $(this).attr('id');
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            $('.nav-item').removeClass('active');
+                            $(`.nav-item[data-target="${sectionId}"]`).addClass('active');
+                            
+                            // Auto-scroll nav menu to active item
+                            const activeNav = $('.nav-item.active');
+                            if (activeNav.length) {
+                                const navContainer = $('.nav-items');
+                                const navTop = activeNav.position().top;
+                                const navHeight = activeNav.outerHeight();
+                                const containerHeight = navContainer.height();
+                                
+                                if (navTop < 0 || navTop + navHeight > containerHeight) {
+                                    navContainer.animate({
+                                        scrollTop: navContainer.scrollTop() + navTop - containerHeight/2 + navHeight/2
+                                    }, 300);
+                                }
+                            }
+                        }
+                    });
+                }, 100);
+                
+                // Show/hide back to top button
+                if ($(this).scrollTop() > 400) {
+                    $('#backToTop').addClass('show');
+                } else {
+                    $('#backToTop').removeClass('show');
+                }
+            });
+            
+            // Back to top functionality
+            $('#backToTop').click(function() {
+                $('html, body').animate({ scrollTop: 0 }, 600);
+                return false;
+            });
+            
+            // Generate floating particles
+            (function createParticles() {
+                const container = document.getElementById('particles');
+                if (!container) return;
+                const particleCount = 18;
+                for (let i = 0; i < particleCount; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.width = (Math.random() * 3 + 1.5) + 'px';
+                    p.style.height = p.style.width;
+                    p.style.animationDuration = (Math.random() * 15 + 12) + 's';
+                    p.style.animationDelay = (Math.random() * 15) + 's';
+                    p.style.opacity = 0;
+                    container.appendChild(p);
+                }
+            })();
+            
+            // Initialize with first section active
+            $('.nav-item:first').addClass('active');
+            
+            // Improve keyboard navigation
+            $(document).keydown(function(e) {
+                if (e.key === 'Escape') {
+                    $('#navMenu').removeClass('show');
+                    $('#navToggle').removeClass('active');
+                }
+            });
+        });
+    </script>
+
+    <!-- Bottom Nav slot -->
+    <div id="app-bottomnav-slot"></div>
+
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/identity.js"></script>
+    <script>
+        // تفعيل Partials + أدوات القراءة
+        YC.loadPartials().then(() => {
+            const container = document.getElementById('navbar-actions-container');
+            if (container) {
+                container.innerHTML = `
+                    <button id="nav-font-dec-btn" class="navbar-action" title="تصغير الخط">
+                        <i class="bi bi-dash-lg"></i>
+                    </button>
+                    <button id="nav-font-inc-btn" class="navbar-action" title="تكبير الخط">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <button id="nav-reading-btn" class="navbar-action" data-reading-toggle title="وضع القراءة">
+                        <i class="bi bi-moon-stars"></i>
+                    </button>
+                `;
+                
+                document.getElementById('nav-font-dec-btn')?.addEventListener('click', () => YC.FontSizeControl.decrease());
+                document.getElementById('nav-font-inc-btn')?.addEventListener('click', () => YC.FontSizeControl.increase());
+                document.getElementById('nav-reading-btn')?.addEventListener('click', () => YC.ReadingModeToggle.toggle());
+                
+                // إعادة تهيئة التبديل البصري للمفاتيح بعد الحقن
+                YC.ReadingModeToggle.init();
+            }
+        });
+        
+        YC.FontSizeControl.init();
+        YC.ReadingModeToggle.init();
+        YC.ScrollPositionSaver.startAutoSave('prayer-morning');
+        window.addEventListener('load', () => {
+            YC.ScrollPositionSaver.restore('prayer-morning');
+        });
+    </script>
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+</body>
+</html>

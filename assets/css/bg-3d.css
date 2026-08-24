@@ -1,0 +1,126 @@
+/* ═══════════════════════════════════════════════
+   bg-3d.css — خلفية محيطية خفيفة (بدون GSAP)
+   مؤتمر خلطبيطة بالصلصة 2026
+   ═══════════════════════════════════════════════ */
+
+/* حاوية الخلفية */
+.gsap-3d-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -9999;
+    pointer-events: none;
+    background: #040814;
+}
+
+/* الطبقة الداخلية — بدون preserve-3d لتوفير GPU */
+.gsap-3d-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* ═══ الهالات الضوئية الثلاث (CSS فقط، بدون GSAP) ═══ */
+.bg-3d-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    /* blur أقل من السابق (140px ← 80px) لتوفير GPU */
+    filter: blur(80px);
+}
+
+.bg-3d-orb-cyan {
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.55) 0%, transparent 70%);
+    top: -10%;
+    left: -10%;
+    opacity: 0.2;
+    animation: orbDrift1 45s ease-in-out infinite alternate;
+}
+
+.bg-3d-orb-pink {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+    bottom: -15%;
+    right: -12%;
+    opacity: 0.16;
+    animation: orbDrift2 55s ease-in-out infinite alternate;
+}
+
+.bg-3d-orb-purple {
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
+    top: 35%;
+    right: 20%;
+    opacity: 0.10;
+    animation: orbDrift3 38s ease-in-out infinite alternate;
+}
+
+/* ═══ حركات الهالات — بطيئة جداً لتوفير الأداء ═══ */
+@keyframes orbDrift1 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(6vw, 5vh); }
+}
+
+@keyframes orbDrift2 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-5vw, -4vh); }
+}
+
+@keyframes orbDrift3 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(3vw, -3vh); }
+}
+
+/* ═══ حقل النجوم الثابت ═══ */
+.bg-3d-stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(6, 182, 212, 0.4), transparent),
+        radial-gradient(1px 1px at 25% 55%, rgba(139, 92, 246, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 40% 30%, rgba(245, 158, 11, 0.3), transparent),
+        radial-gradient(1px 1px at 60% 70%, rgba(6, 182, 212, 0.35), transparent),
+        radial-gradient(1px 1px at 75% 20%, rgba(139, 92, 246, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 85% 60%, rgba(245, 158, 11, 0.25), transparent),
+        radial-gradient(1px 1px at 90% 85%, rgba(6, 182, 212, 0.3), transparent),
+        radial-gradient(1px 1px at 15% 80%, rgba(139, 92, 246, 0.25), transparent),
+        radial-gradient(1px 1px at 50% 10%, rgba(255, 255, 255, 0.18), transparent),
+        radial-gradient(1px 1px at 70% 45%, rgba(255, 255, 255, 0.14), transparent),
+        radial-gradient(1px 1px at 32% 90%, rgba(6, 182, 212, 0.25), transparent),
+        radial-gradient(1px 1px at 65% 5%,  rgba(139, 92, 246, 0.2), transparent);
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+/* ═══ خط ضوئي علوي رفيع ═══ */
+.bg-3d-topline {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(6, 182, 212, 0.35) 25%,
+        rgba(245, 158, 11, 0.25) 50%,
+        rgba(139, 92, 246, 0.35) 75%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+/* ═══ prefers-reduced-motion ═══ */
+@media (prefers-reduced-motion: reduce) {
+    .bg-3d-orb-cyan,
+    .bg-3d-orb-pink,
+    .bg-3d-orb-purple {
+        animation: none !important;
+    }
+}
+

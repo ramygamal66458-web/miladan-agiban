@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="التسكين والغرف — مؤتمر الشباب 2026">
+    <title>التسكين — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <style>
+        /* ────── شريط الفلتر ────── */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+            position: sticky;
+            top: 56px; z-index: 100;
+            background: rgba(14,23,42,0.96);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.09);
+        }
+        .filter-bar::-webkit-scrollbar { display: none; }
+
+        .filter-chip {
+            flex-shrink: 0;
+            padding: .5rem 1.2rem;
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.04);
+            color: #94a3b8;
+            font-family: inherit;
+            font-size: .83rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .25s;
+            white-space: nowrap;
+        }
+        .filter-chip.active {
+            background: rgba(6,182,212,0.15);
+            border-color: rgba(6,182,212,0.5);
+            color: #38bdf8;
+            box-shadow: 0 0 12px rgba(6,182,212,0.2);
+        }
+        .filter-chip.active[data-gender="girls"] {
+            background: rgba(251,113,133,0.15);
+            border-color: rgba(251,113,133,0.5);
+            color: #f87171;
+            box-shadow: 0 0 12px rgba(251,113,133,0.2);
+        }
+        .filter-chip:hover { border-color: rgba(6,182,212,0.35); color: #38bdf8; background: rgba(6,182,212,0.08); }
+
+        /* ────── كارت غرفتي السريعة ────── */
+        .my-quick-room-card {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(180, 83, 9, 0.25) 100%);
+            border: 1.5px solid rgba(245, 158, 11, 0.4);
+            border-radius: 18px;
+            padding: 0.9rem 1.1rem;
+            margin: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
+            animation: quickCardFade 0.4s ease;
+        }
+        @keyframes quickCardFade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .my-quick-room-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .my-quick-room-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fbbf24;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .my-quick-room-text {
+            font-size: 0.85rem;
+            color: #fef08a;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        .btn-goto-my-room {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border: 1px solid #fef08a;
+            color: #451a03;
+            border-radius: 12px;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.78rem;
+            font-weight: 900;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            transition: all 0.25s ease;
+        }
+        .btn-goto-my-room:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.5);
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 100%);
+        }
+
+        /* ────── شريط الإحصائيات ────── */
+        .accomm-stats-bar {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.8rem 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 1rem;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 6px 14px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #cbd5e1;
+        }
+
+        /* ────── فاصل المصعد والسلالم الفندقية ────── */
+        .hotel-elevator-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 0.85rem 1rem;
+            margin: 1.75rem auto 1.25rem;
+            background: linear-gradient(90deg, rgba(30,41,59,0.2) 0%, rgba(30,41,59,0.85) 50%, rgba(30,41,59,0.2) 100%);
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 0.82rem;
+            font-weight: 800;
+            max-width: 600px;
+        }
+        .hotel-elevator-icon {
+            font-size: 1.2rem;
+            color: #f59e0b;
+        }
+
+        /* ────── قسم ممر الفندق ثلاثي الأبعاد (3D Hallway Corridor) ────── */
+        .floor-hallway-container {
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+        .floor-title-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .floor-title-badge .line {
+            flex: 1;
+            height: 2px;
+            border-radius: 99px;
+        }
+        .floor-title-badge .label {
+            font-size: 0.95rem;
+            font-weight: 900;
+            letter-spacing: 0.03em;
+        }
+
+        .hallway-scene {
+            position: relative;
+            background: linear-gradient(180deg, #090e1a 0%, #0f172a 40%, #1e293b 100%);
+            border-radius: 24px;
+            border: 1.5px solid rgba(255,255,255,0.12);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 100px rgba(0,0,0,0.7);
+            padding: 2rem 1.25rem 2.5rem;
+        }
+
+        /* سقف الممر والإضاءة */
+        .hallway-ceiling {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 40px;
+            background: linear-gradient(180deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 100%);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 5;
+            pointer-events: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .ceiling-light {
+            width: 50px;
+            height: 6px;
+            background: #fef08a;
+            border-radius: 99px;
+            box-shadow: 0 0 20px #fde047, 0 0 35px #eab308;
+            opacity: 0.85;
+        }
+
+        /* أرضية الممر بالبلاط والمنظور */
+        .hallway-floor {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* مسار المشي الأوسط للممر */
+        .hallway-center-path {
+            position: absolute;
+            top: 0; bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32%;
+            background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.04) 50%, transparent 100%);
+            border-left: 1px dashed rgba(245, 158, 11, 0.15);
+            border-right: 1px dashed rgba(245, 158, 11, 0.15);
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* ممر الأبواب — زيادة المسافة والاتساع بين الجانبين */
+        .hallway-corridor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.85rem 4.5rem;
+            position: relative;
+            z-index: 10;
+            max-width: 840px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        @media (max-width: 600px) {
+            .hallway-corridor {
+                gap: 1.5rem 2.25rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .hallway-corridor {
+                gap: 1.35rem 1.75rem;
+            }
+        }
+
+        /* ────── الباب الخشبي الفندقي (Door Component) ────── */
+        .room-door-wrapper {
+            perspective: 800px;
+        }
+        .room-door {
+            position: relative;
+            background: linear-gradient(135deg, #78350f 0%, #451a03 50%, #270e02 100%);
+            border: 3px solid #92400e;
+            border-radius: 12px 12px 3px 3px;
+            padding: 12px 10px 14px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.45s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.2);
+            min-height: 145px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: visible;
+        }
+
+        /* إطار الباب الخشبي الداخلي */
+        .room-door::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1.5px solid rgba(251, 191, 36, 0.2);
+            border-radius: 8px;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+        }
+
+        /* مقبض الباب النحاسي الذهبي */
+        .door-handle {
+            position: absolute;
+            top: 52%;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle at 30% 30%, #fef08a 0%, #d97706 70%, #78350f 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.8), 0 0 6px rgba(245, 158, 11, 0.5);
+            z-index: 5;
+        }
+        .door-left .door-handle { right: 10px; }
+        .door-right .door-handle { left: 10px; }
+
+        /* لافتة الباب النحاسية برقم الغرفة */
+        .door-brass-plate {
+            background: linear-gradient(135deg, #fef08a 0%, #d97706 50%, #b45309 100%);
+            border: 1px solid #fef08a;
+            border-radius: 8px;
+            padding: 4px 8px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.6);
+            position: relative;
+            z-index: 2;
+        }
+        .door-number {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #451a03;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+        }
+        .door-status-text {
+            font-size: 0.62rem;
+            font-weight: 800;
+            color: #78350f;
+            display: block;
+        }
+
+        /* لافتة الإشغال تحت الباب */
+        .door-occupancy-info {
+            position: relative;
+            z-index: 2;
+            margin-top: 8px;
+            background: rgba(15, 23, 42, 0.85);
+            border-radius: 8px;
+            padding: 4px 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .door-occ-counts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.68rem;
+            font-weight: 800;
+            color: #e2e8f0;
+            margin-bottom: 3px;
+        }
+        .door-occ-bar-bg {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .door-occ-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 0.4s ease;
+        }
+
+        /* تسرب الضوء من أسفل الباب */
+        .door-light-leak {
+            position: absolute;
+            bottom: -6px;
+            left: 10%; right: 10%;
+            height: 6px;
+            border-radius: 50%;
+            filter: blur(3px);
+            opacity: 0.85;
+            transition: opacity 0.3s ease, background 0.3s ease;
+        }
+
+        /* حالات الباب الإشغالية */
+        .status-empty .door-light-leak { background: #22c55e; box-shadow: 0 0 12px #22c55e; }
+        .status-partial .door-light-leak { background: #f59e0b; box-shadow: 0 0 12px #f59e0b; }
+        .status-full .door-light-leak { background: #ef4444; box-shadow: 0 0 12px #ef4444; }
+
+        /* 3D Hover & Open Animation */
+        .door-left:hover, .door-left.open {
+            transform: rotateY(-18deg) translateY(-3px) scale(1.02);
+            border-color: #f59e0b;
+            box-shadow: 12px 12px 30px rgba(0,0,0,0.8), 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+        .door-right:hover, .door-right.open {
+            transform: rotateY(18deg) translateY(-3px) scale(1.02);
+            border-color: #f59e0b;
+            box-shadow: -12px 12px 30px rgba(0,0,0,0.8), 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .room-door.highlighted, .room-door.door-spotlight-glow {
+            animation: doorPulseGlow 1.2s infinite alternate;
+        }
+        @keyframes doorPulseGlow {
+            0% { border-color: #f59e0b; box-shadow: 0 0 10px #f59e0b, 0 0 25px rgba(245, 158, 11, 0.5); }
+            100% { border-color: #38bdf8; box-shadow: 0 0 30px #38bdf8, 0 0 45px rgba(56, 189, 248, 0.7); }
+        }
+
+        .room-door.dimmed {
+            opacity: 0.35;
+            filter: grayscale(0.5);
+        }
+
+        /* ────── النافذة المنبثقة للبحث الممتازة (Search Overlay UI) ────── */
+        .search-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(4, 8, 18, 0.85);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            animation: overlayFadeIn 0.3s ease;
+        }
+
+        @keyframes overlayFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* مؤشر التحميل داخل نافذة البحث */
+        @keyframes accomm-spin { to { transform: rotate(360deg); } }
+        .accomm-loading-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 1.2rem 0.5rem 0.8rem;
+            animation: overlayFadeIn 0.3s ease;
+        }
+        .accomm-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(56, 189, 248, 0.15);
+            border-top-color: #38bdf8;
+            border-radius: 50%;
+            animation: accomm-spin 0.85s linear infinite;
+        }
+        .accomm-loading-text {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+        .accomm-loading-hint {
+            color: #64748b;
+            font-size: 0.78rem;
+            line-height: 1.5;
+        }
+        /* إخفاء خانة البحث الداخلية أثناء التحميل */
+        .accomm-loading-active .search-wrap,
+        .accomm-loading-active #accomm-search-suggestions,
+        .accomm-loading-active #accomm-no-match-msg,
+        .accomm-loading-active #accomm-search-btns-wrap {
+            display: none !important;
+        }
+
+        .search-box {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+            border: 1.5px solid rgba(56, 189, 248, 0.3);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 380px;
+            padding: 2rem 1.5rem 1.75rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .search-box-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .search-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 14px;
+            font-size: 1.15rem;
+            color: #06b6d4;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 2.8rem 0.75rem 1rem !important;
+            background: rgba(15, 23, 42, 0.9) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 14px !important;
+            color: #ffffff !important;
+            font-size: 0.92rem !important;
+            font-weight: 700 !important;
+            outline: none !important;
+            transition: all 0.25s ease !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4) !important;
+        }
+
+        .search-input::placeholder {
+            color: #64748b !important;
+            font-weight: 600 !important;
+            font-size: 0.85rem !important;
+        }
+
+        .search-input:focus {
+            border-color: #06b6d4 !important;
+            box-shadow: 0 0 16px rgba(6, 182, 212, 0.35), inset 0 2px 4px rgba(0,0,0,0.4) !important;
+            background: rgba(15, 23, 42, 1) !important;
+        }
+
+        /* ────── اقتراحات البحث الحية (Live Autocomplete Suggestions) ────── */
+        .search-suggestions-list {
+            max-height: 180px;
+            overflow-y: auto;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1.5px solid rgba(56, 189, 248, 0.3);
+            border-radius: 14px;
+            margin-top: 0.4rem;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            text-align: right;
+            display: none;
+        }
+        .search-suggestions-list.show {
+            display: block;
+            animation: fadeInDown 0.25s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .suggestion-item {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s ease;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+        }
+
+        .search-no-match-box {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1.5px solid rgba(244, 63, 94, 0.35);
+            border-radius: 16px;
+            padding: 1.25rem 1rem;
+            margin-top: 0.6rem;
+            margin-bottom: 0.6rem;
+            text-align: center;
+            animation: quickCardFade 0.3s ease;
+        }
+
+        .btn-primary-app {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            border: 1px solid #22d3ee;
+            border-radius: 12px;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.88rem;
+            padding: 0.6rem 1.4rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 18px rgba(6, 182, 212, 0.35);
+        }
+
+        .btn-primary-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(6, 182, 212, 0.5);
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+            color: #ffffff;
+        }
+
+        .btn-secondary-app {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 0.6rem 1.4rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-secondary-app:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+
+        /* ────── مودال الغرفة المعماري المطور ────── */
+        .room-modal-view .modal-dialog {
+            max-width: 480px;
+            width: 92%;
+            margin: 1rem auto;
+        }
+
+        .room-interior-modal {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            border-radius: 24px !important;
+            background: #0f172a !important;
+            border: 1.5px solid rgba(255,255,255,0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+            overflow: hidden !important;
+            position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .room-interior-header {
+            background: linear-gradient(135deg, rgba(30,41,59,0.95) 0%, rgba(15,23,42,0.95) 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 0.85rem 1rem;
+        }
+
+        .room-architectural-plan {
+            position: relative;
+            background: #090e1a;
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 1.25rem 0.6rem 1rem;
+            margin: 0.25rem 0;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
+        }
+
+        /* عناصر المعمار: باب المخرج + النافذة */
+        .plan-door-entrance {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #334155;
+            color: #cbd5e1;
+            padding: 2px 14px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            border: 1px solid #475569;
+            z-index: 5;
+            white-space: nowrap;
+        }
+
+        .plan-window {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #38bdf8;
+            height: 4px;
+            width: 80px;
+            border-radius: 99px;
+            box-shadow: 0 0 10px #38bdf8;
+        }
+        .plan-window::after {
+            content: '🪟 نافذة';
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        /* شبكة الأسرّة داخل الغرفة (عمودان × N صفوف) */
+        .beds-architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* شكل السرير الرسومي (3D Bed Card) */
+        .bed-3d-card {
+            position: relative;
+            border-radius: 12px;
+            padding: 8px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1.5px solid transparent;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            opacity: 0;
+            transform: scale(0.8) translateY(10px);
+            min-height: 72px;
+            overflow: hidden;
+        }
+
+        .bed-3d-card.animate-pop {
+            animation: bedPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes bedPopIn {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* وسادة السرير العلوية */
+        .bed-pillow {
+            width: 50%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        /* محجوز ولاد */
+        .bed-3d-card.boys.occupied {
+            background: linear-gradient(135deg, rgba(6,182,212,0.2) 0%, rgba(14,116,144,0.3) 100%);
+            border-color: rgba(56,189,248,0.6);
+            box-shadow: 0 4px 12px rgba(6,182,212,0.2);
+        }
+        .bed-3d-card.boys.occupied .bed-pillow { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+
+        /* محجوز بنات */
+        .bed-3d-card.girls.occupied {
+            background: linear-gradient(135deg, rgba(251,113,133,0.2) 0%, rgba(190,18,60,0.3) 100%);
+            border-color: rgba(248,113,113,0.6);
+            box-shadow: 0 4px 12px rgba(251,113,133,0.2);
+        }
+        .bed-3d-card.girls.occupied .bed-pillow { background: #f87171; box-shadow: 0 0 6px #f87171; }
+
+        /* سرير شاغر */
+        .bed-3d-card.empty {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.08);
+        }
+        .bed-3d-card.empty .bed-pillow { background: rgba(255,255,255,0.1); }
+
+        .bed-person-name-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: center;
+            padding: 0 2px;
+        }
+        .bed-3d-card.empty .bed-person-name-title {
+            color: #64748b;
+            font-weight: 700;
+        }
+
+        .bed-number-badge {
+            position: absolute;
+            top: 3px; right: 5px;
+            font-size: 0.6rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.6);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-layer bg-layer-ambient"></div>
+    <div id="app-navbar-slot"></div>
+
+    <header style="padding:1.25rem 1rem .5rem;">
+        <div class="page-header-title">🏠 التسكين الفندقي</div>
+        <div class="page-header-sub">ممر الغرف والأسرّة — اضغط على أي باب للاستكشاف</div>
+    </header>
+
+    <!-- كارت غرفتي السريعة -->
+    <div id="my-quick-room-container"></div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar" role="toolbar">
+        <button class="filter-chip active" data-gender="all">كل الغرف</button>
+        <button class="filter-chip" data-gender="girls">الدور الأول (بنات)</button>
+        <button class="filter-chip" data-gender="boys">الأدوار 2 و3 (ولاد)</button>
+    </div>
+
+    <!-- Hidden search state + Active search badge -->
+    <input type="hidden" id="accomm-search">
+    <div id="accomm-active-search-wrap" style="display: none; padding: 0.25rem 1rem 0.5rem;"></div>
+
+    <!-- Rooms list (3D Corridor View) -->
+    <div class="rooms-list" id="rooms-list">
+        <div class="empty-state">
+            <i class="bi bi-house-door"></i>
+            <p>بيانات التسكين هتتضاف قريباً من فريق المؤتمر<br>
+            ابعت للمسؤول عشان يضيف الغرف والأسماء</p>
+        </div>
+    </div>
+
+    <!-- Search Popup Overlay -->
+    <div class="search-overlay" id="accomm-search-overlay" style="display: none;">
+        <!-- 1. صندوق مدخلات البحث -->
+        <div class="search-box accomm-loading-active" id="accomm-search-box">
+            <div class="search-box-title"><i class="bi bi-search" style="color:#06b6d4;"></i> ابحث عن غرفتك</div>
+            <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:1rem; line-height:1.5;">ادخل اسمك أو رقم الغرفة لمعرفة مكان تسكينك وسريرك فوراً</p>
+
+            <!-- مؤشر التحميل — يظهر حتى تصل البيانات من Google Sheets -->
+            <div class="accomm-loading-block" id="accomm-loading-indicator">
+                <div class="accomm-loading-spinner"></div>
+                <div class="accomm-loading-text">⏳ بنجيب البيانات دلوقتي...</div>
+                <div class="accomm-loading-hint">اكتب اسمك وهنقولك غرفتك بمجرد ما يجهز</div>
+            </div>
+            <div class="search-wrap mb-2">
+                <i class="bi bi-person search-icon"></i>
+                <input type="text" id="accomm-popup-search-input" class="search-input" placeholder="اكتب الاسم أو رقم الغرفة..." autocomplete="off">
+            </div>
+
+            <!-- قائمة الاقتراحات المباشرة -->
+            <div id="accomm-search-suggestions" class="search-suggestions-list"></div>
+
+            <!-- رسالة عدم وجود الاسم -->
+            <div id="accomm-no-match-msg" style="display: none;"></div>
+
+            <div id="accomm-search-btns-wrap" style="display:flex; gap:0.6rem; justify-content:center; margin-top: 0.5rem;">
+                <button class="btn-primary-app" id="accomm-popup-search-btn"><i class="bi bi-search"></i> ابحث</button>
+                <button class="btn-secondary-app" id="accomm-popup-close-btn">إغلاق</button>
+            </div>
+        </div>
+
+        <!-- 2. صندوق ترحيب النجاح -->
+        <div class="search-box" id="accomm-success-box" style="display: none;">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎉</div>
+            <div class="search-box-title" id="accomm-success-welcome">أهلاً بك!</div>
+            <p style="font-size:0.88rem; color:#cbd5e1; margin-bottom:1.5rem; line-height: 1.6;" id="accomm-success-desc">
+                تم تسكينك في الدور الأول (ولاد)<br>
+                رقم غرفتك هي: <strong>105</strong>
+            </p>
+            <button class="btn-primary-app" id="accomm-success-show-btn" style="width:100%; justify-content:center;"><i class="bi bi-geo-alt-fill"></i> وريني غرفتي</button>
+        </div>
+    </div>
+
+    <!-- Room Details Modal (Architectural Room View) -->
+    <div class="modal fade room-modal-view" id="roomDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content room-interior-modal">
+                <div class="modal-header room-interior-header">
+                    <h5 class="modal-title fw-bold text-white" id="room-modal-title">تفاصيل الغرفة</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3">
+                    <div id="room-modal-beds-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔒 مودال حجب الخصوصية — يظهر عند الضغط على غرفة مقفلة -->
+    <div class="modal fade privacy-lock-modal" id="privacyLockedModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background:linear-gradient(135deg,#0f172a,#1e293b); border:1.5px solid rgba(239,68,68,0.4); border-radius:24px; text-align:center; padding:2rem 1.5rem;">
+                <span class="privacy-lock-icon">🔒</span>
+                <div style="font-size:1.3rem; font-weight:900; color:#f87171; margin-bottom:0.5rem;">غرفة خاصة</div>
+                <p style="font-size:0.88rem; color:#94a3b8; line-height:1.7; margin-bottom:1.5rem;">
+                    هذه الغرفة خاصة بنزلائها فقط.<br>
+                    حفاظاً على الخصوصية، لا يمكن الاطلاع على<br>
+                    أسماء أو بيانات نزلاء الغرف الأخرى.
+                </p>
+                <button class="btn-primary-app" data-bs-dismiss="modal" style="width:100%; justify-content:center; background:linear-gradient(135deg,#ef4444,#dc2626); box-shadow:0 4px 14px rgba(239,68,68,0.35); border-color:#f87171;">
+                    <i class="bi bi-check-circle-fill me-1"></i> حسناً، فهمت
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-bottomnav-slot"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/identity.js"></script>
+    <!-- config.js: إعدادات GAS (لا يُرفع على GitHub) -->
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/data-service.js"></script>
+    <script src="../assets/js/accommodation-data.js"></script>
+    <script src="../assets/js/accommodation.js"></script>
+    <script>
+        YC.loadPartials().then(() => {
+            // إخفاء زر البحث في الـ navbar إذا كانت الهوية مقفلة بالفعل
+            try {
+                const profile = JSON.parse(localStorage.getItem('yc2_user_profile') || '{}');
+                if (profile && profile.name && profile.room) {
+                    // هوية مقفلة — لا نُظهر زر البحث
+                    return;
+                }
+            } catch(e) {}
+
+            const container = document.getElementById('navbar-actions-container');
+            if (container) {
+                container.innerHTML = `
+                    <button id="accomm-nav-search-btn" class="navbar-action animate__animated animate__fadeIn" title="بحث">
+                        <i class="bi bi-search"></i>
+                    </button>
+                `;
+                
+                document.getElementById('accomm-nav-search-btn')?.addEventListener('click', () => {
+                    const overlay = document.getElementById('accomm-search-overlay');
+                    const searchBox = document.getElementById('accomm-search-box');
+                    const successBox = document.getElementById('accomm-success-box');
+                    const popupInput = document.getElementById('accomm-popup-search-input');
+                    
+                    if (overlay) {
+                        overlay.style.display = 'flex';
+                        if (searchBox) searchBox.style.display = 'block';
+                        if (successBox) successBox.style.display = 'none';
+                        setTimeout(() => {
+                            if (popupInput) {
+                                popupInput.value = document.getElementById('accomm-search')?.value || '';
+                                popupInput.focus();
+                                popupInput.select();
+                            }
+                        }, 300);
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        // فتح نافذة البحث فوراً بعد 500ms — فقط إذا لم تكن الهوية مقفلة
+        setTimeout(function() {
+            try {
+                const profile = JSON.parse(localStorage.getItem('yc2_user_profile') || '{}');
+                if (profile && profile.name && profile.room) return; // هوية مقفلة — لا نفتح النافذة
+            } catch(e) {}
+            const overlay = document.getElementById('accomm-search-overlay');
+            if (overlay && !sessionStorage.getItem('search_shown_accomm')) {
+                overlay.style.display = 'flex';
+            }
+        }, 500);
+    </script>
+    <script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+</body>
+</html>

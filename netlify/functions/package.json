@@ -1,0 +1,8 @@
+{
+  "name": "youth-conference-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify Serverless Functions for Youth Conference 2026",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

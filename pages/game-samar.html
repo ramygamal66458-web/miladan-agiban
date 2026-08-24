@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="مسرح حفلة سمر — ميلادا عجيبًا 2026">
+    <title>🎭 مسرح حفلة سمر — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --samar-gold: #fbbf24;
+            --samar-gold-dark: #b45309;
+            --samar-crimson: #e11d48;
+            --samar-crimson-glow: rgba(225, 29, 72, 0.4);
+            --samar-purple: #9333ea;
+            --stage-bg: #070a14;
+            --stage-wood: #1e120c;
+        }
+
+        body {
+            background-color: var(--stage-bg);
+            color: #ffffff;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ─── أجواء المسرح والإضاءات الخلفية ─── */
+        .stage-atmosphere {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .spotlight-left, .spotlight-right {
+            position: absolute;
+            top: -100px;
+            width: 380px;
+            height: 950px;
+            background: radial-gradient(ellipse at top, rgba(251, 191, 36, 0.16) 0%, rgba(225, 29, 72, 0.07) 40%, transparent 70%);
+            transform-origin: top center;
+            animation: spotSwingLeft 8s ease-in-out infinite alternate;
+        }
+        .spotlight-left { left: 5%; }
+        .spotlight-right {
+            right: 5%;
+            animation: spotSwingRight 9s ease-in-out infinite alternate;
+            background: radial-gradient(ellipse at top, rgba(225, 29, 72, 0.18) 0%, rgba(147, 51, 234, 0.1) 40%, transparent 70%);
+        }
+
+        @keyframes spotSwingLeft {
+            0% { transform: rotate(-15deg); }
+            100% { transform: rotate(10deg); }
+        }
+        @keyframes spotSwingRight {
+            0% { transform: rotate(15deg); }
+            100% { transform: rotate(-10deg); }
+        }
+
+        /* ─── شريط التحكم العلوي للمسرح ─── */
+        .stage-top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 26, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .stage-team-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.25) 0%, rgba(251, 191, 36, 0.2) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.45);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--samar-gold);
+            box-shadow: 0 2px 10px rgba(225, 29, 72, 0.25);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .stage-team-badge:hover {
+            transform: scale(1.03);
+            border-color: var(--samar-gold);
+        }
+
+        .stage-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-stage-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .btn-stage-action:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: var(--samar-gold);
+            border-color: var(--samar-gold);
+            transform: translateY(-1px);
+        }
+        .btn-switch-flow {
+            background: linear-gradient(135deg, #e11d48, #f59e0b);
+            border: none;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+        }
+        .btn-switch-flow:hover {
+            background: linear-gradient(135deg, #f43f5e, #fbbf24);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.6);
+        }
+
+        /* ─── مسرح العرض الرئيسي ─── */
+        .stage-container {
+            position: relative;
+            z-index: 10;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 1.25rem 1rem 3rem;
+        }
+
+        /* لافتة المسرح العلوية */
+        .theatre-valance {
+            background: radial-gradient(ellipse at center, #be123c 0%, #881337 60%, #4c0519 100%);
+            border-bottom: 4px solid #f59e0b;
+            border-radius: 20px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 2px 10px rgba(255,255,255,0.2);
+            overflow: hidden;
+        }
+        .theatre-valance::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0,0,0,0.2) 30px, rgba(0,0,0,0.2) 60px);
+            pointer-events: none;
+        }
+        .stage-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(251, 191, 36, 0.6);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+        .stage-subtitle {
+            font-size: 0.9rem;
+            color: #fde68a;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        /* ─── شريط خطوات الأقسام (Stepper) ─── */
+        .segments-nav {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            scrollbar-width: thin;
+        }
+        .seg-tab {
+            flex: 1;
+            min-width: 140px;
+            background: rgba(23, 31, 51, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 0.75rem 0.6rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            user-select: none;
+        }
+        .seg-tab:hover {
+            background: rgba(36, 48, 77, 0.85);
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
+        }
+        .seg-tab.active {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.25) 0%, rgba(251, 191, 36, 0.2) 100%);
+            border-color: var(--samar-gold);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
+        }
+        .seg-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 6px 0 6px;
+            border-style: solid;
+            border-color: var(--samar-gold) transparent transparent transparent;
+        }
+        .seg-tab.done .seg-tab-num {
+            background: #10b981;
+            color: #fff;
+        }
+        .seg-tab-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            color: #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 0.35rem;
+        }
+        .seg-tab.active .seg-tab-num {
+            background: var(--samar-gold);
+            color: #000;
+        }
+        .seg-tab-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .seg-tab-time {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+        .seg-tab.active .seg-tab-time {
+            color: var(--samar-gold);
+            font-weight: 700;
+        }
+
+        /* ─── بطاقة القسم الحالي (Stage Card) ─── */
+        .stage-card {
+            background: rgba(18, 25, 43, 0.85);
+            border: 1.5px solid rgba(251, 191, 36, 0.3);
+            border-radius: 24px;
+            padding: 2.25rem 1.5rem;
+            position: relative;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.35s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stage-card-header {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+        .stage-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(225, 29, 72, 0.2);
+            border: 1px solid rgba(225, 29, 72, 0.5);
+            color: #fb7185;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+        }
+        .stage-card-title {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+        .stage-card-desc {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* ─── التايمر الرقمي للمسرح ─── */
+        .stage-timer-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1.75rem 0 0.5rem;
+        }
+        .timer-display {
+            font-family: 'Courier New', Courier, monospace, 'Cairo';
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--samar-gold);
+            text-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+            letter-spacing: 2px;
+            line-height: 1;
+            padding: 0.8rem 1.8rem;
+            background: rgba(7, 11, 20, 0.85);
+            border: 2px solid rgba(251, 191, 36, 0.35);
+            border-radius: 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 8px 30px rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+        }
+        .timer-display.tense-active {
+            color: #f43f5e;
+            border-color: #f43f5e;
+            text-shadow: 0 0 35px rgba(244, 63, 94, 0.8);
+            animation: pulseTimer 0.5s infinite alternate;
+        }
+        @keyframes pulseTimer {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .timer-progress-bar {
+            width: 100%;
+            max-width: 480px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+            position: relative;
+        }
+        .timer-progress-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #10b981, #f59e0b, #e11d48);
+            border-radius: 10px;
+            transition: width 0.2s linear;
+        }
+
+        /* ─── أزرار التحكم بالتايمر ─── */
+        .stage-timer-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .btn-timer-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 16px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        .btn-start {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff;
+        }
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+        }
+        .btn-pause {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+        }
+        .btn-pause:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+        .btn-timer-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.65rem 1.1rem;
+            border-radius: 14px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-timer-secondary:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ─── أسلوب فقرة تحت الضغط ─── */
+        .pressure-arena {
+            background: radial-gradient(ellipse at center, rgba(225, 29, 72, 0.18) 0%, rgba(15, 23, 42, 0.9) 70%);
+            border: 2px solid rgba(225, 29, 72, 0.5);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 1.25rem;
+            box-shadow: 0 0 35px rgba(225, 29, 72, 0.25);
+        }
+        .question-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #e11d48;
+            color: #fff;
+            padding: 0.3rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(225, 29, 72, 0.5);
+        }
+        .question-card-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.4;
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 1.2rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .answer-reveal-box {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 14px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+            color: #34d399;
+            font-weight: 800;
+            font-size: 1.15rem;
+            display: none;
+            animation: fadeIn 0.2s ease;
+        }
+        .answer-reveal-box.show {
+            display: block;
+        }
+
+        .pressure-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .btn-ans-correct {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff;
+            border: none;
+            padding: 0.85rem 0.5rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .btn-ans-correct:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+        }
+        .btn-ans-wrong {
+            background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+            color: #fff;
+            border: none;
+            padding: 0.85rem 0.5rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .btn-ans-wrong:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.5);
+        }
+        .btn-ans-reveal {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            padding: 0.85rem 0.5rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .btn-ans-reveal:hover {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fff;
+        }
+
+        .pressure-stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0,0,0,0.4);
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #cbd5e1;
+        }
+        .pressure-stats span {
+            color: var(--samar-gold);
+            font-weight: 800;
+        }
+
+        /* ─── أفكار الشخصيات للاستوديو التحليلي ─── */
+        .character-wheel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+        .char-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .char-card:hover, .char-card.selected {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.3) 0%, rgba(251, 191, 36, 0.25) 100%);
+            border-color: var(--samar-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        .char-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        .char-name {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        /* ─── شريط التنقل السفلي بين الفقرات ─── */
+        .stage-footer-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-nav-step {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        .btn-nav-prev {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #cbd5e1;
+        }
+        .btn-nav-prev:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+        }
+        .btn-nav-next {
+            background: linear-gradient(135deg, #e11d48, #f59e0b);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.35);
+        }
+        .btn-nav-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           🎪 مودال اختيار المجموعة والقسم المتقدم (2-Step Modal)
+           ═══════════════════════════════════════════════════ */
+        .stage-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 7, 15, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .stage-modal-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .stage-modal-content {
+            background: linear-gradient(180deg, #131b2e 0%, #0d1222 100%);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+            border-radius: 28px;
+            max-width: 580px;
+            width: 100%;
+            padding: 2rem 1.75rem;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(225, 29, 72, 0.3);
+            text-align: center;
+            position: relative;
+            transform: scale(0.94);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+        .stage-modal-backdrop.show .stage-modal-content {
+            transform: scale(1);
+        }
+
+        /* مؤشر الخطوات داخل المودال */
+        .modal-step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-bubble {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.25s ease;
+        }
+        .step-bubble.active {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.3) 0%, rgba(251, 191, 36, 0.25) 100%);
+            color: var(--samar-gold);
+            border-color: var(--samar-gold);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+        }
+        .step-bubble.completed {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border-color: #10b981;
+        }
+
+        /* شبكة اختيار الفرق */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin: 1.25rem 0 1rem;
+        }
+        .team-select-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 0.9rem 0.75rem;
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .team-select-btn:hover, .team-select-btn.selected {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.35) 0%, rgba(251, 191, 36, 0.3) 100%);
+            border-color: var(--samar-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+        }
+        .team-select-btn i {
+            font-size: 1.5rem;
+            color: var(--samar-gold);
+        }
+
+        .custom-team-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s;
+        }
+        .custom-team-input:focus {
+            border-color: var(--samar-gold);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+        }
+
+        /* شبكة اختيار الأقسام الـ 5 داخل المودال */
+        .segments-modal-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin: 1.25rem 0 1rem;
+            text-align: right;
+        }
+        .segment-select-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 0.85rem 1rem;
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .segment-select-btn:hover, .segment-select-btn.selected {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.35) 0%, rgba(251, 191, 36, 0.3) 100%);
+            border-color: var(--samar-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+        }
+        .seg-left-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .seg-icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--samar-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .segment-select-btn.selected .seg-icon-circle {
+            background: var(--samar-gold);
+            color: #000;
+        }
+
+        .btn-launch-stage {
+            width: 100%;
+            background: linear-gradient(135deg, #e11d48 0%, #f59e0b 100%);
+            border: none;
+            border-radius: 16px;
+            padding: 0.9rem;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 6px 25px rgba(225, 29, 72, 0.5);
+            transition: all 0.2s ease;
+        }
+        .btn-launch-stage:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(225, 29, 72, 0.7);
+        }
+
+        /* ─── شاشة النتائج والاحتفال ─── */
+        .celebration-modal {
+            text-align: center;
+        }
+        .celebration-icon {
+            font-size: 3.5rem;
+            color: var(--samar-gold);
+            animation: bounceIcon 1s infinite alternate;
+        }
+        @keyframes bounceIcon {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 576px) {
+            .timer-display { font-size: 3.2rem; padding: 0.5rem 1rem; }
+            .stage-card-title { font-size: 1.4rem; }
+            .question-card-text { font-size: 1.2rem; min-height: 65px; }
+            .pressure-actions { grid-template-columns: 1fr; }
+            .teams-grid { grid-template-columns: 1fr; }
+            .stage-top-bar { flex-wrap: wrap; }
+            .stage-actions { width: 100%; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- أضواء المسرح الخلفية -->
+    <div class="stage-atmosphere">
+        <div class="spotlight-left"></div>
+        <div class="spotlight-right"></div>
+    </div>
+
+    <!-- شريط التحكم العلوي للمسرح -->
+    <header class="stage-top-bar">
+        <div class="d-flex align-items-center gap-2">
+            <a href="games.html" class="btn-stage-action" title="رجوع للألعاب">
+                <i class="bi bi-arrow-right"></i> للألعاب
+            </a>
+            <div class="stage-team-badge" id="current-team-display" onclick="openWizardModal(1)" title="اضغط لتغيير المجموعة أو القسم">
+                <i class="bi bi-people-fill"></i>
+                <span id="current-team-name">فريق: مارجرجس</span>
+            </div>
+        </div>
+
+        <div class="stage-actions">
+            <button class="btn-stage-action btn-switch-flow" id="btn-switch-flow" onclick="openWizardModal(1)" title="اختيار مجموعة أو قسم آخر">
+                <i class="bi bi-arrow-repeat"></i> اختيار فريق / قسم آخر
+            </button>
+            <button class="btn-stage-action" id="btn-toggle-sound" title="كتم / تفعيل الصوت">
+                <i class="bi bi-volume-up-fill" id="sound-icon"></i>
+            </button>
+            <button class="btn-stage-action" id="btn-toggle-fullscreen" title="ملء الشاشة للعرض">
+                <i class="bi bi-arrows-fullscreen"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي للمسرح -->
+    <main class="stage-container">
+
+        <!-- لافتة المسرح العلوية -->
+        <div class="theatre-valance">
+            <div class="stage-title">🎭 مسرح حفلة السمر</div>
+            <div class="stage-subtitle">تقديم الفقرات الإبداعية والتنافس المسرحي — ميلادا عجيبًا 2026</div>
+        </div>
+
+        <!-- شريط خطوات الفقرات الخمس -->
+        <div class="segments-nav" id="segments-nav">
+            <div class="seg-tab active" data-step="0" onclick="goToStep(0)">
+                <div class="seg-tab-num">١</div>
+                <div class="seg-tab-title">الترنيمة وتقديمها</div>
+                <div class="seg-tab-time">⏱️ دقيقتين</div>
+            </div>
+            <div class="seg-tab" data-step="1" onclick="goToStep(1)">
+                <div class="seg-tab-num">٢</div>
+                <div class="seg-tab-title">تحت الضغط</div>
+                <div class="seg-tab-time">⚡ ٥٠ ثانية</div>
+            </div>
+            <div class="seg-tab" data-step="2" onclick="goToStep(2)">
+                <div class="seg-tab-num">٣</div>
+                <div class="seg-tab-title">الاسكتش المسرحي</div>
+                <div class="seg-tab-time">⏱️ ١٠ دقائق</div>
+            </div>
+            <div class="seg-tab" data-step="3" onclick="goToStep(3)">
+                <div class="seg-tab-num">٤</div>
+                <div class="seg-tab-title">استوديو تحليلي بمود شخصية</div>
+                <div class="seg-tab-time">🎙️ ٥ دقائق</div>
+            </div>
+            <div class="seg-tab" data-step="4" onclick="goToStep(4)">
+                <div class="seg-tab-num">٥</div>
+                <div class="seg-tab-title">تسميع اللحن الخاص بالمؤتمر</div>
+                <div class="seg-tab-time">🎼 ٥ دقائق</div>
+            </div>
+        </div>
+
+        <!-- منطقة محتوى الفقرة الحالية -->
+        <div class="stage-card" id="stage-card">
+            <!-- سيتم توليد محتوى الفقرة هنا بالجافاسكريبت -->
+        </div>
+
+        <!-- شريط التنقل بين الفقرات -->
+        <div class="stage-footer-nav">
+            <button class="btn-nav-step btn-nav-prev" id="btn-prev-step" onclick="prevStep()">
+                <i class="bi bi-arrow-right"></i> الفقرة السابقة
+            </button>
+            <div class="text-secondary small fw-bold" id="step-indicator-text">الفقرة ١ من ٥</div>
+            <button class="btn-nav-step btn-nav-next" id="btn-next-step" onclick="nextStep()">
+                الفقرة التالية <i class="bi bi-arrow-left"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════
+         🎪 نافذة اختيار المجموعة ثم القسم (2-Step Selector Modal)
+         ═══════════════════════════════════════════════════════ -->
+    <div class="stage-modal-backdrop" id="wizard-modal">
+        <div class="stage-modal-content">
+
+            <!-- شريط توضيح الخطوتين -->
+            <div class="modal-step-indicator">
+                <div class="step-bubble active" id="indicator-step-1">
+                    <span>١. اختر المجموعة</span>
+                </div>
+                <i class="bi bi-chevron-left text-secondary"></i>
+                <div class="step-bubble" id="indicator-step-2">
+                    <span>٢. اختر القسم</span>
+                </div>
+            </div>
+
+            <!-- ─── المرحلة الأولى: اختيار المجموعة (الفريق) ─── -->
+            <div id="wizard-step-1-content">
+                <div style="font-size:2.2rem;margin-bottom:.35rem;">👥</div>
+                <h3 class="fw-bold text-white mb-1">مجموعة الفريق</h3>
+                <p class="text-secondary small mb-3">المجموعة مأخوذة تلقائياً من الاسم المسجل على الهاتف.</p>
+                <div class="team-select-btn selected" style="cursor:default;display:flex;align-items:center;justify-content:center;gap:10px;">
+                    <i class="bi bi-shield-check-fill"></i><span id="auto-team-name">جارٍ تحميل المجموعة...</span>
+                </div>
+                <button class="btn-launch-stage mt-3" onclick="proceedToSectionSelection()">التالي: اختيار الفقرة ⬅️</button>
+            </div>
+
+            <!-- ─── المرحلة الثانية: اختيار القسم (الفقرة) ─── -->
+            <div id="wizard-step-2-content" style="display: none;">
+                <div style="font-size: 2.2rem; margin-bottom: 0.35rem;">🎯</div>
+                <h3 class="fw-bold text-white mb-1">اختر القسم لبدء العرض</h3>
+                <p class="text-secondary small mb-2">فريق: <strong class="text-warning" id="modal-selected-team-name">مارجرجس</strong></p>
+
+                <div class="segments-modal-grid">
+                    <button class="segment-select-btn selected" data-seg-idx="0" onclick="selectModalSegment(0, this)">
+                        <div class="seg-left-info">
+                            <div class="seg-icon-circle">🎵</div>
+                            <div>
+                                <div class="text-white fw-bold">١. الترنيمة وتقديمها</div>
+                                <div class="text-secondary small">تقديم الفكرة وأداء الترنيمة جماعياً</div>
+                            </div>
+                        </div>
+                        <div class="text-warning fw-bold small">⏱️ دقيقتين</div>
+                    </button>
+
+                    <button class="segment-select-btn" data-seg-idx="1" onclick="selectModalSegment(1, this)">
+                        <div class="seg-left-info">
+                            <div class="seg-icon-circle">🎤</div>
+                            <div>
+                                <div class="text-white fw-bold">٢. تحت الضغط</div>
+                                <div class="text-secondary small">١٥ سؤالاً في ٥٠ ثانية</div>
+                            </div>
+                        </div>
+                        <div class="text-warning fw-bold small">⏱️ ٥ دقائق</div>
+                    </button>
+
+                    <button class="segment-select-btn" data-seg-idx="2" onclick="selectModalSegment(2, this)">
+                        <div class="seg-left-info">
+                            <div class="seg-icon-circle">⚡</div>
+                            <div>
+                                <div class="text-white fw-bold">٣. الاسكتش المسرحي</div>
+                                <div class="text-secondary small">عرض تمثيلي متكامل هادف</div>
+                            </div>
+                        </div>
+                        <div class="text-warning fw-bold small">⚡ ٥٠ ثانية</div>
+                    </button>
+
+                    <button class="segment-select-btn" data-seg-idx="3" onclick="selectModalSegment(3, this)">
+                        <div class="seg-left-info">
+                            <div class="seg-icon-circle">🎭</div>
+                            <div>
+                                <div class="text-white fw-bold">٤. استوديو تحليلي بمود شخصية</div>
+                                <div class="text-secondary small">تحليل وتقديم بأسلوب شخصية مختارة</div>
+                            </div>
+                        </div>
+                        <div class="text-warning fw-bold small">⏱️ ١٠ دقائق</div>
+                    </button>
+
+                    <button class="segment-select-btn" data-seg-idx="4" onclick="selectModalSegment(4, this)">
+                        <div class="seg-left-info">
+                            <div class="seg-icon-circle">🎙️</div>
+                            <div>
+                                <div class="text-white fw-bold">٥. تسميع اللحن الخاص بالمؤتمر</div>
+                                <div class="text-secondary small">تسميع اللحن وكلمات شعار المؤتمر</div>
+                            </div>
+                        </div>
+                        <div class="text-warning fw-bold small">🎙️ ٥ دقائق</div>
+                    </button>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button class="btn-stage-action py-2 px-3 fw-bold" onclick="backToTeamSelection()">
+                        ➡️ تغيير الفريق
+                    </button>
+                    <button class="btn-launch-stage m-0 flex-grow-1" onclick="confirmAndLaunchStage()">
+                        🚀 بدء العرض الآن
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══ مودال احتفال نهاية التحدي أو العرض ═══ -->
+    <div class="stage-modal-backdrop" id="celebration-modal">
+        <div class="stage-modal-content celebration-modal">
+            <div class="celebration-icon">🏆</div>
+            <h2 class="fw-bold text-white mt-2" id="cel-title">أداء رائع على المسرح!</h2>
+            <p class="text-secondary" id="cel-subtitle">تحية كبيرة لفريق المسرح على هذا الأداء المتميز</p>
+            
+            <div class="p-3 my-3 rounded-4" style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3);" id="cel-details">
+                <!-- تفاصيل النتيجة -->
+            </div>
+
+            <div class="d-flex flex-column gap-2 mt-3">
+                <button class="btn-launch-stage" onclick="closeCelebrationModal()">
+                    المتابعة في المسرح ➡️
+                </button>
+                <button class="btn-stage-action btn-switch-flow w-100 justify-content-center py-2" onclick="openWizardModal(1)">
+                    👥 اختيار فريق / قسم آخر
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/identity.js"></script>
+    <script src="../assets/js/scoring.js?v=2026_v1"></script>
+    <script>
+        /* ═══════════════════════════════════════════════════════
+           🎭 محرك حفلة سمر والمسرح التفاعلي — ميلادا عجيبًا 2026
+           ═══════════════════════════════════════════════════════ */
+        'use strict';
+
+        // 1. بنك أسئلة "تحت الضغط" الـ 15 المحددة بدقة
+        const RAW_PRESSURE_QUESTIONS = [
+            { q: "متى دخل لحن إيبارثينوس الى الكنيسة القبطية؟", a: "يحددها مسؤول المسابقة" },
+            { q: "المجوس وسجودهم للمسيح موجودين في قراءة:", a: "يحددها مسؤول المسابقة" },
+            { q: "تتحدث الثيؤطؤكيات عن عقيدة ....", a: "يحددها مسؤول المسابقة" },
+            { q: 'رفض لقب والدة الاله \"ثيؤطوكوس\" ....', a: "يحددها مسؤول المسابقة" },
+            { q: 'عند قول ابونا فى القداس "تجسد وتأنس" يتم وضع يد بخور ب ....', a: "يحددها مسؤول المسابقة" },
+            { q: "للفايف بتشير إلى.....", a: "يحددها مسؤول المسابقة" },
+            { q: "قراءة إنجيل باكر بتتكلم عن", a: "يحددها مسؤول المسابقة" },
+            { q: "قراءة الإبركسيس بتتكلم عن حدث:", a: "يحددها مسؤول المسابقة" },
+            { q: "من الذي قام بتأليف لحن ايبارثينوس", a: "يحددها مسؤول المسابقة" },
+            { q: "تقال ابصالية امويني تيرو في تسبحه قداس عيد الميلاد بنغمه .......", a: "يحددها مسؤول المسابقة" },
+            { q: "ايه الاوشيه اللي بتتقال ... في رفع بخور باكر عيد الميلاد المجيد؟", a: "يحددها مسؤول المسابقة" },
+            { q: "لحن بيتقال أثناء الحمل ....", a: "يحددها مسؤول المسابقة" },
+            { q: "اليوم البتول تلد فائق الجوهر ايه اسم اللحن بالقبطي ......", a: "يحددها مسؤول المسابقة" },
+            { q: "من وضع طقس قراءة الإنجيل الخاص بترتيل تسبحة الملائكة عند جزء المجد لله ف الاعالي", a: "يحددها مسؤول المسابقة" },
+            { q: "معني كلمة برامون (دوام استعداد - ثبات - كلاهما)", a: "يحددها مسؤول المسابقة" }
+        ];
+
+        // 2. تعريف الفقرات الخمس بالتفصيل
+        const SEGMENTS = [
+            { id:'hymn', title:'ترنيمه وتقديمها', badge:'🎵 الفقرة الأولى — 15 درجة', defaultTime:120, timeLabel:'دقيقتين (02:00)', desc:'تقديم الترنيمة ثم أداؤها جماعياً.', gameId:'hymn', maxScore:15 },
+            { id:'pressure', title:'تحت الضغط', badge:'⚡ الفقرة الثانية — 15 درجة', defaultTime:50, timeLabel:'٥٠ ثانية — ١٥ سؤال', desc:'تحدي السرعة والتركيز: ١٥ سؤالاً في ٥٠ ثانية.', isPressure:true, gameId:'pressure', maxScore:15 },
+            { id:'sketch', title:'اسكتش مسرحي', badge:'🎭 الفقرة الثالثة — 30 درجة', defaultTime:600, timeLabel:'١٠ دقائق (10:00)', desc:'عرض مسرحي متكامل يقدمه الفريق.', gameId:'sketch', maxScore:30 },
+            { id:'studio', title:'استوديو تحليلي بمود شخصيه', badge:'🎙️ الفقرة الرابعة — 20 درجة', defaultTime:300, timeLabel:'٥ دقائق (05:00)', desc:'استوديو تحليلي بأسلوب شخصية يختارها الفريق.', isStudio:true, gameId:'studio', maxScore:20, characters:[{icon:'⚽',name:'المعلق الرياضي'},{icon:'🕵️',name:'المحقق الجنائي'},{icon:'👨‍🍳',name:'شيف البرامج'},{icon:'🎙️',name:'مذيع الأخبار العاجلة'},{icon:'📜',name:'الفيلسوف والحكيم'},{icon:'🎬',name:'المخرج السينمائي'},{icon:'✈️',name:'كابتن الطائرة'},{icon:'📺',name:'دوبلاج وثائقي'}] },
+            { id:'conferenceHymn', title:'تسميع اللحن الخاص بالمؤتمر', badge:'🎼 الفقرة الخامسة — 20 درجة', defaultTime:300, timeLabel:'٥ دقائق (05:00)', desc:'تسميع لحن المؤتمر وكلمات شعاره.', gameId:'conferenceHymn', maxScore:20 }
+        ];
+
+        // 3. حالة المسرح العامة (State)
+        let currentStep = 0;
+        let selectedTeam = 'مارجرجس';
+        let modalSelectedStep = 0;
+        let isSoundEnabled = true;
+
+        // حالة التايمر
+        let timerInterval = null;
+        let timerSecondsLeft = 0;
+        let timerTotalSeconds = 0;
+        let isTimerRunning = false;
+
+        // حالة فقرة تحت الضغط
+        let shuffledQuestions = [];
+        let currentQuestionIdx = 0;
+        let correctAnswersCount = 0;
+        let totalAnsweredCount = 0;
+        let isAnswerRevealed = false;
+
+        /* ═══════════════════════════════════════════════════════
+           🔊 محرك الصوت وموسيقى التوتر السينمائية (Cinematic Web Audio Synth)
+           ═══════════════════════════════════════════════════════ */
+        const SoundEngine = {
+            ctx: null,
+            tenseTimer: null,
+            musicInterval: null,
+            musicStep: 0,
+
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (AudioCtx) {
+                        this.ctx = new AudioCtx();
+                    }
+                }
+                if (this.ctx && this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+
+            // نقرة أزرار تفاعلية ناعمة
+            playClick() {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1200, now);
+                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.03);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.03);
+                } catch(e) {}
+            },
+
+            // صافرة حكم عالية وقوية جداً لانتهاء التيمر (Piercing Referee Whistle)
+            playWhistle() {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+
+                    const blowWhistle = (startTime, duration, volume = 0.75) => {
+                        const now = startTime;
+
+                        // 1. Dual high-pitch oscillators (2850Hz & 3280Hz)
+                        const osc1 = this.ctx.createOscillator();
+                        const osc2 = this.ctx.createOscillator();
+
+                        // 2. LFO Pea Flutter (حركة بلية الصافرة الترددية السريعة)
+                        const lfo = this.ctx.createOscillator();
+                        const lfoGain = this.ctx.createGain();
+                        lfo.type = 'sine';
+                        lfo.frequency.setValueAtTime(34, now); // 34 Hz
+                        lfoGain.gain.setValueAtTime(95, now);  // +/- 95 Hz
+                        lfo.connect(osc1.frequency);
+                        lfo.connect(osc2.frequency);
+                        lfo.start(now);
+                        lfo.stop(now + duration);
+
+                        osc1.type = 'triangle';
+                        osc2.type = 'sine';
+                        osc1.frequency.setValueAtTime(2850, now);
+                        osc2.frequency.setValueAtTime(3280, now);
+
+                        // 3. Bandpass Filter
+                        const filter = this.ctx.createBiquadFilter();
+                        filter.type = 'bandpass';
+                        filter.frequency.setValueAtTime(3050, now);
+                        filter.Q.setValueAtTime(3.8, now);
+
+                        // 4. Master Gain Envelope
+                        const gain = this.ctx.createGain();
+                        gain.gain.setValueAtTime(0.001, now);
+                        gain.gain.linearRampToValueAtTime(volume, now + 0.025);
+                        gain.gain.setValueAtTime(volume, now + duration - 0.03);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+                        osc1.connect(filter);
+                        osc2.connect(filter);
+                        filter.connect(gain);
+                        gain.connect(this.ctx.destination);
+
+                        osc1.start(now);
+                        osc2.start(now);
+                        osc1.stop(now + duration);
+                        osc2.stop(now + duration);
+                    };
+
+                    const t0 = this.ctx.currentTime;
+                    // صفارة أولى سريعة
+                    blowWhistle(t0, 0.22, 0.7);
+                    // صفارة ثانية حاسمة وطويلة
+                    blowWhistle(t0 + 0.32, 0.85, 0.85);
+
+                    // إضافة رنين صدمة مسرحية مرافق
+                    this.playGong();
+                } catch(e) {}
+            },
+
+            // نغمة نجاح كاريزمية براقة (Sparkling Major Chord Chime)
+            playCorrect() {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const now = this.ctx.currentTime;
+                    const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                    
+                    freqs.forEach((freq, idx) => {
+                        const noteTime = now + (idx * 0.035);
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, noteTime);
+
+                        gain.gain.setValueAtTime(0.16, noteTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.45);
+
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+
+                        osc.start(noteTime);
+                        osc.stop(noteTime + 0.45);
+                    });
+                } catch(e) {}
+            },
+
+            // بَزَر الخطأ والتخطي الواقعي لبرامج المسابقات (Dual Detuned TV Buzzer)
+            playWrong() {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const now = this.ctx.currentTime;
+
+                    const osc1 = this.ctx.createOscillator();
+                    const osc2 = this.ctx.createOscillator();
+                    const filter = this.ctx.createBiquadFilter();
+                    const gain = this.ctx.createGain();
+
+                    osc1.type = 'sawtooth';
+                    osc2.type = 'sawtooth';
+                    osc1.frequency.setValueAtTime(110, now);
+                    osc2.frequency.setValueAtTime(116.54, now);
+
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(480, now);
+                    filter.Q.setValueAtTime(4, now);
+
+                    gain.gain.setValueAtTime(0.22, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+                    osc1.connect(filter);
+                    osc2.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(this.ctx.destination);
+
+                    osc1.start(now);
+                    osc2.start(now);
+                    osc1.stop(now + 0.28);
+                    osc2.stop(now + 0.28);
+                } catch(e) {}
+            },
+
+            // نبضة قلب واقعية مزدوجة (Realistic Lub-Dub Heartbeat + Clock Tick)
+            playHeartbeatDouble(isUrgent = false) {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const now = this.ctx.currentTime;
+
+                    // 1. الدقة الأولى (Lub)
+                    const osc1 = this.ctx.createOscillator();
+                    const gain1 = this.ctx.createGain();
+                    const filter1 = this.ctx.createBiquadFilter();
+
+                    filter1.type = 'lowpass';
+                    filter1.frequency.setValueAtTime(140, now);
+
+                    osc1.type = 'sine';
+                    const startFreq1 = isUrgent ? 95 : 75;
+                    osc1.frequency.setValueAtTime(startFreq1, now);
+                    osc1.frequency.exponentialRampToValueAtTime(38, now + 0.12);
+
+                    gain1.gain.setValueAtTime(isUrgent ? 0.35 : 0.25, now);
+                    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+                    osc1.connect(filter1);
+                    filter1.connect(gain1);
+                    gain1.connect(this.ctx.destination);
+
+                    osc1.start(now);
+                    osc1.stop(now + 0.12);
+
+                    // 2. الدقة الثانية (Dub)
+                    const osc2 = this.ctx.createOscillator();
+                    const gain2 = this.ctx.createGain();
+                    const filter2 = this.ctx.createBiquadFilter();
+
+                    filter2.type = 'lowpass';
+                    filter2.frequency.setValueAtTime(160, now + 0.11);
+
+                    osc2.type = 'sine';
+                    const startFreq2 = isUrgent ? 110 : 88;
+                    osc2.frequency.setValueAtTime(startFreq2, now + 0.11);
+                    osc2.frequency.exponentialRampToValueAtTime(42, now + 0.22);
+
+                    gain2.gain.setValueAtTime(isUrgent ? 0.28 : 0.2, now + 0.11);
+                    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+                    osc2.connect(filter2);
+                    filter2.connect(gain2);
+                    gain2.connect(this.ctx.destination);
+
+                    osc2.start(now + 0.11);
+                    osc2.stop(now + 0.22);
+
+                    // 3. نقرة التيك المعدنية المرافقة (Clock Tick)
+                    const oscTick = this.ctx.createOscillator();
+                    const gainTick = this.ctx.createGain();
+                    oscTick.type = 'triangle';
+                    oscTick.frequency.setValueAtTime(isUrgent ? 1600 : 900, now);
+                    gainTick.gain.setValueAtTime(isUrgent ? 0.12 : 0.06, now);
+                    gainTick.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+                    oscTick.connect(gainTick);
+                    gainTick.connect(this.ctx.destination);
+                    oscTick.start(now);
+                    oscTick.stop(now + 0.04);
+                } catch(e) {}
+            },
+
+            // جرس غونغ ضخم
+            playGong() {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const now = this.ctx.currentTime;
+
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(140, now);
+                    osc.frequency.exponentialRampToValueAtTime(65, now + 2.2);
+
+                    gain.gain.setValueAtTime(0.35, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
+
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 2.4);
+                } catch(e) {}
+            },
+
+            // نغمة انتصار واحتفال كلاسيكية فخمة
+            playFanfare() {
+                if (!isSoundEnabled) return;
+                try {
+                    this.init();
+                    if (!this.ctx) return;
+                    const notes = [
+                        { f: 523.25, d: 0.15, t: 0 },
+                        { f: 659.25, d: 0.15, t: 0.15 },
+                        { f: 783.99, d: 0.2, t: 0.3 },
+                        { f: 1046.50, d: 0.6, t: 0.5 }
+                    ];
+
+                    const now = this.ctx.currentTime;
+                    notes.forEach(n => {
+                        const noteStart = now + n.t;
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(n.f, noteStart);
+
+                        gain.gain.setValueAtTime(0.24, noteStart);
+                        gain.gain.exponentialRampToValueAtTime(0.001, noteStart + n.d);
+
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+
+                        osc.start(noteStart);
+                        osc.stop(noteStart + n.d);
+                    });
+                } catch(e) {}
+            },
+
+            // 🎵 موسيقى توتر سينمائية حقيقية تتسارع وتتصاعد مع التايمر (Cinematic Suspense Track)
+            startTensionMusic() {
+                this.stopTensionMusic();
+                if (!isSoundEnabled) return;
+                this.init();
+                if (!this.ctx) return;
+
+                const bassNotes = [146.83, 155.56, 174.61, 196.00, 220.00, 233.08]; // D minor tension ostinato
+                this.musicStep = 0;
+
+                const runMusicLoop = () => {
+                    if (!isTimerRunning) return;
+
+                    const now = this.ctx.currentTime;
+                    const isUrgent = timerSecondsLeft <= 15;
+                    const isSuperUrgent = timerSecondsLeft <= 7;
+
+                    // تسارع الإيقاع
+                    const bpm = isSuperUrgent ? 165 : (isUrgent ? 135 : 105);
+                    const stepIntervalMs = (60 / bpm) * 1000 / 2;
+
+                    // 1. نغمة باص متوترة (Tense Bass Ostinato)
+                    const noteIdx = (this.musicStep % bassNotes.length);
+                    const rootFreq = isSuperUrgent ? bassNotes[noteIdx] * 1.5 : (isUrgent ? bassNotes[noteIdx] * 1.2 : bassNotes[noteIdx]);
+                    
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    const filter = this.ctx.createBiquadFilter();
+
+                    osc.type = isUrgent ? 'sawtooth' : 'triangle';
+                    osc.frequency.setValueAtTime(rootFreq, now);
+
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(isUrgent ? 950 : 500, now);
+                    filter.Q.setValueAtTime(isUrgent ? 5 : 2, now);
+
+                    gain.gain.setValueAtTime(isUrgent ? 0.2 : 0.13, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+                    osc.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(this.ctx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + 0.22);
+
+                    // 2. دقات تيك ونبضات قلب متزامنة
+                    if (this.musicStep % 2 === 0) {
+                        this.playHeartbeatDouble(isUrgent);
+                    }
+
+                    // 3. وتريات توتر تصاعدية في الثواني الأخيرة (Rising Siren Riser)
+                    if (isUrgent && this.musicStep % 4 === 0) {
+                        const riseOsc = this.ctx.createOscillator();
+                        const riseGain = this.ctx.createGain();
+                        riseOsc.type = 'sawtooth';
+                        const startF = 480 + (15 - timerSecondsLeft) * 40;
+                        riseOsc.frequency.setValueAtTime(startF, now);
+                        riseOsc.frequency.linearRampToValueAtTime(startF + 70, now + 0.3);
+
+                        riseGain.gain.setValueAtTime(0.07, now);
+                        riseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+
+                        riseOsc.connect(riseGain);
+                        riseGain.connect(this.ctx.destination);
+                        riseOsc.start(now);
+                        riseOsc.stop(now + 0.3);
+                    }
+
+                    this.musicStep++;
+                    this.musicInterval = setTimeout(runMusicLoop, stepIntervalMs);
+                };
+
+                runMusicLoop();
+            },
+
+            stopTensionMusic() {
+                if (this.musicInterval) {
+                    clearTimeout(this.musicInterval);
+                    this.musicInterval = null;
+                }
+            }
+        };
+
+        /* ─── دوال التحكم بالمسرح والفقرات ─── */
+        function initStage() {
+            renderCurrentStep();
+            updateStepNav();
+
+            // المجموعة مأخوذة من هوية الهاتف المحفوظة؛ لا يوجد اختيار يدوي لمجموعة أخرى.
+            const p = window.YCScoring ? YCScoring.profile() : null;
+            if (!p || !p.group) { alert('اختار اسمك ومجموعتك من صفحة البداية أولاً.'); window.location.href = '../index.html'; return; }
+            selectedTeam = p.group;
+            sessionStorage.setItem('samar_stage_team', selectedTeam);
+            updateTeamBadge();
+            const autoTeam=document.getElementById('auto-team-name'); if(autoTeam) autoTeam.textContent=selectedTeam;
+            openWizardModal(1);
+
+            // إعداد أزرار الرأس
+            document.getElementById('btn-toggle-sound').addEventListener('click', toggleSound);
+            document.getElementById('btn-toggle-fullscreen').addEventListener('click', toggleFullscreen);
+
+            // تحميل الفرق المسجلة إن وجدت في conferenceData
+            loadRegisteredGroups();
+        }
+
+        function loadRegisteredGroups() {
+            const el=document.getElementById('auto-team-name'); if(el) el.textContent=selectedTeam || 'غير محددة';
+        }
+
+        function selectTeam(name, btnEl) {
+            selectedTeam = name;
+            document.querySelectorAll('.team-select-btn').forEach(btn => btn.classList.remove('selected'));
+            if (btnEl) btnEl.classList.add('selected');
+            document.getElementById('custom-team-name-input').value = '';
+            SoundEngine.playClick();
+        }
+
+        function handleCustomTeamInput(val) {
+            if (val.trim()) {
+                selectedTeam = val.trim();
+                document.querySelectorAll('.team-select-btn').forEach(btn => btn.classList.remove('selected'));
+            }
+        }
+
+        /* ─── منطق نافذة الخطوتين (Step 1 -> Step 2) ─── */
+        function openWizardModal(step = 1) {
+            pauseTimer();
+            SoundEngine.stopTensionMusic();
+            
+            if (step === 1) {
+                showWizardStep1();
+            } else {
+                showWizardStep2();
+            }
+            document.getElementById('wizard-modal').classList.add('show');
+            SoundEngine.playClick();
+        }
+
+        function closeWizardModal() {
+            document.getElementById('wizard-modal').classList.remove('show');
+        }
+
+        function showWizardStep1() {
+            document.getElementById('wizard-step-1-content').style.display = 'block';
+            document.getElementById('wizard-step-2-content').style.display = 'none';
+
+            document.getElementById('indicator-step-1').className = 'step-bubble active';
+            document.getElementById('indicator-step-2').className = 'step-bubble';
+        }
+
+        function showWizardStep2() {
+            document.getElementById('wizard-step-1-content').style.display = 'none';
+            document.getElementById('wizard-step-2-content').style.display = 'block';
+
+            document.getElementById('indicator-step-1').className = 'step-bubble completed';
+            document.getElementById('indicator-step-2').className = 'step-bubble active';
+
+            document.getElementById('modal-selected-team-name').textContent = selectedTeam;
+            
+            // تحديد القسم المختار حالياً
+            const segBtns = document.querySelectorAll('.segment-select-btn');
+            segBtns.forEach((btn, idx) => {
+                btn.classList.toggle('selected', idx === modalSelectedStep);
+            });
+        }
+
+        function proceedToSectionSelection() {
+            const p = window.YCScoring ? YCScoring.profile() : null;
+            if (p && p.group) selectedTeam = p.group;
+            sessionStorage.setItem('samar_stage_team', selectedTeam);
+            updateTeamBadge(); SoundEngine.playClick(); showWizardStep2();
+        }
+
+        function backToTeamSelection() {
+            SoundEngine.playClick();
+            showWizardStep1();
+        }
+
+        function selectModalSegment(idx, btnEl) {
+            modalSelectedStep = idx;
+            document.querySelectorAll('.segment-select-btn').forEach(btn => btn.classList.remove('selected'));
+            if (btnEl) btnEl.classList.add('selected');
+            SoundEngine.playClick();
+        }
+
+        function confirmAndLaunchStage() {
+            closeWizardModal();
+            updateTeamBadge();
+            goToStep(modalSelectedStep);
+            SoundEngine.playFanfare();
+        }
+
+        function updateTeamBadge() {
+            document.getElementById('current-team-name').textContent = `فريق: ${selectedTeam}`;
+        }
+
+        function toggleSound() {
+            isSoundEnabled = !isSoundEnabled;
+            const icon = document.getElementById('sound-icon');
+            if (isSoundEnabled) {
+                icon.className = 'bi bi-volume-up-fill';
+                SoundEngine.playClick();
+            } else {
+                icon.className = 'bi bi-volume-mute-fill';
+                SoundEngine.stopTensionMusic();
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        /* ─── التنقل بين خطوات المسرح ─── */
+        function goToStep(stepIdx) {
+            pauseTimer();
+            SoundEngine.stopTensionMusic();
+            currentStep = stepIdx;
+            modalSelectedStep = stepIdx;
+            renderCurrentStep();
+            updateStepNav();
+        }
+
+        function nextStep() {
+            SoundEngine.playClick();
+            if (currentStep < SEGMENTS.length - 1) {
+                goToStep(currentStep + 1);
+            } else {
+                // نهاية كل الفقرات
+                showFinalCelebration();
+            }
+        }
+
+        function prevStep() {
+            SoundEngine.playClick();
+            if (currentStep > 0) {
+                goToStep(currentStep - 1);
+            }
+        }
+
+        function updateStepNav() {
+            const tabs = document.querySelectorAll('.seg-tab');
+            tabs.forEach((tab, idx) => {
+                tab.classList.toggle('active', idx === currentStep);
+                tab.classList.toggle('done', idx < currentStep);
+            });
+
+            document.getElementById('step-indicator-text').textContent = `الفقرة ${currentStep + 1} من ${SEGMENTS.length}`;
+            document.getElementById('btn-prev-step').style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+            
+            const nextBtn = document.getElementById('btn-next-step');
+            if (currentStep === SEGMENTS.length - 1) {
+                nextBtn.innerHTML = '🎉 ختام فقرات الفريق وتحية المسرح';
+            } else {
+                nextBtn.innerHTML = 'الفقرة التالية <i class="bi bi-arrow-left"></i>';
+            }
+        }
+
+        /* ─── رسم محتوى الفقرة الحالية ─── */
+        function renderCurrentStep() {
+            const seg = SEGMENTS[currentStep];
+            const container = document.getElementById('stage-card');
+
+            // ضبط مؤقت الفقرة
+            timerSecondsLeft = seg.defaultTime;
+            timerTotalSeconds = seg.defaultTime;
+            isTimerRunning = false;
+
+            if (seg.isPressure) {
+                // تهيئة أسئلة تحت الضغط عشوائياً
+                initPressureArena();
+            }
+
+            let html = `
+                <div class="stage-card-header">
+                    <div class="stage-badge-pill">${seg.badge}</div>
+                    <h2 class="stage-card-title">${seg.title}</h2>
+                    <p class="stage-card-desc">${seg.desc}</p>
+                </div>
+
+                <!-- التايمر المسرحي -->
+                <div class="stage-timer-box">
+                    <div class="timer-display ${seg.isPressure ? 'tense-display' : ''}" id="main-timer-display">
+                        ${formatTime(timerSecondsLeft)}
+                    </div>
+                    <div class="timer-progress-bar">
+                        <div class="timer-progress-fill" id="timer-progress-fill" style="width: 100%;"></div>
+                    </div>
+                    <div class="stage-timer-controls">
+                        <button class="btn-timer-main btn-start" id="btn-timer-toggle" onclick="toggleTimer()">
+                            <i class="bi bi-play-fill"></i> بدء العد التنازلي
+                        </button>
+                        <button class="btn-timer-secondary" onclick="resetTimer()">
+                            <i class="bi bi-arrow-counterclockwise"></i> إعادة ضبط
+                        </button>
+                        <button class="btn-timer-secondary" onclick="addSeconds(30)">
+                            +٣٠ ثانية
+                        </button>
+                        ${seg.defaultTime >= 300 ? '<button class="btn-timer-secondary" onclick="addSeconds(60)">+١ دقيقة</button>' : ''}
+                    </div>
+                </div>
+            `;
+
+            // في حال كانت فقرة تحت الضغط
+            if (seg.isPressure) {
+                html += renderPressureArenaHTML();
+            }
+
+            // في حال كانت فقرة الاستوديو التحليلي
+            if (seg.isStudio) {
+                html += renderStudioCharactersHTML(seg.characters);
+            }
+
+            if (!seg.isPressure) {
+                html += `<div class="mt-4 text-center"><button class="btn-launch-stage" onclick="submitCurrentSegmentScore()">🏆 إتمام الفقرة وتسجيل ${seg.maxScore} درجة للمجموعة</button></div>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        /* ─── محرك التايمر التنازلي ─── */
+        function formatTime(secs) {
+            const m = Math.floor(secs / 60);
+            const s = secs % 60;
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            if (isTimerRunning) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+            isTimerRunning = true;
+            SoundEngine.init();
+            SoundEngine.playClick();
+
+            const toggleBtn = document.getElementById('btn-timer-toggle');
+            if (toggleBtn) {
+                toggleBtn.className = 'btn-timer-main btn-pause';
+                toggleBtn.innerHTML = '<i class="bi bi-pause-fill"></i> إيقاف مؤقت';
+            }
+
+            const seg = SEGMENTS[currentStep];
+            // تشغيل موسيقى التوتر في فقرة تحت الضغط أو التايمر
+            if (seg.isPressure) {
+                SoundEngine.startTensionMusic();
+                const disp = document.getElementById('main-timer-display');
+                if (disp) disp.classList.add('tense-active');
+            }
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timerSecondsLeft > 0) {
+                    timerSecondsLeft--;
+                    updateTimerUI();
+                } else {
+                    // انتهاء الوقت ⬅️ إطلاق صافرة الحكم القوية!
+                    pauseTimer();
+                    SoundEngine.stopTensionMusic();
+                    SoundEngine.playWhistle();
+                    if (seg.isPressure) {
+                        finishPressureChallenge('انتهى وقت الـ ٥٠ ثانية!');
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isTimerRunning = false;
+            clearInterval(timerInterval);
+            SoundEngine.stopTensionMusic();
+
+            const toggleBtn = document.getElementById('btn-timer-toggle');
+            if (toggleBtn) {
+                toggleBtn.className = 'btn-timer-main btn-start';
+                toggleBtn.innerHTML = '<i class="bi bi-play-fill"></i> استئناف العد';
+            }
+
+            const disp = document.getElementById('main-timer-display');
+            if (disp) disp.classList.remove('tense-active');
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            const seg = SEGMENTS[currentStep];
+            timerSecondsLeft = seg.defaultTime;
+            timerTotalSeconds = seg.defaultTime;
+            updateTimerUI();
+            SoundEngine.playClick();
+        }
+
+        function addSeconds(extra) {
+            timerSecondsLeft += extra;
+            timerTotalSeconds = Math.max(timerTotalSeconds, timerSecondsLeft);
+            updateTimerUI();
+            SoundEngine.playClick();
+        }
+
+        function updateTimerUI() {
+            const disp = document.getElementById('main-timer-display');
+            const fill = document.getElementById('timer-progress-fill');
+            if (disp) disp.textContent = formatTime(timerSecondsLeft);
+            if (fill) {
+                const pct = Math.max(0, Math.min(100, (timerSecondsLeft / timerTotalSeconds) * 100));
+                fill.style.width = `${pct}%`;
+            }
+        }
+
+        async function submitCurrentSegmentScore(){
+            const seg=SEGMENTS[currentStep];
+            if(!seg || !seg.gameId || !window.YCScoring) return;
+            try{
+                const r=await YCScoring.submitGame(seg.gameId,seg.maxScore);
+                if(r.status==='success') openCelebrationModal('تم تسجيل الفقرة 🏆', `فريق ${selectedTeam}`, `<div class="h4 fw-bold text-warning">${seg.maxScore} / ${seg.maxScore}</div><div class="text-secondary">تم حفظ الدرجة للمجموعة، ولا يمكن لعب الفقرة مرة أخرى.</div>`);
+                else if(r.status==='already_submitted') openCelebrationModal('الفقرة مكتملة بالفعل', `فريق ${selectedTeam}`, `<div class="h4 fw-bold text-warning">${r.score} / ${r.max}</div><div class="text-secondary">هذه الفقرة لا يمكن تكرارها للمجموعة.</div>`);
+                else alert(r.message||'تعذر تسجيل الدرجة');
+            }catch(e){ alert(e.message||'تعذر تسجيل الدرجة'); }
+        }
+
+        /* ─── منطق فقرة تحت الضغط (15 سؤال عشوائي) ─── */
+        function initPressureArena() {
+            // خوارزمية فيشر ييتس لخلط الـ 15 سؤالاً عشوائياً في كل مرة
+            shuffledQuestions = [...RAW_PRESSURE_QUESTIONS];
+            for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+            }
+            currentQuestionIdx = 0;
+            correctAnswersCount = 0;
+            totalAnsweredCount = 0;
+            isAnswerRevealed = false;
+        }
+
+        function renderPressureArenaHTML() {
+            const currentQ = shuffledQuestions[currentQuestionIdx] || { q: 'جاهز؟ اضغط بدء التحدي!', a: '—' };
+
+            return `
+                <div class="pressure-arena" id="pressure-arena-box">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="question-badge" id="q-badge">
+                            <i class="bi bi-lightning-charge-fill"></i> سؤال ${currentQuestionIdx + 1} من ${shuffledQuestions.length}
+                        </div>
+                        <div class="text-warning small fw-bold">
+                            <i class="bi bi-shuffle"></i> ترتيب عشوائي
+                        </div>
+                    </div>
+
+                    <div class="question-card-text" id="q-text">
+                        ${currentQ.q}
+                    </div>
+
+                    <div class="answer-reveal-box" id="q-ans-box">
+                        الإجابة النموذجية: <strong id="q-ans-text">${currentQ.a}</strong>
+                    </div>
+
+                    <div class="pressure-actions">
+                        <button class="btn-ans-correct" onclick="recordAnswer(true)">
+                            <i class="bi bi-check-circle-fill"></i> صح (+١)
+                        </button>
+                        <button class="btn-ans-wrong" onclick="recordAnswer(false)">
+                            <i class="bi bi-x-circle-fill"></i> خطأ / تخطي
+                        </button>
+                        <button class="btn-ans-reveal" onclick="toggleRevealAnswer()">
+                            <i class="bi bi-eye-fill"></i> كشف الإجابة
+                        </button>
+                    </div>
+
+                    <div class="pressure-stats">
+                        <div>إجابات صحيحة: <span id="stat-correct">${correctAnswersCount}</span></div>
+                        <div>الأسئلة المتبقية: <span id="stat-remaining">${shuffledQuestions.length - currentQuestionIdx}</span></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleRevealAnswer() {
+            const box = document.getElementById('q-ans-box');
+            if (!box) return;
+            isAnswerRevealed = !isAnswerRevealed;
+            box.classList.toggle('show', isAnswerRevealed);
+            SoundEngine.playClick();
+        }
+
+        function recordAnswer(isCorrect) {
+            if (!isTimerRunning) {
+                // بدء التيمر تلقائياً إذا ضغط على الإجابة قبل البدء
+                startTimer();
+            }
+
+            if (isCorrect) {
+                correctAnswersCount++;
+                SoundEngine.playCorrect();
+            } else {
+                SoundEngine.playWrong();
+            }
+
+            totalAnsweredCount++;
+            isAnswerRevealed = false;
+
+            if (currentQuestionIdx < shuffledQuestions.length - 1) {
+                currentQuestionIdx++;
+                updatePressureCardUI();
+            } else {
+                // إتمام كل الـ 15 سؤالاً بنجاح ⬅️ صافرة إتمام التحدي واحتفال
+                pauseTimer();
+                SoundEngine.stopTensionMusic();
+                SoundEngine.playWhistle();
+                setTimeout(() => {
+                    SoundEngine.playFanfare();
+                }, 1000);
+                finishPressureChallenge('أنهيتم جميع الـ ١٥ سؤالاً بنجاح!');
+            }
+        }
+
+        function updatePressureCardUI() {
+            const currentQ = shuffledQuestions[currentQuestionIdx];
+            const badge = document.getElementById('q-badge');
+            const qText = document.getElementById('q-text');
+            const ansText = document.getElementById('q-ans-text');
+            const ansBox = document.getElementById('q-ans-box');
+            const statCorrect = document.getElementById('stat-correct');
+            const statRemaining = document.getElementById('stat-remaining');
+
+            if (badge) badge.innerHTML = `<i class="bi bi-lightning-charge-fill"></i> سؤال ${currentQuestionIdx + 1} من ${shuffledQuestions.length}`;
+            if (qText) qText.textContent = currentQ.q;
+            if (ansText) ansText.textContent = currentQ.a;
+            if (ansBox) ansBox.classList.remove('show');
+            if (statCorrect) statCorrect.textContent = correctAnswersCount;
+            if (statRemaining) statRemaining.textContent = shuffledQuestions.length - currentQuestionIdx;
+        }
+
+        async function finishPressureChallenge(msg) {
+            let savedHtml='';
+            try { const r=await YCScoring.submitGame('pressure',correctAnswersCount); if(r.status==='success') savedHtml=`<div class="text-success fw-bold">تم تسجيل ${correctAnswersCount}/15 للمجموعة — لا يمكن تكرار الفقرة.</div>`; else if(r.status==='already_submitted') savedHtml=`<div class="text-warning fw-bold">الدرجة مسجلة بالفعل: ${r.score}/15</div>`; else savedHtml=`<div class="text-danger fw-bold">تعذر حفظ الدرجة: ${r.message||''}</div>`; } catch(e) { savedHtml=`<div class="text-danger fw-bold">تعذر حفظ الدرجة: ${e.message}</div>`; }
+            const details = `
+                <div class="h4 fw-bold text-white mb-2">${msg}</div>
+                <div class="d-flex justify-content-around text-center my-3">
+                    <div>
+                        <div class="h2 fw-bold text-warning mb-0">${correctAnswersCount} / ١٥</div>
+                        <div class="small text-secondary">إجابات صحيحة</div>
+                    </div>
+                    <div>
+                        <div class="h2 fw-bold text-info mb-0">${50 - timerSecondsLeft} ثانية</div>
+                        <div class="small text-secondary">الوقت المستغرق</div>
+                    </div>
+                </div>
+                ${savedHtml}
+            `;
+            openCelebrationModal('نتيجة فقرة تحت الضغط ⚡', `فريق ${selectedTeam}`, details);
+        }
+
+        /* ─── فقرة الاستوديو التحليلي ─── */
+        function renderStudioCharactersHTML(characters) {
+            if (!characters) return '';
+            return `
+                <div class="mt-4">
+                    <div class="fw-bold text-warning mb-2">
+                        <i class="bi bi-dice-5-fill"></i> اضغط لاختيار الشخصية المطلوبة للاستوديو:
+                    </div>
+                    <div class="character-wheel-grid">
+                        ${characters.map((c, i) => `
+                            <div class="char-card ${i === 0 ? 'selected' : ''}" onclick="selectCharacter(this)">
+                                <span class="char-icon">${c.icon}</span>
+                                <div class="char-name">${c.name}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectCharacter(cardEl) {
+            document.querySelectorAll('.char-card').forEach(c => c.classList.remove('selected'));
+            cardEl.classList.add('selected');
+            SoundEngine.playClick();
+        }
+
+        /* ─── الاحتفال والختام ─── */
+        function showFinalCelebration() {
+            pauseTimer();
+            SoundEngine.stopTensionMusic();
+            SoundEngine.playFanfare();
+
+            const details = `
+                <div class="h4 fw-bold text-warning mb-2">تحية حارة لفريق ${selectedTeam}! 👏</div>
+                <p class="text-secondary small">أتممتم بنجاح كافة فقرات المسرح وحفلة السمر الخمس بكل إبداع وتألق.</p>
+                <div class="badge bg-success p-2 px-3 fs-6 mt-1">🎉 عرض مسرحي متكامل</div>
+            `;
+            openCelebrationModal('ختام عرض الفريق على المسرح 🎭', `فريق ${selectedTeam}`, details);
+        }
+
+        function openCelebrationModal(title, subtitle, detailsHTML) {
+            document.getElementById('cel-title').textContent = title;
+            document.getElementById('cel-subtitle').textContent = subtitle;
+            document.getElementById('cel-details').innerHTML = detailsHTML;
+            document.getElementById('celebration-modal').classList.add('show');
+        }
+
+        function closeCelebrationModal() {
+            document.getElementById('celebration-modal').classList.remove('show');
+        }
+
+        // بدء التشغيل عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            initStage();
+        });
+    </script>
+</body>
+</html>

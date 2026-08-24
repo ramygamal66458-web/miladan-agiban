@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>المتاهة - مؤتمر الشباب</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+        :root {
+            --bg-deepest: #070d19;
+            --bg-deep: #0b1121;
+            --bg-dark: #0f172a;
+            --bg-light: #1e293b;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card-light: #334155;
+            --primary: #06b6d4;
+            --primary-light: #22d3ee;
+            --primary-dark: #0891b2;
+            --primary-glow: rgba(6, 182, 212, 0.5);
+            --primary-border: rgba(6, 182, 212, 0.3);
+            --primary-super-glow: rgba(6, 182, 212, 0.65);
+            --accent-purple: #8b5cf6;
+            --accent-purple-light: #a78bfa;
+            --accent-pink: #ec4899;
+            --accent-pink-light: #f472b6;
+            --seat-avail: #10b981;
+            --seat-avail-light: #34d399;
+            --seat-avail-glow: rgba(16, 185, 129, 0.5);
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --gold-dark: #d97706;
+            --gold-super-glow: rgba(245, 158, 11, 0.55);
+            --text-main: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.5);
+            --glass-bg: rgba(15, 23, 42, 0.55);
+            --glass-border: rgba(148, 163, 184, 0.12);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(160deg, #070d19 0%, #0c1222 20%, #0a1628 45%, #0d1b2e 70%, #061524 100%);
+            color: var(--text-main);
+            min-height: 100vh; min-height: 100dvh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 20% 20%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body > * { position: relative; z-index: 1; }
+
+        /* Navbar */
+        nav {
+            background: linear-gradient(135deg, rgba(6, 12, 28, 0.85), rgba(15, 23, 42, 0.75));
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        nav .back-link { color: var(--primary-light); text-decoration: none; font-size: 1.3rem; transition: all 0.3s; text-shadow: 0 0 12px var(--primary-glow); }
+        nav .back-link:hover { color: var(--gold-light); text-shadow: 0 0 16px var(--gold-super-glow); }
+        nav .nav-title { font-weight: 900; font-size: 1.15rem; background: linear-gradient(135deg, var(--primary-light), var(--gold-light), var(--seat-avail), var(--primary)); background-size: 250% 250%; animation: gradientShift 6s ease infinite; -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
+        nav .nav-subtitle { font-size: 0.65rem; color: var(--text-muted); text-align: center; letter-spacing: 1px; }
+        nav .spacer { width: 50px; }
+        nav .nav-brand {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; justify-content: center;
+            transition: opacity 0.25s ease, transform 0.2s ease;
+        }
+        nav .nav-brand:hover { opacity: 0.85; }
+        nav .nav-brand:active { transform: scale(0.96); }
+        nav .nav-brand-logo {
+            width: 32px; height: 32px; flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 8px rgba(6, 182, 212, 0.15);
+        }
+        nav .nav-brand-logo i { font-size: 1rem; color: var(--primary); }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Stage Info Bar */
+        .stage-info-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin: 10px 15px 5px;
+            flex-wrap: wrap;
+        }
+        .stage-badge {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--accent-purple));
+            border: 1px solid var(--primary);
+            border-radius: 14px;
+            padding: 7px 16px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 0 16px var(--primary-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            backdrop-filter: blur(8px);
+        }
+        .stage-badge .stage-num {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 2px 8px;
+            font-size: 0.95rem;
+        }
+        .stage-badge.badge-gold {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), #fde68a);
+            border-color: var(--gold);
+            box-shadow: 0 0 16px rgba(245,158,11,0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .stage-badge.badge-danger {
+            background: linear-gradient(135deg, #991b1b, var(--danger), #f87171);
+            border-color: var(--danger);
+            box-shadow: 0 0 16px var(--danger-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-size: 0.75rem;
+        }
+
+        /* Stage Progress */
+        .stage-progress {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 5px 10px 8px;
+            flex-wrap: wrap;
+        }
+        .stage-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .stage-dot.completed {
+            background: linear-gradient(135deg, var(--seat-avail), #059669, var(--accent-purple));
+            border-color: var(--seat-avail);
+            color: white;
+            box-shadow: 0 0 14px var(--seat-avail-glow);
+        }
+        .stage-dot.active {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--accent-purple));
+            border-color: var(--primary-light);
+            color: white;
+            box-shadow: 0 0 18px var(--primary-super-glow), 0 0 6px var(--primary-glow);
+            transform: scale(1.15);
+            animation: activeDotPulse 2s ease-in-out infinite;
+        }
+        @keyframes activeDotPulse {
+            0%, 100% { box-shadow: 0 0 18px var(--primary-super-glow), 0 0 6px var(--primary-glow); }
+            50% { box-shadow: 0 0 24px var(--primary-super-glow), 0 0 12px var(--primary-glow); }
+        }
+        .stage-dot.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .stage-dot:not(.locked):hover {
+            border-color: var(--primary-light);
+            transform: scale(1.1);
+        }
+        .stage-dot .dot-check { font-size: 0.8rem; }
+        .stage-dot .dot-lock { font-size: 0.6rem; }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px;
+            margin: 5px 15px;
+            background: var(--glass-bg);
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px) saturate(1.5);
+            -webkit-backdrop-filter: blur(16px) saturate(1.5);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px; }
+        .stat-value { font-size: 1.2rem; font-weight: 900; }
+        .stat-value.cyan { color: var(--primary-light); text-shadow: 0 0 10px var(--primary-glow); }
+        .stat-value.gold { color: var(--gold-light); text-shadow: 0 0 10px var(--gold-super-glow); }
+        .stat-value.green { color: var(--seat-avail-light); text-shadow: 0 0 10px var(--seat-avail-glow); }
+        .stat-value.red { color: var(--danger); text-shadow: 0 0 10px var(--danger-glow); }
+
+        /* Canvas Container */
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            padding: 8px 15px;
+        }
+        #mazeCanvas {
+            border-radius: 16px;
+            border: 2px solid var(--primary-border);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(6, 182, 212, 0.05);
+            touch-action: none;
+        }
+
+        /* D-Pad Controls */
+        .dpad-container {
+            display: flex;
+            justify-content: center;
+            margin: 12px auto;
+            max-width: 200px;
+        }
+        .dpad {
+            display: grid;
+            grid-template-areas:
+                ". up ."
+                "left center right"
+                ". down .";
+            gap: 6px;
+        }
+        .dpad-btn {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--primary-light);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            backdrop-filter: blur(12px) saturate(1.5);
+            -webkit-backdrop-filter: blur(12px) saturate(1.5);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .dpad-btn:active, .dpad-btn.pressed {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-color: var(--primary-light);
+            box-shadow: 0 0 20px var(--primary-super-glow), 0 0 6px var(--primary-glow);
+            transform: scale(0.92);
+        }
+        .dpad-up { grid-area: up; }
+        .dpad-down { grid-area: down; }
+        .dpad-left { grid-area: left; }
+        .dpad-right { grid-area: right; }
+        .dpad-center {
+            grid-area: center;
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px) saturate(1.5);
+            -webkit-backdrop-filter: blur(12px) saturate(1.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        /* Footer Buttons */
+        .maze-footer {
+            text-align: center;
+            padding: 5px 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .maze-btn {
+            background: var(--glass-bg);
+            color: var(--primary-light);
+            border: 1px solid var(--glass-border);
+            padding: 11px 26px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(12px) saturate(1.5);
+            -webkit-backdrop-filter: blur(12px) saturate(1.5);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+        .maze-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            box-shadow: 0 0 20px var(--primary-super-glow);
+            transform: translateY(-2px);
+        }
+        .maze-btn.btn-gold {
+            border-color: rgba(245, 158, 11, 0.25);
+            color: var(--gold-light);
+        }
+        .maze-btn.btn-gold:hover {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            box-shadow: 0 0 20px var(--gold-super-glow);
+            color: #000;
+        }
+
+        /* Victory Overlay */
+        .victory-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.92);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px) saturate(1.8);
+            -webkit-backdrop-filter: blur(12px) saturate(1.8);
+        }
+        .victory-overlay.show { display: flex; }
+        .victory-box {
+            text-align: center;
+            padding: 35px 28px;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.75));
+            border-radius: 28px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.35), 0 0 100px rgba(245, 158, 11, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            max-width: 400px;
+            width: 90%;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(20px) saturate(1.5);
+            -webkit-backdrop-filter: blur(20px) saturate(1.5);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .victory-emoji { font-size: 4rem; margin-bottom: 10px; filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.5)); }
+        .victory-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold-light), var(--accent-purple-light), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.3));
+        }
+        .victory-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.9;
+        }
+        .victory-stats {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 20px;
+            line-height: 2.3;
+            background: rgba(6, 182, 212, 0.06);
+            border-radius: 14px;
+            padding: 12px;
+            border: 1px solid rgba(6, 182, 212, 0.1);
+        }
+        .victory-stars { margin-bottom: 12px; }
+        .victory-star {
+            font-size: 2rem;
+            display: inline-block;
+            opacity: 0.2;
+            transition: all 0.3s;
+        }
+        .victory-star.earned {
+            opacity: 1;
+            animation: starPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+        }
+        @keyframes starPop {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .victory-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .victory-btn {
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .victory-btn.primary {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .victory-btn.primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px var(--primary-super-glow); }
+        .victory-btn.gold {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), #fde68a);
+            color: #000;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35);
+        }
+        .victory-btn.gold:hover { transform: translateY(-3px); box-shadow: 0 8px 30px var(--gold-super-glow); }
+        .victory-btn.share-btn {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .victory-btn.share-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(14, 165, 233, 0.5); }
+
+        /* All Stages Complete Overlay */
+        .all-complete-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.95);
+            z-index: 250;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(14px) saturate(1.8);
+            -webkit-backdrop-filter: blur(14px) saturate(1.8);
+        }
+        .all-complete-overlay.show { display: flex; }
+        .all-complete-box {
+            text-align: center;
+            padding: 40px 32px;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+            border-radius: 28px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 70px rgba(245, 158, 11, 0.4), 0 0 120px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            max-width: 420px;
+            width: 90%;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(20px) saturate(1.5);
+            -webkit-backdrop-filter: blur(20px) saturate(1.5);
+        }
+        .all-complete-icon { font-size: 4.5rem; margin-bottom: 12px; animation: floatIcon 2s ease-in-out infinite; filter: drop-shadow(0 0 24px rgba(245, 158, 11, 0.5)); }
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .all-complete-title {
+            font-size: 1.7rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold-light), var(--accent-pink-light), #ef4444, var(--gold-light));
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.3));
+        }
+        .all-complete-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 2.2;
+            margin-bottom: 22px;
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 300;
+            overflow: hidden;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -20px;
+            opacity: 0;
+        }
+        @keyframes confettiFall {
+            0% { top: -10%; opacity: 1; transform: rotate(0deg) scale(1); }
+            100% { top: 110%; opacity: 0; transform: rotate(720deg) scale(0.5); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: floatParticle 8s infinite ease-in-out;
+        }
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.1; }
+            50% { transform: translateY(-60px) translateX(30px); opacity: 0.5; }
+        }
+
+        .share-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 25px rgba(14, 165, 233, 0.4);
+            z-index: 500;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .share-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Share Card Overlay */
+        .share-card-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.95);
+            z-index: 400;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(14px) saturate(1.8);
+            -webkit-backdrop-filter: blur(14px) saturate(1.8);
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+        }
+        .share-card-overlay.show { display: flex; }
+        .share-card-preview {
+            max-width: 340px;
+            max-height: 340px;
+            border-radius: 20px;
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.2), 0 0 80px rgba(245, 158, 11, 0.1);
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            width: 100%;
+            object-fit: contain;
+        }
+        .share-card-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .share-card-btn {
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .share-card-btn:active { transform: scale(0.95); }
+        .share-card-btn.btn-share-img {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+        }
+        .share-card-btn.btn-share-img:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(14, 165, 233, 0.5); }
+        .share-card-btn.btn-download {
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+        .share-card-btn.btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5); }
+        .share-card-btn.btn-copy-text {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: #000;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35);
+        }
+        .share-card-btn.btn-copy-text:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--gold-super-glow); }
+        .share-card-btn.btn-close-overlay {
+            background: rgba(100, 116, 139, 0.3);
+            color: var(--text-secondary);
+            border: 1px solid var(--glass-border);
+        }
+        .share-card-btn.btn-close-overlay:hover { background: rgba(100, 116, 139, 0.5); transform: translateY(-2px); }
+        .share-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .dpad-btn { width: 50px; height: 50px; font-size: 1.1rem; }
+            .dpad-center { width: 50px; height: 50px; }
+            .stage-dot { width: 26px; height: 26px; font-size: 0.55rem; }
+            .share-card-preview { max-width: 280px; max-height: 280px; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/identity.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-inner">
+            <a href="games.html" class="back-link"><i class="bi bi-arrow-right"></i> رجوع</a>
+            <a href="home.html" class="nav-brand">
+                <div class="nav-brand-logo"><i class="bi bi-bus-front-fill"></i></div>
+                <div class="nav-brand-text">
+                    <div class="nav-title">المتاهة</div>
+                    <div class="nav-subtitle">مؤتمر الشباب</div>
+                </div>
+            </a>
+            <div class="spacer"></div>
+        </div>
+    </nav>
+
+    <!-- Stage Info -->
+    <div class="stage-info-bar">
+        <div class="stage-badge">
+            <span>المستوى</span>
+            <span class="stage-num" id="stageNumDisplay">1</span>
+        </div>
+        <div class="stage-badge badge-gold">
+            <span id="stageNameDisplay">البداية</span>
+        </div>
+        <div class="stage-badge badge-danger" id="deadEndsBadge" style="display:none;">
+            <i class="bi bi-sign-stop-fill"></i>
+            <span id="deadEndsDisplay">0</span> طريق مسدود
+        </div>
+    </div>
+
+    <!-- Stage Progress Dots -->
+    <div class="stage-progress" id="stageProgress"></div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-label">الحركات</div>
+            <div class="stat-value cyan" id="moveCount">0</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">الوقت</div>
+            <div class="stat-value gold" id="timerDisplay">00:00</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">النجوم</div>
+            <div class="stat-value green" id="totalStars">0</div>
+        </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="canvas-container">
+        <canvas id="mazeCanvas"></canvas>
+    </div>
+
+    <!-- D-Pad Controls -->
+    <div class="dpad-container">
+        <div class="dpad">
+            <button class="dpad-btn dpad-up" ontouchstart="movePlayer(0,-1);event.preventDefault();" onclick="movePlayer(0,-1)"><i class="bi bi-chevron-up"></i></button>
+            <button class="dpad-btn dpad-left" ontouchstart="movePlayer(1,0);event.preventDefault();" onclick="movePlayer(1,0)"><i class="bi bi-chevron-right"></i></button>
+            <div class="dpad-center">✝️</div>
+            <button class="dpad-btn dpad-right" ontouchstart="movePlayer(-1,0);event.preventDefault();" onclick="movePlayer(-1,0)"><i class="bi bi-chevron-left"></i></button>
+            <button class="dpad-btn dpad-down" ontouchstart="movePlayer(0,1);event.preventDefault();" onclick="movePlayer(0,1)"><i class="bi bi-chevron-down"></i></button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="maze-footer">
+        <button class="maze-btn" onclick="restartStage()"><i class="bi bi-arrow-counterclockwise"></i> من الأول</button>
+        <button class="maze-btn btn-gold" onclick="goToStageSelect()"><i class="bi bi-list-ol"></i> المستويات</button>
+    </div>
+
+    <!-- Victory Overlay -->
+    <div class="victory-overlay" id="victoryOverlay">
+        <div class="victory-box" id="victoryBox">
+            <div class="victory-emoji">✝️</div>
+            <div class="victory-title" id="victoryTitle">وصلت للصليب!</div>
+            <div class="victory-subtitle" id="victorySubtitle">الرب معاك في كل خطوة</div>
+            <div class="victory-stars" id="victoryStars"></div>
+            <div class="victory-stats" id="victoryStats"></div>
+            <div class="victory-buttons" id="victoryButtons"></div>
+            <button class="victory-btn share-btn" id="btnShareVictory" onclick="shareStageResult()" style="margin-top:10px;"><i class="bi bi-share-fill"></i> شارك النتيجة</button>
+        </div>
+    </div>
+
+    <!-- All Stages Complete Overlay -->
+    <div class="all-complete-overlay" id="allCompleteOverlay">
+        <div class="all-complete-box" id="allCompleteBox">
+            <div class="all-complete-icon">🏆</div>
+            <div class="all-complete-title">مبروك! خلصت كل المستويات!</div>
+            <div class="all-complete-text" id="allCompleteText">
+                رحلتك من الأرض للصليب خلصت<br>
+                الرب يبارك حياتك كلها ✝️
+            </div>
+            <div class="victory-buttons">
+                <button class="victory-btn gold" onclick="goToStageSelect()"><i class="bi bi-list-ol me-1"></i> المستويات</button>
+                <button class="victory-btn primary" onclick="restartAllStages()"><i class="bi bi-arrow-counterclockwise me-1"></i> من الأول</button>
+                <button class="victory-btn share-btn" onclick="shareAllCompleteResult()"><i class="bi bi-share-fill"></i> شارك النتيجة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- Background Particles -->
+    <div id="particles"></div>
+
+    <!-- Share Card Overlay -->
+    <div class="share-card-overlay" id="shareCardOverlay">
+        <div class="share-card-title">شارك نتيجتك</div>
+        <img class="share-card-preview" id="shareCardPreview" alt="بطاقة المشاركة" />
+        <div class="share-card-actions" id="shareCardActions"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script>
+        /* ============================================
+           تعريف 10 مراحل - كل مرحلة أصعب
+           من المستوى 2+: طريقين (صح + مسدود)
+           ============================================ */
+        const STAGES = [
+            { id: 1,  name: 'البداية',     size: 6,  branches: 0, desc: 'أول خطوة ليك ناحية الصليب',           icon: '👣' },
+            { id: 2,  name: 'الطريق',      size: 7,  branches: 1, desc: 'طريقين... اختار الصح!',              icon: '🛤️' },
+            { id: 3,  name: 'التحدي',      size: 7,  branches: 2, desc: 'أكتر من طريق مسدود... احترس!',      icon: '🔥' },
+            { id: 4,  name: 'الصبر',       size: 8,  branches: 2, desc: 'بالصبر هتوصل للطريق الصح',           icon: '⏳' },
+            { id: 5,  name: 'الإيمان',     size: 9,  branches: 3, desc: 'الإيمان هو الطريق... بس أنهي طريق؟',    icon: '🙏' },
+            { id: 6,  name: 'الرجاء',      size: 10, branches: 3, desc: 'فكر كويس قبل ما تمشي!',              icon: '🕊️' },
+            { id: 7,  name: 'المحبة',      size: 11, branches: 4, desc: 'طرق كتير بس واحد بس الصح',           icon: '❤️' },
+            { id: 8,  name: 'الحكمة',      size: 12, branches: 4, desc: 'الحكمة تفرق بين الطريق الصح والغلط', icon: '📖' },
+            { id: 9,  name: 'التضحية',     size: 13, branches: 5, desc: 'كل تضحية ليها طريق واحد بس',         icon: '✨' },
+            { id: 10, name: 'الصليب',      size: 15, branches: 6, desc: 'آخر طريق للصليب!',              icon: '✝️' },
+        ];
+
+        /* ============================================
+           حالة اللعبة
+           ============================================ */
+        let currentStage = 0;
+        let maze = [];
+        let playerX = 0;
+        let playerY = 0;
+        let goalX = 0;
+        let goalY = 0;
+        let moves = 0;
+        let seconds = 0;
+        let timerInterval = null;
+        let gameActive = false;
+        let visitedCells = new Set();
+        let canvasSize = 0;
+        let cellSize = 0;
+        let playerAnimFrame = 0;
+        let playerAnimTimer = null;
+        let deadEndMarkers = []; // مواقع علامات الطريق المسدود
+
+        let stageProgress = loadProgress();
+
+        const canvas = document.getElementById('mazeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const PATH_COLOR = '#080e1a';
+        const VISITED_COLOR = 'rgba(6, 182, 212, 0.18)';
+        const WALL_BORDER = '#4a6080';
+        const DEADEND_BG = 'rgba(239, 68, 68, 0.08)';
+
+        /* ============================================
+           نظام الحفظ - localStorage
+           ============================================ */
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('maze_stage_progress_v2');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    if (data.length === STAGES.length) return data;
+                }
+            } catch(e) {}
+            return STAGES.map(s => ({
+                id: s.id, completed: false, stars: 0, bestMoves: 0, bestTime: 0
+            }));
+        }
+
+        function saveProgress() {
+            try {
+                localStorage.setItem('maze_stage_progress_v2', JSON.stringify(stageProgress));
+            } catch(e) {}
+        }
+
+        function isStageUnlocked(index) {
+            if (index === 0) return true;
+            return stageProgress[index - 1].completed;
+        }
+
+        /* ============================================
+           عرض شريط تقدم المراحل
+           ============================================ */
+        function renderStageProgress() {
+            const $container = $('#stageProgress');
+            $container.empty();
+            STAGES.forEach((stage, i) => {
+                const unlocked = isStageUnlocked(i);
+                const isActive = i === currentStage;
+                const completed = stageProgress[i].completed;
+                let cls = 'stage-dot';
+                let inner = '';
+                if (completed) {
+                    cls += ' completed';
+                    inner = '<span class="dot-check">&#10003;</span>';
+                } else if (isActive) {
+                    cls += ' active';
+                    inner = stage.id;
+                } else if (!unlocked) {
+                    cls += ' locked';
+                    inner = '<span class="dot-lock"><i class="bi bi-lock-fill"></i></span>';
+                } else {
+                    inner = stage.id;
+                }
+                const $dot = $(`<div class="${cls}" data-stage="${i}">${inner}</div>`);
+                if (unlocked && !isActive) {
+                    $dot.on('click', function() {
+                        currentStage = i;
+                        startStage();
+                    });
+                }
+                $container.append($dot);
+            });
+        }
+
+        function goToStageSelect() {
+            $('#victoryOverlay').removeClass('show');
+            $('#allCompleteOverlay').removeClass('show');
+            for (let i = 0; i < STAGES.length; i++) {
+                if (!stageProgress[i].completed) { currentStage = i; break; }
+                if (i === STAGES.length - 1) currentStage = 0;
+            }
+            startStage();
+        }
+
+        /* ============================================
+           بدء مرحلة
+           ============================================ */
+        function startStage() {
+            if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+            $('#victoryOverlay').removeClass('show');
+            $('#allCompleteOverlay').removeClass('show');
+            $('#confettiContainer').empty();
+
+            const stage = STAGES[currentStage];
+            const mazeSize = stage.size;
+
+            // Update UI
+            $('#stageNumDisplay').text(stage.id);
+            $('#stageNameDisplay').text(stage.name);
+            if (stage.branches > 0) {
+                $('#deadEndsBadge').show();
+                $('#deadEndsDisplay').text(stage.branches);
+            } else {
+                $('#deadEndsBadge').hide();
+            }
+            renderStageProgress();
+
+            // Reset state
+            moves = 0;
+            seconds = 0;
+            gameActive = true;
+            visitedCells = new Set();
+            deadEndMarkers = [];
+            $('#moveCount').text('0');
+            $('#timerDisplay').text('00:00');
+
+            // Setup canvas
+            setupCanvas(mazeSize);
+
+            // Generate maze with branches
+            maze = generateMazeDFS(mazeSize);
+
+            // إضافة فروع الطريق المسدود من المستوى 2+
+            if (stage.branches > 0) {
+                addDeadEndBranches(maze, mazeSize, stage.branches);
+            }
+
+            // Player at top-left
+            playerX = 0;
+            playerY = 0;
+            visitedCells.add('0,0');
+
+            // Goal at bottom-right
+            goalX = mazeSize - 1;
+            goalY = mazeSize - 1;
+
+            drawMaze(mazeSize);
+            startPlayerAnimation();
+        }
+
+        function restartStage() { startStage(); }
+
+        function restartAllStages() {
+            stageProgress = STAGES.map(s => ({
+                id: s.id, completed: false, stars: 0, bestMoves: 0, bestTime: 0
+            }));
+            saveProgress();
+            currentStage = 0;
+            startStage();
+        }
+
+        /* ============================================
+           Canvas Setup
+           ============================================ */
+        function setupCanvas(mazeSize) {
+            const containerWidth = Math.min(window.innerWidth - 30, 450);
+            canvasSize = Math.min(containerWidth, 450);
+            cellSize = Math.floor(canvasSize / mazeSize);
+            canvasSize = cellSize * mazeSize;
+            canvas.width = canvasSize;
+            canvas.height = canvasSize;
+            canvas.style.width = canvasSize + 'px';
+            canvas.style.height = canvasSize + 'px';
+        }
+
+        /* ============================================
+           DFS Maze Generation (المتاهة الأساسية)
+           ============================================ */
+        function generateMazeDFS(size) {
+            const grid = [];
+            for (let y = 0; y < size; y++) {
+                grid[y] = [];
+                for (let x = 0; x < size; x++) {
+                    grid[y][x] = { walls: [true, true, true, true], visited: false };
+                }
+            }
+            const stack = [];
+            grid[0][0].visited = true;
+            stack.push({ x: 0, y: 0 });
+            const dirs = [
+                { dx: 0, dy: -1, wall: 0, opp: 2 },
+                { dx: 1, dy: 0, wall: 1, opp: 3 },
+                { dx: 0, dy: 1, wall: 2, opp: 0 },
+                { dx: -1, dy: 0, wall: 3, opp: 1 }
+            ];
+            while (stack.length > 0) {
+                const cur = stack[stack.length - 1];
+                const neighbors = [];
+                for (const d of dirs) {
+                    const nx = cur.x + d.dx, ny = cur.y + d.dy;
+                    if (nx >= 0 && nx < size && ny >= 0 && ny < size && !grid[ny][nx].visited)
+                        neighbors.push({ x: nx, y: ny, dir: d });
+                }
+                if (neighbors.length > 0) {
+                    const ch = neighbors[Math.floor(Math.random() * neighbors.length)];
+                    grid[cur.y][cur.x].walls[ch.dir.wall] = false;
+                    grid[ch.y][ch.x].walls[ch.dir.opp] = false;
+                    grid[ch.y][ch.x].visited = true;
+                    stack.push({ x: ch.x, y: ch.y });
+                } else {
+                    stack.pop();
+                }
+            }
+            return grid;
+        }
+
+        /* ============================================
+           BFS - إيجاد أقصر طريق
+           ============================================ */
+        function bfsPath(grid, size, sx, sy, gx, gy) {
+            const visited = Array.from({ length: size }, () => Array(size).fill(false));
+            const parent = Array.from({ length: size }, () => Array(size).fill(null));
+            const queue = [{ x: sx, y: sy }];
+            visited[sy][sx] = true;
+            const dirs = [
+                { dx: 0, dy: -1, wall: 0 },
+                { dx: 1, dy: 0, wall: 1 },
+                { dx: 0, dy: 1, wall: 2 },
+                { dx: -1, dy: 0, wall: 3 }
+            ];
+            while (queue.length > 0) {
+                const cur = queue.shift();
+                if (cur.x === gx && cur.y === gy) {
+                    // Reconstruct path
+                    const path = [];
+                    let c = { x: gx, y: gy };
+                    while (c) { path.unshift(c); c = parent[c.y][c.x]; }
+                    return path;
+                }
+                for (const d of dirs) {
+                    const nx = cur.x + d.dx, ny = cur.y + d.dy;
+                    if (nx >= 0 && nx < size && ny >= 0 && ny < size &&
+                        !visited[ny][nx] && !grid[cur.y][cur.x].walls[d.wall]) {
+                        visited[ny][nx] = true;
+                        parent[ny][nx] = { x: cur.x, y: cur.y };
+                        queue.push({ x: nx, y: ny });
+                    }
+                }
+            }
+            return [];
+        }
+
+        /* ============================================
+           إضافة فروع الطريق المسدود
+           الفكرة: من نقطة على الطريق الصح، نفتح حيط
+           ناحية منطقة بعيدة عن الهدف، ونمد طريق طويل
+           في الاتجاه المعاكس للصليب - ينتهي بمسدود
+           ============================================ */
+        function addDeadEndBranches(grid, size, numBranches) {
+            // إيجاد الطريق الصحيح من البداية للنهاية
+            const solutionPath = bfsPath(grid, size, 0, 0, size - 1, size - 1);
+            if (solutionPath.length < 4) return;
+
+            // نجمع خلايا جنب الطريق الصح بس مش عليه
+            const onPath = new Set(solutionPath.map(p => `${p.x},${p.y}`));
+
+            for (let b = 0; b < numBranches; b++) {
+                // نختار نقطة تفرع عشوائية من الطريق الصح (من الربع التاني للتلات أرباع)
+                const startIdx = Math.floor(solutionPath.length * 0.2) +
+                    Math.floor(Math.random() * solutionPath.length * 0.6);
+                const fork = solutionPath[Math.min(startIdx, solutionPath.length - 1)];
+
+                // نبحث عن حيط ممكن نفتحه ناحية خلية مش على الطريق الصح
+                const dirs = [
+                    { dx: 0, dy: -1, wall: 0, opp: 2 },
+                    { dx: 1, dy: 0, wall: 1, opp: 3 },
+                    { dx: 0, dy: 1, wall: 2, opp: 0 },
+                    { dx: -1, dy: 0, wall: 3, opp: 1 }
+                ];
+
+                // نفضل الاتجاه اللي يبعدنا عن الهدف (عشان الطريق المسدود يبقى في الاتجاه الغلط)
+                const goalDirX = (size - 1) - fork.x;
+                const goalDirY = (size - 1) - fork.y;
+
+                // ترتيب الاتجاهات: الأبعد عن الهدف الأول
+                const sortedDirs = dirs.slice().sort((a, b) => {
+                    const scoreA = -(a.dx * goalDirX + a.dy * goalDirY); // سلبي = عكس الهدف
+                    const scoreB = -(b.dx * goalDirX + b.dy * goalDirY);
+                    return scoreA - scoreB; // الأعلى سلبي (الأبعد عن الهدف) أولاً
+                });
+
+                let branchCreated = false;
+                for (const dir of sortedDirs) {
+                    const nx = fork.x + dir.dx;
+                    const ny = fork.y + dir.dy;
+                    if (nx < 0 || nx >= size || ny < 0 || ny >= size) continue;
+                    if (onPath.has(`${nx},${ny}`)) continue;
+                    if (!grid[fork.y][fork.x].walls[dir.wall]) continue; // مفتوح بالفعل
+
+                    // نفتح الحيط - ده بداية الفرع
+                    grid[fork.y][fork.x].walls[dir.wall] = false;
+                    grid[ny][nx].walls[dir.opp] = false;
+
+                    // نمشي في الاتجاه ده لأطول مسافة ممكنة (عشان الفرع يكون طويل ومغرور)
+                    let cx = nx, cy = ny;
+                    let branchLen = 0;
+                    const maxBranchLen = Math.max(3, Math.floor(size * 0.5));
+
+                    while (branchLen < maxBranchLen) {
+                        // نحاول نمشي في نفس الاتجاه الفرع أو اتجاه قريب
+                        const nextDirs = [];
+                        for (const d of dirs) {
+                            const nnx = cx + d.dx, nny = cy + d.dy;
+                            if (nnx < 0 || nnx >= size || nny < 0 || nny >= size) continue;
+                            if (onPath.has(`${nnx},${nny}`)) continue;
+                            if (!grid[cy][cx].walls[d.wall]) continue; // مفتوح
+                            // نتأكد إن الخلية الجديدة مش هتوصل للهدف
+                            const testPath = bfsPathWithBlock(grid, size, nnx, nny, size-1, size-1, onPath);
+                            if (testPath.length === 0) {
+                                nextDirs.push({ dir: d, nx: nnx, ny: nny });
+                            }
+                        }
+
+                        if (nextDirs.length === 0) break;
+
+                        // نفضل الاتجاه اللي يبعدنا عن الهدف
+                        const goalDX = (size - 1) - cx;
+                        const goalDY = (size - 1) - cy;
+                        nextDirs.sort((a, b) => {
+                            const sa = -(a.dir.dx * goalDX + a.dir.dy * goalDY);
+                            const sb = -(b.dir.dx * goalDX + b.dir.dy * goalDY);
+                            return sa - sb;
+                        });
+
+                        const chosen = nextDirs[0];
+                        grid[cy][cx].walls[chosen.dir.wall] = false;
+                        grid[chosen.ny][chosen.nx].walls[chosen.dir.opp] = false;
+                        cx = chosen.nx;
+                        cy = chosen.ny;
+                        branchLen++;
+                    }
+
+                    // نحط علامة طريق مسدود عند نهاية الفرع
+                    deadEndMarkers.push({ x: cx, y: cy });
+
+                    branchCreated = true;
+                    break;
+                }
+            }
+        }
+
+        // BFS مع حظر خلايا معينة (عشان نتأكد إن الفرع مش هيوصل للهدف)
+        function bfsPathWithBlock(grid, size, sx, sy, gx, gy, blocked) {
+            if (blocked.has(`${sx},${sy}`)) return [];
+            const visited = Array.from({ length: size }, () => Array(size).fill(false));
+            const queue = [{ x: sx, y: sy }];
+            visited[sy][sx] = true;
+            const dirs = [
+                { dx: 0, dy: -1, wall: 0 },
+                { dx: 1, dy: 0, wall: 1 },
+                { dx: 0, dy: 1, wall: 2 },
+                { dx: -1, dy: 0, wall: 3 }
+            ];
+            while (queue.length > 0) {
+                const cur = queue.shift();
+                if (cur.x === gx && cur.y === gy) return [{ x: gx, y: gy }];
+                for (const d of dirs) {
+                    const nx = cur.x + d.dx, ny = cur.y + d.dy;
+                    if (nx >= 0 && nx < size && ny >= 0 && ny < size &&
+                        !visited[ny][nx] && !blocked.has(`${nx},${ny}`) &&
+                        !grid[cur.y][cur.x].walls[d.wall]) {
+                        visited[ny][nx] = true;
+                        queue.push({ x: nx, y: ny });
+                    }
+                }
+            }
+            return [];
+        }
+
+        /* ============================================
+           Drawing
+           ============================================ */
+        function drawMaze(mazeSize) {
+            if (!mazeSize) mazeSize = STAGES[currentStage].size;
+            ctx.clearRect(0, 0, canvasSize, canvasSize);
+
+            // Fill background
+            ctx.fillStyle = PATH_COLOR;
+            ctx.fillRect(0, 0, canvasSize, canvasSize);
+
+            // تم إزالة أرضية الطريق المسدود الحمرا - اللاعب لازم يكتشف بنفسه
+
+            // Draw visited cells trail
+            visitedCells.forEach(key => {
+                const [vx, vy] = key.split(',').map(Number);
+                ctx.fillStyle = VISITED_COLOR;
+                ctx.fillRect(vx * cellSize, vy * cellSize, cellSize, cellSize);
+                ctx.fillStyle = 'rgba(34, 211, 238, 0.35)';
+                ctx.beginPath();
+                ctx.arc(vx * cellSize + cellSize / 2, vy * cellSize + cellSize / 2, Math.max(2, cellSize * 0.1), 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw goal (Cross)
+            drawGoal(mazeSize);
+
+            // Draw dead-end symbols (علامة ⛔)
+            drawDeadEndSymbols();
+
+            // Draw walls
+            ctx.strokeStyle = WALL_BORDER;
+            ctx.lineWidth = Math.max(2, cellSize * 0.08);
+            ctx.lineCap = 'round';
+            for (let y = 0; y < mazeSize; y++) {
+                for (let x = 0; x < mazeSize; x++) {
+                    const cell = maze[y][x];
+                    const px = x * cellSize, py = y * cellSize;
+                    if (cell.walls[0]) { ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + cellSize, py); ctx.stroke(); }
+                    if (cell.walls[1]) { ctx.beginPath(); ctx.moveTo(px + cellSize, py); ctx.lineTo(px + cellSize, py + cellSize); ctx.stroke(); }
+                    if (cell.walls[2]) { ctx.beginPath(); ctx.moveTo(px, py + cellSize); ctx.lineTo(px + cellSize, py + cellSize); ctx.stroke(); }
+                    if (cell.walls[3]) { ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, py + cellSize); ctx.stroke(); }
+                }
+            }
+
+            // Outer border
+            ctx.strokeStyle = '#06b6d4';
+            ctx.lineWidth = Math.max(3, cellSize * 0.1);
+            ctx.shadowColor = 'rgba(6, 182, 212, 0.6)';
+            ctx.shadowBlur = 12;
+            ctx.strokeRect(0, 0, canvasSize, canvasSize);
+            ctx.shadowBlur = 0;
+
+            // Draw player
+            drawPlayer();
+        }
+
+        /* ============================================
+           رسم علامات الطريق المسدود
+           ============================================ */
+        function drawDeadEndSymbols() {
+            // تم إزالة علامة X - اللاعب لازم يكتشف الطريق المسدود بنفسه
+        }
+
+        /* ============================================
+           رسم الصليب (الهدف)
+           ============================================ */
+        function drawGoal(mazeSize) {
+            const gx = goalX * cellSize, gy = goalY * cellSize;
+            const cx = gx + cellSize / 2, cy = gy + cellSize / 2;
+
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.2)';
+            ctx.fillRect(gx, gy, cellSize, cellSize);
+
+            const goalGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, cellSize * 0.8);
+            goalGlow.addColorStop(0, 'rgba(245, 158, 11, 0.35)');
+            goalGlow.addColorStop(1, 'rgba(245, 158, 11, 0)');
+            ctx.fillStyle = goalGlow;
+            ctx.beginPath();
+            ctx.arc(cx, cy, cellSize * 0.8, 0, Math.PI * 2);
+            ctx.fill();
+
+            const crossSize = cellSize * 0.6;
+            const crossWidth = crossSize * 0.22;
+            const verticalLen = crossSize;
+            const horizontalLen = crossSize * 0.65;
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(245, 158, 11, 0.9)';
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = '#fbbf24';
+
+            const vTop = cy - verticalLen / 2;
+            ctx.fillRect(cx - crossWidth / 2, vTop, crossWidth, verticalLen);
+
+            const hLeft = cx - horizontalLen / 2;
+            const hY = cy - verticalLen * 0.1;
+            ctx.fillRect(hLeft, hY - crossWidth / 2, horizontalLen, crossWidth);
+
+            ctx.restore();
+        }
+
+        /* ============================================
+           رسم اللاعب (شخصية إنسان)
+           ============================================ */
+        function drawPlayer() {
+            const px = playerX * cellSize + cellSize / 2;
+            const py = playerY * cellSize + cellSize / 2;
+            const r = cellSize * 0.35;
+
+            const glow = ctx.createRadialGradient(px, py, 0, px, py, cellSize * 0.55);
+            glow.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
+            glow.addColorStop(0.5, 'rgba(139, 92, 246, 0.15)');
+            glow.addColorStop(1, 'rgba(6, 182, 212, 0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(px, py, cellSize * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(6, 182, 212, 0.8)';
+            ctx.shadowBlur = 14;
+
+            const headR = r * 0.32;
+            const headY = py - r * 0.5;
+            ctx.fillStyle = '#22d3ee';
+            ctx.beginPath();
+            ctx.arc(px, headY, headR, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = '#22d3ee';
+            ctx.lineWidth = Math.max(2, r * 0.15);
+            ctx.lineCap = 'round';
+
+            ctx.beginPath();
+            ctx.moveTo(px, headY + headR);
+            ctx.lineTo(px, py + r * 0.3);
+            ctx.stroke();
+
+            const armSwing = Math.sin(playerAnimFrame * 0.3) * r * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(px, headY + headR + r * 0.15);
+            ctx.lineTo(px - r * 0.4, headY + headR + r * 0.3 + armSwing);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(px, headY + headR + r * 0.15);
+            ctx.lineTo(px + r * 0.4, headY + headR + r * 0.3 - armSwing);
+            ctx.stroke();
+
+            const legSwing = Math.sin(playerAnimFrame * 0.3) * r * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(px, py + r * 0.3);
+            ctx.lineTo(px - r * 0.3, py + r * 0.75 + legSwing);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(px, py + r * 0.3);
+            ctx.lineTo(px + r * 0.3, py + r * 0.75 - legSwing);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function startPlayerAnimation() {
+            if (playerAnimTimer) clearInterval(playerAnimTimer);
+            playerAnimFrame = 0;
+            playerAnimTimer = setInterval(() => {
+                playerAnimFrame++;
+                if (gameActive) drawMaze();
+            }, 200);
+        }
+
+        /* ============================================
+           حركة اللاعب
+           ============================================ */
+        function movePlayer(dx, dy) {
+            if (!gameActive) return;
+            const mazeSize = STAGES[currentStage].size;
+            const cell = maze[playerY][playerX];
+
+            let wallIndex = -1;
+            if (dy === -1) wallIndex = 0;
+            if (dx === 1) wallIndex = 1;
+            if (dy === 1) wallIndex = 2;
+            if (dx === -1) wallIndex = 3;
+            if (wallIndex === -1) return;
+            if (cell.walls[wallIndex]) return;
+
+            const newX = playerX + dx, newY = playerY + dy;
+            if (newX < 0 || newX >= mazeSize || newY < 0 || newY >= mazeSize) return;
+
+            if (moves === 0 && !timerInterval) startTimer();
+
+            playerX = newX;
+            playerY = newY;
+            moves++;
+            visitedCells.add(`${playerX},${playerY}`);
+            $('#moveCount').text(moves);
+
+            drawMaze(mazeSize);
+
+            if (playerX === goalX && playerY === goalY) {
+                gameActive = false;
+                stopTimer();
+                setTimeout(showVictory, 300);
+            }
+        }
+
+        /* ============================================
+           Timer
+           ============================================ */
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds++;
+                const m = Math.floor(seconds / 60), s = seconds % 60;
+                $('#timerDisplay').text(`${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`);
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+        }
+
+        /* ============================================
+           Victory - حساب النجوم
+           ============================================ */
+        function calculateStars(mazeSize, moveCount, timeSeconds) {
+            const optimal = mazeSize * mazeSize * 0.8;
+            const optimalTime = mazeSize * mazeSize * 0.5;
+            if (moveCount <= optimal && timeSeconds <= optimalTime) return 3;
+            if (moveCount <= optimal * 2 && timeSeconds <= optimalTime * 2.5) return 2;
+            return 1;
+        }
+
+        function showVictory() {
+            const stage = STAGES[currentStage];
+            const stars = calculateStars(stage.size, moves, seconds);
+            const m = Math.floor(seconds / 60), s = seconds % 60;
+            const timeStr = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+
+            const prev = stageProgress[currentStage];
+            stageProgress[currentStage] = {
+                id: stage.id,
+                completed: true,
+                stars: Math.max(prev.stars, stars),
+                bestMoves: prev.bestMoves === 0 ? moves : Math.min(prev.bestMoves, moves),
+                bestTime: prev.bestTime === 0 ? seconds : Math.min(prev.bestTime, seconds)
+            };
+            saveProgress();
+            updateTotalStars();
+
+            const titles = [
+                'خطوة أولى!', 'الطريق بيتفرع!', 'تحدي أكبر!',
+                'الصبر مفتاح الفرج!', 'إيمانك قوي!', 'الرجاء ما بيموتش!',
+                'المحبة تنتصر!', 'الحكمة قادتك!', 'التضحية أوصلتك!',
+                'وصلت للصليب! ✝️'
+            ];
+            const subtitles = [
+                'كل مؤتمر بيبدأ بخطوة',
+                'اختارت الصح... الطريق الصح بيوصّل!',
+                'طرق كتير بس واحد صح',
+                'ربنا بيشوف صبرك',
+                'بالإيمان كل شيء ممكن',
+                'الرجاء في الرب لا يخزي',
+                'المحبة لا تسقط أبداً',
+                'الحكمة تميّز الطريق',
+                'التضحية دايماً ليها مكافأة',
+                'مبارك أنت! وصلت للصليب 🙏'
+            ];
+
+            $('#victoryTitle').text(titles[currentStage] || 'أحسنت!');
+            $('#victorySubtitle').text(subtitles[currentStage] || 'الرب يباركك');
+
+            let starsHtml = '';
+            for (let i = 1; i <= 3; i++) {
+                starsHtml += `<span class="victory-star ${i <= stars ? 'earned' : ''}" style="animation-delay: ${i * 0.2}s">&#11088;</span>`;
+            }
+            $('#victoryStars').html(starsHtml);
+
+            const branchInfo = stage.branches > 0 ?
+                `<br>🚧 طرق مسدود: <strong>${stage.branches}</strong>` : '';
+
+            $('#victoryStats').html(`
+                ⏱️ الوقت: <strong>${timeStr}</strong><br>
+                👣 الحركات: <strong>${moves}</strong><br>
+                📊 المستوى: <strong>${stage.name}</strong> (${stage.size}×${stage.size})${branchInfo}
+            `);
+
+            let btnsHtml = '<button class="victory-btn primary" onclick="restartStage()"><i class="bi bi-arrow-counterclockwise me-1"></i> من الأول</button>';
+            if (currentStage < STAGES.length - 1) {
+                btnsHtml += '<button class="victory-btn gold" onclick="nextStage()"><i class="bi bi-arrow-left me-1"></i> المستوى الجاي</button>';
+            } else {
+                btnsHtml += '<button class="victory-btn gold" onclick="showAllComplete()"><i class="bi bi-trophy me-1"></i> النتيجة</button>';
+            }
+            $('#victoryButtons').html(btnsHtml);
+
+            $('#victoryOverlay').addClass('show');
+            launchConfetti();
+        }
+
+        function nextStage() {
+            if (currentStage < STAGES.length - 1) { currentStage++; startStage(); }
+        }
+
+        function showAllComplete() {
+            const total = stageProgress.reduce((sum, p) => sum + p.stars, 0);
+            const max = STAGES.length * 3;
+            $('#allCompleteText').html(`
+                جمعت ${total} من ${max} نجمة ⭐<br>
+                رحلتك من الأرض للصليب خلصت<br>
+                الرب يبارك حياتك كلها ✝️
+            `);
+            $('#victoryOverlay').removeClass('show');
+            $('#allCompleteOverlay').addClass('show');
+            launchConfetti();
+        }
+
+        function updateTotalStars() {
+            const total = stageProgress.reduce((sum, p) => sum + p.stars, 0);
+            $('#totalStars').text(total);
+        }
+
+        /* ============================================
+           Confetti
+           ============================================ */
+        function launchConfetti() {
+            const container = $('#confettiContainer');
+            container.empty();
+            const colors = ['#06b6d4', '#22d3ee', '#10b981', '#34d399', '#f59e0b', '#fbbf24', '#8b5cf6', '#a78bfa', '#ef4444', '#ec4899', '#f472b6', '#6366f1'];
+            for (let i = 0; i < 80; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const piece = $(`<div class="confetti-piece"></div>`).css({
+                    left: Math.random() * 100 + '%',
+                    width: (6 + Math.random() * 10) + 'px',
+                    height: (6 + Math.random() * 10) + 'px',
+                    background: color,
+                    borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+                    animation: `confettiFall ${2 + Math.random() * 3}s ${Math.random() * 2}s ease-out forwards`
+                });
+                container.append(piece);
+            }
+            setTimeout(() => container.empty(), 6000);
+        }
+
+        /* ============================================
+           Keyboard Controls
+           ============================================ */
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowUp': case 'w': case 'W': e.preventDefault(); movePlayer(0, -1); break;
+                case 'ArrowDown': case 's': case 'S': e.preventDefault(); movePlayer(0, 1); break;
+                case 'ArrowLeft': case 'a': case 'A': e.preventDefault(); movePlayer(-1, 0); break;
+                case 'ArrowRight': case 'd': case 'D': e.preventDefault(); movePlayer(1, 0); break;
+            }
+        });
+
+        /* ============================================
+           Swipe Controls
+           ============================================ */
+        let touchStartX = 0, touchStartY = 0;
+        canvas.addEventListener('touchstart', function(e) {
+            const t = e.touches[0];
+            touchStartX = t.clientX; touchStartY = t.clientY;
+        }, { passive: true });
+        canvas.addEventListener('touchend', function(e) {
+            const t = e.changedTouches[0];
+            const dx = t.clientX - touchStartX, dy = t.clientY - touchStartY;
+            if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+            if (Math.abs(dx) > Math.abs(dy)) movePlayer(dx > 0 ? -1 : 1, 0);
+            else movePlayer(0, dy > 0 ? 1 : -1);
+        }, { passive: true });
+
+        /* ============================================
+           Background Particles & Init
+           ============================================ */
+        function createParticles() {
+            const container = $('#particles');
+            const particleColors = ['var(--primary)', 'var(--accent-purple)', 'var(--gold)', 'var(--seat-avail)'];
+            for (let i = 0; i < 15; i++) {
+                const color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                container.append($('<div class="particle"></div>').css({
+                    left: Math.random() * 100 + '%',
+                    top: Math.random() * 100 + '%',
+                    background: color,
+                    animationDelay: Math.random() * 8 + 's',
+                    animationDuration: (5 + Math.random() * 8) + 's',
+                    width: (2 + Math.random() * 4) + 'px',
+                    height: (2 + Math.random() * 4) + 'px'
+                }));
+            }
+        }
+
+        window.addEventListener('resize', function() {
+            if (maze.length > 0) {
+                setupCanvas(STAGES[currentStage].size);
+                drawMaze();
+            }
+        });
+
+        /* ============================================
+           Share Functions
+           ============================================ */
+        function formatTime(secs) {
+            var m = Math.floor(secs / 60), s = secs % 60;
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        /* ============================================
+           بطاقة المشاركة البصرية - Canvas
+           ============================================ */
+        var _shareCardBlob = null;
+        var _shareCardText = '';
+
+        function shareImageFile() {
+            if (!_shareCardBlob) return;
+            var file = new File([_shareCardBlob], 'maze-share.png', { type: 'image/png' });
+            var shareData = { files: [file], title: 'المتاهة', text: _shareCardText };
+            if (navigator.canShare && navigator.canShare(shareData)) {
+                navigator.share(shareData).catch(function() {});
+            } else if (navigator.share) {
+                navigator.share({ title: 'المتاهة', text: _shareCardText }).catch(function() {});
+            }
+        }
+
+        function downloadShareCard() {
+            if (!_shareCardBlob) return;
+            var url = URL.createObjectURL(_shareCardBlob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'maze-share-card.png';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('تم تحميل الصورة!');
+        }
+
+        function copyShareText() {
+            var text = _shareCardText || getMazeShareText('stage');
+            navigator.clipboard.writeText(text).then(function() {
+                showToast('تم نسخ النص!');
+            }).catch(function() {
+                showToast('مش قادرين ننسخ النص');
+            });
+        }
+
+        function closeShareCard() {
+            $('#shareCardOverlay').removeClass('show');
+            _shareCardBlob = null;
+        }
+
+        function shareStageResult() {
+            var victoryBox = document.getElementById('victoryBox');
+            if (!victoryBox) {
+                shareTextFallback();
+                return;
+            }
+            html2canvas(victoryBox, {
+                backgroundColor: '#070d19',
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                allowTaint: true,
+                onclone: function(clonedDoc) {
+                    var clonedBox = clonedDoc.getElementById('victoryBox');
+                    if (clonedBox) {
+                        clonedBox.style.background = 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))';
+                        clonedBox.style.backdropFilter = 'none';
+                        clonedBox.style.webkitBackdropFilter = 'none';
+                    }
+                }
+            }).then(function(canvas) {
+                var dataUrl = canvas.toDataURL('image/png');
+                _shareCardText = getMazeShareText('stage');
+
+                canvas.toBlob(function(blob) {
+                    _shareCardBlob = blob;
+                    $('#shareCardPreview').attr('src', dataUrl);
+                    var $actions = $('#shareCardActions');
+                    $actions.empty();
+
+                    var canShareFiles = !!(navigator.share && navigator.canShare);
+                    if (canShareFiles && _shareCardBlob) {
+                        var testFile = new File([_shareCardBlob], 'maze-share.png', { type: 'image/png' });
+                        var testShareData = { files: [testFile], title: 'المتاهة', text: _shareCardText };
+                        if (navigator.canShare(testShareData)) {
+                            $actions.append('<button class="share-card-btn btn-share-img" onclick="shareImageFile()"><i class="bi bi-share-fill"></i> شارك الصورة</button>');
+                        }
+                    }
+                    $actions.append('<button class="share-card-btn btn-download" onclick="downloadShareCard()"><i class="bi bi-download"></i> حمّل الصورة</button>');
+                    $actions.append('<button class="share-card-btn btn-copy-text" onclick="copyShareText()"><i class="bi bi-clipboard"></i> نسخ النص</button>');
+                    $actions.append('<button class="share-card-btn btn-close-overlay" onclick="closeShareCard()"><i class="bi bi-x-lg"></i> إغلاق</button>');
+
+                    $('#shareCardOverlay').addClass('show');
+                }, 'image/png');
+            }).catch(function(err) {
+                shareTextFallback();
+            });
+        }
+
+        function shareAllCompleteResult() {
+            var completeBox = document.getElementById('allCompleteBox');
+            if (!completeBox) {
+                shareTextFallback();
+                return;
+            }
+            html2canvas(completeBox, {
+                backgroundColor: '#070d19',
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                allowTaint: true,
+                onclone: function(clonedDoc) {
+                    var clonedBox = clonedDoc.getElementById('allCompleteBox');
+                    if (clonedBox) {
+                        clonedBox.style.background = 'linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))';
+                        clonedBox.style.backdropFilter = 'none';
+                        clonedBox.style.webkitBackdropFilter = 'none';
+                    }
+                }
+            }).then(function(canvas) {
+                var dataUrl = canvas.toDataURL('image/png');
+                _shareCardText = getMazeShareText('complete');
+
+                canvas.toBlob(function(blob) {
+                    _shareCardBlob = blob;
+                    $('#shareCardPreview').attr('src', dataUrl);
+                    var $actions = $('#shareCardActions');
+                    $actions.empty();
+
+                    var canShareFiles = !!(navigator.share && navigator.canShare);
+                    if (canShareFiles && _shareCardBlob) {
+                        var testFile = new File([_shareCardBlob], 'maze-share.png', { type: 'image/png' });
+                        var testShareData = { files: [testFile], title: 'المتاهة', text: _shareCardText };
+                        if (navigator.canShare(testShareData)) {
+                            $actions.append('<button class="share-card-btn btn-share-img" onclick="shareImageFile()"><i class="bi bi-share-fill"></i> شارك الصورة</button>');
+                        }
+                    }
+                    $actions.append('<button class="share-card-btn btn-download" onclick="downloadShareCard()"><i class="bi bi-download"></i> حمّل الصورة</button>');
+                    $actions.append('<button class="share-card-btn btn-copy-text" onclick="copyShareText()"><i class="bi bi-clipboard"></i> نسخ النص</button>');
+                    $actions.append('<button class="share-card-btn btn-close-overlay" onclick="closeShareCard()"><i class="bi bi-x-lg"></i> إغلاق</button>');
+
+                    $('#shareCardOverlay').addClass('show');
+                }, 'image/png');
+            }).catch(function(err) {
+                shareTextFallback();
+            });
+        }
+
+        function getMazeShareText(type) {
+            var stage = STAGES[currentStage];
+            var prog = stageProgress[currentStage];
+            if (type === 'stage') {
+                var text = '✝️ المتاهة - مؤتمر الشباب\n';
+                text += 'المستوى ' + stage.id + ': ' + stage.name + '\n';
+                text += '⭐ النجوم: ' + prog.stars + '/3\n';
+                text += '🎯 الحركات: ' + moves + '\n';
+                text += '⏱️ الوقت: ' + formatTime(seconds) + '\n';
+                text += '✝️';
+                return text;
+            } else {
+                var totalStars = stageProgress.reduce(function(sum, p) { return sum + p.stars; }, 0);
+                var maxStars = STAGES.length * 3;
+                var text = '🏆 المتاهة - مؤتمر الشباب\n';
+                text += 'خلصت كل المستويات! 🎉\n';
+                text += '⭐ مجموع النجوم: ' + totalStars + '/' + maxStars + '\n';
+                text += '✝️ رحلتك من الأرض للصليب خلصت';
+                return text;
+            }
+        }
+
+        function shareTextFallback() {
+            var text = _shareCardText || getMazeShareText('stage');
+            if (navigator.share) {
+                navigator.share({ title: 'المتاهة', text: text }).catch(function(){});
+            } else {
+                navigator.clipboard.writeText(text).then(function() {
+                    showToast('تم نسخ النص!');
+                }).catch(function() {
+                    showToast('مش قادرين ننسخ النص');
+                });
+            }
+        }
+
+        function showToast(msg) {
+            var existing = document.querySelector('.share-toast');
+            if (existing) existing.remove();
+            var toast = document.createElement('div');
+            toast.className = 'share-toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(function() { toast.classList.add('show'); }, 10);
+            setTimeout(function() { toast.classList.remove('show'); setTimeout(function(){ toast.remove(); }, 400); }, 2500);
+        }
+
+        $(document).ready(function() {
+            createParticles();
+            updateTotalStars();
+            startStage();
+        });
+    </script>
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

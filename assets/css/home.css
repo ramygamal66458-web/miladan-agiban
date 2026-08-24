@@ -1,0 +1,681 @@
+/* ═══════════════════════════════════════════════
+   home.css — أنماط الصفحة الرئيسية
+   مؤتمر الشباب 2026
+═══════════════════════════════════════════════ */
+
+/* ─── متغيرات الدائرة ─── */
+:root {
+    --navbar-h:      56px;
+    --bottom-nav-h:  64px;
+
+    --dial-size:         min(92vw, 62vh);
+    --dial-radius:       calc(var(--dial-size) / 2 - 44px);
+    --dial-right-offset: auto;
+
+    --church-gold:          #b78b32;
+    --church-gold-glow:     #e5c878;
+    --church-gold-dim:      rgba(183,139,50,0.18);
+    --church-blue:          #8f6a22;
+    --church-blue-deep:     #4a3212;
+    --church-burgundy:      #7c1f2b;
+    --church-burgundy-deep: #3a0f17;
+}
+
+@media (min-width: 480px) {
+    :root {
+        --dial-size:         500px;
+        --dial-radius:       210px;
+        --dial-right-offset: auto;
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   تخطيط الصفحة — الحاوية الرئيسية
+═══════════════════════════════════════════════ */
+.home-main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - var(--navbar-h) - var(--bottom-nav-h));
+}
+
+/* ═══════════════════════════════════════════════
+   Hero Strip — شريط أعلى مضغوط
+═══════════════════════════════════════════════ */
+.home-hero-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 1rem;
+    background: linear-gradient(135deg,
+        rgba(14,24,48,0.85) 0%,
+        rgba(6,10,22,0.7) 100%
+    );
+    border-bottom: 1px solid rgba(212,168,67,0.12);
+    backdrop-filter: blur(8px);
+    flex-shrink: 0;
+}
+
+.hero-logo-sm {
+    width: 70px;
+    height: 85px;
+    border-radius: 14px;
+    object-fit: contain;
+  
+
+    flex-shrink: 0;
+   
+}
+
+@keyframes logoPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(212,168,67,0.08), 0 4px 16px rgba(0, 0, 0, 0.45); }
+    50%       { box-shadow: 0 0 0 5px rgba(212,168,67,0.22), 0 4px 22px rgba(212,168,67,0.25); }
+}
+
+.hero-text-wrap { flex: 1; min-width: 0; }
+
+.home-greeting {
+    font-size: clamp(0.95rem, 4vw, 1.15rem);
+    font-weight: 850;
+    color: var(--text-main, #f1f5f9);
+    line-height: 1.25;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-greeting-sub {
+    font-size: 0.72rem;
+    color: var(--text-secondary, #94a3b8);
+    margin: 2px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════════════════════════
+   Live Activity Compact — الآن / بعد مضغوط (تحديث تجميلي v2.7)
+   ===================================================== */
+.live-compact {
+    margin: 0.5rem 1rem;
+    background: rgba(10, 18, 36, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 0.55rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+.live-compact:hover {
+    transform: translateY(-1px);
+    background: rgba(10, 18, 36, 0.75);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* لون جانبي مضيء حسب الحالة */
+.live-compact::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 0 16px 16px 0;
+    background: var(--accent-gradient, linear-gradient(to bottom, #06b6d4, #3b82f6));
+}
+
+.live-compact.status-before::before {
+    background: linear-gradient(to bottom, #f59e0b, #d97706);
+}
+.live-compact.status-after::before {
+    background: linear-gradient(to bottom, #10b981, #059669);
+}
+.live-compact.status-during::before {
+    background: linear-gradient(to bottom, #10b981, #8b5cf6);
+}
+
+/* الكاونت داون (قبل/بعد المؤتمر) */
+.lc-countdown-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+}
+.lc-countdown-wrapper .lc-title {
+    font-size: 0.82rem;
+    font-weight: 750;
+    color: var(--text-main);
+    flex: 1;
+}
+.lc-countdown-wrapper .lc-time {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #fbbf24;
+}
+.live-compact.status-after .lc-time {
+    color: #34d399;
+}
+
+.lc-section {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex: 1;
+    min-width: 0;
+}
+.lc-section.next-section {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    padding-right: 0.75rem;
+    margin-right: 0.25rem;
+}
+
+.lc-badge {
+    font-size: 0.65rem;
+    font-weight: 850;
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.lc-badge.now  { 
+    background: rgba(16, 185, 129, 0.15); 
+    color: #34d399; 
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.lc-badge.now-free {
+    background: rgba(6, 182, 212, 0.15); 
+    color: #22d3ee; 
+    border: 1px solid rgba(6, 182, 212, 0.25);
+}
+.lc-badge.next { 
+    background: rgba(139, 92, 246, 0.15);  
+    color: #a78bfa; 
+    border: 1px solid rgba(139, 92, 246, 0.25);
+}
+.lc-badge.before {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.lc-badge.after {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+/* نقطة الفعالية الوامضة */
+.blink-dot {
+    width: 6px; height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulseBlink 1.4s infinite ease-in-out;
+}
+
+.lc-title {
+    font-size: 0.8rem;
+    font-weight: 750;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.lc-time {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--primary-light);
+    flex-shrink: 0;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2px 7px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ═══════════════════════════════════════════════
+   Dial Wrapper — يملأ ما تبقى من الصفحة
+═══════════════════════════════════════════════ */
+.dial-wrapper {
+    flex: 1;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    z-index: 5;
+    padding: 0;
+}
+
+.dial-outer-ring {
+    position: absolute;
+    width:  var(--dial-size);
+    height: var(--dial-size);
+    border-radius: 50%;
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    touch-action: none;
+    z-index: 5;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+.dial-outer-ring::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, rgba(124, 58, 237, 0.06) 50%, transparent 70%);
+    filter: blur(12px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.dial-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.dial-wheel {
+    transform-origin: 150px 150px;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   Dial Nodes (SVG Groups)
+═══════════════════════════════════════════════ */
+.dial-node {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.svg-sector {
+    transition: fill-opacity 0.3s, stroke-width 0.3s, stroke-opacity 0.3s, filter 0.3s;
+}
+
+/* ألوان التوهج والتأثيرات */
+.sector-cyan    { --glow-color: #0284c7; }
+.sector-teal    { --glow-color: #0d9488; }
+.sector-gold    { --glow-color: #d97706; }
+.sector-orange  { --glow-color: #ea580c; }
+.sector-magenta { --glow-color: #c026d3; }
+.sector-blue    { --glow-color: #2563eb; }
+.sector-pink    { --glow-color: #db2777; }
+.sector-purple  { --glow-color: #7c3aed; }
+.sector-emerald { --glow-color: #10b981; }
+.sector-indigo  { --glow-color: #4f46e5; }
+
+/* تأثيرات التحويم */
+.dial-node:hover .svg-sector {
+    stroke-opacity: 0.95;
+    stroke-width: 1.6px;
+    filter: drop-shadow(0 0 4px var(--glow-color));
+}
+
+/* القطاع النشط */
+.dial-node.active .svg-sector {
+    stroke-width: 2.2px;
+    stroke-opacity: 1;
+    fill-opacity: 0.35;
+    filter: drop-shadow(0 0 6px var(--glow-color));
+}
+
+.svg-icon {
+    font-size: 13.5px;
+    pointer-events: none;
+    fill: #ffffff;
+    text-anchor: middle;
+    dominant-baseline: central;
+    transition: font-size 0.3s ease, filter 0.3s ease;
+}
+
+.dial-node.active .svg-icon {
+    font-size: 16.5px;
+    filter: drop-shadow(0 0 4px #ffffff);
+}
+
+.svg-label {
+    font-family: 'Cairo', sans-serif;
+    font-size: 7px;
+    font-weight: 800;
+    fill: rgba(255, 255, 255, 0.7);
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+    transition: fill 0.3s ease, font-weight 0.3s ease;
+}
+
+.dial-node.active .svg-label {
+    fill: #ffffff;
+    font-weight: 900;
+}
+
+/* ═══════════════════════════════════════════════
+   Hub Inside SVG (شعار المؤتمر الدائري)
+   ===================================================== */
+.dial-hub {
+    position: absolute;
+    width: clamp(82px, 22vw, 102px);
+    height: clamp(82px, 22vw, 102px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.dial-hub-logo-wrap {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #0a1220;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--church-gold);
+    box-shadow: 0 0 18px rgba(212,168,67,0.45), inset 0 0 10px rgba(0,0,0,0.85);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dial-hub-logo { width: 100%; height: 100%; object-fit: contain; }
+
+/* ═══════════════════════════════════════════════
+   Dial Active Badge — بادج القسم النشط
+   ═══════════════════════════════════════════════ */
+.dial-active-badge {
+    position: absolute;
+    left: 0.55rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 25;
+    width: clamp(125px, 37vw, 160px);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
+    background: linear-gradient(145deg,
+        rgba(12,22,44,0.96) 0%,
+        rgba(6,10,22,0.99)  100%
+    );
+    border: 1.5px solid rgba(212,168,67,0.4);
+    border-radius: 20px;
+    padding: 1rem 0.85rem 0.9rem;
+    text-align: center;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.65),
+        0 0 22px rgba(212,168,67,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow   0.3s ease,
+        transform    0.3s ease;
+}
+
+.dial-active-badge:hover {
+    border-color: rgba(212,168,67,0.68);
+    box-shadow:
+        0 12px 38px rgba(0,0,0,0.7),
+        0 0 32px rgba(212,168,67,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+    transform: translateY(calc(-50% - 3px));
+}
+
+.dial-active-badge:active {
+    transform: translateY(-50%) scale(0.97);
+}
+
+@keyframes badgePop {
+    0%   { opacity: 0.6; transform: translateY(calc(-50% + 10px)); }
+    100% { opacity: 1;   transform: translateY(-50%); }
+}
+
+.dial-active-badge.changing {
+    animation: badgePop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── مؤشر الذروة ─── */
+.dab-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.dab-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--church-gold-glow);
+    box-shadow: 0 0 8px rgba(212,168,67,0.9);
+    animation: dotPulse 1.6s ease-in-out 3;
+}
+
+@keyframes dotPulse {
+    0%, 100% { transform: scale(1);   opacity: 1; }
+    50%       { transform: scale(1.55); opacity: 0.5; }
+}
+
+.dab-vline {
+    width: 1.5px; height: 12px;
+    background: linear-gradient(to bottom, rgba(212,168,67,0.65), transparent);
+}
+
+/* ─── أيقونة القسم ─── */
+.dab-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 5px;
+    line-height: 1;
+    filter: drop-shadow(0 0 8px rgba(212,168,67,0.45));
+    animation: iconFloat 3s ease-in-out 3;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-4px) scale(1.06); }
+}
+
+/* ─── اسم القسم ─── */
+.dab-name {
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: var(--church-gold-glow);
+    line-height: 1.2;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    margin-bottom: 4px;
+}
+
+/* ─── وصف مختصر ─── */
+.dab-desc {
+    font-size: 0.63rem;
+    color: rgba(175,190,215,0.68);
+    line-height: 1.4;
+    margin-bottom: 9px;
+    padding: 0 2px;
+}
+
+/* ─── تلميح الدخول ─── */
+.dab-enter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: rgba(212,168,67,0.62);
+    letter-spacing: 0.02em;
+    transition: color 0.22s, gap 0.22s;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 8px;
+    width: 100%;
+}
+
+.dial-active-badge:hover .dab-enter {
+    color: var(--church-gold-glow);
+    gap: 7px;
+}
+
+.dab-enter i { font-size: 0.78rem; }
+
+/* ─── السهم الواصل من البادج إلى الدائرة ─── */
+.dab-connector {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.dab-h-line {
+    width: 20px;
+    height: 1.5px;
+    background: linear-gradient(to right, rgba(212,168,67,0.5), rgba(212,168,67,0.1));
+}
+
+.dab-h-arrow {
+    color: rgba(212,168,67,0.55);
+    font-size: 0.9rem;
+    line-height: 1;
+    animation: arrowPulse 1.5s ease-in-out 3;
+}
+
+@keyframes arrowPulse {
+    0%, 100% { transform: translateX(0);   opacity: 0.5; }
+    50%       { transform: translateX(4px); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════
+   Nav Buttons
+═══════════════════════════════════════════════ */
+.dial-nav-btn {
+    position: absolute;
+    z-index: 30;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(10,18,36,0.88);
+    border: 1.5px solid rgba(212,168,67,0.35);
+    color: var(--church-gold-glow);
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+}
+
+.dial-nav-btn:hover {
+    background: rgba(212,168,67,0.2);
+    border-color: var(--church-gold);
+    transform: scale(1.12);
+    box-shadow: 0 0 14px rgba(212,168,67,0.4);
+}
+
+/* أعلى وأسفل للتنقل عمودي */
+.dial-nav-up   { top: 1rem;    left: 50%; transform: translateX(-50%); }
+.dial-nav-down { bottom: 1rem; left: 50%; transform: translateX(-50%); }
+
+.dial-nav-up:hover   { transform: translateX(-50%) scale(1.12); }
+.dial-nav-down:hover { transform: translateX(-50%) scale(1.12); }
+
+/* ═══════════════════════════════════════════════
+   Dial Footer — Dots
+═══════════════════════════════════════════════ */
+.dial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.2rem 0 0.35rem;
+    flex-shrink: 0;
+}
+
+.dial-dots { display: flex; gap: 5px; align-items: center; }
+
+.dial-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.dial-dot.active {
+    background: var(--church-gold-glow);
+    transform: scale(1.6);
+    box-shadow: 0 0 7px var(--church-gold-glow);
+}
+
+.dial-swipe-hint {
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.28);
+    display: flex; align-items: center; gap: 3px;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+
+.dial-swipe-hint.visible { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   Page Transition
+═══════════════════════════════════════════════ */
+body.page-transition-out {
+    animation: pageOut 0.22s ease forwards;
+}
+
+@keyframes pageOut {
+    to { opacity: 0; transform: scale(0.98); }
+}
+
+/* ─── مؤتمر ميلادا عجيبًا: تمركز العجلة وهوية كلاسيكية ─── */
+.home-main { position: relative; }
+.home-hero-strip { background: linear-gradient(135deg, rgba(32,24,16,.92), rgba(10,9,7,.78)); border-bottom-color: rgba(229,200,120,.22); }
+.hero-logo-sm { filter: drop-shadow(0 4px 12px rgba(183,139,50,.25)); }
+.dial-outer-ring::before { background: radial-gradient(circle, rgba(229,200,120,.14) 0%, rgba(124,31,43,.07) 48%, transparent 72%); }
+.svg-sector { stroke: #b78b32 !important; }
+.svg-label, .svg-icon { fill: #f8f1e4; }
+.dial-node.active .svg-sector { filter: drop-shadow(0 0 7px rgba(229,200,120,.5)); }
+.dial-active-badge { background: linear-gradient(145deg, rgba(38,29,19,.97), rgba(12,10,7,.99)); border-color: rgba(229,200,120,.42); }
+@media (max-width: 767px) {
+  .dial-outer-ring { width: min(94vw, 430px); height: min(94vw, 430px); }
+  .dial-active-badge { width: min(42vw, 165px); padding: .65rem .55rem; }
+  .dab-icon { font-size: 1.65rem; }
+  .dab-name { font-size: .76rem; }
+  .dab-desc, .dab-enter { font-size: .56rem; }
+}
+
+/* تمركز بادج القسم بجوار العجلة بدون التأثير على مركزها */
+.dial-active-badge { left: calc(50% - (var(--dial-size) / 2) - 175px); }
+@media (max-width: 1100px) {
+  .dial-active-badge {
+    left: 50%; top: auto; bottom: .25rem;
+    transform: translateX(-50%);
+    width: min(78vw, 340px);
+    padding: .55rem .7rem;
+  }
+  .dial-active-badge:hover { transform: translateX(-50%) translateY(-2px); }
+  .dial-nav-up { top: 50%; left: .7rem; transform: translateY(-50%); }
+  .dial-nav-down { top: 50%; bottom: auto; right: .7rem; left: auto; transform: translateY(-50%); }
+  .dial-nav-up:hover, .dial-nav-down:hover { transform: translateY(-50%) scale(1.12); }
+  .dab-connector { display:none; }
+}

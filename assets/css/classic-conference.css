@@ -1,0 +1,44 @@
+/* الهوية البصرية — ميلادا عجيبًا */
+:root {
+  --conference-cream:#f1e6d2;
+  --conference-beige:#d8c5a7;
+  --conference-gold:#b78b32;
+  --conference-gold-light:#e5c878;
+  --conference-black:#0d0b09;
+  --conference-burgundy:#7c1f2b;
+}
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background: radial-gradient(circle at 50% 15%, rgba(229,200,120,.07), transparent 34%),
+              radial-gradient(circle at 15% 85%, rgba(124,31,43,.06), transparent 30%);
+}
+.page-header-title { color:var(--conference-cream)!important; }
+.page-header-sub { color:var(--conference-beige)!important; }
+.btn-primary-app, .btn-primary-custom { background:linear-gradient(135deg,#8f6a22,#b78b32)!important; border-color:#e5c878!important; }
+.meta-chip { border-color:rgba(229,200,120,.3)!important; background:rgba(183,139,50,.08)!important; color:#eadbbf!important; }
+
+/* welcome screen */
+.welcome-body{background:#0b0a08!important}
+.bg-poster-layer{filter:saturate(.55) sepia(.2)!important;opacity:.45!important}
+.welcome-card-glass{background:linear-gradient(145deg,rgba(35,27,18,.9),rgba(10,9,7,.92))!important;border-color:rgba(229,200,120,.28)!important}
+.welcome-title{color:#e5c878!important}
+.welcome-subtitle{color:#d8ccb9!important}
+.start-journey-btn{background:linear-gradient(135deg,#7c1f2b,#b78b32)!important;border-color:#e5c878!important}
+.location-card-btn{border-color:rgba(229,200,120,.24)!important}
+
+/* Welcome screen — poster background for "ميلادا عجيبًا" */
+.welcome-body {
+  background: #0b0a08 !important;
+}
+.welcome-body .bg-poster-layer {
+  background-image: url('../img/milada-welcome-bg.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  opacity: .58 !important;
+  filter: blur(3px) saturate(.82) contrast(1.02) !important;
+  transform: scale(1.035);
+}
+.welcome-body .bg-poster-layer::after {
+  background: linear-gradient(rgba(8,7,5,.18), rgba(8,7,5,.30)),
+              radial-gradient(circle at 50% 45%, rgba(8,7,5,.04) 0%, rgba(8,7,5,.38) 78%, rgba(8,7,5,.58) 100%) !important;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="شاركنا رأيك وتجربتك في مؤتمر الشباب 2026 ورشح وجهتنا القادمة">
+    <title>رأيك يهمنا 💬 — مؤتمر الشباب</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-layer bg-layer-ambient"></div>
+    <div id="app-navbar-slot"></div>
+
+    <div id="main-content" class="container py-4 px-3">
+        <!-- كارت النموذج -->
+        <div class="feedback-card">
+            <div class="feedback-header-icon text-center mb-3">
+                <i class="bi bi-chat-heart-fill pulse-glow-green" style="font-size: 2.8rem; color: #10b981;"></i>
+            </div>
+            <h2>رأيك يهمنا 💬</h2>
+            <p class="text-secondary text-center mb-4" style="font-size:0.85rem;">شاركنا تجربتك وترشيحك، ورأيك هيوصلنا فوراً 🙏</p>
+            
+            <div class="mb-3">
+                <label for="fb-name" class="form-label">🧍 اسمك ايه؟ 😊</label>
+                <input type="text" id="fb-name" class="form-control" placeholder="اكتب اسمك هنا...">
+            </div>
+
+            <!-- تقييم النجوم التفاعلي -->
+            <div class="mb-4 text-center">
+                <label class="form-label mb-2" style="font-size: 0.92rem; font-weight: 700; color: #fbbf24;">⭐ إيه تقييمك العام للمؤتمر؟</label>
+                <div class="star-rating-widget d-flex justify-content-center gap-2 fs-2 my-1">
+                    <i class="bi bi-star rating-star" data-value="1"></i>
+                    <i class="bi bi-star rating-star" data-value="2"></i>
+                    <i class="bi bi-star rating-star" data-value="3"></i>
+                    <i class="bi bi-star rating-star" data-value="4"></i>
+                    <i class="bi bi-star rating-star" data-value="5"></i>
+                </div>
+                <input type="hidden" id="fb-rating" value="0">
+            </div>
+            
+            <div class="mb-3">
+                <label for="fb-experience" class="form-label">✨ رأيك في تجربة المؤتمر</label>
+                <textarea id="fb-experience" class="form-control" placeholder="احكينا تجربتك في المؤتمر ده كانت عاملة إزاي؟"></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label for="fb-destination" class="form-label">🚍 ترشيحك للرحلة الجاية</label>
+                <input type="text" id="fb-destination" class="form-control" placeholder="لو هتختار وجهة الرحلة الجاية، هتبقي فين؟">
+            </div>
+            
+            <button id="fb-submit" class="feedback-submit-btn w-100 btn btn-lg" disabled>
+                🚀 ابعت رأيك 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- رسالة النجاح الاحتفالية -->
+    <div id="success-celebration" class="success-celebration">
+        <span class="emoji">🎉</span>
+        <h2>🙏 شكراً ليك!</h2>
+        <p>رأيك اتبعت بنجاح<br>أشوفك في المؤتمر الجاي 🚍</p>
+    </div>
+
+    <div id="app-bottomnav-slot"></div>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="../assets/js/core.js"></script>
+    <script src="../assets/js/identity.js"></script>
+    <script src="../assets/js/feedback.js"></script>
+    <script>YC.loadPartials();</script>
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+</body>
+</html>

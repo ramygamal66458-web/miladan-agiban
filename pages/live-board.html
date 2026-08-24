@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="شاشة المطار القديمة بنمط Retro System — مؤتمر الشباب 2026">
+    <title>RETRO FLIGHT CONTROL — YOUTH CONF 2026 ✈️</title>
+    <link rel="icon" type="image/png" href="../assets/img/logo-favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/identity.css">
+    <link rel="stylesheet" href="../assets/css/classic-conference.css?v=2.6">
+    <link rel="stylesheet" href="../assets/css/live-board.css?v=2026_v5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="live-terminal-body">
+    <div class="bg-layer bg-layer-ambient"></div>
+    <div id="app-navbar-slot"></div>
+
+    <!-- ═══ 1. الهيدر بنمط نظام المطار القديم Vintage Retro System ═══ -->
+    <header class="t2-airport-header">
+        <div class="d-flex align-items-center gap-3">
+            <div class="t2-terminal-badge">CRT</div>
+            <div>
+                <div class="t2-header-title">RETRO FLIGHT SYSTEM - DEPARTURES</div>
+                <div class="t2-sub-title">YOUTH CONFERENCE 2026 — TELEMETRY CONTROL</div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <!-- تبويب الأيام للتبديل السريع -->
+            <div class="d-flex align-items-center gap-1 bg-dark px-2 py-1 rounded border border-secondary">
+                <button class="day-tab-btn" data-day="1">اليوم 1</button>
+                <button class="day-tab-btn" data-day="2">اليوم 2</button>
+                <button class="day-tab-btn" data-day="3">اليوم 3</button>
+                <button class="day-tab-btn" data-day="4">اليوم 4</button>
+            </div>
+
+            <button class="chime-btn" id="testChimeBtn" title="اختبار نداء المطار الصوتي">
+                <i class="bi bi-volume-up-fill"></i> 🔊 نداء المطار
+            </button>
+
+            <button class="chime-btn" data-bs-toggle="modal" data-bs-target="#boardSettingsModal" title="إعدادات الوقت والمحاكاة">
+                <i class="bi bi-gear-fill me-1"></i> الإعدادات ⚙️
+            </button>
+
+            <a href="program.html" class="chime-btn" style="text-decoration:none;">
+                <i class="bi bi-calendar3"></i> الجدول
+            </a>
+        </div>
+    </header>
+
+    <!-- ═══ 2. الشبكة الرئيسية الموزعة بنمط Retro System ═══ -->
+    <main class="live-layout-grid">
+
+        <!-- 👈 أقصى اليسار: الفقرة السابقة والحالية والتالية + الساعة المربعة بالأسفل -->
+        <div class="left-stack-col">
+            <!-- الفقرات الثلاث -->
+            <div id="leftActivitiesStack" class="d-flex flex-column gap-3">
+                <!-- Rendered dynamically by live-board.js -->
+            </div>
+
+            <!-- 🌍 🕰️ المربع السفلي لساعة الكرة الأرضية الذهبية الكلاسيكية الفاخرة (Luxury World Map Globe Clock) -->
+            <div class="left-bottom-square-clock">
+                <svg class="analog-svg-square" viewBox="0 0 200 200">
+                    <defs>
+                        <radialGradient id="worldClockBg" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#1e293b"/>
+                            <stop offset="65%" stop-color="#0f172a"/>
+                            <stop offset="100%" stop-color="#020617"/>
+                        </radialGradient>
+                        <linearGradient id="goldHandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fef08a"/>
+                            <stop offset="50%" stop-color="#fbbf24"/>
+                            <stop offset="100%" stop-color="#b45309"/>
+                        </linearGradient>
+                        <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                        <clipPath id="clockClip">
+                            <circle cx="100" cy="100" r="92"/>
+                        </clipPath>
+                    </defs>
+
+                    <!-- إطار الساعة المعدني الفاخر المزدوج -->
+                    <circle cx="100" cy="100" r="96" fill="url(#worldClockBg)" stroke="#fbbf24" stroke-width="3.5" filter="url(#goldGlow)"/>
+
+                    <!-- 🌍 خلفية صورة الكرة الأرضية بتأثير داكن هادئ لضمان وضوح العقارب 100% -->
+                    <image href="../assets/img/earth_globe_3d_dial.jpg" x="6" y="6" width="188" height="188" clip-path="url(#clockClip)" preserveAspectRatio="xMidYMid slice" opacity="0.38" style="filter: brightness(0.55) contrast(0.9);" decoding="async"/>
+                    
+                    <!-- طبقة مظللة هادئة تضمن التباين العالي للعقارب والأرقام -->
+                    <circle cx="100" cy="100" r="92" fill="rgba(3, 8, 20, 0.48)"/>
+                    <circle cx="100" cy="100" r="92" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+
+                    <!-- 🔢 أرقام الساعات الـ 12 الكلاسيكية الفاخرة باللون الذهبي من 1 إلى 12 -->
+                    <text x="100" y="32" class="clock-num-gold">12</text>
+                    <text x="136" y="41" class="clock-num-gold">1</text>
+                    <text x="161" y="66" class="clock-num-gold">2</text>
+                    <text x="170" y="102" class="clock-num-gold">3</text>
+                    <text x="161" y="139" class="clock-num-gold">4</text>
+                    <text x="136" y="164" class="clock-num-gold">5</text>
+                    <text x="100" y="173" class="clock-num-gold">6</text>
+                    <text x="64" y="164" class="clock-num-gold">7</text>
+                    <text x="39" y="139" class="clock-num-gold">8</text>
+                    <text x="30" y="102" class="clock-num-gold">9</text>
+                    <text x="38" y="66" class="clock-num-gold">10</text>
+                    <text x="63" y="41" class="clock-num-gold">11</text>
+
+                    <!-- 🗡️ عقرب الساعات الأبيض والذهبي عالي التباين بحدود سوداء ناصعة -->
+                    <g id="hourHand" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.95))">
+                        <polygon points="94,104 106,104 103,48 97,48" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                        <polygon points="96,102 104,102 102,50 98,50" fill="url(#goldHandGrad)"/>
+                        <circle cx="100" cy="62" r="3.5" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+                    </g>
+
+                    <!-- 🗡️ عقرب الدقائق الأبيض والذهبي الإبري الناصع -->
+                    <g id="minHand" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.95))">
+                        <polygon points="95,106 105,106 102,28 98,28" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                        <polygon points="97,104 103,104 101,30 99,30" fill="#fef08a"/>
+                        <circle cx="100" cy="42" r="3" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+                    </g>
+
+                    <!-- 📍 عقرب الثواني النيون الأحمر الناصع -->
+                    <g id="secHand" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.9))">
+                        <line x1="100" y1="118" x2="100" y2="16" stroke="#ff3366" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="100" y1="118" x2="100" y2="16" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="100" cy="118" r="4.5" fill="#ff3366" stroke="#000000" stroke-width="1"/>
+                        <circle cx="100" cy="24" r="3.5" fill="#ffffff" stroke="#ff3366" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- النواة المركزية النحاسية الناصعة -->
+                    <circle cx="100" cy="100" r="8" fill="#fbbf24" stroke="#000000" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="3.5" fill="#ffffff"/>
+                    <circle cx="100" cy="100" r="3" fill="#ffffff"/>
+                </svg>
+
+                <div class="square-digital-text" id="squareClockDigitalText">00:00:00</div>
+                <div class="square-date-chip" id="squareClockDateText">📅 الأحد 2 أغسطس</div>
+                <div class="square-status-tag">🌍 WORLD MAP TELEMETRY CONTROL</div>
+            </div>
+        </div>
+
+        <!-- 🖥️ المنتصف: الشاشة الكبيرة للعرض الحالي (Center Hero Display Stage) -->
+        <div class="center-main-stage" id="centerHeroStageWrap">
+            <!-- Rendered dynamically by live-board.js -->
+        </div>
+
+        <!-- 👉 أقصى اليمين بالطول: أسماء جميع المشتركين من الشيت (كأسماء فقط بدون بحث) -->
+        <div class="right-participants-col">
+            <div class="participants-header">
+                <div style="font-weight:900; font-size:0.9rem; color:var(--retro-amber); font-family:var(--retro-font);">
+                    <i class="bi bi-people-fill me-1" style="color:var(--retro-green)"></i>PASSENGERS MANIFEST
+                </div>
+                <span class="badge bg-warning text-dark fw-bold" id="participantsCountBadge">[65 PASSENGERS]</span>
+            </div>
+
+            <!-- القائمة الطولية لأسماء المشتركين فقط من الشيت -->
+            <div class="participants-scroll-list" id="participantsListWrap">
+                <!-- Rendered dynamically by live-board.js -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ═══ ⚙️ نافذة الإعدادات المنبثقة (Settings Modal) ═══ -->
+    <div class="modal fade" id="boardSettingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background:#090f1d; border:2px solid var(--retro-amber); color:#fff; border-radius:18px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title font-monospace" style="color:var(--retro-amber); font-weight:900;">
+                        ⚙️ إعدادات الشاشة والمحاكاة
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold" style="color:var(--retro-green);">وضع تتبع الوقت:</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="timeMode" id="modeRealRadio" checked>
+                            <label class="form-check-label text-white fw-bold" for="modeRealRadio">
+                                🟢 الوقت الحقيقي المباشر (التلقائي)
+                            </label>
+                            <div class="form-text text-muted" style="font-size:0.75rem;">يتتبع وقت الجهاز وساعة الجهاز الفعلية حياً.</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="timeMode" id="modeSimRadio">
+                            <label class="form-check-label text-white fw-bold" for="modeSimRadio">
+                                🧪 محاكاة وقت معين (للاختبار والمشرفين)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- خيارات المحاكاة -->
+                    <div id="simInputsWrap" style="display:none;" class="p-3 rounded bg-dark border border-secondary mb-3">
+                        <div class="mb-3">
+                            <label class="form-label text-warning small fw-bold">اختر يوم المؤتمر:</label>
+                            <select id="modalSimDaySelect" class="form-select bg-black text-white border-secondary">
+                                <option value="1">اليوم الأول</option>
+                                <option value="2">اليوم الثاني</option>
+                                <option value="3">اليوم الثالث</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label text-warning small fw-bold">حدد وقت الفعالية:</label>
+                            <input type="time" id="modalSimTimeInput" class="form-content form-control bg-black text-white border-secondary" value="07:30">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-warning text-dark font-monospace fw-bold" data-bs-dismiss="modal">
+                        حفظ وإغلاق
+                    </button>
+                </div>
+            </div>
+        </div>
+    <!-- 🍽️ نافذة منيو الوجبة المخصصة (Meal Card Popup Modal) -->
+    <div class="modal fade" id="mealCardModal" tabindex="-1" aria-labelledby="mealModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="background:#0f172a; border:2px solid #fbbf24; border-radius:20px; overflow:hidden;">
+                <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.1); padding:1rem 1.25rem;">
+                    <h5 class="modal-title fw-bold" id="mealModalTitle" style="color:#fbbf24;">🍽️ قائمة الوجبة المخصصة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter:invert(1);"></button>
+                </div>
+                <div class="modal-body text-center p-3">
+                    <img id="mealModalImg" src="" alt="منيو الوجبة" style="max-width:100%; max-height:80vh; border-radius:14px; box-shadow:0 0 30px rgba(0,0,0,0.8); object-fit:contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل السفلي ملغى من هذه الصفحة فقط -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/core.js?v=2026_v9" defer></script>
+    <script src="../assets/js/live-board.js?v=2026_v44" defer></script>
+    <!-- YC.loadPartials() called by core.js -->
+<script src="../assets/js/bg-3d.js?v=3.0" defer></script>
+    <script src="../assets/js/identity.js?v=2026_v1"></script>
+</body>
+</html>

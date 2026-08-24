@@ -1,0 +1,419 @@
+/* ✈️ live-board.css — شاشة العرض وساعة الكرة الأرضية الذهبية الكلاسيكية الفاخرة */
+
+:root {
+    --retro-bg: #03060c;
+    --retro-green: #00ff88;
+    --retro-amber: #fbbf24;
+    --retro-cyan: #00e5ff;
+    --retro-red: #ef4444;
+    --retro-card-bg: rgba(6, 12, 24, 0.95);
+    --retro-font: 'Courier New', Consolas, Monaco, monospace;
+}
+
+body.live-terminal-body {
+    background-color: var(--retro-bg);
+    background-image: 
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, transparent 1px, transparent 2px),
+        linear-gradient(180deg, #03060c 0%, #060d1a 100%);
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* ═══ Header البوابة العلوي ═══ */
+.t2-airport-header {
+    background: #000000;
+    border-bottom: 3px double var(--retro-amber);
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.t2-terminal-badge {
+    background: var(--retro-amber);
+    color: #000000;
+    font-weight: 900;
+    font-size: 1.3rem;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+.t2-header-title {
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--retro-amber);
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+}
+
+.t2-sub-title {
+    font-size: 0.72rem;
+    color: #cbd5e1;
+    letter-spacing: 2px;
+}
+
+/* ═══ الشبكة الرئيسية الموزعة (3 أجزاء) ═══ */
+.live-layout-grid {
+    direction: ltr !important;
+    display: grid;
+    grid-template-columns: 340px 1fr 320px;
+    gap: 16px;
+    padding: 16px;
+    min-height: calc(100vh - 70px);
+}
+
+@media (max-width: 1100px) {
+    .live-layout-grid {
+        grid-template-columns: 320px 1fr;
+    }
+    .right-participants-col {
+        grid-column: span 2;
+        max-height: 400px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .live-layout-grid {
+        grid-template-columns: 1fr;
+    }
+    .right-participants-col {
+        grid-column: span 1;
+    }
+}
+
+/* ═══ 1. أقصى اليسار (Stack فوق + World Map Clock أسفل) ═══ */
+.left-stack-col {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.timeline-activity-card {
+    background: var(--retro-card-bg);
+    border: 1.5px solid rgba(251, 191, 36, 0.35);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-activity-card.current-active {
+    border: 2px solid var(--retro-amber);
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.35), inset 0 0 15px rgba(251, 191, 36, 0.15);
+}
+
+.timeline-card-tag {
+    font-size: 0.75rem;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    font-family: var(--retro-font);
+}
+
+.timeline-card-tag.prev { background: rgba(148,163,184,0.2); color: #cbd5e1; border: 1px solid #64748b; }
+.timeline-card-tag.curr { background: rgba(0,255,136,0.2); color: var(--retro-green); border: 1px solid var(--retro-green); }
+.timeline-card-tag.next { background: rgba(251,191,36,0.2); color: var(--retro-amber); border: 1px solid var(--retro-amber); }
+
+/* ═══ 🌍 🕰️ ساعة الكرة الأرضية الفاخرة ذات خريطة العالم الذهبية (Luxury World Map Globe Clock) ═══ */
+.left-bottom-square-clock {
+    direction: rtl;
+    background: linear-gradient(145deg, #0e172a 0%, #030712 100%);
+    border: 2px solid rgba(251, 191, 36, 0.6);
+    border-radius: 20px;
+    padding: 16px 12px 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 0 20px rgba(251, 191, 36, 0.12);
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.analog-svg-square {
+    width: 230px;
+    height: 230px;
+    filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.clock-num-gold {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 900;
+    fill: #fef08a;
+    stroke: #000000;
+    stroke-width: 1px;
+    font-size: 18px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,1));
+}
+
+.square-digital-text {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1.5px solid rgba(251, 191, 36, 0.6);
+    border-radius: 12px;
+    padding: 6px 20px;
+    font-family: var(--retro-font);
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: var(--retro-amber);
+    margin-top: 12px;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.2), inset 0 0 12px rgba(251, 191, 36, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+    justify-content: center;
+    gap: 6px;
+}
+
+.square-date-chip {
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+    padding: 3px 12px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--retro-amber);
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+}
+
+.square-status-tag {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--retro-green);
+    letter-spacing: 1.5px;
+    margin-top: 6px;
+    text-transform: uppercase;
+}
+
+/* ═══ 2. المنتصف: الشاشة الكبيرة للعرض الحالي (Center Hero Display) ═══ */
+.center-main-stage {
+    direction: rtl;
+    background: #040812;
+    border: 2.5px solid var(--retro-cyan);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
+    min-height: 480px;
+}
+
+.hero-backdrop-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.45;
+    filter: saturate(1.2) contrast(1.2);
+    transition: all 0.6s ease;
+}
+
+.hero-stage-content {
+    position: relative;
+    z-index: 2;
+    padding: 2.2rem 2rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(3, 6, 12, 0.92) 30%, rgba(3, 6, 12, 0.99) 100%);
+}
+
+.hero-title-main {
+    font-weight: 900;
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+    color: #ffffff;
+    line-height: 1.3;
+    text-shadow: 0 0 15px rgba(0,0,0,0.9);
+    margin-bottom: 12px;
+}
+
+.hero-meta-badge {
+    background: rgba(0, 229, 255, 0.18);
+    border: 1.5px solid var(--retro-cyan);
+    color: var(--retro-cyan);
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 5px 14px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ═══ 3. أقصى اليمين بالطول: أسماء جميع المشتركين الـ 67 بالمؤتمر ═══ */
+.right-participants-col {
+    direction: rtl;
+    background: var(--retro-card-bg);
+    border: 2px solid var(--retro-amber);
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.18);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+}
+
+.participants-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed rgba(251, 191, 36, 0.4);
+}
+
+.participants-scroll-list {
+    overflow-y: auto;
+    flex: 1;
+    padding-left: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--retro-amber) transparent;
+}
+
+/* ═══ 🔘 الزر الموحد المزدوج لكل مشترك (Single Split-Pill Button) ═══ */
+.split-passenger-btn {
+    display: flex;
+    align-items: stretch;
+    background: rgba(10, 16, 32, 0.95);
+    border: 1.5px solid rgba(251, 191, 36, 0.4);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.split-passenger-btn:hover {
+    border-color: var(--retro-green);
+    transform: translateX(-4px);
+    box-shadow: 0 6px 18px rgba(0, 255, 136, 0.3);
+}
+
+.split-btn-name {
+    flex: 1;
+    padding: 9px 14px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(7, 12, 26, 0.98) 100%);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.94rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    align-items: center;
+    border-left: 1.5px solid rgba(251, 191, 36, 0.3);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.split-btn-badge {
+    padding: 9px 12px;
+    background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+    color: #000000;
+    font-weight: 900;
+    font-size: 0.88rem;
+    font-family: var(--retro-font);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+    min-width: 46px;
+    flex-shrink: 0;
+}
+
+/* ═══ أزرار التبديل بين الأيام في الهيدر ═══ */
+.day-tab-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: #cbd5e1;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--retro-font);
+}
+
+.day-tab-btn:hover, .day-tab-btn.active {
+    background: var(--retro-amber);
+    color: #000000;
+    border-color: var(--retro-amber);
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+/* ═══ ⏳ أنيميشن الساعة الرملية قبل 5 دقائق ═══ */
+.hourglass-center-alert {
+    display: none;
+    background: rgba(239, 68, 68, 0.25);
+    border: 2px dashed var(--retro-red);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    animation: pulseHourglass 1.5s infinite alternate;
+}
+
+.hourglass-center-alert.active {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@keyframes pulseHourglass {
+    0% { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+    100% { border-color: var(--retro-red); box-shadow: 0 0 25px rgba(239, 68, 68, 0.6); }
+}
+
+.hourglass-spinning-icon {
+    font-size: 2.2rem;
+    animation: spinHourglass 2s infinite ease-in-out;
+}
+
+@keyframes spinHourglass {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.chime-btn {
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid var(--retro-amber);
+    color: var(--retro-amber);
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    font-family: var(--retro-font);
+}
+
+.chime-btn:hover {
+    background: var(--retro-amber);
+    color: #000000;
+}

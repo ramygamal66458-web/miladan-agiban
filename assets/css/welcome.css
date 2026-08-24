@@ -1,0 +1,632 @@
+/* ═══════════════════════════════════════════════
+   welcome.css — أنماط واجهة الترحيب الفاخرة
+   مؤتمر خلطبيطة بالصلصة 2026
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+/* تخصيص شريط التمرير (Custom Scrollbar) */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(10, 18, 36, 0.4);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #06b6d4 0%, #db2777 100%);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #38bdf8 0%, #fb7185 100%);
+}
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #06b6d4 rgba(10, 18, 36, 0.4);
+}
+
+:root {
+    --bg-deepest: #0e172a;
+    --bg-deep:    #141f36;
+    --bg-dark:    #1b2842;
+    --bg-mid:     #1f2e4a;
+    --bg-light:   #2d3e5b;
+
+    --primary:        #06b6d4;
+    --primary-light:  #38bdf8;
+    --primary-dark:   #0891b2;
+    --primary-glow:   rgba(56, 189, 248, 0.45);
+    --primary-subtle: rgba(6, 182, 212, 0.15);
+
+    --gold:        #f59e0b;
+    --gold-light:  #fbbf24;
+    --gold-glow:   rgba(245, 158, 11, 0.45);
+
+    --pink:        #db2777;
+    --pink-light:  #f472b6;
+    --pink-glow:   rgba(219, 39, 119, 0.45);
+
+    --text-main:      #ffffff;
+    --text-secondary: #cbd5e1;
+    --text-muted:     #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-main);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ═══════════════════════════════════════════════
+   الخلفية المتدرجة والفقاعات المتوهجة
+═══════════════════════════════════════════════ */
+body.welcome-body {
+    background: linear-gradient(135deg, #040814 0%, #081125 35%, #0b1c3a 65%, #040814 100%);
+    background-size: 100% 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes welcomeGradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bg-poster-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none;
+    background-image: url('../img/conference-theme-bg.jpg');
+    background-size: cover;
+    background-position: center 42%;
+    background-repeat: no-repeat;
+    opacity: 0.14;
+    filter: saturate(0.8) contrast(1.1);
+}
+
+.bg-poster-layer::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(7, 13, 25, 0.25) 0%, rgba(7, 13, 25, 0.75) 60%, rgba(4, 8, 20, 0.95) 100%);
+}
+
+.bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+
+.bg-layer-1 {
+    background:
+        radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(219, 39, 119, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 35%);
+    /* animation removed: floatLayer — كانت ثقيلة على الـ GPU */
+}
+
+@keyframes floatLayer {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-10px, 15px) scale(1.05); }
+}
+
+.floating-circle { position: absolute; border-radius: 50%; opacity: 0.06; filter: blur(50px); }
+.circle-1 { width: 320px; height: 320px; background: var(--primary); top: 5%; left: -10%; }
+.circle-2 { width: 280px; height: 280px; background: var(--pink); bottom: 5%; right: -5%; }
+.circle-3 { width: 200px; height: 200px; background: var(--gold); top: 40%; right: 15%; }
+.circle-4 { width: 250px; height: 250px; background: var(--primary); bottom: 20%; left: 20%; }
+
+@keyframes floatCircle {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33%       { transform: translate(30px, -40px) rotate(120deg); }
+    66%       { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+.particles-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════
+   محتوى صفحة الترحيب
+═══════════════════════════════════════════════ */
+.welcome-page {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.5rem;
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    gap: 1.6rem;
+    text-align: center;
+    animation: welcomeFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes welcomeFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── شعار الهولوغرام الفاخر ─── */
+.welcome-logo-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0rem;
+}
+
+.logo-portal-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.ring-outer {
+    width: 220px;
+    height: 220px;
+    border: 2px dashed rgba(6, 182, 212, 0.45);
+    filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.4));
+    animation: spinPortalOuter 20s linear infinite;
+}
+
+.ring-inner {
+    width: 190px;
+    height: 190px;
+    border: 1.5px solid rgba(245, 158, 11, 0.35);
+    border-style: double;
+    filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.3));
+    animation: spinPortalInner 12s linear infinite reverse;
+}
+
+
+@keyframes spinPortalOuter {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinPortalInner {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.welcome-logo-glow {
+    position: absolute;
+    width: 130px; height: 130px;
+    
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.35) 0%, transparent 70%);
+    filter: blur(8px);
+}
+
+.welcome-logo {
+    width: 250px;
+    height: 250px;
+
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+   
+    animation: logoFloat 3s ease-in-out 3; 
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+/* ─── العنوان ─── */
+.welcome-title {
+    font-size: clamp(1.75rem, 6.5vw, 2.3rem);
+    font-weight: 900;
+    margin: 0 0 0.4rem;
+    background: linear-gradient(135deg, #ffffff 20%, #fbbf24 60%, #f43f5e 85%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+    letter-spacing: -0.01em;
+}
+
+.welcome-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 0.35rem 0 0.55rem;
+}
+
+.divider-line {
+    width: 32px;
+    height: 1.5px;
+    background: linear-gradient(to left, rgba(6, 182, 212, 0.35), transparent);
+}
+
+.divider-line:first-of-type {
+    background: linear-gradient(to right, rgba(6, 182, 212, 0.35), transparent);
+}
+
+.divider-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(245, 158, 11, 0.6);
+}
+
+.divider-icon {
+    color: var(--primary-light);
+    font-size: 0.75rem;
+    filter: drop-shadow(0 0 4px var(--primary-glow));
+}
+
+.welcome-subtitle {
+    font-size: clamp(0.78rem, 3.2vw, 0.88rem);
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+/* ─── الحاوية الزجاجية الاحترافية (Glassmorphic Container) ─── */
+.welcome-card-glass {
+    width: 100%;
+    background: rgba(10, 20, 38, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    padding: 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .welcome-page {
+        padding: 1.5rem 1rem;
+        gap: 1.1rem;
+    }
+    .welcome-card-glass {
+        padding: 1.5rem 1.1rem;
+        border-radius: 24px;
+        gap: 1.1rem;
+    }
+    .welcome-logo-container {
+        width: 160px;
+        height: 160px;
+    }
+    .welcome-logo {
+        width: 160px;
+        height: 160px;
+    }
+    .welcome-logo-glow {
+        width: 90px;
+        height: 90px;
+    }
+    .ring-outer {
+        width: 145px;
+        height: 145px;
+    }
+    .ring-inner {
+        width: 125px;
+        height: 125px;
+    }
+    .welcome-title {
+        font-size: 1.7rem;
+    }
+    .welcome-subtitle {
+        font-size: 0.76rem;
+    }
+    .location-card-btn {
+        padding: 0.75rem 0.95rem;
+    }
+    .location-icon-wrapper {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+        margin-left: 0.7rem;
+    }
+    .location-title {
+        font-size: 0.92rem;
+    }
+    .location-subtitle {
+        font-size: 0.62rem;
+    }
+    .location-action-badge {
+        padding: 0.25rem 0.55rem;
+    }
+    .start-journey-btn {
+        padding: 0.85rem 2.2rem;
+        font-size: 0.96rem;
+    }
+}
+
+/* ─── زر مقر المؤتمر التفاعلي المطور (Google Maps) ─── */
+.welcome-location-container {
+    width: 100%;
+    margin: 0.2rem 0;
+}
+
+.location-card-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: rgba(219, 39, 119, 0.04);
+    border: 1px solid rgba(219, 39, 119, 0.18);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.location-card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 10% 50%, rgba(219, 39, 119, 0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+/* أيقونة الموقع التفاعلية والنبض */
+.location-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(219, 39, 119, 0.15);
+    border-radius: 12px;
+    color: var(--pink-light);
+    font-size: 1.3rem;
+    margin-left: 0.95rem; /* مسافة RTL */
+    transition: transform 0.3s ease;
+}
+
+.location-icon-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    border: 2px solid rgba(219, 39, 119, 0.5);
+    animation: locationPulse 2s 3 ease-out;
+    pointer-events: none;
+}
+
+@keyframes locationPulse {
+    0% { transform: scale(0.95); opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* تفاصيل الموقع */
+.location-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    flex-grow: 1;
+}
+
+.location-subtitle {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.location-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+.location-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--pink-light);
+    margin-top: 1px;
+}
+
+/* شارة الإجراء لفتح الخريطة */
+.location-action-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.35rem 0.75rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.action-text {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+}
+
+.action-icon {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+}
+
+/* تأثيرات التحويم والتفاعل */
+.location-card-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(219, 39, 119, 0.08);
+    border-color: rgba(219, 39, 119, 0.35);
+    box-shadow: 
+        0 8px 24px rgba(219, 39, 119, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.location-card-btn:hover .location-card-glow {
+    opacity: 1;
+}
+
+.location-card-btn:hover .location-icon-wrapper {
+    transform: scale(1.06) rotate(-5deg);
+    background: rgba(219, 39, 119, 0.25);
+    color: #ffffff;
+}
+
+.location-card-btn:hover .location-action-badge {
+    background: rgba(219, 39, 119, 0.2);
+    border-color: rgba(219, 39, 119, 0.3);
+}
+
+.location-card-btn:hover .action-text {
+    color: #ffffff;
+}
+
+.location-card-btn:hover .action-icon {
+    color: #ffffff;
+    transform: translate(-1px, -1px) scale(1.05);
+}
+
+.location-card-btn:active {
+    transform: translateY(0) scale(0.985);
+}
+
+/* ─── زر الدخول المتوهج ─── */
+.start-journey-btn {
+    position: relative;
+    padding: 0.95rem 2.8rem;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(90deg, #0891b2 0%, #0d9488 50%, #0891b2 100%);
+    background-size: 200% auto;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    margin-top: 0.4rem;
+    animation: buttonPulseGradient 6s ease 3;
+}
+
+@keyframes buttonPulseGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50%       { background-position: 100% 50%; }
+}
+
+.btn-shimmer-sweep {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: shimmerSweep 3.2s ease-in-out 3;
+}
+
+@keyframes shimmerSweep {
+    0% { left: -100%; }
+    30%, 100% { left: 160%; }
+}
+
+.start-journey-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+        0 12px 35px rgba(6, 182, 212, 0.5),
+        0 0 20px rgba(13, 148, 136, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.start-journey-btn:active {
+    transform: scale(0.96) translateY(-1px);
+}
+
+.start-journey-btn.loading {
+    pointer-events: none;
+    opacity: 0.85;
+    animation: btnPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes btnPulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(0.97); opacity: 0.75; }
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+.start-journey-btn:hover .btn-icon {
+    animation: iconShake 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes iconShake {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-3px) rotate(-6deg); }
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-arrow {
+    font-size: 1.05rem;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.start-journey-btn:hover .btn-arrow {
+    transform: translateX(-4px);
+}
+
+/* ─── التلميح والتحذير ─── */
+.welcome-hint {
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 320px;
+    margin: 0;
+}
+
+/* ─── انيميشن خروج الصفحة ─── */
+body.page-exit {
+    animation: welcomeExit 0.5s ease-in-out forwards;
+}
+
+@keyframes welcomeExit {
+    from { opacity: 1; transform: scale(1); filter: blur(0); }
+    to   { opacity: 0; transform: scale(1.05); filter: blur(6px); }
+}
