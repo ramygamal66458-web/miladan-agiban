@@ -93,24 +93,37 @@ export default async function handler(req, res) {
     }
 
     const fetchOptions = {
-      method: req.method,
-      headers: { 'Content-Type': 'application/json' },
-      redirect: 'follow'
-    };
-    if (req.method === 'POST') fetchOptions.body = JSON.stringify(body);
+  method: req.method,
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  redirect: 'follow'
+};
 
-    // Google Apps Script /exec commonly responds with a 302 redirect.
-    // Do NOT let fetch follow that redirect automatically for POST: per Fetch
-    // semantics a 301/302 can turn POST into GET, which makes GAS hit doGet()
-    // and report write actions such as saveIndividualScore as "unknown".
-    let gasResponse = await fetch(targetUrl, { ...fetchOptions, redirect: 'manual' });
-    if (gasResponse.status >= 300 && gasResponse.status < 400) {
-      const location = gasResponse.headers.get('location');
-      if (!location) throw new Error(`Google Apps Script redirect missing Location header (HTTP ${gasResponse.status})`);
-      const redirectedUrl = new URL(location, targetUrl).toString();
-      gasResponse = await fetch(redirectedUrl, { ...fetchOptions, redirect: 'manual' });
-    }
-    const responseText = await gasResponse.text();
+if (req.method === 'POST') {
+  fetchOptions.body = JSON.stringify(body);
+}
+
+// Google Apps Script ContentService redirects the response
+// to script.googleusercontent.com.
+// Let fetch follow that redirect automatically.
+const gasResponse = await fetch(targetUrl, fetchOptions);
+
+const responseText = await gasResponse.text();
+
+let responseData;
+
+try {
+  responseData = JSON.parse(responseText);
+} catch {
+  console.error('[gas-proxy] Non-JSON response from GAS:', responseText.substring(0, 1000));
+
+  return res.status(502).json({
+    status: 'error',
+    message: 'Invalid JSON response from Google Apps Script',
+    raw: responseText.substring(0, 500)
+  });
+}
 
     let responseData;
     try { responseData = JSON.parse(responseText); }
